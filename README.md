@@ -26,4 +26,5 @@ Pagina web inicial para `solucionoreka.com`, lista para publicar en Netlify.
 
 - El texto principal esta en `index.html`.
 - Los colores y estilos estan en `styles.css`.
+- El logo usado por la pagina esta en `assets/logo-solucion-oreka.png`.
 - El correo actual es `hola@solucionoreka.com`; puedes cambiarlo por el correo real.
