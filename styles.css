@@ -275,9 +275,9 @@ h3 { margin: 16px 0 10px; font-size: 1.2rem; line-height: 1.18; }
 .team .eyebrow { color: #ffc08c; }
 .team-grid { grid-template-columns: repeat(4, 1fr); margin-top: 34px; }
 .team-grid article { background: rgba(255,255,255,.06); border-color: rgba(254,145,64,.34); }
-.team-card-featured { padding: 0 !important; overflow: hidden; }
-.team-card-featured img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
-.team-card-featured div { padding: 20px; }
+.team-card { padding: 0 !important; overflow: hidden; }
+.team-card img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; filter: grayscale(100%); }
+.team-card div { padding: 20px; }
 .team-grid strong { display: block; margin-bottom: 8px; }
 .team-grid span { color: #eee3dc; }
 
