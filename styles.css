@@ -1,17 +1,17 @@
 :root {
   color-scheme: light;
-  --ink: #20231f;
-  --muted: #6d625c;
-  --line: #ead6c7;
-  --paper: #fff8f2;
+  --ink: #0f0f0f;
+  --muted: #4f4f4f;
+  --line: #ded8d2;
+  --paper: #fbf7f3;
   --surface: #ffffff;
-  --accent: #ff8f3d;
-  --accent-strong: #d96819;
-  --charcoal: #2f2f2f;
-  --charcoal-soft: #4d4d4d;
-  --logo-gray: #858585;
-  --sky: #fff0e4;
-  --shadow: 0 24px 60px rgba(47, 47, 47, 0.13);
+  --accent: #fe9140;
+  --accent-strong: #c95f13;
+  --charcoal: #0f0f0f;
+  --charcoal-soft: #4f4f4f;
+  --logo-gray: #4f4f4f;
+  --sky: #fff1e6;
+  --shadow: 0 24px 60px rgba(15, 15, 15, 0.14);
 }
 
 * {
@@ -45,7 +45,7 @@ a {
   justify-content: space-between;
   gap: 24px;
   padding: 14px clamp(20px, 5vw, 72px);
-  background: rgba(255, 248, 242, 0.95);
+  background: rgba(251, 247, 243, 0.96);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(14px);
 }
@@ -182,7 +182,7 @@ h3 {
   min-height: 500px;
   padding: 26px;
   overflow: hidden;
-  border: 1px solid rgba(255, 143, 61, 0.28);
+  border: 1px solid rgba(254, 145, 64, 0.28);
   border-radius: 8px;
   background:
     linear-gradient(135deg, rgba(47, 47, 47, 0.96), rgba(77, 77, 77, 0.88)),
@@ -194,7 +194,7 @@ h3 {
   position: absolute;
   inset: 22px;
   content: "";
-  border: 1px solid rgba(255, 143, 61, 0.34);
+  border: 1px solid rgba(254, 145, 64, 0.34);
   border-radius: 6px;
 }
 
@@ -230,7 +230,7 @@ h3 {
   min-height: 250px;
   margin: 56px 0 38px;
   padding: 18px;
-  border: 1px solid rgba(255, 143, 61, 0.22);
+  border: 1px solid rgba(254, 145, 64, 0.22);
   border-radius: 8px;
   background: rgba(25, 25, 25, 0.28);
 }
@@ -260,7 +260,7 @@ h3 {
 .panel-grid div {
   min-height: 82px;
   padding: 14px;
-  border: 1px solid rgba(255, 143, 61, 0.24);
+  border: 1px solid rgba(254, 145, 64, 0.24);
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.9);
 }
@@ -274,8 +274,8 @@ small {
 .proof-strip {
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
-  background: rgba(255, 143, 61, 0.28);
-  border-bottom: 1px solid rgba(255, 143, 61, 0.28);
+  background: rgba(254, 145, 64, 0.28);
+  border-bottom: 1px solid rgba(254, 145, 64, 0.28);
 }
 
 .proof-strip div {
@@ -384,11 +384,11 @@ small {
 .method .eyebrow,
 .team-band .eyebrow,
 .lesson-card.featured .lesson-label {
-  color: #ffbd86;
+  color: #ffc08c;
 }
 
 .method-copy p {
-  color: #f7f0ec;
+  color: #f6eee8;
 }
 
 .method-steps {
@@ -399,7 +399,7 @@ small {
 .method-steps article {
   min-height: 162px;
   padding: 22px;
-  border: 1px solid rgba(255, 143, 61, 0.3);
+  border: 1px solid rgba(254, 145, 64, 0.3);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.06);
 }
@@ -442,9 +442,9 @@ small {
   gap: 1px;
   margin-top: 18px;
   overflow: hidden;
-  border: 1px solid rgba(255, 143, 61, 0.28);
+  border: 1px solid rgba(254, 145, 64, 0.28);
   border-radius: 8px;
-  background: rgba(255, 143, 61, 0.28);
+  background: rgba(254, 145, 64, 0.28);
 }
 
 .values-row div {
@@ -499,7 +499,7 @@ small {
 }
 
 .lesson-card.featured p {
-  color: #f7f0ec;
+  color: #f6eee8;
 }
 
 .lesson-label {
@@ -526,7 +526,7 @@ small {
 }
 
 .contact .eyebrow {
-  color: #ffbd86;
+  color: #ffc08c;
 }
 
 footer {
