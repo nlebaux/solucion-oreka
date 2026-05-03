@@ -27,23 +27,58 @@
     <main id="inicio">
       <section class="hero" aria-label="Inicio Solucion Oreka">
         <div class="hero-bg" aria-hidden="true"></div>
-        <div class="hero-content">
-          <p class="eyebrow">Consultoria gastronomica integral</p>
-          <h1>Restaurantes que funcionan.</h1>
-          <p>
-            Solucion Oreka diseña, ordena y escala negocios gastronomicos con una
-            mirada completa: cocina, sala, costos, layout, tecnologia y equipos
-            trabajando bajo el mismo metodo.
-          </p>
-          <div class="hero-actions">
-            <a class="button primary" href="mailto:hola@solucionoreka.com">Conversemos</a>
-            <a class="button ghost" href="#servicios">Ver servicios</a>
+        <div class="hero-layout">
+          <div class="hero-content">
+            <p class="eyebrow">Consultoria en gestion gastronomica</p>
+            <h1>Inteligencia operativa para restaurantes que crecen.</h1>
+            <p>
+              Solucion Oreka transforma cocina, sala, costos, tecnologia y equipos
+              en sistemas claros para abrir, ordenar y escalar negocios HORECA con
+              control real de la operacion.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="mailto:hola@solucionoreka.com">Conversemos</a>
+              <a class="button ghost" href="#experiencia">Ver trayectoria</a>
+            </div>
           </div>
-          <div class="hero-proof" aria-label="Areas de trabajo">
-            <span>Diagnostico operativo</span>
-            <span>Layout y procesos</span>
-            <span>Menu, costos y escala</span>
-          </div>
+
+          <aside class="hero-system" aria-label="Metodo operativo Oreka">
+            <div class="system-topline">
+              <img src="assets/brand/logo-solucion-oreka.png" alt="Solucion Oreka" />
+              <span><i></i> Operacion en curso</span>
+            </div>
+            <figure class="system-photo">
+              <img src="assets/photos/hero-operacion-cocina.jpg" alt="Equipo de cocina en servicio" />
+            </figure>
+            <div class="system-grid">
+              <article>
+                <small>01</small>
+                <strong>Diagnostico</strong>
+              </article>
+              <article>
+                <small>02</small>
+                <strong>Metodo</strong>
+              </article>
+              <article>
+                <small>03</small>
+                <strong>Ejecucion</strong>
+              </article>
+              <article>
+                <small>04</small>
+                <strong>Escala</strong>
+              </article>
+            </div>
+            <div class="system-note">
+              <span>Control 360</span>
+              <p>Carta, layout, costos, equipos y canales digitales mirando el mismo tablero.</p>
+            </div>
+          </aside>
+        </div>
+        <div class="hero-proof" aria-label="Areas de trabajo">
+          <span>Diagnostico operativo</span>
+          <span>Layout y procesos</span>
+          <span>Menu, costos y escala</span>
+          <span>Canales digitales</span>
         </div>
       </section>
 
@@ -298,6 +333,17 @@
 
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
+
+      const revealItems = document.querySelectorAll(".hero-content, .hero-system, .metrics, .section, .method-panel, .contact");
+      revealItems.forEach((item) => item.classList.add("reveal"));
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add("is-visible");
+        });
+      }, { threshold: 0.12 });
+
+      revealItems.forEach((item) => observer.observe(item));
     </script>
   </body>
 </html>
