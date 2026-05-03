@@ -251,6 +251,7 @@ small {
 
 .section,
 .band,
+.academy,
 .contact {
   padding: clamp(56px, 8vw, 104px) clamp(20px, 5vw, 72px);
 }
@@ -327,6 +328,103 @@ small {
   max-width: 780px;
 }
 
+.academy {
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+
+.academy-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 30px;
+  align-items: end;
+  margin-bottom: 34px;
+}
+
+.academy-intro p:not(.eyebrow) {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.lesson-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 18px;
+}
+
+.lesson-card {
+  min-height: 260px;
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+}
+
+.lesson-card.featured {
+  background: var(--charcoal);
+  color: #fff;
+}
+
+.lesson-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.lesson-card.featured p {
+  color: #f7f0ec;
+}
+
+.lesson-label {
+  display: inline-flex;
+  margin-bottom: 14px;
+  color: var(--accent-strong);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.lesson-card.featured .lesson-label {
+  color: #ffbd86;
+}
+
+.academy-note {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(280px, 1.1fr);
+  gap: 24px;
+  margin-top: 18px;
+  padding: 26px;
+  border: 1px solid rgba(255, 143, 61, 0.28);
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--sky), #fff);
+}
+
+.academy-note h3 {
+  margin-top: 0;
+}
+
+.academy-note p,
+.academy-list {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.academy-note p {
+  margin: 0;
+}
+
+.academy-list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.academy-list li + li {
+  margin-top: 8px;
+}
+
 footer {
   padding: 28px clamp(20px, 5vw, 72px);
   color: var(--muted);
@@ -340,6 +438,8 @@ footer {
 
   .hero,
   .section-heading,
+  .academy-intro,
+  .academy-note,
   .band {
     grid-template-columns: 1fr;
   }
@@ -348,7 +448,8 @@ footer {
     min-height: auto;
   }
 
-  .service-grid {
+  .service-grid,
+  .lesson-grid {
     grid-template-columns: 1fr;
   }
 
