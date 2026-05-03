@@ -262,6 +262,9 @@ h3 { margin: 16px 0 10px; font-size: 1.2rem; line-height: 1.18; }
 .bauhaus-pattern span:nth-child(6) { background: #728158; grid-column: 3 / 5; grid-row: 3 / 4; }
 .brand-case span, .academy-grid span { color: var(--orange-dark); font-size: 0.76rem; font-weight: 950; letter-spacing: .1em; text-transform: uppercase; }
 .brand-case a { display: inline-flex; margin-top: 14px; color: var(--orange-dark); font-weight: 900; }
+.brand-story { margin: 18px 0 0; }
+.brand-story img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; }
+.brand-story figcaption { margin-top: 8px; color: var(--gray); font-size: 0.86rem; line-height: 1.4; }
 
 .experience { background: var(--paper); border-bottom: 1px solid var(--line); }
 .experience-grid { grid-template-columns: repeat(4, 1fr); }
