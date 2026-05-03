@@ -250,6 +250,7 @@ small {
 }
 
 .section,
+.trajectory,
 .band,
 .academy,
 .contact {
@@ -425,6 +426,83 @@ small {
   margin-top: 8px;
 }
 
+.trajectory {
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+
+.trajectory-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 30px;
+  align-items: end;
+  margin-bottom: 34px;
+}
+
+.trajectory-heading p:not(.eyebrow) {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.project-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.project-list article {
+  min-height: 300px;
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+}
+
+.project-list span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.84rem;
+  font-weight: 900;
+}
+
+.project-list p,
+.values-row p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.values-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin-top: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 143, 61, 0.28);
+  border-radius: 8px;
+  background: rgba(255, 143, 61, 0.28);
+}
+
+.values-row div {
+  padding: 22px;
+  background: #fff;
+}
+
+.values-row strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--accent-strong);
+  font-size: 1.05rem;
+}
+
 footer {
   padding: 28px clamp(20px, 5vw, 72px);
   color: var(--muted);
@@ -438,6 +516,7 @@ footer {
 
   .hero,
   .section-heading,
+  .trajectory-heading,
   .academy-intro,
   .academy-note,
   .band {
@@ -449,6 +528,8 @@ footer {
   }
 
   .service-grid,
+  .project-list,
+  .values-row,
   .lesson-grid {
     grid-template-columns: 1fr;
   }
