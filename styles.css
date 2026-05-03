@@ -216,15 +216,75 @@ footer { padding: 28px clamp(20px,5vw,72px); color: rgba(255,255,255,.48); backg
 }
 
 @media (max-width: 720px) {
-  .site-header { align-items: flex-start; flex-direction: column; }
-  .nav { justify-content: flex-start; }
-  h1 { font-size: clamp(3rem, 17vw, 4.8rem); }
+  .site-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px 16px 10px;
+    background: rgba(8,8,8,.88);
+  }
+  .brand img { width: min(178px, 68vw); }
+  .nav {
+    width: 100%;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 18px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    font-size: .78rem;
+    scrollbar-width: none;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  h1 { font-size: clamp(2.65rem, 13.2vw, 4.1rem); line-height: .94; }
+  h2 { font-size: clamp(2rem, 10vw, 3rem); }
   .metrics, .service-list, .brand-cases, .experience-grid, .team-grid, .academy-grid, .logo-wall { grid-template-columns: 1fr; }
-  .hero { min-height: 640px; }
+  .hero {
+    min-height: 620px;
+    padding: 148px 16px 48px;
+    align-items: end;
+  }
+  .hero-media img {
+    object-position: 70% 42%;
+    filter: grayscale(100%) contrast(1.1) brightness(.62);
+  }
+  .hero-overlay {
+    background:
+      radial-gradient(circle at 64% 30%, rgba(254,145,64,.18), transparent 34%),
+      linear-gradient(90deg, rgba(8,8,8,.94) 0%, rgba(8,8,8,.76) 58%, rgba(8,8,8,.38) 100%),
+      linear-gradient(0deg, rgba(8,8,8,.92) 0%, rgba(8,8,8,.24) 62%);
+  }
+  .hero-badge {
+    max-width: 100%;
+    margin-bottom: 18px;
+    padding: 8px 11px;
+    font-size: .66rem;
+    letter-spacing: .06em;
+  }
+  .hero-content p:not(.eyebrow) {
+    margin-top: 20px;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+  .hero-actions { margin-top: 24px; gap: 10px; }
+  .button { width: 100%; min-height: 50px; }
+  .hero-scroll { display: none; }
+  .metrics div { min-height: auto; padding: 22px 18px; }
+  .section, .method-panel, .contact { padding: 58px 16px; }
+  .service-list article, .experience-grid article, .team-grid article, .academy-grid article, .brand-case { padding: 20px; }
+  .brand-logo-box { min-height: 170px; }
+  .bocus-box { min-height: 220px; }
+  .logo-wall article { min-height: 108px; }
+  .team-card img { aspect-ratio: 1 / 1.08; }
   .system-topline { align-items: flex-start; flex-direction: column; }
   .system-topline img { width: min(240px, 84%); }
   .system-note { grid-template-columns: 1fr; }
   .method-panel li { grid-template-columns: 1fr; }
-  .button { width: 100%; }
   .contact { align-items: flex-start; flex-direction: column; }
+}
+
+@media (max-width: 390px) {
+  .hero { min-height: 590px; padding-top: 138px; }
+  h1 { font-size: clamp(2.35rem, 12.5vw, 3.25rem); }
+  .hero-content p:not(.eyebrow) { font-size: .96rem; }
+  .hero-badge { font-size: .61rem; }
 }
