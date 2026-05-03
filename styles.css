@@ -226,10 +226,11 @@ h3 { margin: 16px 0 10px; font-size: 1.2rem; line-height: 1.18; }
 .method-panel li span { color: #eee3dc; }
 
 .brands { background: var(--white); border-bottom: 1px solid var(--line); }
-.brand-cases { grid-template-columns: repeat(2, 1fr); margin-top: 34px; }
-.brand-case { display: grid; grid-template-columns: 0.86fr 1fr; gap: 24px; align-items: center; padding: 24px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper-2); }
+.brand-cases { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 34px; }
+.brand-case { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: center; padding: 24px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper-2); }
 .brand-logo-box { min-height: 220px; display: grid; place-items: center; padding: 18px; background: #ead3c3; border-radius: 4px; }
 .brand-logo-box.dark { background: #000; }
+.brand-logo-box.parigo-box { background: #f8f6f2; }
 .brand-logo-box img { display: block; max-width: 100%; max-height: 190px; object-fit: contain; }
 
 .bauhaus-card {
