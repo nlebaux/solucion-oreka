@@ -231,65 +231,63 @@ footer { padding: 28px clamp(20px,5vw,72px); color: rgba(255,255,255,.48); backg
   .site-header {
     align-items: flex-start;
     flex-direction: column;
-    gap: 10px;
-    padding: 12px 16px 10px;
+    gap: 8px;
+    padding: 9px 14px 8px;
     background: rgba(255,255,255,.97);
   }
   .brand { max-width: 100%; }
-  .brand img { width: min(286px, 88vw); }
+  .brand img { width: min(238px, 76vw); }
   .nav {
     width: 100%;
     flex-wrap: nowrap;
     justify-content: flex-start;
-    gap: 18px;
+    gap: 14px;
     overflow-x: auto;
-    padding-bottom: 4px;
-    font-size: .78rem;
+    padding-bottom: 3px;
+    font-size: .72rem;
     scrollbar-width: none;
   }
   .nav::-webkit-scrollbar { display: none; }
-  h1 { font-size: clamp(2.65rem, 13.2vw, 4.1rem); line-height: .94; }
-  h2 { font-size: clamp(2rem, 10vw, 3rem); }
-  .metrics, .service-list, .brand-cases, .experience-grid, .experience-grid.case-grid, .team-grid, .academy-grid, .logo-wall { grid-template-columns: 1fr; }
+  h1 { font-size: clamp(2.25rem, 11.7vw, 3.35rem); line-height: .96; }
+  h2 { font-size: clamp(1.85rem, 8.8vw, 2.65rem); }
+  .metrics, .service-list, .brand-cases, .experience-grid, .experience-grid.case-grid, .team-grid, .academy-grid { grid-template-columns: 1fr; }
+  .logo-wall { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .hero {
-    min-height: 620px;
-    padding: 148px 16px 48px;
+    min-height: 570px;
+    padding: 118px 16px 38px;
     align-items: end;
   }
   .hero-media img {
     object-position: 70% 42%;
-    filter: grayscale(100%) contrast(1.1) brightness(.62);
+    filter: grayscale(100%) contrast(1.1) brightness(.58);
   }
   .hero-overlay {
     background:
       radial-gradient(circle at 64% 30%, rgba(254,145,64,.18), transparent 34%),
-      linear-gradient(90deg, rgba(8,8,8,.94) 0%, rgba(8,8,8,.76) 58%, rgba(8,8,8,.38) 100%),
-      linear-gradient(0deg, rgba(8,8,8,.92) 0%, rgba(8,8,8,.24) 62%);
+      linear-gradient(90deg, rgba(8,8,8,.95) 0%, rgba(8,8,8,.78) 58%, rgba(8,8,8,.42) 100%),
+      linear-gradient(0deg, rgba(8,8,8,.94) 0%, rgba(8,8,8,.2) 62%);
   }
-  .hero-badge {
-    max-width: 100%;
-    margin-bottom: 18px;
-    padding: 8px 11px;
-    font-size: .66rem;
-    letter-spacing: .06em;
-  }
+  .hero-badge { display: none; }
   .hero-content p:not(.eyebrow) {
-    margin-top: 20px;
-    font-size: 1rem;
-    line-height: 1.55;
+    margin-top: 18px;
+    font-size: .96rem;
+    line-height: 1.5;
   }
-  .hero-actions { margin-top: 24px; gap: 10px; }
-  .hero-proof { gap: 8px; margin-top: 18px; }
-  .hero-proof span { padding: 8px 10px; font-size: .72rem; }
-  .button { width: 100%; min-height: 50px; }
+  .hero-actions { margin-top: 22px; gap: 10px; }
+  .hero-proof { gap: 7px; margin-top: 16px; }
+  .hero-proof span { padding: 7px 9px; font-size: .68rem; }
+  .button { width: 100%; min-height: 48px; }
   .hero-scroll { display: none; }
-  .metrics div { min-height: auto; padding: 22px 18px; }
-  .section, .method-panel, .contact { padding: 58px 16px; }
-  .service-list article, .experience-grid article, .team-grid article, .academy-grid article, .brand-case { padding: 20px; }
-  .brand-logo-box { min-height: 170px; }
-  .bocus-box { min-height: 220px; }
-  .logo-wall article { min-height: 108px; }
-  .team-card img { aspect-ratio: 1 / 1.08; }
+  .metrics div { min-height: auto; padding: 20px 16px; }
+  .section, .method-panel, .contact { padding: 52px 16px; }
+  .section-title { margin-bottom: 28px; }
+  .service-list article, .experience-grid article, .team-grid article, .academy-grid article, .brand-case { padding: 18px; }
+  .brand-logo-box { min-height: 158px; }
+  .bocus-box { min-height: 210px; }
+  .logo-wall { gap: 10px; }
+  .logo-wall article { min-height: 92px; padding: 12px; }
+  .logo-wall img { height: 58px; }
+  .team-card img { aspect-ratio: 1 / 1.02; }
   .system-topline { align-items: flex-start; flex-direction: column; }
   .system-topline img { width: min(240px, 84%); }
   .system-note { grid-template-columns: 1fr; }
@@ -299,8 +297,10 @@ footer { padding: 28px clamp(20px,5vw,72px); color: rgba(255,255,255,.48); backg
 }
 
 @media (max-width: 390px) {
-  .hero { min-height: 590px; padding-top: 138px; }
-  h1 { font-size: clamp(2.35rem, 12.5vw, 3.25rem); }
-  .hero-content p:not(.eyebrow) { font-size: .96rem; }
-  .hero-badge { font-size: .61rem; }
+  .brand img { width: min(218px, 82vw); }
+  .nav { font-size: .68rem; gap: 12px; }
+  .hero { min-height: 540px; padding-top: 108px; }
+  h1 { font-size: clamp(2.05rem, 11vw, 2.85rem); }
+  .hero-content p:not(.eyebrow) { font-size: .92rem; }
+  .hero-proof span { font-size: .64rem; }
 }
