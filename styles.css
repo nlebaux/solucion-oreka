@@ -133,6 +133,11 @@ h3 { margin: 16px 0 10px; font-size: 1.22rem; line-height: 1.18; }
 .service-list article, .experience-grid article, .team-grid article, .academy-grid article { padding: 24px; }
 .service-list article:hover, .experience-grid article:hover, .academy-grid article:hover, .brand-case:hover, .logo-wall article:hover { transform: translateY(-6px); border-color: rgba(254,145,64,.52); box-shadow: var(--shadow); background: linear-gradient(180deg, rgba(255,255,255,.105), rgba(255,255,255,.04)); }
 .service-list article span { display: inline-grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--orange); color: var(--black); font-weight: 950; font-size: .84rem; }
+.when-call { background: #0c0c0c; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.trigger-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(254,145,64,.36); border: 1px solid rgba(254,145,64,.28); }
+.trigger-list article { min-height: 190px; padding: 26px; background: #111; }
+.trigger-list strong { display: block; margin-bottom: 12px; color: #fff; font-size: 1.12rem; line-height: 1.15; }
+.trigger-list span { color: rgba(255,255,255,.64); line-height: 1.55; font-weight: 750; }
 .case-grid { grid-template-columns: repeat(3, 1fr); }
 .case-grid article { position: relative; overflow: hidden; }
 .case-grid article::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 4px; background: var(--orange); opacity: .8; }
@@ -189,6 +194,15 @@ h3 { margin: 16px 0 10px; font-size: 1.22rem; line-height: 1.18; }
 .team-grid strong { display: block; margin-bottom: 8px; }
 .team-grid span { color: rgba(255,255,255,.66); }
 
+.credentials { background: #0b0b0b; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.credential-grid { display: grid; grid-template-columns: minmax(0,1.4fr) repeat(2, minmax(0,.8fr)); gap: 16px; }
+.credential-card { border: 1px solid var(--line); border-radius: 10px; background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.035)); overflow: hidden; }
+.credential-card img { display: block; width: 100%; height: 320px; object-fit: contain; padding: 14px; background: #f3f0eb; filter: grayscale(100%) contrast(1.05); }
+.credential-card div, .credential-card.compact { padding: 24px; }
+.credential-card span { color: var(--orange); font-size: .74rem; font-weight: 950; letter-spacing: .1em; text-transform: uppercase; }
+.credential-card p { color: rgba(255,255,255,.64); line-height: 1.6; }
+.credential-card a { display: inline-flex; margin-top: 16px; color: var(--orange); font-weight: 950; }
+.credential-card.compact { display: flex; min-height: 100%; flex-direction: column; justify-content: center; }
 .academy { background: #0f0f0f; }
 .academy-grid { grid-template-columns: 1.2fr 1fr 1fr; }
 .academy-grid article:first-child { background: linear-gradient(180deg, rgba(254,145,64,.18), rgba(255,255,255,.04)); border-color: rgba(254,145,64,.34); }
@@ -222,7 +236,7 @@ footer { padding: 28px clamp(20px,5vw,72px); color: rgba(255,255,255,.48); backg
   .split, .method-panel, .hero-layout { grid-template-columns: 1fr; }
   .hero { min-height: clamp(620px, 82svh, 760px); }
   .hero-system { max-width: 720px; }
-  .metrics, .experience-grid, .case-grid, .team-grid, .logo-wall, .brand-cases, .service-list { grid-template-columns: repeat(2, 1fr); }
+  .metrics, .experience-grid, .case-grid, .team-grid, .logo-wall, .brand-cases, .service-list, .trigger-list, .credential-grid { grid-template-columns: repeat(2, 1fr); }
   .experience-grid.case-grid { grid-template-columns: repeat(2, 1fr); }
   .brand-case { grid-template-columns: 1fr; }
 }
@@ -250,7 +264,7 @@ footer { padding: 28px clamp(20px,5vw,72px); color: rgba(255,255,255,.48); backg
   .nav::-webkit-scrollbar { display: none; }
   h1 { font-size: clamp(2.25rem, 11.7vw, 3.35rem); line-height: .96; }
   h2 { font-size: clamp(1.85rem, 8.8vw, 2.65rem); }
-  .metrics, .service-list, .brand-cases, .experience-grid, .experience-grid.case-grid, .team-grid, .academy-grid { grid-template-columns: 1fr; }
+  .metrics, .service-list, .brand-cases, .experience-grid, .experience-grid.case-grid, .team-grid, .academy-grid, .trigger-list, .credential-grid { grid-template-columns: 1fr; }
   .logo-wall { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .hero {
     min-height: 570px;
@@ -282,6 +296,9 @@ footer { padding: 28px clamp(20px,5vw,72px); color: rgba(255,255,255,.48); backg
   .section, .method-panel, .contact { padding: 52px 16px; }
   .section-title { margin-bottom: 28px; }
   .service-list article, .experience-grid article, .team-grid article, .academy-grid article, .brand-case { padding: 18px; }
+  .trigger-list article { min-height: auto; padding: 20px; }
+  .credential-card img { height: 220px; padding: 10px; }
+  .credential-card div, .credential-card.compact { padding: 20px; }
   .brand-logo-box { min-height: 158px; }
   .bocus-box { min-height: 210px; }
   .logo-wall { gap: 10px; }
