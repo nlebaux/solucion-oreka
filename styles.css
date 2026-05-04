@@ -185,6 +185,34 @@ h3 { margin: 16px 0 10px; font-size: 1.22rem; line-height: 1.18; }
 .logo-wall .logo-text strong { font-size: 1.14rem; }
 .logo-wall .logo-text span { color: #ffc08c; }
 
+.press { background: #0f0f0f; border-bottom: 1px solid var(--line); }
+.press-card {
+  display: grid;
+  grid-template-columns: 112px minmax(0,1fr);
+  gap: 28px;
+  align-items: center;
+  max-width: 980px;
+  padding: 28px;
+  border: 1px solid rgba(254,145,64,.28);
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(254,145,64,.16), rgba(255,255,255,.045));
+  box-shadow: 0 1px 0 rgba(255,255,255,.05) inset;
+}
+.press-mark {
+  display: grid;
+  place-items: center;
+  width: 92px;
+  height: 92px;
+  background: var(--orange);
+  color: var(--black);
+  font-size: 2.3rem;
+  font-weight: 950;
+  letter-spacing: -.06em;
+}
+.press-card span { color: var(--orange); font-size: .76rem; font-weight: 950; letter-spacing: .1em; text-transform: uppercase; }
+.press-card h3 { margin-top: 12px; font-size: clamp(1.7rem, 3.2vw, 3rem); }
+.press-card p { max-width: 720px; color: rgba(255,255,255,.66); line-height: 1.65; }
+
 .team { background: #101010; color: #fff; }
 .team .eyebrow { color: var(--orange); }
 .team-grid { grid-template-columns: repeat(2, minmax(0,1fr)); margin-top: 34px; }
@@ -299,6 +327,8 @@ footer { padding: 28px clamp(20px,5vw,72px); color: rgba(255,255,255,.48); backg
   .section, .method-panel, .contact { padding: 52px 16px; }
   .section-title { margin-bottom: 28px; }
   .service-list article, .experience-grid article, .team-grid article, .academy-grid article, .brand-case { padding: 18px; }
+  .press-card { grid-template-columns: 1fr; gap: 18px; padding: 22px; }
+  .press-mark { width: 72px; height: 72px; font-size: 1.8rem; }
   .trigger-list article { min-height: auto; padding: 20px; }
   .credential-card img { height: 220px; padding: 10px; }
   .credential-card div, .credential-card.compact { padding: 20px; }
