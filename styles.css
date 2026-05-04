@@ -99,6 +99,8 @@ h2 { margin: 0; font-size: clamp(2.2rem, 4.8vw, 4.8rem); line-height: .98; lette
 h3 { margin: 16px 0 10px; font-size: 1.22rem; line-height: 1.18; }
 .hero-content p:not(.eyebrow) { max-width: 760px; margin: 30px 0 0; color: rgba(255,255,255,.82); font-size: clamp(1.1rem, 1.7vw, 1.34rem); line-height: 1.65; opacity: 0; animation: fadeUp .8s cubic-bezier(.22,1,.36,1) .6s forwards; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; opacity: 0; animation: fadeUp .8s cubic-bezier(.22,1,.36,1) .8s forwards; }
+.hero-proof { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; opacity: 0; animation: fadeUp .8s cubic-bezier(.22,1,.36,1) 1s forwards; }
+.hero-proof span { padding: 9px 12px; border: 1px solid rgba(255,255,255,.18); border-radius: 999px; background: rgba(255,255,255,.07); color: rgba(255,255,255,.78); font-size: .78rem; font-weight: 900; }
 .button { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 22px; border: 1px solid var(--orange); border-radius: 999px; font-weight: 950; transition: transform .25s ease, box-shadow .25s ease, background .25s ease; }
 .button.primary { background: var(--orange); color: var(--black); box-shadow: 0 0 0 0 rgba(254,145,64,.55); animation: borderGlow 3s ease-in-out 1.4s infinite; }
 .button.ghost { color: #fff; border-color: rgba(255,255,255,.42); background: rgba(255,255,255,.04); }
@@ -131,6 +133,10 @@ h3 { margin: 16px 0 10px; font-size: 1.22rem; line-height: 1.18; }
 .service-list article, .experience-grid article, .team-grid article, .academy-grid article { padding: 24px; }
 .service-list article:hover, .experience-grid article:hover, .academy-grid article:hover, .brand-case:hover, .logo-wall article:hover { transform: translateY(-6px); border-color: rgba(254,145,64,.52); box-shadow: var(--shadow); background: linear-gradient(180deg, rgba(255,255,255,.105), rgba(255,255,255,.04)); }
 .service-list article span { display: inline-grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--orange); color: var(--black); font-weight: 950; font-size: .84rem; }
+.case-grid { grid-template-columns: repeat(3, 1fr); }
+.case-grid article { position: relative; overflow: hidden; }
+.case-grid article::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 4px; background: var(--orange); opacity: .8; }
+.case-grid span { color: var(--orange); font-size: .72rem; font-weight: 950; letter-spacing: .1em; text-transform: uppercase; }
 
 .method-panel { background: #0b0b0b; color: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .method-panel .eyebrow { color: var(--orange); }
@@ -164,6 +170,7 @@ h3 { margin: 16px 0 10px; font-size: 1.22rem; line-height: 1.18; }
 
 .experience { background: #0b0b0b; border-bottom: 1px solid var(--line); }
 .experience-grid { grid-template-columns: repeat(4, 1fr); }
+.experience-grid.case-grid { grid-template-columns: repeat(3, 1fr); }
 .logo-wall { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 28px; }
 .logo-wall article { min-height: 128px; display: grid; align-content: center; padding: 18px; background: rgba(255,255,255,.94); }
 .logo-wall img { display: block; width: 100%; height: 82px; object-fit: contain; }
@@ -189,6 +196,8 @@ h3 { margin: 16px 0 10px; font-size: 1.22rem; line-height: 1.18; }
 .academy-grid article:first-child p { color: rgba(255,255,255,.7); }
 
 .contact { display: flex; align-items: center; justify-content: space-between; gap: 30px; background: #090909; color: #fff; border-top: 1px solid rgba(254,145,64,.24); }
+.contact-actions { display: grid; gap: 12px; max-width: 390px; }
+.contact-actions span { color: rgba(255,255,255,.62); line-height: 1.5; font-weight: 750; }
 .contact .eyebrow { color: var(--orange); }
 .contact h2 { max-width: 900px; }
 footer { padding: 28px clamp(20px,5vw,72px); color: rgba(255,255,255,.48); background: #070707; }
@@ -213,7 +222,8 @@ footer { padding: 28px clamp(20px,5vw,72px); color: rgba(255,255,255,.48); backg
   .split, .method-panel, .hero-layout { grid-template-columns: 1fr; }
   .hero { min-height: clamp(620px, 82svh, 760px); }
   .hero-system { max-width: 720px; }
-  .metrics, .experience-grid, .team-grid, .logo-wall, .brand-cases { grid-template-columns: repeat(2, 1fr); }
+  .metrics, .experience-grid, .case-grid, .team-grid, .logo-wall, .brand-cases, .service-list { grid-template-columns: repeat(2, 1fr); }
+  .experience-grid.case-grid { grid-template-columns: repeat(2, 1fr); }
   .brand-case { grid-template-columns: 1fr; }
 }
 
@@ -240,7 +250,7 @@ footer { padding: 28px clamp(20px,5vw,72px); color: rgba(255,255,255,.48); backg
   .nav::-webkit-scrollbar { display: none; }
   h1 { font-size: clamp(2.65rem, 13.2vw, 4.1rem); line-height: .94; }
   h2 { font-size: clamp(2rem, 10vw, 3rem); }
-  .metrics, .service-list, .brand-cases, .experience-grid, .team-grid, .academy-grid, .logo-wall { grid-template-columns: 1fr; }
+  .metrics, .service-list, .brand-cases, .experience-grid, .experience-grid.case-grid, .team-grid, .academy-grid, .logo-wall { grid-template-columns: 1fr; }
   .hero {
     min-height: 620px;
     padding: 148px 16px 48px;
@@ -269,6 +279,8 @@ footer { padding: 28px clamp(20px,5vw,72px); color: rgba(255,255,255,.48); backg
     line-height: 1.55;
   }
   .hero-actions { margin-top: 24px; gap: 10px; }
+  .hero-proof { gap: 8px; margin-top: 18px; }
+  .hero-proof span { padding: 8px 10px; font-size: .72rem; }
   .button { width: 100%; min-height: 50px; }
   .hero-scroll { display: none; }
   .metrics div { min-height: auto; padding: 22px 18px; }
@@ -283,6 +295,7 @@ footer { padding: 28px clamp(20px,5vw,72px); color: rgba(255,255,255,.48); backg
   .system-note { grid-template-columns: 1fr; }
   .method-panel li { grid-template-columns: 1fr; }
   .contact { align-items: flex-start; flex-direction: column; }
+  .contact-actions { width: 100%; max-width: none; }
 }
 
 @media (max-width: 390px) {
