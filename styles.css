@@ -185,7 +185,7 @@ h3 { margin: 16px 0 10px; font-size: 1.22rem; line-height: 1.18; }
 .press { background: #0f0f0f; border-bottom: 1px solid var(--line); }
 .press-card {
   display: grid;
-  grid-template-columns: minmax(210px, .42fr) minmax(0,1fr);
+  grid-template-columns: minmax(360px, .62fr) minmax(0,1fr);
   gap: 30px;
   align-items: stretch;
   max-width: 1080px;
@@ -195,7 +195,7 @@ h3 { margin: 16px 0 10px; font-size: 1.22rem; line-height: 1.18; }
   background: linear-gradient(135deg, rgba(254,145,64,.16), rgba(255,255,255,.045));
   box-shadow: 0 1px 0 rgba(255,255,255,.05) inset;
 }
-.press-cover { margin: 0; min-height: 320px; border-radius: 8px; overflow: hidden; background: #f8f6f2; }
+.press-cover { margin: 0; min-height: 360px; border-radius: 8px; overflow: hidden; background: #f8f6f2; }
 .press-cover img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
 .press-body { display: grid; align-content: center; }
 .press-mark {
@@ -320,7 +320,7 @@ footer { padding: 28px clamp(20px,5vw,72px); color: rgba(255,255,255,.48); backg
   .section-title { margin-bottom: 28px; }
   .service-list article, .experience-grid article, .team-grid article, .academy-grid article, .brand-case { padding: 18px; }
   .press-card { grid-template-columns: 1fr; gap: 18px; padding: 18px; }
-  .press-cover { min-height: 0; aspect-ratio: 4 / 5; }
+  .press-cover { min-height: 0; aspect-ratio: 1 / .82; }
   .press-mark { width: 62px; height: 62px; margin-bottom: 18px; font-size: 1.65rem; }
   .trigger-list article { min-height: auto; padding: 20px; }
   .brand-logo-box { min-height: 158px; }
