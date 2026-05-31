@@ -1,176 +1,1865 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bocus | Manual privado de marca</title>
-    <meta name="robots" content="noindex,nofollow,noarchive" />
-    <meta
-      name="description"
-      content="Manual privado de marca Bocus dentro de Solucion Oreka."
-    />
-    <link rel="stylesheet" href="../styles.css" />
-  </head>
-  <body>
-    <main class="wrap">
-      <div class="topbar">
-        <div class="crumb">Oreka privado · Bocus marca</div>
-        <a class="home-link" href="../">Volver al indice privado</a>
+<head>
+<meta charset="utf-8">
+<title>Bocus · Manual de Marca</title>
+<link rel="icon" type="image/png" href="gallo-favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;500;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --creme:      #f4e2d6;
+  --beige:      #eedacf;
+  --beige-deep: #ebd3c2;
+  --sand:       #c4a693;
+  --brown:      #3f3833;
+  --brown-deep: #342d2a;
+  --stone:      #95887d;
+  --orange:     #ef6a2b;
+  --orange-h:   #d65a1f;
+  --olive:      #7a8158;
+  --wa:         #25d366;
+  --j: "Jost", sans-serif;
+  --m: "Montserrat", sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--creme);color:var(--brown);font-family:var(--m);font-size:16px;line-height:1.6}
+
+.wrap{max-width:1160px;margin:0 auto;padding:0 48px}
+section{padding:96px 0}
+hr.div{border:none;border-top:1px solid var(--beige-deep)}
+
+.label{font-family:var(--j);font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--stone);margin-bottom:14px}
+h2{font-family:var(--j);font-weight:700;font-size:56px;line-height:1;letter-spacing:-.02em;margin-bottom:10px}
+h3{font-family:var(--j);font-weight:700;font-size:24px;letter-spacing:.01em;margin-bottom:6px}
+.note{font-size:15px;color:var(--stone);margin-bottom:32px}
+
+/* ═══ HERO ═══ */
+.hero{background:var(--olive);min-height:580px;position:relative;overflow:hidden;display:flex;align-items:center}
+.hero-geo{position:absolute;inset:0;pointer-events:none}
+.hero-wrap{position:relative;z-index:2;width:100%;display:flex;align-items:center;justify-content:space-between;gap:48px;padding:80px 48px;max-width:1160px;margin:0 auto}
+
+/* Logo B en cuadrado */
+.logo-box{flex:none;width:260px;height:260px;position:relative;display:flex;align-items:center;justify-content:center}
+.logo-box svg{width:100%;height:100%}
+
+.hero-text{flex:1}
+.hero-eyebrow{font-family:var(--j);font-weight:300;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:rgba(244,226,214,.55);margin-bottom:20px}
+.hero-name{font-family:var(--j);font-weight:700;font-size:100px;line-height:.9;letter-spacing:-.04em;color:var(--creme)}
+.hero-name .dot{color:var(--orange)}
+.hero-tagline{font-family:var(--j);font-weight:300;font-size:20px;letter-spacing:.14em;text-transform:uppercase;color:rgba(244,226,214,.7);margin-top:18px}
+.hero-sub{font-family:var(--m);font-size:15px;color:rgba(244,226,214,.55);margin-top:10px;letter-spacing:.02em}
+.hero-badge{margin-top:32px;display:inline-block}
+.hero-badge span{font-family:var(--j);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(244,226,214,.25);border-radius:999px;padding:8px 18px;color:rgba(244,226,214,.6)}
+
+/* ═══ ADN ═══ */
+.adn-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.adn-card{background:var(--beige);border-radius:16px;padding:28px 32px;border-left:4px solid var(--orange)}
+.adn-card.olive{border-left-color:var(--olive)}
+.adn-card.sand{border-left-color:var(--sand)}
+.adn-card-label{font-family:var(--j);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:8px}
+.adn-card.olive .adn-card-label{color:var(--olive)}
+.adn-card.sand .adn-card-label{color:var(--stone)}
+.adn-card p{font-size:15px;color:var(--stone);line-height:1.6}
+.valores{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.valor{font-family:var(--j);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;background:var(--beige-deep);color:var(--brown);border-radius:999px;padding:6px 16px}
+
+/* ═══ LOGO SECTION ═══ */
+.logo-section{background:var(--brown-deep)}
+.logo-demo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.logo-demo{border-radius:16px;padding:48px 32px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;text-align:center}
+.logo-demo-label{font-family:var(--j);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-top:8px}
+.logo-demo svg{width:120px;height:120px}
+
+/* ═══ COLOR ═══ */
+.tira{display:flex;height:80px;border-radius:14px;overflow:hidden;border:1px solid rgba(63,56,51,.12);margin-bottom:48px}
+.tira span{flex:1}
+.color-group{margin-bottom:52px}
+.sw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.sw{border-radius:14px;overflow:hidden;border:1px solid rgba(63,56,51,.12);transition:all 0.35s cubic-bezier(0.16, 1, 0.3, 1)}
+.sw:hover{transform:translateY(-6px);box-shadow:0 12px 24px rgba(63, 56, 51, 0.12)}
+.sw .chip{height:100px}
+.sw .meta{padding:14px 16px;background:var(--beige)}
+.sw .name{font-family:var(--j);font-weight:700;font-size:16px}
+.sw .hex{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--stone);letter-spacing:.06em;margin-top:2px}
+.sw .role{font-size:13px;color:var(--stone);margin-top:6px;line-height:1.4}
+
+/* accesibilidad */
+.pair-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.pair{border-radius:12px;overflow:hidden;border:1px solid rgba(63,56,51,.1)}
+.pair-chip{height:72px;display:flex;align-items:center;justify-content:center;font-family:var(--j);font-weight:700;font-size:15px}
+.pair-meta{padding:10px 14px;background:var(--beige)}
+.pair-combo{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--stone)}
+.verdict{display:inline-block;margin-top:6px;font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.07em;text-transform:uppercase;padding:3px 10px;border-radius:999px}
+.v-ok{background:var(--olive);color:#fff}
+.v-warn{background:var(--sand);color:var(--brown)}
+.v-fail{background:#b23b2e;color:#fff}
+
+/* ═══ TIPOGRAFIA ═══ */
+.type-card{background:var(--beige);border-radius:16px;padding:36px;border:1px solid var(--beige-deep)}
+.font-tag{font-family:var(--j);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--beige-deep);border-radius:6px;padding:4px 12px;display:inline-block;margin-bottom:16px;color:var(--stone)}
+.typo-xl{font-family:var(--j);font-weight:700;font-size:80px;line-height:1;letter-spacing:-.02em;margin-bottom:24px}
+.typo-xl.mont{font-family:var(--m);font-size:64px}
+.type-scale{display:grid;gap:12px;margin-top:20px;padding-top:20px;border-top:1px solid var(--beige-deep)}
+.type-row{display:flex;align-items:baseline;gap:16px}
+.type-row-label{min-width:80px;font-size:12px;font-family:var(--j);color:var(--stone);letter-spacing:.08em;text-transform:uppercase}
+
+/* jerarquia full */
+.hier{background:var(--beige);border-radius:16px;padding:36px;margin-top:24px}
+.hier-row{display:flex;align-items:baseline;gap:24px;padding:16px 0;border-bottom:1px solid var(--beige-deep)}
+.hier-row:last-child{border:none}
+.hier-key{min-width:130px;font-size:13px;font-family:var(--j);color:var(--stone);letter-spacing:.06em;text-transform:uppercase}
+
+/* ═══ BAUHAUS ═══ */
+.bauhaus-card{background:var(--brown-deep);border-radius:24px;overflow:hidden;position:relative;display:grid;grid-template-columns:1fr 340px;min-height:440px}
+.bauhaus-left{padding:56px;position:relative;z-index:2;display:flex;flex-direction:column;justify-content:flex-end}
+.bauhaus-right{background:var(--olive);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.bh-tag{background:var(--orange);color:var(--brown);font-family:var(--j);font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:8px 18px;border-radius:999px;display:inline-block;margin-bottom:20px;width:fit-content}
+.bh-title{font-family:var(--j);font-weight:700;font-size:60px;line-height:.95;letter-spacing:-.02em;color:var(--creme)}
+.bh-body{font-family:var(--m);font-size:15px;color:var(--sand);margin-top:20px;max-width:320px;line-height:1.6}
+.bh-geo{position:absolute;inset:0;pointer-events:none}
+
+.principles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:24px}
+.principle{background:var(--beige);border-radius:14px;padding:28px;border:1px solid var(--beige-deep)}
+.principle-icon{margin-bottom:16px}
+.principle h3{font-size:20px;margin-bottom:8px}
+.principle p{font-size:14px;color:var(--stone);line-height:1.6}
+
+/* ═══ SUPERFICIES ═══ */
+.surface-section{background:var(--brown-deep);padding:96px 0}
+.surf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:48px}
+.surf-card{border-radius:16px;padding:32px}
+.surf-label{font-family:var(--j);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+.surf-title{font-family:var(--j);font-weight:700;font-size:30px;line-height:1.1;margin-bottom:10px}
+.surf-body{font-size:14px;line-height:1.5}
+
+.btn{font-family:var(--j);font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;border:none;border-radius:999px;padding:16px 28px;cursor:pointer}
+.btn-orange{background:var(--orange);color:var(--brown)}
+.btn-dark{background:var(--brown);color:var(--creme)}
+.btn-ghost{background:transparent;color:var(--creme);border:1.5px solid rgba(244,226,214,.4)}
+.btn-wa{background:var(--wa);color:#fff}
+.btn-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:20px}
+
+/* ═══ GRAFICAS ═══ */
+.grafica-arch{display:grid;grid-template-columns:1fr 2fr;gap:48px;align-items:start;margin-bottom:56px}
+.arch-layer{display:flex;flex-direction:column;gap:0}
+.arch-row{display:grid;grid-template-columns:28px 1fr;gap:16px;align-items:stretch;padding:16px 0;border-bottom:1px solid var(--beige-deep)}
+.arch-row:last-child{border-bottom:none}
+.arch-num{font-family:var(--j);font-weight:700;font-size:11px;color:var(--orange);letter-spacing:.1em;padding-top:2px}
+.arch-label{font-family:var(--j);font-weight:700;font-size:16px;color:var(--brown);margin-bottom:4px}
+.arch-desc{font-family:var(--m);font-size:14px;color:var(--stone);line-height:1.55}
+.arch-example{font-family:var(--m);font-size:13px;color:var(--sand);font-style:italic;margin-top:6px;padding-left:12px;border-left:2px solid var(--orange)}
+.plantilla-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.plantilla{border-radius:16px;overflow:hidden;aspect-ratio:4/5;position:relative;display:flex;flex-direction:column;justify-content:flex-end}
+.plantilla-foto{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.plantilla-overlay{position:relative;z-index:2;padding:24px}
+.p-tag{font-family:var(--j);font-weight:700;font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px}
+.p-titulo{font-family:var(--j);font-weight:700;line-height:1.05;margin-bottom:10px}
+.p-bajada{font-family:var(--m);line-height:1.45;margin-bottom:14px}
+.p-cta{display:inline-flex;align-items:center;gap:10px;font-family:var(--j);font-weight:700;font-size:10px;letter-spacing:.14em;text-transform:uppercase;background:rgba(244,226,214,0.88);color:var(--brown);padding:9px 9px 9px 16px;border-radius:50px;backdrop-filter:blur(6px)}
+.p-cta-arrow{width:30px;height:30px;background:var(--olive);border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none}
+.p-cta-arrow svg{width:14px;height:14px}
+.foto-dir-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:40px}
+.foto-dir-card{border-radius:14px;padding:24px 28px;background:var(--beige)}
+.foto-dir-label{font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px}
+/* ═══ VOZ ═══ */
+.voz-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.voz-card{border-radius:16px;padding:32px}
+.voz-ok{background:var(--olive)}
+.voz-bad{background:var(--beige);border:1px solid var(--beige-deep)}
+.voz-head{font-family:var(--j);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:20px}
+.voz-ok .voz-head{color:rgba(244,226,214,.65)}
+.voz-bad .voz-head{color:var(--stone)}
+.voz-item{font-family:var(--m);font-size:15px;line-height:1.5;padding:12px 0;border-bottom:1px solid rgba(0,0,0,.08);display:flex;gap:12px;align-items:flex-start}
+.voz-ok .voz-item{color:var(--creme);border-bottom-color:rgba(244,226,214,.15)}
+.voz-bad .voz-item{color:var(--stone)}
+.voz-item:last-child{border:none;padding-bottom:0}
+.vi{flex:none;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-top:2px}
+.vi-ok{background:var(--orange);color:var(--brown)}
+.vi-bad{background:rgba(178,59,46,.2);color:#b23b2e}
+
+.princ-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:40px}
+.princ{border-left:3px solid var(--orange);padding-left:18px}
+.princ.p2{border-left-color:var(--olive)}
+.princ.p3{border-left-color:var(--sand)}
+.princ.p4{border-left-color:var(--beige-deep)}
+.princ-title{font-family:var(--j);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);margin-bottom:6px}
+.princ.p2 .princ-title{color:var(--olive)}
+.princ.p3 .princ-title,.princ.p4 .princ-title{color:var(--stone)}
+.princ p{font-size:14px;color:var(--stone);line-height:1.5}
+
+.canal-grid{margin-top:32px;background:var(--beige);border-radius:14px;padding:28px 32px}
+.canal-row{display:flex;gap:20px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--beige-deep)}
+.canal-row:last-child{border:none;padding-bottom:0}
+.canal-key{min-width:110px;font-family:var(--j);font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);padding-top:2px}
+.canal-row p{font-size:15px;color:var(--stone)}
+
+/* ═══ EMAIL ═══ */
+.email-section{background:var(--beige);padding:96px 0}
+.rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.rule-list{list-style:none;display:grid;gap:10px}
+.rule-item{display:flex;gap:14px;align-items:flex-start;background:var(--creme);border-radius:10px;padding:14px 18px;font-size:15px}
+.rule-dot{width:8px;height:8px;border-radius:50%;margin-top:6px;flex:none}
+
+/* ═══ INSTAGRAM ═══ */
+.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.ig-card{border-radius:16px;overflow:hidden;border:1px solid var(--beige-deep)}
+.ig-preview{min-height:200px;padding:32px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
+.ig-meta{padding:16px 20px;background:var(--beige)}
+.ig-meta-note{font-size:13px;color:var(--stone)}
+.ig-stats{display:flex;gap:24px;flex-wrap:wrap;margin-top:20px;padding:20px 24px;background:var(--beige);border-radius:12px}
+.ig-stat .k{font-family:var(--j);font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);margin-bottom:4px}
+.ig-stat .v{font-size:15px;color:var(--brown)}
+
+/* ═══ FOOTER ═══ */
+.footer{background:var(--brown-deep);padding:72px 0 48px;position:relative;overflow:hidden}
+.footer-gallo{position:absolute;right:-2%;top:50%;transform:translateY(-50%);height:160%;opacity:0.07;pointer-events:none;filter:brightness(0) invert(1)}
+.footer-inner{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;position:relative;z-index:2}
+.footer-logo{font-family:var(--j);font-weight:700;font-size:48px;color:var(--creme);letter-spacing:-.02em;line-height:1}
+.footer-logo .dot{color:var(--orange)}
+.footer-tag{font-family:var(--j);font-weight:300;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--sand);margin-top:8px}
+.footer-divider{border:none;border-top:1px solid rgba(244,226,214,0.1);margin:32px 0 24px;position:relative;z-index:2}
+.footer-info{font-family:var(--m);font-size:13px;color:var(--stone);text-align:right;line-height:1.7}
+.footer-url{font-family:var(--j);font-weight:700;font-size:13px;letter-spacing:.1em;color:var(--orange)}
+
+@media(max-width:768px){
+  h2{font-size:40px}
+  .adn-grid,.logo-demo-grid,.bauhaus-card,.voz-grid,.surf-grid,.voz-grid,.rule-grid,.ig-grid,.princ-grid,.hero-wrap{grid-template-columns:1fr}
+  .bauhaus-card{display:flex;flex-direction:column}
+  .bauhaus-right{min-height:200px}
+  .hero-name{font-size:64px}
+  .logo-box{width:180px;height:180px}
+}
+
+/* ═══ TOAST NOTIFICATION ═══ */
+.bocus-toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translate(-50%, 100px);
+  background: var(--brown);
+  color: var(--creme);
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-family: var(--j);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  z-index: 9999;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+  border: 1.5px solid var(--orange);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.bocus-toast.show {
+  transform: translate(-50%, 0);
+  opacity: 1;
+}
+.bocus-toast-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--orange);
+}
+
+/* ═══ PRINT ═══ */
+@page {
+  size: A4;
+  margin: 0;
+}
+@media print {
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  /* Cortes limpios entre secciones grandes */
+  .hero               { page-break-after: always; min-height: 100vh }
+  .logo-section       { page-break-before: always; page-break-after: always }
+  section             { page-break-inside: avoid }
+  hr.div              { display: none }
+  .surface-section    { page-break-before: always }
+  .email-section      { page-break-before: always }
+  .footer             { page-break-before: always }
+
+  /* No cortar cards ni tablas internas */
+  .sw, .pair, .adn-card, .type-card, .logo-demo,
+  .plantilla, .ig-card, .voz-card, .canal-grid,
+  .bauhaus-card, .foto-dir-card, .foto-dir-grid,
+  table, tr, .princ, .arch-row { page-break-inside: avoid }
+
+  /* Ocultar elementos interactivos */
+  #typo-input, button[onclick] { display: none !important }
+
+  /* Ajuste de escala para que el contenido quepa mejor en A4 */
+  .wrap { max-width: 100%; padding: 0 40px }
+  h2    { font-size: 48px }
+  .hero-name { font-size: 80px }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ HERO ══════════ -->
+<div class="hero">
+  <!-- Gallo silhouette fondo transparente -->
+  <img src="gallo-icono.png" style="position:absolute;right:-4%;top:50%;transform:translateY(-50%);height:100%;width:auto;opacity:0.12;pointer-events:none;z-index:1;object-fit:contain;filter:brightness(0) invert(1)">
+  <svg class="hero-geo" viewBox="0 0 1200 580" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="1050" cy="290" r="380" fill="none" stroke="rgba(244,226,214,0.07)" stroke-width="1.5"/>
+    <circle cx="1050" cy="290" r="240" fill="none" stroke="rgba(244,226,214,0.07)" stroke-width="1"/>
+    <rect x="870" y="90" width="300" height="300" fill="none" stroke="rgba(239,106,43,0.15)" stroke-width="1.5"/>
+    <rect x="920" y="140" width="200" height="200" fill="rgba(63,56,51,0.15)"/>
+    <circle cx="120" cy="100" r="70" fill="none" stroke="rgba(244,226,214,0.08)" stroke-width="1"/>
+    <line x1="0" y1="420" x2="350" y2="420" stroke="rgba(244,226,214,0.07)" stroke-width="1"/>
+  </svg>
+
+  <div class="hero-wrap">
+    <!-- Logo real: gallo en cuadrado con cuisine de qualité -->
+    <div class="logo-box" style="width:320px;height:320px;flex:none">
+      <img src="bocus-logo.jpeg" alt="Logo Bocus" style="width:100%;height:100%;object-fit:contain">
+    </div>
+
+    <div class="hero-text">
+      <div class="hero-eyebrow">Manual de Marca · 2026</div>
+      <div class="hero-name">Bocus<span class="dot">.</span></div>
+      <div class="hero-tagline">Cuisine de qualité</div>
+      <div class="hero-sub">Forma · Función · Gastronomía</div>
+      <div class="hero-badge"><span>Bauhaus · Bistro · Delivery · bocus.cl</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ ADN ══════════ -->
+<section>
+  <div class="wrap">
+    <div class="adn-grid">
+      <div>
+        <div class="label">ADN de Marca</div>
+        <h2>Forma sigue<br>a función.</h2>
+        <p style="font-size:16px;color:var(--stone);max-width:420px;line-height:1.7;margin-top:16px">
+          Bocus se inspira en el movimiento Bauhaus: geometría, equilibrio y propósito. Cada elemento visual tiene una razón de existir. Nada es decorativo sin función.
+        </p>
+      </div>
+      <div style="display:grid;gap:14px">
+        <div class="adn-card">
+          <div class="adn-card-label">Propósito</div>
+          <p>Fusionar arte, diseño y gastronomía para crear experiencias funcionales, estéticas y honestas.</p>
+        </div>
+        <div class="adn-card olive">
+          <div class="adn-card-label">Promesa de marca</div>
+          <p>Bistro en tu casa, en 60 minutos. Vive una experiencia en tu casa.</p>
+        </div>
+        <div class="adn-card sand">
+          <div class="adn-card-label">Valores</div>
+          <div class="valores">
+            <span class="valor">Funcionalidad</span>
+            <span class="valor">Equilibrio</span>
+            <span class="valor">Honestidad</span>
+            <span class="valor">Innovación</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ══════════ LOGOTIPO ══════════ -->
+<div class="logo-section" style="padding:96px 0">
+  <div class="wrap">
+    <div class="label" style="color:var(--sand)">3.1 Identidad Visual</div>
+    <h2 style="color:var(--creme)">Logotipo</h2>
+    <p class="note" style="color:var(--sand)">El gallo dentro del cuadrado es el sello visual de la marca. La forma es inviolable: no se rompe el cuadrado, no se separa el gallo del marco.</p>
+
+    <!-- Logo central grande -->
+    <div style="display:flex;justify-content:center;margin-bottom:48px">
+      <img src="bocus-logo.jpeg" alt="Logo Bocus" style="width:340px;height:340px;object-fit:contain;border-radius:8px">
+    </div>
+
+    <!-- 3 fondos permitidos -->
+    <div class="logo-demo-grid">
+      <div class="logo-demo" style="background:var(--creme)">
+        <img src="bocus-logo.jpeg" alt="Logo Bocus" style="width:140px;height:140px;object-fit:contain">
+        <div class="logo-demo-label" style="color:var(--stone)">Sobre creme<br><span style="font-weight:400;font-size:13px">Version principal</span></div>
+      </div>
+      <div class="logo-demo" style="background:var(--olive)">
+        <img src="bocus-logo.jpeg" alt="Logo Bocus" style="width:140px;height:140px;object-fit:contain">
+        <div class="logo-demo-label" style="color:rgba(244,226,214,0.7)">Sobre olive<br><span style="font-weight:400;font-size:13px">Fondo de seccion</span></div>
+      </div>
+      <div class="logo-demo" style="background:var(--brown-deep)">
+        <img src="bocus-logo.jpeg" alt="Logo Bocus" style="width:140px;height:140px;object-fit:contain">
+        <div class="logo-demo-label" style="color:var(--sand)">Sobre brown-deep<br><span style="font-weight:400;font-size:13px">Footer / fondos oscuros</span></div>
+      </div>
+    </div>
+
+    <div style="margin-top:32px;background:rgba(244,226,214,0.07);border-radius:14px;padding:24px 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px">
+      <div>
+        <div style="font-family:var(--j);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:6px">Area de proteccion</div>
+        <p style="font-size:15px;color:var(--sand)">Margen minimo equivalente a la altura del gallo alrededor del cuadrado.</p>
+      </div>
+      <div>
+        <div style="font-family:var(--j);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#b23b2e;margin-bottom:6px">Usos incorrectos</div>
+        <p style="font-size:15px;color:var(--sand)">No separar el gallo del cuadrado. No distorsionar, rotar, aplicar sombras ni degradados.</p>
+      </div>
+    </div>
+
+    <!-- Tamaños mínimos -->
+    <div style="margin-top:32px">
+      <div style="font-family:var(--j);font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--sand);margin-bottom:16px">Tamaño mínimo de reproducción</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div style="background:rgba(244,226,214,0.07);border-radius:12px;padding:20px 24px">
+          <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.12em;color:rgba(244,226,214,.45);margin-bottom:14px">PANTALLA · DIGITAL</div>
+          <div style="display:flex;align-items:flex-end;gap:20px;margin-bottom:16px">
+            <div style="text-align:center">
+              <img src="bocus-logo.jpeg" style="width:32px;height:32px;object-fit:contain;display:block;margin:0 auto 6px;opacity:.7">
+              <div style="font-family:ui-monospace,monospace;font-size:10px;color:rgba(244,226,214,.35)">32px</div>
+              <div style="font-family:var(--j);font-size:9px;color:#b23b2e;margin-top:2px">NO USAR</div>
+            </div>
+            <div style="text-align:center">
+              <img src="bocus-logo.jpeg" style="width:56px;height:56px;object-fit:contain;display:block;margin:0 auto 6px;opacity:.85">
+              <div style="font-family:ui-monospace,monospace;font-size:10px;color:rgba(244,226,214,.5)">56px</div>
+              <div style="font-family:var(--j);font-size:9px;color:var(--sand);margin-top:2px">LIMITE</div>
+            </div>
+            <div style="text-align:center">
+              <img src="bocus-logo.jpeg" style="width:80px;height:80px;object-fit:contain;display:block;margin:0 auto 6px">
+              <div style="font-family:ui-monospace,monospace;font-size:10px;color:rgba(244,226,214,.7)">80px</div>
+              <div style="font-family:var(--j);font-size:9px;color:var(--olive);margin-top:2px">MINIMO</div>
+            </div>
+          </div>
+          <p style="font-size:13px;color:var(--sand);line-height:1.5;margin:0">Minimo recomendado: <strong style="color:var(--creme)">80px</strong> de ancho. Para favicon/app icon usar solo el isotipo del gallo (gallo-favicon.png), nunca el logotipo completo. A 16px quitar el marco y usar solo el gallo. En círculo (Instagram, WhatsApp) el cuadro se vuelve campo de color y el gallo va centrado.</p>
+        </div>
+        <div style="background:rgba(244,226,214,0.07);border-radius:12px;padding:20px 24px">
+          <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.12em;color:rgba(244,226,214,.45);margin-bottom:14px">IMPRESIÓN · FÍSICO</div>
+          <div style="display:flex;align-items:flex-end;gap:20px;margin-bottom:16px">
+            <div style="text-align:center">
+              <div style="width:20px;height:20px;background:rgba(244,226,214,.12);border:1px dashed rgba(178,59,46,.5);border-radius:2px;margin:0 auto 6px;display:flex;align-items:center;justify-content:center"><span style="font-size:7px;color:rgba(244,226,214,.3)">B</span></div>
+              <div style="font-family:ui-monospace,monospace;font-size:10px;color:rgba(244,226,214,.35)">15mm</div>
+              <div style="font-family:var(--j);font-size:9px;color:#b23b2e;margin-top:2px">NO USAR</div>
+            </div>
+            <div style="text-align:center">
+              <div style="width:32px;height:32px;background:rgba(244,226,214,.16);border:1px solid rgba(244,226,214,.3);border-radius:3px;margin:0 auto 6px;display:flex;align-items:center;justify-content:center"><span style="font-size:10px;color:rgba(244,226,214,.5)">B</span></div>
+              <div style="font-family:ui-monospace,monospace;font-size:10px;color:rgba(244,226,214,.5)">25mm</div>
+              <div style="font-family:var(--j);font-size:9px;color:var(--sand);margin-top:2px">LIMITE</div>
+            </div>
+            <div style="text-align:center">
+              <div style="width:48px;height:48px;background:rgba(244,226,214,.2);border:1.5px solid rgba(244,226,214,.5);border-radius:4px;margin:0 auto 6px;display:flex;align-items:center;justify-content:center"><span style="font-size:16px;color:var(--creme);font-family:var(--j);font-weight:700">B</span></div>
+              <div style="font-family:ui-monospace,monospace;font-size:10px;color:rgba(244,226,214,.7)">40mm</div>
+              <div style="font-family:var(--j);font-size:9px;color:var(--olive);margin-top:2px">MINIMO</div>
+            </div>
+          </div>
+          <p style="font-size:13px;color:var(--sand);line-height:1.5;margin:0">Minimo recomendado: <strong style="color:var(--creme)">40mm</strong> de ancho en impresión offset. En papel mantequilla y stickers pequeños, no bajar de 25mm.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contraste por fondo -->
+    <div style="margin-top:32px">
+      <div style="font-family:var(--j);font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--sand);margin-bottom:16px">Logo sobre fondo de marca · regla de contraste</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+        <div style="background:var(--creme);border-radius:12px;padding:18px 16px;border:1.5px solid var(--beige-deep)">
+          <div style="font-family:var(--j);font-weight:700;font-size:10px;letter-spacing:.14em;color:var(--stone);margin-bottom:8px;text-transform:uppercase">Creme</div>
+          <div style="font-family:var(--j);font-weight:800;font-size:22px;color:var(--brown);letter-spacing:-.01em">BOCUS</div>
+          <div style="font-size:12px;color:var(--stone);margin-top:8px">Usar brown<br><span style="font-size:11px">Superficie por defecto</span></div>
+        </div>
+        <div style="background:var(--olive);border-radius:12px;padding:18px 16px">
+          <div style="font-family:var(--j);font-weight:700;font-size:10px;letter-spacing:.14em;color:rgba(244,226,214,.6);margin-bottom:8px;text-transform:uppercase">Olive</div>
+          <div style="font-family:var(--j);font-weight:800;font-size:22px;color:var(--creme);letter-spacing:-.01em">BOCUS</div>
+          <div style="font-size:12px;color:rgba(244,226,214,.75);margin-top:8px">Usar creme<br><span style="font-size:11px">Bloques full-bleed</span></div>
+        </div>
+        <div style="background:var(--brown-deep);border-radius:12px;padding:18px 16px">
+          <div style="font-family:var(--j);font-weight:700;font-size:10px;letter-spacing:.14em;color:rgba(244,226,214,.5);margin-bottom:8px;text-transform:uppercase">Brown</div>
+          <div style="font-family:var(--j);font-weight:800;font-size:22px;color:var(--creme);letter-spacing:-.01em">BOCUS</div>
+          <div style="font-size:12px;color:rgba(244,226,214,.7);margin-top:8px">Usar creme<br><span style="font-size:11px">Footer y fondos oscuros</span></div>
+        </div>
+        <div style="background:var(--orange);border-radius:12px;padding:18px 16px">
+          <div style="font-family:var(--j);font-weight:700;font-size:10px;letter-spacing:.14em;color:rgba(63,56,51,.6);margin-bottom:8px;text-transform:uppercase">Naranja</div>
+          <div style="font-family:var(--j);font-weight:800;font-size:22px;color:var(--brown);letter-spacing:-.01em">BOCUS</div>
+          <div style="font-size:12px;color:var(--brown-deep);margin-top:8px">Usar brown<br><span style="font-size:11px">Nunca creme ni blanco</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Logo sobre fotografia -->
+    <div style="margin-top:32px">
+      <div style="font-family:var(--j);font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--sand);margin-bottom:16px">Logo sobre fotografia</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div style="background:rgba(244,226,214,0.07);border-radius:12px;padding:20px 24px">
+          <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.12em;color:var(--olive);margin-bottom:8px">ZONA LIMPIA U OSCURA</div>
+          <p style="font-size:14px;color:var(--sand);line-height:1.55;margin:0">Logo creme en una esquina tranquila de la foto. Contraste resuelto sin velo. Aplica cuando la zona donde va el logo es oscura o uniforme.</p>
+        </div>
+        <div style="background:rgba(244,226,214,0.07);border-radius:12px;padding:20px 24px">
+          <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.12em;color:var(--orange);margin-bottom:8px">VELO MARRON 25-35%</div>
+          <p style="font-size:14px;color:var(--sand);line-height:1.55;margin:0">Cuando la foto es clara o movida: aplicar <span style="font-family:ui-monospace,monospace;font-size:12px;color:var(--creme)">rgba(63,56,51,.25–.35)</span> sobre la zona antes de poner el logo creme. El velo senta el sello sin taparlo.</p>
+        </div>
+      </div>
+      <div style="background:rgba(178,59,46,.1);border-radius:10px;padding:14px 20px;margin-top:12px;border-left:3px solid #b23b2e">
+        <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.12em;color:#b23b2e;margin-bottom:4px">EVITAR</div>
+        <p style="font-size:13px;color:var(--sand);margin:0;line-height:1.5">Logo sobre el producto o el rostro de la escena · sobre cielo/mantel saturado · con sombra para "despegarlo" · escalado bajo el minimo de pagina E.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ COLOR ══════════ -->
+<section>
+  <div class="wrap">
+    <div class="label">3.2 Identidad Visual</div>
+    <h2>Sistema de color</h2>
+    <p class="note">Regla 60/30/10. Neutros cálidos como base dominante. Tinta marrón para texto y estructura. Un solo acento de energía.</p>
+
+    <!-- Tira -->
+    <div class="tira">
+      <span style="background:#f4e2d6"></span>
+      <span style="background:#eedacf"></span>
+      <span style="background:#ebd3c2"></span>
+      <span style="background:#c4a693"></span>
+      <span style="background:#3f3833"></span>
+      <span style="background:#342d2a"></span>
+      <span style="background:#95887d"></span>
+      <span style="background:#ef6a2b"></span>
+      <span style="background:#d65a1f"></span>
+      <span style="background:#7a8158"></span>
+    </div>
+
+    <!-- 60% -->
+    <div class="color-group">
+      <h3>Neutros cálidos <span style="color:var(--orange)">60%</span></h3>
+      <p class="note" style="margin-bottom:16px">La base. Todo respira sobre esta familia. Cuatro pasos de claro a oscuro.</p>
+      <div class="sw-grid">
+        <div class="sw"><div class="chip" style="background:#f4e2d6"></div><div class="meta"><div class="name">creme</div><div class="hex">#f4e2d6</div><div class="role">Fondo base de página</div></div></div>
+        <div class="sw"><div class="chip" style="background:#eedacf"></div><div class="meta"><div class="name">beige</div><div class="hex">#eedacf</div><div class="role">Superficie secundaria, cards</div></div></div>
+        <div class="sw"><div class="chip" style="background:#ebd3c2"></div><div class="meta"><div class="name">beige-deep</div><div class="hex">#ebd3c2</div><div class="role">Bordes y divisores</div></div></div>
+        <div class="sw"><div class="chip" style="background:#c4a693"></div><div class="meta"><div class="name">sand</div><div class="hex">#c4a693</div><div class="role">Fills muteados, detalle</div></div></div>
+      </div>
+    </div>
+
+    <!-- 30% -->
+    <div class="color-group">
+      <h3>Tinta <span style="color:var(--orange)">30%</span></h3>
+      <p class="note" style="margin-bottom:16px">Texto y estructura. La familia marrón sostiene toda la tipografía.</p>
+      <div class="sw-grid">
+        <div class="sw"><div class="chip" style="background:#3f3833"></div><div class="meta"><div class="name">brown</div><div class="hex">#3f3833</div><div class="role">Texto primario, logo</div></div></div>
+        <div class="sw"><div class="chip" style="background:#342d2a"></div><div class="meta"><div class="name">brown-deep</div><div class="hex">#342d2a</div><div class="role">Superficies oscuras, footer</div></div></div>
+        <div class="sw"><div class="chip" style="background:#95887d"></div><div class="meta"><div class="name">stone</div><div class="hex">#95887d</div><div class="role">Texto secundario, labels</div></div></div>
+      </div>
+    </div>
+
+    <!-- 10% -->
+    <div class="color-group">
+      <h3>Acento <span style="color:var(--orange)">10%</span></h3>
+      <p class="note" style="margin-bottom:16px">Un solo color de energía. El naranja es el único acento activo. Olive es acento de sección, no decorativo.</p>
+      <div class="sw-grid">
+        <div class="sw"><div class="chip" style="background:#ef6a2b"></div><div class="meta"><div class="name">orange</div><div class="hex">#ef6a2b</div><div class="role">CTA, highlight, acento</div></div></div>
+        <div class="sw"><div class="chip" style="background:#d65a1f"></div><div class="meta"><div class="name">orange-hover</div><div class="hex">#d65a1f</div><div class="role">Estado hover del naranja</div></div></div>
+        <div class="sw"><div class="chip" style="background:#7a8158"></div><div class="meta"><div class="name">olive</div><div class="hex">#7a8158</div><div class="role">Bloques full-bleed de sección</div></div></div>
+      </div>
+    </div>
+
+    <!-- Funcionales -->
+    <div class="color-group">
+      <h3>Funcionales</h3>
+      <p class="note" style="margin-bottom:16px">No son marca. Solo el botón de WhatsApp. Prohibido usar decorativamente.</p>
+      <div class="sw-grid">
+        <div class="sw"><div class="chip" style="background:#25d366"></div><div class="meta"><div class="name">wa-green</div><div class="hex">#25d366</div><div class="role">Solo botón "Pedir por WhatsApp"</div></div></div>
+        <div class="sw"><div class="chip" style="background:#1ebe5a"></div><div class="meta"><div class="name">wa-hover</div><div class="hex">#1ebe5a</div><div class="role">Hover del botón WhatsApp</div></div></div>
+      </div>
+    </div>
+
+    <!-- Accesibilidad -->
+    <h3 style="margin-bottom:6px">Accesibilidad</h3>
+    <p class="note" style="margin-bottom:20px">Pares que pasan WCAG AA para texto de cuerpo.</p>
+    <div class="pair-grid">
+      <div class="pair"><div class="pair-chip" style="background:#f4e2d6;color:#3f3833">Texto / Fondo</div><div class="pair-meta"><div class="pair-combo">brown / creme</div><span class="verdict v-ok">AA texto cuerpo</span></div></div>
+      <div class="pair"><div class="pair-chip" style="background:#ef6a2b;color:#3f3833">Boton CTA</div><div class="pair-meta"><div class="pair-combo">brown / orange</div><span class="verdict v-ok">AA CTA OK</span></div></div>
+      <div class="pair"><div class="pair-chip" style="background:#342d2a;color:#f4e2d6">Footer</div><div class="pair-meta"><div class="pair-combo">creme / brown-deep</div><span class="verdict v-ok">AA OK</span></div></div>
+      <div class="pair"><div class="pair-chip" style="background:#7a8158;color:#f4e2d6">Seccion</div><div class="pair-meta"><div class="pair-combo">creme / olive</div><span class="verdict v-ok">AA seccion OK</span></div></div>
+      <div class="pair"><div class="pair-chip" style="background:#f4e2d6;color:#95887d">Stone</div><div class="pair-meta"><div class="pair-combo">stone / creme</div><span class="verdict v-warn">solo titulos</span></div></div>
+      <div class="pair"><div class="pair-chip" style="background:#ef6a2b;color:#fff">Blanco</div><div class="pair-meta"><div class="pair-combo">white / orange</div><span class="verdict v-fail">no usar</span></div></div>
+    </div>
+
+    <!-- ═══ ESPECIFICACIONES DE PRODUCCIÓN FÍSICA ═══ -->
+    <div style="margin-top:56px">
+      <h3 style="margin-bottom:6px">Especificaciones para producción física</h3>
+      <p class="note" style="margin-bottom:8px">Papel mantequilla, stickers, bolsas kraft, tarjetas y cualquier pieza impresa deben usar estos valores. El HEX es solo para pantalla. Nunca enviar HEX a imprenta.</p>
+      <div style="background:var(--beige);border-radius:6px;padding:10px 16px;margin-bottom:24px;display:inline-block">
+        <span style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.12em;color:var(--stone)">Nota:</span>
+        <span style="font-size:13px;color:var(--stone)"> Los valores Pantone son aproximaciones calibradas. Validar contra muestra física antes de tirada final.</span>
       </div>
 
-      <section class="hero">
-        <p class="eyebrow">Manual vivo</p>
-        <h1>Bocus · sistema de marca</h1>
-        <p>
-          Bocus es una marca gastronomica inspirada en el espiritu Bauhaus: forma y funcion
-          trabajando juntas. El objetivo de este manual es fijar una identidad que se vea precisa,
-          racional y moderna, pero tambien calida, tangible y profundamente culinaria.
-        </p>
-        <div class="meta">
-          <span class="chip">ADN: Bauhaus reinterpretado</span>
-          <span class="chip">Estado: v2 privada</span>
-          <span class="chip">Ultima actualizacion: 2026-05-31</span>
+      <!-- Tabla producción -->
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-family:var(--m);font-size:13px">
+          <thead>
+            <tr style="border-bottom:2px solid var(--beige-deep)">
+              <th style="text-align:left;padding:10px 14px;font-family:var(--j);font-weight:700;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone)">Color</th>
+              <th style="text-align:left;padding:10px 14px;font-family:var(--j);font-weight:700;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone)">HEX</th>
+              <th style="text-align:left;padding:10px 14px;font-family:var(--j);font-weight:700;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone)">RGB</th>
+              <th style="text-align:left;padding:10px 14px;font-family:var(--j);font-weight:700;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone)">CMYK</th>
+              <th style="text-align:left;padding:10px 14px;font-family:var(--j);font-weight:700;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone)">Pantone C</th>
+              <th style="text-align:left;padding:10px 14px;font-family:var(--j);font-weight:700;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone)">Pantone U</th>
+              <th style="text-align:left;padding:10px 14px;font-family:var(--j);font-weight:700;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone)">RAL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Orange -->
+            <tr style="border-bottom:1px solid var(--beige-deep)">
+              <td style="padding:12px 14px">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="width:28px;height:28px;border-radius:6px;background:#ef6a2b;flex:none;border:1px solid rgba(0,0,0,.06)"></div>
+                  <div>
+                    <div style="font-family:var(--j);font-weight:700;font-size:13px;color:var(--brown)">Orange</div>
+                    <div style="font-size:11px;color:var(--stone)">CTA · Acento</div>
+                  </div>
+                </div>
+              </td>
+              <td style="padding:12px 14px;font-family:ui-monospace,monospace;color:var(--brown)">#ef6a2b</td>
+              <td style="padding:12px 14px;font-family:ui-monospace,monospace;color:var(--stone)">239 · 106 · 43</td>
+              <td style="padding:12px 14px;font-family:ui-monospace,monospace;color:var(--stone)">0 · 56 · 82 · 6</td>
+              <td style="padding:12px 14px"><span style="background:rgba(239,106,43,.12);color:#c45010;font-family:var(--j);font-weight:700;font-size:12px;padding:3px 9px;border-radius:4px">1585 C</span></td>
+              <td style="padding:12px 14px"><span style="background:rgba(239,106,43,.08);color:#c45010;font-family:var(--j);font-weight:700;font-size:12px;padding:3px 9px;border-radius:4px">1585 U</span></td>
+              <td style="padding:12px 14px;font-family:ui-monospace,monospace;color:var(--stone)">RAL 2010</td>
+            </tr>
+            <!-- Olive -->
+            <tr style="border-bottom:1px solid var(--beige-deep)">
+              <td style="padding:12px 14px">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="width:28px;height:28px;border-radius:6px;background:#7a8158;flex:none;border:1px solid rgba(0,0,0,.06)"></div>
+                  <div>
+                    <div style="font-family:var(--j);font-weight:700;font-size:13px;color:var(--brown)">Olive</div>
+                    <div style="font-size:11px;color:var(--stone)">Seccion · Fondo activo</div>
+                  </div>
+                </div>
+              </td>
+              <td style="padding:12px 14px;font-family:ui-monospace,monospace;color:var(--brown)">#7a8158</td>
+              <td style="padding:12px 14px;font-family:ui-monospace,monospace;color:var(--stone)">122 · 129 · 88</td>
+              <td style="padding:12px 14px;font-family:ui-monospace,monospace;color:var(--stone)">5 · 0 · 32 · 49</td>
+              <td style="padding:12px 14px"><span style="background:rgba(122,129,88,.14);color:#4a5030;font-family:var(--j);font-weight:700;font-size:12px;padding:3px 9px;border-radius:4px">5763 C</span></td>
+              <td style="padding:12px 14px"><span style="background:rgba(122,129,88,.1);color:#4a5030;font-family:var(--j);font-weight:700;font-size:12px;padding:3px 9px;border-radius:4px">5763 U</span></td>
+              <td style="padding:12px 14px;font-family:ui-monospace,monospace;color:var(--stone)">RAL 6013</td>
+            </tr>
+            <!-- Brown -->
+            <tr style="border-bottom:1px solid var(--beige-deep)">
+              <td style="padding:12px 14px">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="width:28px;height:28px;border-radius:6px;background:#3f3833;flex:none;border:1px solid rgba(0,0,0,.06)"></div>
+                  <div>
+                    <div style="font-family:var(--j);font-weight:700;font-size:13px;color:var(--brown)">Brown</div>
+                    <div style="font-size:11px;color:var(--stone)">Texto principal · Estructura</div>
+                  </div>
+                </div>
+              </td>
+              <td style="padding:12px 14px;font-family:ui-monospace,monospace;color:var(--brown)">#3f3833</td>
+              <td style="padding:12px 14px;font-family:ui-monospace,monospace;color:var(--stone)">63 · 56 · 51</td>
+              <td style="padding:12px 14px;font-family:ui-monospace,monospace;color:var(--stone)">0 · 11 · 19 · 75</td>
+              <td style="padding:12px 14px"><span style="background:rgba(63,56,51,.1);color:#3f3833;font-family:var(--j);font-weight:700;font-size:12px;padding:3px 9px;border-radius:4px">412 C</span></td>
+              <td style="padding:12px 14px"><span style="background:rgba(63,56,51,.08);color:#3f3833;font-family:var(--j);font-weight:700;font-size:12px;padding:3px 9px;border-radius:4px">412 U</span></td>
+              <td style="padding:12px 14px;font-family:ui-monospace,monospace;color:var(--stone)">RAL 8019</td>
+            </tr>
+            <!-- Creme -->
+            <tr style="border-bottom:1px solid var(--beige-deep)">
+              <td style="padding:12px 14px">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="width:28px;height:28px;border-radius:6px;background:#f4e2d6;flex:none;border:1px solid rgba(0,0,0,.1)"></div>
+                  <div>
+                    <div style="font-family:var(--j);font-weight:700;font-size:13px;color:var(--brown)">Creme</div>
+                    <div style="font-size:11px;color:var(--stone)">Fondo principal · 60%</div>
+                  </div>
+                </div>
+              </td>
+              <td style="padding:12px 14px;font-family:ui-monospace,monospace;color:var(--brown)">#f4e2d6</td>
+              <td style="padding:12px 14px;font-family:ui-monospace,monospace;color:var(--stone)">244 · 226 · 214</td>
+              <td style="padding:12px 14px;font-family:ui-monospace,monospace;color:var(--stone)">0 · 7 · 12 · 4</td>
+              <td style="padding:12px 14px"><span style="background:rgba(244,226,214,.6);color:var(--stone);font-family:var(--j);font-weight:700;font-size:12px;padding:3px 9px;border-radius:4px;border:1px solid var(--beige-deep)">7506 C</span></td>
+              <td style="padding:12px 14px"><span style="background:rgba(244,226,214,.6);color:var(--stone);font-family:var(--j);font-weight:700;font-size:12px;padding:3px 9px;border-radius:4px;border:1px solid var(--beige-deep)">7506 U</span></td>
+              <td style="padding:12px 14px;font-family:ui-monospace,monospace;color:var(--stone)">RAL 1013</td>
+            </tr>
+            <!-- Sand -->
+            <tr style="border-bottom:1px solid var(--beige-deep)">
+              <td style="padding:12px 14px">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="width:28px;height:28px;border-radius:6px;background:#c4a693;flex:none;border:1px solid rgba(0,0,0,.06)"></div>
+                  <div>
+                    <div style="font-family:var(--j);font-weight:700;font-size:13px;color:var(--brown)">Sand</div>
+                    <div style="font-size:11px;color:var(--stone)">Secundario calido</div>
+                  </div>
+                </div>
+              </td>
+              <td style="padding:12px 14px;font-family:ui-monospace,monospace;color:var(--brown)">#c4a693</td>
+              <td style="padding:12px 14px;font-family:ui-monospace,monospace;color:var(--stone)">196 · 166 · 147</td>
+              <td style="padding:12px 14px;font-family:ui-monospace,monospace;color:var(--stone)">0 · 15 · 25 · 23</td>
+              <td style="padding:12px 14px"><span style="background:rgba(196,166,147,.2);color:#7a5c4a;font-family:var(--j);font-weight:700;font-size:12px;padding:3px 9px;border-radius:4px">7529 C</span></td>
+              <td style="padding:12px 14px"><span style="background:rgba(196,166,147,.15);color:#7a5c4a;font-family:var(--j);font-weight:700;font-size:12px;padding:3px 9px;border-radius:4px">7529 U</span></td>
+              <td style="padding:12px 14px;font-family:ui-monospace,monospace;color:var(--stone)">RAL 1014</td>
+            </tr>
+            <!-- Stone -->
+            <tr>
+              <td style="padding:12px 14px">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="width:28px;height:28px;border-radius:6px;background:#95887d;flex:none;border:1px solid rgba(0,0,0,.06)"></div>
+                  <div>
+                    <div style="font-family:var(--j);font-weight:700;font-size:13px;color:var(--brown)">Stone</div>
+                    <div style="font-size:11px;color:var(--stone)">Texto secundario · Labels</div>
+                  </div>
+                </div>
+              </td>
+              <td style="padding:12px 14px;font-family:ui-monospace,monospace;color:var(--brown)">#95887d</td>
+              <td style="padding:12px 14px;font-family:ui-monospace,monospace;color:var(--stone)">149 · 136 · 125</td>
+              <td style="padding:12px 14px;font-family:ui-monospace,monospace;color:var(--stone)">0 · 9 · 16 · 42</td>
+              <td style="padding:12px 14px"><span style="background:rgba(149,136,125,.15);color:#5a4e44;font-family:var(--j);font-weight:700;font-size:12px;padding:3px 9px;border-radius:4px">Warm Gray 9 C</span></td>
+              <td style="padding:12px 14px"><span style="background:rgba(149,136,125,.12);color:#5a4e44;font-family:var(--j);font-weight:700;font-size:12px;padding:3px 9px;border-radius:4px">Warm Gray 9 U</span></td>
+              <td style="padding:12px 14px;font-family:ui-monospace,monospace;color:var(--stone)">RAL 7006</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Reglas de impresion -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px">
+        <div style="background:var(--beige);border-radius:12px;padding:18px 20px;border-left:3px solid var(--orange)">
+          <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:8px">Papel mantequilla · 1 tinta</div>
+          <p style="font-size:13px;color:var(--stone);line-height:1.55;margin:0">Usar Brown (412 C) o Orange (1585 C). Nunca los dos en la misma pieza a 1 tinta -- elegir uno segun el fondo del papel.</p>
         </div>
-      </section>
+        <div style="background:var(--beige);border-radius:12px;padding:18px 20px;border-left:3px solid var(--olive)">
+          <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--olive);margin-bottom:8px">Stickers y tarjetas · 4 tintas</div>
+          <p style="font-size:13px;color:var(--stone);line-height:1.55;margin:0">Usar valores CMYK de esta tabla. Pedir prueba de color (proof) antes de tirada final. El naranja puede variar segun papel.</p>
+        </div>
+        <div style="background:var(--beige);border-radius:12px;padding:18px 20px;border-left:3px solid var(--brown)">
+          <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown);margin-bottom:8px">Vinilos y senaletica</div>
+          <p style="font-size:13px;color:var(--stone);line-height:1.55;margin:0">Usar codigo RAL de esta tabla. RAL 2010 para el naranja, RAL 6013 para el olive, RAL 8019 para el brown.</p>
+        </div>
+      </div>
+    </div>
 
-      <section class="stack">
-        <div class="kpi">
-          <div class="note">
-            <strong>Proposito</strong>
-            <span>Fusionar arte, diseño y gastronomia para crear experiencias funcionales, esteticas y honestas.</span>
-          </div>
-          <div class="note">
-            <strong>Promesa</strong>
-            <span>Cada plato debe sentirse como una composicion equilibrada entre sabor, forma y concepto.</span>
-          </div>
-          <div class="note">
-            <strong>Personalidad</strong>
-            <span>Minimalista, moderna, precisa, intelectual, experimental.</span>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ══════════ TIPOGRAFIA ══════════ -->
+<section>
+  <div class="wrap">
+    <div class="label">3.3 Identidad Visual</div>
+    <h2>Tipografía</h2>
+    <p class="note">Jost para display y titulos. Montserrat para cuerpo y descripciones.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div class="type-card">
+        <span class="font-tag">Display / Titulos</span>
+        <div class="typo-xl">Jost</div>
+        <div class="type-scale">
+          <div class="type-row"><span class="type-row-label">700 Bold</span><span style="font-family:var(--j);font-weight:700;font-size:26px">Titulos y CTAs</span></div>
+          <div class="type-row"><span class="type-row-label">500 Medium</span><span style="font-family:var(--j);font-weight:500;font-size:22px">Subtitulos</span></div>
+          <div class="type-row"><span class="type-row-label">300 Light</span><span style="font-family:var(--j);font-weight:300;font-size:20px">Eyebrows, labels</span></div>
+        </div>
+        <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--beige-deep)">
+          <div class="label">Ejemplo</div>
+          <div style="font-family:var(--j);font-weight:700;font-size:40px;line-height:1;margin-top:6px">Bistro<br>en tu casa.</div>
+        </div>
+      </div>
+
+      <div class="type-card">
+        <span class="font-tag">Cuerpo / Descripciones</span>
+        <div class="typo-xl mont">Montserrat</div>
+        <div class="type-scale">
+          <div class="type-row"><span class="type-row-label">600 Semi</span><span style="font-family:var(--m);font-weight:600;font-size:22px">Labels, precios</span></div>
+          <div class="type-row"><span class="type-row-label">500 Medium</span><span style="font-family:var(--m);font-weight:500;font-size:20px">Texto énfasis</span></div>
+          <div class="type-row"><span class="type-row-label">400 Regular</span><span style="font-family:var(--m);font-weight:400;font-size:18px">Cuerpo de texto</span></div>
+        </div>
+        <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--beige-deep)">
+          <div class="label">Ejemplo</div>
+          <p style="font-family:var(--m);font-size:15px;line-height:1.6;color:var(--stone);margin-top:6px">Tiramisu de mascarpone real. Buena dosis de cafe amargo. Cacao Valrhona encima.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITC Bauhaus - Fuente del logotipo -->
+    <div class="type-card" style="margin-top:24px;background:var(--brown-deep);border-color:rgba(244,226,214,.1);color:var(--creme)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center">
+        <div>
+          <span class="font-tag" style="border-color:rgba(244,226,214,.15);color:var(--sand)">Logotipo · Solo uso en isotipo</span>
+          <div style="font-family:var(--j);font-weight:700;font-size:32px;color:var(--creme);margin:14px 0 8px;letter-spacing:-.01em">ITC Bauhaus</div>
+          <p style="font-size:14px;color:var(--sand);line-height:1.65;margin-bottom:18px">Disenada en 1975 por Ed Benguiat y Victor Caruso para la International Typeface Corporation. Es la base estructural del logotipo Bocus, modificada vectorialmente para registrar la marca. <strong style="color:var(--creme)">No es una fuente de comunicaciones</strong> -- para textos y titulos se usa Jost.</p>
+          <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone);margin-bottom:12px">Customizacion vectorial sobre ITC Bauhaus</div>
+          <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--sand);line-height:1.6">
+            <div><span style="color:var(--orange);font-weight:700;font-size:15px">B</span> &nbsp;Corte stencil vertical en el asta. Bucle superior convertido en triangulo geometrico. Elemento unico registrable.</div>
+            <div><span style="color:rgba(244,226,214,.9);font-weight:700;font-size:15px">U</span> &nbsp;Minuscula de ITC Bauhaus escalada a altura de caja alta. Semicirculo perfecto en la base.</div>
+            <div><span style="color:rgba(244,226,214,.9);font-weight:700;font-size:15px">OCS</span> &nbsp;Identicos a ITC Bauhaus: circulos perfectos, grosor de trazo uniforme, terminales planas.</div>
           </div>
         </div>
-
-        <div class="section-grid">
-          <div class="panel">
-            <p class="eyebrow">ADN</p>
-            <h2>Lo que no se negocia</h2>
-            <ul class="list">
-              <li><strong>Funcion primero.</strong> Nada es decorativo si no ayuda a ordenar, leer, elegir o entender.</li>
-              <li><strong>Geometria con proposito.</strong> Circulos, modulos y superposiciones deben reforzar estructura, no ruido.</li>
-              <li><strong>Calidez material.</strong> Aunque la marca es racional, no debe sentirse fria ni clinica.</li>
-              <li><strong>Honestidad visual.</strong> El producto y el sistema hablan claro. No hay maquillaje innecesario.</li>
-            </ul>
-          </div>
-
-          <div class="panel">
-            <p class="eyebrow">Voz</p>
-            <h2>Como habla Bocus</h2>
-            <ul class="list">
-              <li><strong>Directo.</strong> Explica, no declama.</li>
-              <li><strong>Racional.</strong> La marca describe valor, proceso y criterio antes que sensaciones vacias.</li>
-              <li><strong>Seguro.</strong> No ruega atencion ni sobreactua premium.</li>
-              <li><strong>Contenido limpio.</strong> Menos slogans, mas precision.</li>
-            </ul>
+        <div>
+          <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone);margin-bottom:14px">Donde activarla</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="background:rgba(239,106,43,.14);border-radius:12px;padding:16px 20px">
+              <div style="font-family:var(--j);font-weight:700;font-size:12px;color:var(--orange);letter-spacing:.08em;margin-bottom:5px">Adobe Fonts · Creative Cloud</div>
+              <p style="font-size:13px;color:var(--sand);margin:0;line-height:1.5">Incluida en la suscripcion CC. Buscar "ITC Bauhaus" en fonts.adobe.com y activar. Viene en 5 pesos: Light, Medium, Demi, Bold, Heavy.</p>
+            </div>
+            <div style="background:rgba(244,226,214,.05);border-radius:12px;padding:16px 20px;border:1px solid rgba(244,226,214,.08)">
+              <div style="font-family:var(--j);font-weight:700;font-size:12px;color:var(--stone);letter-spacing:.08em;margin-bottom:5px">MyFonts / Fonts.com (licencia comercial)</div>
+              <p style="font-size:13px;color:var(--stone);margin:0;line-height:1.5">Alternativa si no se tiene CC. Disponible en Monotype / ITC.</p>
+            </div>
+            <div style="background:rgba(178,59,46,.12);border-radius:12px;padding:12px 20px">
+              <div style="font-family:var(--j);font-weight:700;font-size:12px;color:#e57060;letter-spacing:.08em;margin-bottom:4px">Bauhaus 93 (Windows) -- No usar</div>
+              <p style="font-size:13px;color:var(--stone);margin:0;line-height:1.5">Variante caricaturesca con counters abiertos. Pierde la limpieza de la ITC original.</p>
+            </div>
           </div>
         </div>
+      </div>
+    </div>
 
-        <div class="panel">
-          <p class="eyebrow">Paleta oficial</p>
-          <h2>Colores que sostienen el sistema</h2>
-          <div class="palette">
-            <article class="swatch">
-              <div class="swatch-color" style="background:#eedacf;"></div>
-              <div class="swatch-body">
-                <strong style="color:#2a211b;">Beige claro</strong>
-                <span>#eedacf · fondo principal y clima de marca</span>
-              </div>
-            </article>
-            <article class="swatch">
-              <div class="swatch-color" style="background:#3f3833;"></div>
-              <div class="swatch-body">
-                <strong>Marron oscuro</strong>
-                <span>#3f3833 · tipografia, estructura, peso</span>
-              </div>
-            </article>
-            <article class="swatch">
-              <div class="swatch-color" style="background:#ef6a2b;"></div>
-              <div class="swatch-body">
-                <strong>Naranja Bocus</strong>
-                <span>#ef6a2b · acento, impulso, energia</span>
-              </div>
-            </article>
-            <article class="swatch">
-              <div class="swatch-color" style="background:#7a8158;"></div>
-              <div class="swatch-body">
-                <strong>Verde oliva</strong>
-                <span>#7a8158 · equilibrio organico y calma</span>
-              </div>
-            </article>
-            <article class="swatch">
-              <div class="swatch-color" style="background:#c4a693;"></div>
-              <div class="swatch-body">
-                <strong>Arena calido</strong>
-                <span>#c4a693 · soporte, fondo secundario</span>
-              </div>
-            </article>
-            <article class="swatch">
-              <div class="swatch-color" style="background:#e8c2a0;"></div>
-              <div class="swatch-body">
-                <strong>Beige medio</strong>
-                <span>#e8c2a0 · respiracion y contraste suave</span>
-              </div>
-            </article>
-          </div>
+    <!-- Jerarquía -->
+    <div class="hier">
+      <div class="label">Jerarquía completa</div>
+      <div class="hier-row">
+        <span class="hier-key">H1 · Titulo</span>
+        <span style="font-family:var(--j);font-weight:700;font-size:56px;line-height:1;letter-spacing:-.02em">Bocus.</span>
+      </div>
+      <div class="hier-row">
+        <span class="hier-key">H2</span>
+        <span style="font-family:var(--j);font-weight:700;font-size:36px;line-height:1">Nuestros postres</span>
+      </div>
+      <div class="hier-row">
+        <span class="hier-key">Subtitulo</span>
+        <span style="font-family:var(--j);font-weight:500;font-size:20px;text-transform:uppercase;letter-spacing:.06em;color:var(--stone)">POSTRES DE TEMPORADA</span>
+      </div>
+      <div class="hier-row">
+        <span class="hier-key">Label</span>
+        <span style="font-family:var(--j);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:var(--stone)">IDENTIDAD VISUAL · 2026</span>
+      </div>
+      <div class="hier-row">
+        <span class="hier-key">Cuerpo</span>
+        <span style="font-family:var(--m);font-size:15px;line-height:1.6;color:var(--stone)">Tiramisu de mascarpone real. Buena dosis de cafe. Cacao Valrhona encima. El final que merece un buen plato fuerte.</span>
+      </div>
+    </div>
+
+    <!-- ═══ INTERACTIVE TYPOGRAPHY PLAYGROUND ═══ -->
+    <div class="type-card" style="margin-top: 40px; background: var(--brown-deep); border-color: rgba(244,226,214,0.1); color: var(--creme)">
+      <span class="font-tag" style="border-color: rgba(244,226,214,0.15); color: var(--sand)">Playground Interactivo</span>
+      <h3 style="color: var(--creme); margin-bottom: 12px; font-size: 24px">Visualizador de Tipografía</h3>
+      <p class="note" style="color: var(--sand); margin-bottom: 24px">Escribe tu propio mensaje en el campo interactivo para evaluar la escala, el contraste y la legibilidad de las tipografías Jost y Montserrat en tiempo real.</p>
+      
+      <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 32px; margin-bottom: 32px">
+        <div>
+          <div class="label" style="color: var(--sand); margin-bottom: 8px">Escribe tu texto de prueba</div>
+          <textarea id="typo-input" style="width: 100%; height: 120px; background: rgba(244, 226, 214, 0.05); border: 1.5px solid rgba(244, 226, 214, 0.15); border-radius: 12px; padding: 16px; color: var(--creme); font-family: var(--m); font-size: 15px; resize: none; outline: none; box-sizing: border-box;" placeholder="Escribe aquí tu frase promocional o descripción..."></textarea>
         </div>
-
-        <div class="section-grid">
-          <div class="panel">
-            <p class="eyebrow">Tipografia</p>
-            <h2>Sistema tipografico</h2>
-            <ul class="list">
-              <li><strong>Titulares.</strong> Futura como referencia conceptual; alternativas viables: ITC Avant Garde Gothic, Poppins o Jost cuando haga falta un sistema web mas flexible.</li>
-              <li><strong>Texto corrido.</strong> Montserrat o Helvetica Neue para lectura continua y materiales digitales.</li>
-              <li><strong>Jerarquia.</strong> Mayusculas controladas, tracking amplio en titulos y subtitulos sobrios.</li>
-              <li><strong>Regla.</strong> La tipografia debe verse limpia, modular y decidida. Nunca timida.</li>
-            </ul>
-          </div>
-
-          <div class="panel">
-            <p class="eyebrow">Composicion</p>
-            <h2>Como se arma una pieza</h2>
-            <ul class="list">
-              <li><strong>Reticula visible.</strong> La composicion debe sentirse construida, no improvisada.</li>
-              <li><strong>Formas superpuestas.</strong> Cintas, circulos y bloques deben aportar ritmo y foco.</li>
-              <li><strong>Producto protagonista.</strong> La fotografia entra integrada, nunca como parche.</li>
-              <li><strong>Espacio negativo.</strong> Parte de la sofisticacion viene de no saturar.</li>
-            </ul>
-          </div>
+        <div style="display: flex; flex-direction: column; justify-content: center; gap: 10px">
+          <div class="label" style="color: var(--sand)">Ejemplos oficiales Bocus</div>
+          <button class="btn btn-ghost" style="padding: 10px 18px; font-size: 11px; text-align: left; width: 100%" onclick="setTypoText('Viene lo inolvidable.')">"Viene lo inolvidable."</button>
+          <button class="btn btn-ghost" style="padding: 10px 18px; font-size: 11px; text-align: left; width: 100%" onclick="setTypoText('Bistró en tu casa en 60 minutos.')">"Bistró en tu casa en 60 minutos."</button>
+          <button class="btn btn-ghost" style="padding: 10px 18px; font-size: 11px; text-align: left; width: 100%" onclick="setTypoText('Quesos desde Francia. El resto es puro goce.')">"Quesos desde Francia..."</button>
         </div>
-
-        <div class="panel">
-          <p class="eyebrow">Do / Don't</p>
-          <h2>Criterio rapido de control</h2>
-          <div class="section-grid">
+      </div>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; border-top: 1px solid rgba(244,226,214,0.1); padding-top: 32px">
+        <div>
+          <div class="label" style="color: var(--orange); margin-bottom: 16px">Jost (Display / Títulos)</div>
+          <div style="display: flex; flex-direction: column; gap: 20px">
             <div>
-              <ul class="list">
-                <li><strong>Si.</strong> Modulos claros, contraste limpio, acentos medidos, fondos terrosos, producto bien recortado.</li>
-                <li><strong>Si.</strong> Etiquetas y mensajes cortos, utiles y seguros.</li>
-                <li><strong>Si.</strong> Packaging y piezas que se sientan industriales pero nobles.</li>
-              </ul>
+              <span style="font-size: 11px; color: var(--sand); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px">Jost 700 · Bold (H1 / H2)</span>
+              <div id="preview-jost-bold" style="font-family: var(--j); font-weight: 700; font-size: 38px; line-height: 1.1; color: var(--creme)">Viene lo inolvidable.</div>
             </div>
             <div>
-              <ul class="list">
-                <li><strong>No.</strong> Sombras suaves de moda, gradientes dulzones o exceso de efectos.</li>
-                <li><strong>No.</strong> Tipografias decorativas o storytelling blando.</li>
-                <li><strong>No.</strong> Fotografia sin estructura o composiciones que pierdan el rigor Bauhaus.</li>
+              <span style="font-size: 11px; color: var(--sand); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px">Jost 500 · Medium (Subtítulos)</span>
+              <div id="preview-jost-medium" style="font-family: var(--j); font-weight: 500; font-size: 22px; color: var(--creme)">Viene lo inolvidable.</div>
+            </div>
+            <div>
+              <span style="font-size: 11px; color: var(--sand); text-transform: uppercase; letter-spacing: 0.12em; display: block; margin-bottom: 6px">Jost 300 · Light (Labels)</span>
+              <div id="preview-jost-light" style="font-family: var(--j); font-weight: 300; font-size: 18px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--creme)">VIENE LO INOLVIDABLE.</div>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <div class="label" style="color: var(--olive); margin-bottom: 16px">Montserrat (Cuerpo / Descripciones)</div>
+          <div style="display: flex; flex-direction: column; gap: 20px">
+            <div>
+              <span style="font-size: 11px; color: var(--sand); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px">Montserrat 600 · Semi-Bold (Precios)</span>
+              <div id="preview-mont-semi" style="font-family: var(--m); font-weight: 600; font-size: 20px; color: var(--creme)">Viene lo inolvidable.</div>
+            </div>
+            <div>
+              <span style="font-size: 11px; color: var(--sand); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px">Montserrat 400 · Regular (Cuerpo)</span>
+              <div id="preview-mont-regular" style="font-family: var(--m); font-weight: 400; font-size: 15px; line-height: 1.6; color: var(--creme)">Viene lo inolvidable.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ══════════ BAUHAUS ══════════ -->
+<section>
+  <div class="wrap">
+    <div class="label">3.4 Estilo Visual</div>
+    <h2>Estilo Bauhaus</h2>
+    <p class="note">Geometria funcional. Formas superpuestas. Texto dinamico. Todo tiene un propósito.</p>
+
+    <div class="bauhaus-card">
+      <svg class="bh-geo" viewBox="0 0 820 440" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="200" cy="220" r="200" fill="none" stroke="rgba(244,226,214,0.06)" stroke-width="1.5"/>
+        <circle cx="200" cy="220" r="130" fill="none" stroke="rgba(244,226,214,0.06)" stroke-width="1"/>
+        <rect x="60" y="60" width="300" height="300" fill="none" stroke="rgba(239,106,43,0.12)" stroke-width="1.5"/>
+        <line x1="420" y1="0" x2="420" y2="440" stroke="rgba(244,226,214,0.05)" stroke-width="1"/>
+      </svg>
+
+      <div class="bauhaus-left">
+        <div class="bh-tag">Bauhaus · Bistro</div>
+        <div class="bh-title">Después del<br>plato fuerte...</div>
+        <div class="bh-body">Formas geométricas, texto dinámico, fotografía integrada. El cuadrado del logo. Los círculos del movimiento. El naranja que activa. Este es el lenguaje visual de Bocus.</div>
+      </div>
+
+      <div class="bauhaus-right">
+        <!-- Gallo silhouette grande transparente -->
+        <img src="gallo-icono.png" style="position:absolute;height:130%;top:-15%;left:50%;transform:translateX(-50%);opacity:0.2;pointer-events:none;object-fit:contain;filter:brightness(0) invert(1)">
+        <!-- Texto circular encima -->
+        <div style="position:relative;z-index:2;text-align:center">
+          <div style="position:relative;width:220px;height:220px">
+            <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <path id="ct" d="M 100,100 m -88,0 a 88,88 0 1,1 176,0 a 88,88 0 1,1 -176,0" fill="none"/>
+              <text font-family="Jost,sans-serif" font-weight="700" font-size="10" letter-spacing="4.4" fill="rgba(244,226,214,0.5)">
+                <textPath href="#ct">VIENE LO INOLVIDABLE · BOCUS ·</textPath>
+              </text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="principles-grid">
+      <div class="principle">
+        <div class="principle-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21" fill="none" stroke="var(--orange)" stroke-width="2"/><circle cx="24" cy="24" r="10" fill="var(--orange)" opacity=".3"/></svg>
+        </div>
+        <h3>Formas superpuestas</h3>
+        <p>Circulos, lineas y rectangulos se entrelazan con tipografia e imagenes. Profundidad y ritmo visual sin perder el orden.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48"><rect x="6" y="6" width="36" height="36" fill="none" stroke="var(--olive)" stroke-width="2"/><rect x="14" y="14" width="20" height="20" fill="var(--olive)" opacity=".3"/></svg>
+        </div>
+        <h3>Composicion modular</h3>
+        <p>Cuadriculas y reticulas que mantienen orden. El espacio negativo tiene tanto valor como los elementos.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48"><text x="6" y="36" font-family="Jost,sans-serif" font-size="32" font-weight="700" fill="var(--orange)" transform="rotate(-12 24 24)">Aa</text></svg>
+        </div>
+        <h3>Texto dinamico</h3>
+        <p>Jost en vertical, horizontal y circular. Distintos pesos y tamaños crean jerarquia sin romper el orden geometrico.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ARQUITECTURA DE GRÁFICA ══════════ -->
+<section>
+  <div class="wrap">
+    <div class="label">3.5 Comunicación Visual</div>
+    <h2>Arquitectura de gráfica</h2>
+    <p class="note">Toda pieza visual de Bocus sigue tres capas en orden. No hay gráfica sin las tres.</p>
+
+    <div class="grafica-arch">
+      <!-- Capas -->
+      <div class="arch-layer">
+        <div class="arch-row">
+          <div class="arch-num">01</div>
+          <div>
+            <div class="arch-label">Título</div>
+            <div class="arch-desc">La idea central. Breve, directa, emocional. Máximo dos líneas. Usa Jost 700. Puede ser una afirmación, una promesa o una pregunta implícita.</div>
+            <div class="arch-example">"Viene lo inolvidable." · "Tu mesa." · "Sin reservas."</div>
+          </div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-num">02</div>
+          <div>
+            <div class="arch-label">Bajada</div>
+            <div class="arch-desc">Desarrolla el título. Abre el contexto o entrega el beneficio concreto. Montserrat 400, cuerpo 14-16px. Máximo 3 líneas.</div>
+            <div class="arch-example">"El restaurante llega a tu mesa." · "Hay quesos que acompañan. Y otros que se roban la mesa."</div>
+          </div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-num">03</div>
+          <div>
+            <div class="arch-label">Acción</div>
+            <div class="arch-desc">Siempre referencia a bocus.cl o un verbo claro. Sin puntos. Jost 700, uppercase. El naranja solo aparece aquí como CTA activo.</div>
+            <div class="arch-example">"Pídelo en bocus.cl" · "Disponible en bocus.cl" · "Pedir por WhatsApp"</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Plantillas -->
+      <div>
+        <div class="plantilla-grid">
+
+          <!-- Plantilla 1: Producto -->
+          <div class="plantilla" style="background:var(--brown-deep)">
+            <img src="gallo-icono.png" style="position:absolute;right:-8%;bottom:0;height:90%;opacity:0.08;filter:brightness(0) invert(1);pointer-events:none">
+            <div class="plantilla-overlay">
+              <div class="p-tag" style="color:var(--sand)">Producto</div>
+              <div class="p-titulo" style="font-size:28px;color:var(--creme)">Queso<br>Rocholon.</div>
+              <div class="p-bajada" style="font-size:13px;color:var(--sand)">Hay quesos que acompañan. Y otros que se roban la mesa.</div>
+              <div class="p-cta">Pídelo en bocus.cl<span class="p-cta-arrow"><svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 7h8M7 3l4 4-4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+            </div>
+          </div>
+
+          <!-- Plantilla 2: Experiencia -->
+          <div class="plantilla" style="background:var(--olive)">
+            <img src="gallo-icono.png" style="position:absolute;right:-5%;top:10%;height:70%;opacity:0.1;filter:brightness(0) invert(1);pointer-events:none">
+            <div class="plantilla-overlay">
+              <div class="p-tag" style="color:rgba(244,226,214,.55)">Experiencia</div>
+              <div class="p-titulo" style="font-size:32px;color:var(--creme)">Tu mesa.<br><span style="font-weight:300;font-size:22px">Vive una experiencia en tu casa.</span></div>
+              <div class="p-bajada" style="font-size:13px;color:rgba(244,226,214,.75)">Bistro en 60 minutos. Cuisine de qualité.</div>
+              <div class="p-cta">Disponible en bocus.cl<span class="p-cta-arrow"><svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 7h8M7 3l4 4-4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+            </div>
+          </div>
+
+          <!-- Plantilla 3: Mensaje puro -->
+          <div class="plantilla" style="background:var(--creme)">
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:32px">
+              <div class="p-tag" style="color:var(--stone)">Mensaje</div>
+              <div style="font-family:var(--j);font-weight:700;font-size:26px;color:var(--brown);line-height:1.15;margin-bottom:20px">Sin reservas.<br>Sin filas.<br>Sin cocinar.</div>
+              <div style="font-family:var(--m);font-size:13px;color:var(--stone);line-height:1.55;margin-bottom:20px">El restaurante que siempre quisiste tener cerca. Ahora llega a ti.</div>
+              <div class="p-cta" style="align-self:flex-start;background:rgba(63,56,51,0.1);color:var(--brown)">bocus.cl<span class="p-cta-arrow" style="background:var(--brown)"><svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 7h8M7 3l4 4-4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Dirección fotográfica -->
+        <div style="margin-top:36px">
+          <h3 style="font-family:var(--j);font-size:18px;font-weight:700;color:var(--brown);margin-bottom:6px">Dirección fotográfica</h3>
+          <p style="font-size:14px;color:var(--stone);margin-bottom:20px">La foto no ilustra el texto: <em>lo completa</em>. Debe transmitir la misma emoción que el título.</p>
+          <!-- Tipos de foto -->
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px">
+            <div style="background:var(--olive);border-radius:12px;padding:20px 24px">
+              <div class="foto-dir-label" style="color:rgba(244,226,214,.65)">01 Producto</div>
+              <p style="font-family:var(--m);font-size:14px;color:rgba(244,226,214,.85);line-height:1.6;margin:0">El queso o charcutería como protagonista. Tabla de madera natural. Luz lateral suave. El producto ocupa 60-70% del encuadre.</p>
+            </div>
+            <div style="background:var(--sand);border-radius:12px;padding:20px 24px">
+              <div class="foto-dir-label" style="color:var(--brown-deep)">02 Experiencia</div>
+              <p style="font-family:var(--m);font-size:14px;color:var(--brown-deep);line-height:1.6;margin:0">Mesa servida, hogar real, copa en mano. El producto es parte de un momento. Contexto cálido. Nunca plato blanco de estudio.</p>
+            </div>
+            <div style="background:var(--beige-deep);border-radius:12px;padding:20px 24px">
+              <div class="foto-dir-label" style="color:var(--brown)">03 Proceso</div>
+              <p style="font-family:var(--m);font-size:14px;color:var(--brown);line-height:1.6;margin:0">La mano que corta, el cuchillo en la rueda, el gesto del chef. La artesanía como argumento. Encuadres cerrados que revelan detalle y oficio.</p>
+            </div>
+          </div>
+          <div class="foto-dir-grid" style="grid-template-columns:repeat(3,1fr)">
+            <div class="foto-dir-card" style="border-left:3px solid var(--olive)">
+              <div class="foto-dir-label" style="color:var(--olive)">+ Producto: usar</div>
+              <ul style="font-family:var(--m);font-size:13px;color:var(--brown);line-height:1.85;padding-left:14px;margin:0">
+                <li><strong>Tabla de madera natural</strong> como base -- los tonos caramel complementan la paleta</li>
+                <li>Luz natural lateral: revela la textura de la corteza</li>
+                <li>Ángulo levemente lateral, nunca cenital</li>
+                <li>Un hero por toma: brie, camembert o rueda completa</li>
+                <li>Mármol claro o lino como alternativa</li>
+              </ul>
+            </div>
+            <div class="foto-dir-card" style="border-left:3px solid var(--sand)">
+              <div class="foto-dir-label" style="color:var(--stone)">+ Experiencia: usar</div>
+              <ul style="font-family:var(--m);font-size:13px;color:var(--brown);line-height:1.85;padding-left:14px;margin:0">
+                <li>Tabla completa con vino, fruta y embutidos</li>
+                <li>Una sola acción en escena: cortar, servir, sostener copa</li>
+                <li>Madera de olivo o nogal como superficie de mesa</li>
+                <li>Luz ambiente, nunca flash</li>
+                <li>Hasta tres personas visibles -- enfoque en el gesto</li>
+              </ul>
+            </div>
+            <div class="foto-dir-card" style="border-left:3px solid var(--brown)">
+              <div class="foto-dir-label" style="color:var(--brown)">+ Proceso: usar</div>
+              <ul style="font-family:var(--m);font-size:13px;color:var(--brown);line-height:1.85;padding-left:14px;margin:0">
+                <li>Mano o cuchillo en primer plano: el detalle es el argumento</li>
+                <li>Chef en uniforme blanco Bocus como embajador</li>
+                <li>Rueda entera + etiqueta visible: la procedencia importa</li>
+                <li>Encuadre cerrado (50% del frame = producto)</li>
+                <li>Fondo neutro o contexto natural de cocina</li>
+              </ul>
+            </div>
+          </div>
+          <!-- Evitar -->
+          <div style="margin-top:16px;background:var(--beige);border-radius:12px;padding:20px 24px">
+            <div class="foto-dir-label" style="color:#b23b2e">- Evitar en todas las tomas</div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+              <ul style="font-family:var(--m);font-size:13px;color:var(--brown);line-height:1.85;padding-left:14px;margin:0">
+                <li><strong>Plato blanco sobre fondo blanco</strong> -- el producto desaparece</li>
+                <li>Iluminación de estudio: aplana la corteza</li>
+              </ul>
+              <ul style="font-family:var(--m);font-size:13px;color:var(--brown);line-height:1.85;padding-left:14px;margin:0">
+                <li>Ángulo cenital como catalogo genérico</li>
+                <li>Flash directo o luz fría artificial</li>
+              </ul>
+              <ul style="font-family:var(--m);font-size:13px;color:var(--brown);line-height:1.85;padding-left:14px;margin:0">
+                <li>Fondos saturados o props innecesarios</li>
+                <li>Etiquetas de supermercado visibles en escena</li>
               </ul>
             </div>
           </div>
         </div>
-      </section>
 
-      <p class="footer-note">
-        Esta pagina es el frente vivo privado de Bocus. Debe seguir creciendo aqui mismo hasta convertirse en el entregable canonico de marca.
-      </p>
-    </main>
-  </body>
-  </html>
+      </div>
+    </div>
+
+  </div>
+</section>
+<hr class="div">
+
+<!-- ══════════ SUPERFICIES ══════════ -->
+<div class="surface-section">
+  <div class="wrap">
+    <div class="label" style="color:var(--sand)">3.6 Aplicaciones</div>
+    <h2 style="color:var(--creme);margin-bottom:32px">Superficies y botones</h2>
+
+    <div class="surf-grid">
+      <div class="surf-card" style="background:var(--creme)">
+        <div class="surf-label" style="color:var(--stone)">Superficie principal</div>
+        <div class="surf-title" style="color:var(--brown)">Cocinado hoy.</div>
+        <div class="surf-body" style="color:var(--stone)">Texto brown sobre creme. Par principal de la marca. El 80% del sitio opera en esta combinacion.</div>
+      </div>
+      <div class="surf-card" style="background:var(--olive)">
+        <div class="surf-label" style="color:rgba(244,226,214,.6)">Seccion destacada</div>
+        <div class="surf-title" style="color:var(--creme)">Sin reserva.</div>
+        <div class="surf-body" style="color:rgba(244,226,214,.7)">Texto creme sobre olive. Para bloques full-bleed de alto impacto. Con Jost 700.</div>
+      </div>
+      <div class="surf-card" style="background:var(--brown-deep);border:1px solid rgba(244,226,214,.08)">
+        <div class="surf-label" style="color:var(--sand)">Footer</div>
+        <div class="surf-title" style="color:var(--creme)">Club gozadores.</div>
+        <div class="surf-body" style="color:var(--sand)">Creme + sand sobre brown-deep. Solo para footer y fondos oscuros de sección.</div>
+      </div>
+    </div>
+
+    <div class="label" style="color:var(--sand)">Estados de boton</div>
+    <p style="color:var(--sand);font-size:15px;margin-bottom:8px">Texto sobre naranja SIEMPRE brown. Nunca blanco.</p>
+    <div class="btn-row">
+      <button class="btn btn-orange">Ver la carta de hoy</button>
+      <button class="btn btn-dark">Restaurant en casa</button>
+      <button class="btn btn-ghost">Ver politicas de envio</button>
+      <button class="btn btn-wa">Pedir por WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ VOZ ══════════ -->
+<section>
+  <div class="wrap">
+    <div class="label">4. Tono y Lenguaje</div>
+    <h2>Voz Bocus</h2>
+    <p class="note">Claro, directo y racional. El texto debe sentirse como el plato: sin elementos innecesarios.</p>
+
+    <div class="princ-grid">
+      <div class="princ"><div class="princ-title">Preciso</div><p>"60 minutos", no "rapido". Datos concretos valen mas que descripciones vagas.</p></div>
+      <div class="princ p2"><div class="princ-title">Honesto</div><p>No sobreprometer. Solo palabras que el producto pueda sostener.</p></div>
+      <div class="princ p3"><div class="princ-title">Calido</div><p>Sin exceso. La cercania viene de lo simple, no de los signos de exclamacion.</p></div>
+      <div class="princ p4"><div class="princ-title">Funcional</div><p>Si una frase no agrega valor, se elimina.</p></div>
+    </div>
+
+    <div class="voz-grid">
+      <div class="voz-card voz-ok">
+        <div class="voz-head">Correcto</div>
+        <div class="voz-item"><span class="vi vi-ok">+</span><span>"Bistro en tu casa, en 60 minutos."</span></div>
+        <div class="voz-item"><span class="vi vi-ok">+</span><span>"Como el restaurante en tu casa."</span></div>
+        <div class="voz-item"><span class="vi vi-ok">+</span><span>"Vive una experiencia en tu casa."</span></div>
+        <div class="voz-item"><span class="vi vi-ok">+</span><span>"Platos listos. Quesos. Charcuteria. Vino. Armamos la mesa por ti."</span></div>
+        <div class="voz-item"><span class="vi vi-ok">+</span><span>"Cocinado hoy. Despachado en 60 minutos."</span></div>
+        <div class="voz-item"><span class="vi vi-ok">+</span><span>"Los quesos llegan desde Francia. El resto lo ponemos nosotros."</span></div>
+      </div>
+      <div class="voz-card voz-bad">
+        <div class="voz-head">Incorrecto</div>
+        <div class="voz-item"><span class="vi vi-bad">-</span><span>"Sorprende a los tuyos con la mejor experiencia gourmet!"</span></div>
+        <div class="voz-item"><span class="vi vi-bad">-</span><span>"Producto artesanal de altisima calidad premium"</span></div>
+        <div class="voz-item"><span class="vi vi-bad">-</span><span>"Vive la experiencia Bocus"</span></div>
+        <div class="voz-item"><span class="vi vi-bad">-</span><span>"No te lo pierdas!" — urgencia artificial</span></div>
+        <div class="voz-item"><span class="vi vi-bad">-</span><span>"Increible, imperdible, exclusivo" — adjetivos vacios</span></div>
+      </div>
+    </div>
+
+    <div class="canal-grid">
+      <h3 style="margin-bottom:16px;font-size:20px">Tono por canal</h3>
+      <div class="canal-row"><div class="canal-key">Web</div><p>Minimalista. Titulos cortos. Descripcion funcional del producto.</p></div>
+      <div class="canal-row"><div class="canal-key">Email</div><p>Narrativo pero acotado. Un tema por email. CTA unico. Firma: "Equipo Bocus".</p></div>
+      <div class="canal-row"><div class="canal-key">Instagram</div><p>Economia de palabras. La imagen habla primero. Jost para texto en pieza.</p></div>
+      <div class="canal-row"><div class="canal-key">WhatsApp</div><p>Transaccional. Directo. Solo lo necesario para completar el pedido.</p></div>
+    </div>
+
+    <!-- Formato de precios y números -->
+    <div style="margin-top:40px">
+      <h3 style="font-family:var(--j);font-size:20px;font-weight:700;color:var(--brown);margin-bottom:6px">Formato de precios y números</h3>
+      <p style="font-size:14px;color:var(--stone);margin-bottom:20px">La escritura del precio es marca. Una inconsistencia en el formato rompe la confianza en el e-commerce.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div style="background:var(--beige);border-radius:12px;padding:20px 24px">
+          <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--olive);margin-bottom:14px">+ Correcto</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--beige-deep);padding-bottom:8px">
+              <span style="font-size:13px;color:var(--stone)">Precio normal</span>
+              <span style="font-family:var(--j);font-weight:700;font-size:18px;color:var(--brown)">$12.900</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--beige-deep);padding-bottom:8px">
+              <span style="font-size:13px;color:var(--stone)">Precio desde</span>
+              <span style="font-family:var(--j);font-weight:700;font-size:18px;color:var(--brown)">Desde $8.500</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--beige-deep);padding-bottom:8px">
+              <span style="font-size:13px;color:var(--stone)">Descuento</span>
+              <span style="font-family:var(--j);font-weight:700;font-size:18px;color:var(--brown)">$9.900 <span style="font-size:13px;color:var(--stone);text-decoration:line-through;font-weight:400">$12.900</span></span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline">
+              <span style="font-size:13px;color:var(--stone)">Envio gratis</span>
+              <span style="font-family:var(--j);font-weight:700;font-size:16px;color:var(--olive)">Envio gratis</span>
+            </div>
+          </div>
+        </div>
+        <div style="background:var(--beige);border-radius:12px;padding:20px 24px">
+          <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#b23b2e;margin-bottom:14px">- Incorrecto</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--beige-deep);padding-bottom:8px">
+              <span style="font-size:13px;color:var(--stone)">Con decimales</span>
+              <span style="font-family:var(--j);font-weight:700;font-size:16px;color:var(--stone);text-decoration:line-through">$12.900,00</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--beige-deep);padding-bottom:8px">
+              <span style="font-size:13px;color:var(--stone)">Con coma de miles</span>
+              <span style="font-family:var(--j);font-weight:700;font-size:16px;color:var(--stone);text-decoration:line-through">$12,900</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--beige-deep);padding-bottom:8px">
+              <span style="font-size:13px;color:var(--stone)">Con moneda</span>
+              <span style="font-family:var(--j);font-weight:700;font-size:16px;color:var(--stone);text-decoration:line-through">CLP $12.900</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline">
+              <span style="font-size:13px;color:var(--stone)">Sin signo</span>
+              <span style="font-family:var(--j);font-weight:700;font-size:16px;color:var(--stone);text-decoration:line-through">12900 pesos</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="background:rgba(122,129,88,.08);border-radius:10px;padding:12px 18px;margin-top:12px;display:flex;gap:10px;align-items:flex-start">
+        <span style="color:var(--olive);font-weight:700;flex:none">Regla:</span>
+        <span style="font-size:13px;color:var(--stone);line-height:1.5">Punto de miles, sin decimales, sin "CLP", con signo $ pegado al numero. Descuentos muestran precio nuevo primero, original tachado en stone. Precio "desde" en minuscula.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ EMAIL ══════════ -->
+<div class="email-section">
+  <div class="wrap">
+    <div class="label">4.5 Aplicaciones</div>
+    <h2>Email Marketing</h2>
+    <div style="height:32px"></div>
+    <div class="rule-grid">
+      <div>
+        <h3 style="color:var(--olive);margin-bottom:18px">Estructura</h3>
+        <ul class="rule-list">
+          <li class="rule-item"><span class="rule-dot" style="background:var(--orange)"></span><span><strong>Asunto:</strong> directo, especifico. Maximo 50 caracteres.</span></li>
+          <li class="rule-item"><span class="rule-dot" style="background:var(--orange)"></span><span><strong>Preheader:</strong> complementa el asunto, no lo repite.</span></li>
+          <li class="rule-item"><span class="rule-dot" style="background:var(--orange)"></span><span><strong>Cuerpo:</strong> parrafos de 2-4 lineas. Un tema por email.</span></li>
+          <li class="rule-item"><span class="rule-dot" style="background:var(--orange)"></span><span><strong>CTA:</strong> uno solo, claro y accionable.</span></li>
+          <li class="rule-item"><span class="rule-dot" style="background:var(--orange)"></span><span><strong>Firma:</strong> "Equipo Bocus". La comunidad son los "gozadores".</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color:#b23b2e;margin-bottom:18px">Prohibido en emails</h3>
+        <ul class="rule-list">
+          <li class="rule-item"><span class="rule-dot" style="background:#b23b2e"></span>Guion largo (em dash)</li>
+          <li class="rule-item"><span class="rule-dot" style="background:#b23b2e"></span>Signos de exclamacion multiples</li>
+          <li class="rule-item"><span class="rule-dot" style="background:#b23b2e"></span>"Increible", "imperdible", "exclusivo", "premium"</li>
+          <li class="rule-item"><span class="rule-dot" style="background:#b23b2e"></span>"Aprovecha!", "No te lo pierdas!"</li>
+          <li class="rule-item"><span class="rule-dot" style="background:#b23b2e"></span>Promesas que el producto no pueda sostener</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ INSTAGRAM ══════════ -->
+<section>
+  <div class="wrap">
+    <div class="label">4.6 Aplicaciones</div>
+    <h2>Redes Sociales</h2>
+    <p class="note">Instagram. Bauhaus aplicado al formato digital. Geometria + fotografía honesta.</p>
+
+    <div class="ig-grid">
+      <!-- Pieza olive full-bleed -->
+      <div class="ig-card">
+        <div class="ig-preview" style="background:var(--olive)">
+          <svg style="position:absolute;top:12px;right:12px" width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="none" stroke="rgba(244,226,214,.18)" stroke-width="1"/><circle cx="32" cy="32" r="20" fill="none" stroke="rgba(244,226,214,.18)" stroke-width="1"/><rect x="16" y="16" width="32" height="32" fill="none" stroke="rgba(239,106,43,.25)" stroke-width="1.5"/></svg>
+          <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,226,214,.55);margin-bottom:6px">Nuestros postres</div>
+          <div style="font-family:var(--j);font-weight:700;font-size:28px;color:var(--creme);line-height:1">Viene lo<br>Inolvidable.</div>
+          <div class="p-cta" style="margin-top:14px">Ver carta<span class="p-cta-arrow"><svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 7h8M7 3l4 4-4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+        </div>
+        <div class="ig-meta"><div class="ig-meta-note">Feed 1:1 · Bloque full-bleed olive · texto creme · CTA pastilla</div></div>
+      </div>
+
+      <!-- Pieza producto creme -->
+      <div class="ig-card">
+        <div class="ig-preview" style="background:var(--creme);align-items:center;justify-content:center;text-align:center">
+          <img src="gallo-icono.png" style="position:absolute;top:16px;left:50%;transform:translateX(-50%);height:52px;opacity:0.18;pointer-events:none">
+          <div style="text-align:center;position:relative">
+            <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone);margin-bottom:6px">Queso del mes</div>
+            <div style="font-family:var(--j);font-weight:700;font-size:22px;color:var(--brown)">Petit Camembert</div>
+            <div style="font-family:var(--m);font-size:13px;color:var(--stone);margin-top:4px;margin-bottom:14px">Normandia · Leche cruda</div>
+            <div class="p-cta" style="background:rgba(63,56,51,0.1);color:var(--brown);display:inline-flex">Pídelo en bocus.cl<span class="p-cta-arrow" style="background:var(--brown)"><svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 7h8M7 3l4 4-4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          </div>
+        </div>
+        <div class="ig-meta"><div class="ig-meta-note">Producto · Fondo creme · Foto sobre madera o mármol</div></div>
+      </div>
+
+      <!-- Pieza historia dark -->
+      <div class="ig-card">
+        <div class="ig-preview" style="background:var(--brown-deep)">
+          <div style="position:absolute;top:20px;right:20px;width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(244,226,214,.2)"></div>
+          <img src="gallo-icono.png" style="position:absolute;right:-10%;bottom:-5%;height:90%;opacity:0.07;filter:brightness(0) invert(1);pointer-events:none">
+          <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sand);margin-bottom:10px">Historia · Origen</div>
+          <div style="font-family:var(--j);font-weight:700;font-size:24px;color:var(--creme);line-height:1.1">Quesos desde<br>Francia.</div>
+          <div style="font-family:var(--m);font-size:13px;color:var(--sand);margin-top:10px;margin-bottom:14px">Detras hay cadena de frio, documentos y mucha atencion al detalle.</div>
+          <div class="p-cta" style="align-self:flex-start">Leer mas<span class="p-cta-arrow"><svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 7h8M7 3l4 4-4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+        </div>
+        <div class="ig-meta"><div class="ig-meta-note">Historia · brown-deep · gallo fondo · CTA pastilla</div></div>
+      </div>
+    </div>
+
+    <div class="ig-stats">
+      <div class="ig-stat"><div class="k">Formato feed</div><div class="v">1:1 o 4:5</div></div>
+      <div class="ig-stat"><div class="k">Stories / Reels</div><div class="v">9:16</div></div>
+      <div class="ig-stat"><div class="k">Mix de contenido</div><div class="v">60% producto · 30% historia · 10% promo</div></div>
+      <div class="ig-stat"><div class="k">Renovar cada</div><div class="v">7 dias (evitar saturacion)</div></div>
+      <div class="ig-stat"><div class="k">Video</div><div class="v">Gancho sensorial en primeros 3s</div></div>
+    </div>
+
+    <!-- Stories 9:16 -->
+    <div style="margin-top:56px">
+      <h3 style="font-family:var(--j);font-size:20px;font-weight:700;color:var(--brown);margin-bottom:6px">Stories y Reels · 9:16</h3>
+      <p style="font-size:14px;color:var(--stone);margin-bottom:28px">Mismo sistema de 3 capas adaptado al formato vertical. El 70% del contenido Bocus se publica aqui -- las reglas son distintas al feed.</p>
+
+      <div style="display:grid;grid-template-columns:180px 180px 1fr;gap:24px;align-items:start">
+        <!-- Story 1: olive -->
+        <div>
+          <div style="background:var(--olive);border-radius:14px;padding:14px 14px;display:flex;flex-direction:column;gap:8px;min-height:320px;position:relative;overflow:hidden">
+            <div style="padding-bottom:8px;border-bottom:1px dashed rgba(244,226,214,.2);display:flex;align-items:center">
+              <span style="font-family:var(--j);font-size:8px;letter-spacing:.12em;color:rgba(244,226,214,.3)">ZONA SEGURA ARRIBA</span>
+            </div>
+            <div style="font-family:var(--j);font-weight:700;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,226,214,.5)">Quesos de temporada</div>
+            <div style="font-family:var(--j);font-weight:700;font-size:19px;line-height:1.1;color:var(--creme)">Viene lo<br>Inolvidable.</div>
+            <div style="flex:1;border-radius:8px;background:rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;min-height:80px">
+              <span style="font-family:var(--j);font-size:8px;letter-spacing:.1em;color:rgba(244,226,214,.3)">FOTO</span>
+            </div>
+            <div style="font-family:var(--m);font-size:10px;color:rgba(244,226,214,.7);line-height:1.4">Una seleccion que no puedes perderte.</div>
+            <div class="p-cta" style="align-self:center;padding:6px 6px 6px 12px;font-size:8px">Ver carta<span class="p-cta-arrow" style="width:22px;height:22px"><svg viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+            <div style="padding-top:8px;border-top:1px dashed rgba(244,226,214,.2);display:flex;align-items:center">
+              <span style="font-family:var(--j);font-size:8px;letter-spacing:.12em;color:rgba(244,226,214,.3)">ZONA SEGURA ABAJO</span>
+            </div>
+          </div>
+          <p style="font-size:11px;color:var(--stone);margin-top:8px;text-align:center">Promo / Producto</p>
+        </div>
+
+        <!-- Story 2: beige -->
+        <div>
+          <div style="background:var(--beige);border-radius:14px;padding:14px 14px;display:flex;flex-direction:column;gap:8px;min-height:320px;position:relative;overflow:hidden">
+            <div style="padding-bottom:8px;border-bottom:1px dashed rgba(63,56,51,.12);display:flex;align-items:center">
+              <span style="font-family:var(--j);font-size:8px;letter-spacing:.12em;color:rgba(63,56,51,.3)">ZONA SEGURA ARRIBA</span>
+            </div>
+            <div style="font-family:var(--j);font-weight:700;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone)">Historia · Origen</div>
+            <div style="font-family:var(--j);font-weight:700;font-size:17px;line-height:1.15;color:var(--brown)">El queso que<br>viaja desde<br>Normandia.</div>
+            <div style="flex:1;border-radius:8px;background:rgba(0,0,0,.07);display:flex;align-items:center;justify-content:center;min-height:80px">
+              <span style="font-family:var(--j);font-size:8px;letter-spacing:.1em;color:var(--stone)">FOTO</span>
+            </div>
+            <div style="font-family:var(--m);font-size:10px;color:var(--stone);line-height:1.4">Cadena de frio, documentos y atencion al detalle.</div>
+            <div class="p-cta" style="align-self:center;background:rgba(63,56,51,.09);color:var(--brown);padding:6px 6px 6px 12px;font-size:8px">Leer mas<span class="p-cta-arrow" style="width:22px;height:22px;background:var(--brown)"><svg viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+            <div style="padding-top:8px;border-top:1px dashed rgba(63,56,51,.12);display:flex;align-items:center">
+              <span style="font-family:var(--j);font-size:8px;letter-spacing:.12em;color:rgba(63,56,51,.3)">ZONA SEGURA ABAJO</span>
+            </div>
+          </div>
+          <p style="font-size:11px;color:var(--stone);margin-top:8px;text-align:center">Historia / Origen</p>
+        </div>
+
+        <!-- Reglas -->
+        <div style="display:flex;flex-direction:column;gap:12px;padding-top:4px">
+          <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone);margin-bottom:4px">3 reglas del formato vertical</div>
+          <div style="background:var(--beige);border-radius:12px;padding:16px 18px">
+            <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.1em;color:var(--orange);margin-bottom:6px">01 · Zonas seguras</div>
+            <p style="font-size:13px;color:var(--stone);margin:0;line-height:1.55">15% superior e inferior reservado para UI de Instagram. Nunca colocar texto ni CTA en esas franjas. Las marcas punteadas en las plantillas indican el limite.</p>
+          </div>
+          <div style="background:var(--beige);border-radius:12px;padding:16px 18px">
+            <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.1em;color:var(--olive);margin-bottom:6px">02 · Maximo 5 palabras en titulo</div>
+            <p style="font-size:13px;color:var(--stone);margin:0;line-height:1.55">En story se lee en movimiento. Menos texto que en feed -- la imagen llena el frame. Si necesitas mas palabras, usa la bajada (capa 02) en cuerpo pequeno.</p>
+          </div>
+          <div style="background:var(--beige);border-radius:12px;padding:16px 18px">
+            <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.1em;color:var(--brown);margin-bottom:6px">03 · CTA siempre visible</div>
+            <p style="font-size:13px;color:var(--stone);margin:0;line-height:1.55">La pastilla de accion va siempre anclada sobre la zona segura inferior. Nunca tapada por el sticker de IG ni el swipe-up. Mismo estilo que en feed: beige + circulo olive.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SHOPIFY E-COMMERCE ══════════ -->
+<hr class="div">
+<section>
+  <div class="wrap">
+    <div class="label">4.7 Aplicaciones</div>
+    <h2>Shopify E-commerce (UI/UX)</h2>
+    <p class="note">El canal principal de venta. El e-commerce de Bocus debe ser un templo del minimalismo funcional. Evitamos la sobrecarga informativa y priorizamos la velocidad y la claridad.</p>
+    
+    <div class="adn-grid" style="align-items: stretch; margin-bottom: 40px">
+      <div class="adn-card" style="border-left-color: var(--orange)">
+        <div class="adn-card-label">Cuadrícula y Retícula (Grid)</div>
+        <p style="margin-bottom: 12px">El catálogo de productos en Shopify debe presentarse en una cuadrícula estrictamente geométrica de 3 columnas en escritorio y 1 columna en móvil.</p>
+        <ul style="font-family: var(--m); font-size: 14px; color: var(--stone); line-height: 1.6; padding-left: 18px">
+          <li><strong>Relación de aspecto:</strong> Las fotos de producto deben usar un contenedor con proporción 4:5.</li>
+          <li><strong>Espaciados:</strong> Gap uniforme de 24px entre tarjetas.</li>
+          <li><strong>Fondo de producto:</strong> El producto debe mostrarse recortado sobre base de madera o mármol en fondo beige/creme, nunca blanco puro.</li>
+        </ul>
+      </div>
+      
+      <div class="adn-card olive" style="border-left-color: var(--olive)">
+        <div class="adn-card-label">Micro-interacciones y Hovers</div>
+        <p style="margin-bottom: 12px">El movimiento digital debe sentirse orgánico y de alta gama, nunca abrupto. Toda transición debe durar exactamente 300ms.</p>
+        <ul style="font-family: var(--m); font-size: 14px; color: var(--stone); line-height: 1.6; padding-left: 18px">
+          <li><strong>Imagen de Producto:</strong> Al pasar el cursor, la imagen escala suavemente (1.04x) y revela la segunda foto (corte o textura del producto).</li>
+          <li><strong>Botón de Compra:</strong> El botón cambia de color creme con borde a naranja sólido con tipografía brown.</li>
+          <li><strong>Deslizamiento de menú:</strong> Menús laterales con efecto *slide-in* y desenfoque de fondo (*backdrop-filter: blur(8px)*).</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div style="background: var(--beige); border-radius: 14px; padding: 28px 32px">
+      <h3 style="margin-bottom: 16px">Jerarquía de Etiquetas (Badges) en Shopify</h3>
+      <p class="note" style="margin-bottom: 24px">Las etiquetas de estado son funcionales, no decorativas. Se colocan en la esquina superior izquierda de la tarjeta de producto en mayúsculas Jost 700 (10px).</p>
+      
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px">
+        <div style="background: var(--creme); padding: 16px; border-radius: 8px; text-align: center; border: 1px solid var(--beige-deep)">
+          <span style="font-family: var(--j); font-weight: 700; font-size: 10px; letter-spacing: 0.1em; background: var(--orange); color: var(--brown); padding: 4px 10px; border-radius: 999px; text-transform: uppercase;">Nuevo</span>
+          <p style="font-size: 13px; color: var(--stone); margin-top: 12px">Productos recién llegados del mes. Máximo 7 días activo.</p>
+        </div>
+        <div style="background: var(--creme); padding: 16px; border-radius: 8px; text-align: center; border: 1px solid var(--beige-deep)">
+          <span style="font-family: var(--j); font-weight: 700; font-size: 10px; letter-spacing: 0.1em; background: var(--olive); color: var(--creme); padding: 4px 10px; border-radius: 999px; text-transform: uppercase;">Exclusivo</span>
+          <p style="font-size: 13px; color: var(--stone); margin-top: 12px">Partidas limitadas o importaciones de baja rotación.</p>
+        </div>
+        <div style="background: var(--creme); padding: 16px; border-radius: 8px; text-align: center; border: 1px solid var(--beige-deep)">
+          <span style="font-family: var(--j); font-weight: 700; font-size: 10px; letter-spacing: 0.1em; background: var(--stone); color: var(--creme); padding: 4px 10px; border-radius: 999px; text-transform: uppercase;">Agotado</span>
+          <p style="font-size: 13px; color: var(--stone); margin-top: 12px">Opacidad de tarjeta al 60%. Deshabilita el CTA de compra.</p>
+        </div>
+        <div style="background: var(--creme); padding: 16px; border-radius: 8px; text-align: center; border: 1px solid var(--beige-deep)">
+          <span style="font-family: var(--j); font-weight: 700; font-size: 10px; letter-spacing: 0.1em; background: #b23b2e; color: #fff; padding: 4px 10px; border-radius: 999px; text-transform: uppercase;">Últimos</span>
+          <p style="font-size: 13px; color: var(--stone); margin-top: 12px">Menos de 5 unidades disponibles en el inventario real.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ EXPERIENCE & PACKAGING ══════════ -->
+<hr class="div">
+<section style="background: var(--brown-deep); color: var(--creme)">
+  <div class="wrap">
+    <div class="label" style="color: var(--sand)">4.8 Aplicaciones</div>
+    <h2 style="color: var(--creme)">Empaque y Desembalaje (Unboxing)</h2>
+    <p class="note" style="color: var(--sand)">El delivery premium exige que el contacto físico sea una extensión de la estética digital. El ritual de apertura debe evocar sofisticación, orden y cuidado del producto.</p>
+    
+    <div style="display: grid; grid-template-columns: 2fr 1.2fr; gap: 48px; align-items: center">
+      <div>
+        <h3 style="color: var(--orange); margin-bottom: 20px">El Ritual del Empaque</h3>
+        <div class="arch-layer" style="color: var(--creme)">
+          <div class="arch-row" style="border-bottom-color: rgba(244,226,214,0.1)">
+            <div class="arch-num" style="color: var(--orange)">01</div>
+            <div>
+              <div class="arch-label" style="color: var(--creme)">Bolsa Kraft de Alta Densidad</div>
+              <div class="arch-desc" style="color: var(--sand)">Bolsa de papel Kraft marrón natural, asas trenzadas del mismo tono. Logotipo Bocus centrado en marrón oscuro. Sin plásticos visibles externos.</div>
+            </div>
+          </div>
+          <div class="arch-row" style="border-bottom-color: rgba(244,226,214,0.1)">
+            <div class="arch-num" style="color: var(--orange)">02</div>
+            <div>
+              <div class="arch-label" style="color: var(--creme)">Sellos Geométricos de Seguridad</div>
+              <div class="arch-desc" style="color: var(--sand)">Sticker rectangular de papel beige de 12x4cm con el logo y un patrón lineal Bauhaus. Asegura el cierre de la bolsa. Debe rasgarse limpiamente.</div>
+            </div>
+          </div>
+          <div class="arch-row" style="border-bottom-color: rgba(244,226,214,0.1)">
+            <div class="arch-num" style="color: var(--orange)">03</div>
+            <div>
+              <div class="arch-label" style="color: var(--creme)">Envoltura de Quesos y Charcutería</div>
+              <div class="arch-desc" style="color: var(--sand)">Papel antigrasa biodegradable con trama sutil geométrica (círculos y líneas). Atado con hilo de yute natural. Sello adhesivo redondo indicando procedencia y fecha.</div>
+            </div>
+          </div>
+          <div class="arch-row" style="border-bottom: none">
+            <div class="arch-num" style="color: var(--orange)">04</div>
+            <div>
+              <div class="arch-label" style="color: var(--creme)">Nota de Agradecimiento Manual</div>
+              <div class="arch-desc" style="color: var(--sand)">Tarjeta de cartulina beige-deep de 10x10cm. Por el reverso, un mensaje escrito a mano por el empacador. Transmite calidez y cercanía real.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="plantilla" style="background: var(--creme); color: var(--brown); aspect-ratio: 1; border-radius: 24px; padding: 36px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid rgba(244,226,214,0.15); box-sizing: border-box;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%">
+          <img src="gallo-icono.png" style="width: 32px; height: auto; opacity: 0.9; filter: brightness(0)">
+          <span style="font-family: var(--j); font-weight: 700; font-size: 9px; letter-spacing: 0.15em; color: var(--stone)">BOCUS · EL RITUAL</span>
+        </div>
+        <div>
+          <div style="font-family: var(--j); font-weight: 700; font-size: 20px; line-height: 1.15; color: var(--brown); margin-bottom: 8px">"Merci, gozador."</div>
+          <p style="font-family: var(--m); font-size: 12px; color: var(--stone); line-height: 1.5; margin: 0">Tu mesa está lista. Cocinado hoy con técnicas tradicionales, empacado a mano con cuidado.</p>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--beige-deep); padding-top: 12px; width: 100%">
+          <span style="font-family: var(--j); font-size: 9px; letter-spacing: 0.08em; color: var(--orange)">BOCUS.CL</span>
+          <span style="font-family: var(--j); font-size: 9px; letter-spacing: 0.08em; color: var(--stone)">#00592</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ GRILLA ══════════ -->
+<hr class="div">
+<section>
+  <div class="wrap">
+    <div class="label">3.7 Comunicacion Visual</div>
+    <h2>Grilla y sistema responsive</h2>
+    <p class="note">Web, email y Shopify comparten una sola grilla de 12 columnas y la escala de 8 puntos. El espacio negativo es contenido: nunca se cierran huecos para encajar mas.</p>
+
+    <!-- Breakpoints -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px">
+      <div style="background:var(--brown);border-radius:14px;padding:22px 24px">
+        <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sand);margin-bottom:10px">Desktop</div>
+        <div style="font-family:ui-monospace,monospace;font-size:13px;color:var(--creme);margin-bottom:6px">≥ 1280 px</div>
+        <div style="font-size:13px;color:var(--sand)">12 columnas · margen 64px · max 1280px</div>
+        <div style="display:flex;gap:4px;margin-top:14px">
+          <div style="height:32px;flex:1;background:rgba(244,226,214,.12);border-radius:3px"></div>
+          <div style="height:32px;flex:1;background:rgba(244,226,214,.12);border-radius:3px"></div>
+          <div style="height:32px;flex:1;background:rgba(244,226,214,.12);border-radius:3px"></div>
+          <div style="height:32px;flex:1;background:rgba(244,226,214,.12);border-radius:3px"></div>
+          <div style="height:32px;flex:1;background:rgba(244,226,214,.12);border-radius:3px"></div>
+          <div style="height:32px;flex:1;background:rgba(244,226,214,.12);border-radius:3px"></div>
+        </div>
+        <div style="font-family:var(--j);font-size:10px;color:rgba(244,226,214,.35);margin-top:4px;text-align:center">12 col · gutter 24px</div>
+      </div>
+      <div style="background:var(--brown);border-radius:14px;padding:22px 24px">
+        <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sand);margin-bottom:10px">Tablet</div>
+        <div style="font-family:ui-monospace,monospace;font-size:13px;color:var(--creme);margin-bottom:6px">768 – 1279 px</div>
+        <div style="font-size:13px;color:var(--sand)">8 columnas · margen 32px</div>
+        <div style="display:flex;gap:4px;margin-top:14px">
+          <div style="height:32px;flex:1;background:rgba(244,226,214,.12);border-radius:3px"></div>
+          <div style="height:32px;flex:1;background:rgba(244,226,214,.12);border-radius:3px"></div>
+          <div style="height:32px;flex:1;background:rgba(244,226,214,.12);border-radius:3px"></div>
+          <div style="height:32px;flex:1;background:rgba(244,226,214,.12);border-radius:3px"></div>
+        </div>
+        <div style="font-family:var(--j);font-size:10px;color:rgba(244,226,214,.35);margin-top:4px;text-align:center">8 col · gutter 24px</div>
+      </div>
+      <div style="background:var(--brown);border-radius:14px;padding:22px 24px">
+        <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sand);margin-bottom:10px">Movil</div>
+        <div style="font-family:ui-monospace,monospace;font-size:13px;color:var(--creme);margin-bottom:6px">&lt; 768 px</div>
+        <div style="font-size:13px;color:var(--sand)">4 columnas · margen 24px</div>
+        <div style="display:flex;gap:4px;margin-top:14px">
+          <div style="height:32px;flex:1;background:rgba(244,226,214,.12);border-radius:3px"></div>
+          <div style="height:32px;flex:1;background:rgba(244,226,214,.12);border-radius:3px"></div>
+        </div>
+        <div style="font-family:var(--j);font-size:10px;color:rgba(244,226,214,.35);margin-top:4px;text-align:center">4 col · gutter 24px</div>
+      </div>
+    </div>
+
+    <!-- Escala 8pt + Shopify grid -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div style="background:var(--beige);border-radius:14px;padding:22px 24px">
+        <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);margin-bottom:12px">Escala de espaciado · 8pt</div>
+        <div style="display:flex;align-items:flex-end;gap:6px;margin-bottom:12px">
+          <div style="background:var(--olive);border-radius:3px;width:16px;height:4px"></div>
+          <div style="background:var(--olive);border-radius:3px;width:16px;height:8px"></div>
+          <div style="background:var(--olive);border-radius:3px;width:16px;height:16px"></div>
+          <div style="background:var(--olive);border-radius:3px;width:16px;height:24px"></div>
+          <div style="background:var(--olive);border-radius:3px;width:16px;height:32px"></div>
+          <div style="background:var(--olive);border-radius:3px;width:16px;height:48px"></div>
+          <div style="background:var(--olive);border-radius:3px;width:16px;height:64px"></div>
+        </div>
+        <div style="font-family:ui-monospace,monospace;font-size:11px;color:var(--stone);display:flex;gap:6px;flex-wrap:wrap">
+          <span>4</span><span>8</span><span>16</span><span>24</span><span>32</span><span>48</span><span>64</span><span>96</span><span>128</span>
+        </div>
+        <p style="font-size:13px;color:var(--stone);margin-top:10px;margin-bottom:0;line-height:1.5">Todo margen, padding y gap es multiplo de 8. El 4 es el medio-paso. Sin numeros intermedios.</p>
+      </div>
+      <div style="background:var(--beige);border-radius:14px;padding:22px 24px">
+        <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);margin-bottom:12px">Grilla Shopify · Catalogo</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px">
+          <div style="aspect-ratio:4/5;background:var(--brown);border-radius:6px;opacity:.7"></div>
+          <div style="aspect-ratio:4/5;background:var(--brown);border-radius:6px;opacity:.7"></div>
+          <div style="aspect-ratio:4/5;background:var(--brown);border-radius:6px;opacity:.7"></div>
+        </div>
+        <p style="font-size:13px;color:var(--stone);margin:0;line-height:1.5">3 columnas desktop · 1 movil · proporcion 4:5 · gap 24px · fondo beige, nunca blanco puro.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CO-BRANDING & PARTNERS ══════════ -->
+<hr class="div">
+<section>
+  <div class="wrap">
+    <div class="label">4.9 Lineamientos</div>
+    <h2>Co-branding y Terceros</h2>
+    <p class="note">Bocus colabora activamente con marcas aliadas e importadores externos para ofrecer quesos y vinos de excelencia. Para mantener el prestigio de Bocus, toda alianza debe someterse a reglas visuales claras de jerarquía.</p>
+    
+    <div class="voz-grid" style="margin-bottom: 32px">
+      <div class="voz-card" style="background: var(--olive); color: var(--creme)">
+        <div class="voz-head" style="color: rgba(244,226,214,0.6)">Sello Bocus Domina</div>
+        <p style="font-family: var(--m); font-size: 14px; line-height: 1.6; margin-bottom: 16px">La comunicación siempre es emitida por Bocus. La marca aliada actúa como proveedora o invitada de honor, nunca como copropietaria del canal.</p>
+        <ul style="font-family: var(--m); font-size: 13px; color: var(--creme); opacity: 0.85; padding-left: 18px; line-height: 1.7">
+          <li><strong>Proporción del logo:</strong> El logotipo de Bocus debe ser al menos 1.5 veces más grande que el logotipo aliado.</li>
+          <li><strong>Margen de separación:</strong> Separación física mínima de 48px entre logotipos. Una línea divisoria fina (`beige-deep`) debe mediar entre ambos.</li>
+          <li><strong>Tipografía aliada:</strong> En piezas Bocus, los textos aclaratorios se escriben siempre en Montserrat regular, no en la fuente del aliado.</li>
+        </ul>
+      </div>
+      
+      <div class="voz-card voz-bad">
+        <div class="voz-head" style="color: var(--stone)">Errores Comunes a Evitar</div>
+        <p style="font-family: var(--m); font-size: 14px; line-height: 1.6; margin-bottom: 16px">Evitar difuminar la identidad de Bocus en alianzas masivas o mal orquestadas.</p>
+        <ul style="font-family: var(--m); font-size: 13px; color: var(--stone); padding-left: 18px; line-height: 1.7">
+          <li><strong>No mezclar colores de marca:</strong> Prohibido usar colores corporativos del aliado en tipografía o fondos Bocus. La paleta de Bocus es inviolable.</li>
+          <li><strong>No juntar logotipos:</strong> Evitar la creación de logos combinados (ej. Bocus + Viña X en una sola forma).</li>
+          <li><strong>No usar slogans aliados:</strong> Los slogans del tercero no se colocan en piezas Bocus. Se describe su producto de forma racional.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PACKAGING ══════════ -->
+<hr class="div">
+<section>
+  <div class="wrap">
+    <div class="label">4.10 Aplicaciones</div>
+    <h2>Packaging</h2>
+    <p class="note">El unboxing es el primer contacto físico con la marca. Cada pieza debe sentirse de la misma familia que el Instagram y el manual.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px;margin-top:40px;align-items:start">
+
+      <!-- Papel mantequilla -->
+      <div>
+        <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone);margin-bottom:14px">Papel mantequilla</div>
+        <!-- Mockup SVG -->
+        <div style="background:#f0e6d3;border-radius:10px;padding:28px 20px;display:flex;align-items:center;justify-content:center;min-height:200px;position:relative;overflow:hidden;box-shadow:0 2px 12px rgba(63,56,51,.1)">
+          <!-- Textura kraft -->
+          <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.08" viewBox="0 0 200 160" preserveAspectRatio="xMidYMid slice">
+            <line x1="0" y1="20" x2="200" y2="20" stroke="#3f3833" stroke-width=".5"/>
+            <line x1="0" y1="40" x2="200" y2="40" stroke="#3f3833" stroke-width=".5"/>
+            <line x1="0" y1="60" x2="200" y2="60" stroke="#3f3833" stroke-width=".5"/>
+            <line x1="0" y1="80" x2="200" y2="80" stroke="#3f3833" stroke-width=".5"/>
+            <line x1="0" y1="100" x2="200" y2="100" stroke="#3f3833" stroke-width=".5"/>
+            <line x1="0" y1="120" x2="200" y2="120" stroke="#3f3833" stroke-width=".5"/>
+            <line x1="0" y1="140" x2="200" y2="140" stroke="#3f3833" stroke-width=".5"/>
+          </svg>
+          <!-- Logo completo impreso 1 tinta brown -->
+          <div style="text-align:center;position:relative">
+            <img src="bocus-logo.jpeg" style="width:110px;height:auto;object-fit:contain;mix-blend-mode:multiply;opacity:.85;display:block;margin:0 auto">
+          </div>
+        </div>
+        <div style="margin-top:12px;display:flex;flex-direction:column;gap:6px">
+          <div style="font-size:12px;color:var(--stone);display:flex;gap:6px"><span style="color:var(--orange);font-weight:700">+</span>1 tinta: Brown (412 C) sobre kraft natural</div>
+          <div style="font-size:12px;color:var(--stone);display:flex;gap:6px"><span style="color:var(--orange);font-weight:700">+</span>Logo minimo 40mm de ancho</div>
+          <div style="font-size:12px;color:var(--stone);display:flex;gap:6px"><span style="color:var(--orange);font-weight:700">+</span>Sin texto adicional en la pieza</div>
+        </div>
+      </div>
+
+      <!-- Pote Kraft -->
+      <div>
+        <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone);margin-bottom:14px">Pote Kraft · 16oz</div>
+        <!-- Mockup vista lateral -->
+        <div style="background:#e8ddd0;border-radius:10px;padding:28px 20px;display:flex;align-items:center;justify-content:center;min-height:200px;position:relative;overflow:hidden;box-shadow:0 2px 12px rgba(63,56,51,.1)">
+          <!-- Cilindro simplificado -->
+          <div style="position:relative;width:100px">
+            <!-- Tapa -->
+            <div style="width:100px;height:14px;background:#c8b89a;border-radius:50%;border:1.5px solid #a89070;margin-bottom:-7px;position:relative;z-index:2"></div>
+            <!-- Cuerpo -->
+            <div style="width:100px;min-height:110px;background:linear-gradient(to right, #c8b296 0%, #e0c9b0 30%, #d4bea0 70%, #b8a080 100%);border-radius:0 0 8px 8px;border:1.5px solid #a89070;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative">
+              <!-- Sticker circular -->
+              <div style="width:76px;height:76px;background:var(--creme);border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid rgba(63,56,51,.2);box-shadow:0 1px 4px rgba(0,0,0,.1);padding:8px;overflow:hidden">
+                <img src="bocus-logo.jpeg" style="width:100%;height:auto;object-fit:contain;mix-blend-mode:multiply;opacity:.88">
+              </div>
+            </div>
+            <!-- Fondo kraft -->
+            <div style="position:absolute;bottom:-8px;left:4px;right:4px;height:8px;background:#b8a080;border-radius:0 0 6px 6px;border:1px solid #a09070"></div>
+          </div>
+        </div>
+        <div style="margin-top:12px;display:flex;flex-direction:column;gap:6px">
+          <div style="font-size:12px;color:var(--stone);display:flex;gap:6px"><span style="color:var(--orange);font-weight:700">+</span>Sticker circular creme con logo brown</div>
+          <div style="font-size:12px;color:var(--stone);display:flex;gap:6px"><span style="color:var(--orange);font-weight:700">+</span>Sticker diametro: 50-60mm</div>
+          <div style="font-size:12px;color:var(--stone);display:flex;gap:6px"><span style="color:var(--orange);font-weight:700">+</span>Pote kraft natural sin pintar</div>
+        </div>
+      </div>
+
+      <!-- Reglas de unboxing -->
+      <div style="display:flex;flex-direction:column;gap:14px;padding-top:28px">
+        <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone);margin-bottom:4px">Principios del unboxing</div>
+        <div style="background:var(--beige);border-radius:12px;padding:16px 18px">
+          <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.1em;color:var(--orange);margin-bottom:6px">01 · Kraft como base</div>
+          <p style="font-size:13px;color:var(--stone);margin:0;line-height:1.55">El marron natural del kraft es parte de la paleta. No pintar ni cubrir el material -- es el fondo que da calor a la marca.</p>
+        </div>
+        <div style="background:var(--beige);border-radius:12px;padding:16px 18px">
+          <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.1em;color:var(--olive);margin-bottom:6px">02 · 1 tinta o sticker</div>
+          <p style="font-size:13px;color:var(--stone);margin:0;line-height:1.55">En tiradas pequeñas usar sticker (4C, CMYK). En tiradas de 1.000+ usar impresion directa 1 tinta (Pantone 412 C o 1585 C).</p>
+        </div>
+        <div style="background:var(--beige);border-radius:12px;padding:16px 18px">
+          <div style="font-family:var(--j);font-weight:700;font-size:11px;letter-spacing:.1em;color:var(--brown);margin-bottom:6px">03 · Logo siempre limpio</div>
+          <p style="font-size:13px;color:var(--stone);margin:0;line-height:1.55">El logotipo nunca va sobre texto ni sobre otro elemento. Fondo limpio alrededor. Area de proteccion: una vez la altura del gallo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ DOWNLOADS CENTER ══════════ -->
+<hr class="div">
+<section style="background: var(--creme); padding: 96px 0">
+  <div class="wrap">
+    <div class="label">5. Recursos</div>
+    <h2>Centro de Descargas</h2>
+    <p class="note">Acceso directo a los recursos de marca oficiales para diseñadores, la Agencia York y desarrolladores. Garantiza que todos utilicen las versiones actualizadas y correctas.</p>
+    
+    <div class="logo-demo-grid" style="margin-top: 32px">
+      <div class="logo-demo" style="background: var(--beige); border: 1px solid var(--beige-deep); align-items: stretch; text-align: left; padding: 32px; gap: 12px">
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <span style="font-family: var(--j); font-weight: 700; font-size: 12px; letter-spacing: 0.1em; color: var(--orange)">Vectorial / Raster</span>
+          <svg style="width: 24px; height: 24px" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 style="margin: 8px 0 4px 0">Kit de Logotipos</h3>
+        <p style="font-size: 13px; color: var(--stone)">Logotipo principal Bocus en formatos SVG, EPS y PNG en alta resolución para fondo claro y oscuro.</p>
+        <a class="btn btn-dark" style="margin-top: auto; padding: 12px 20px; font-size: 11px; text-align: center; text-decoration: none" href="#descargar-logos">Descargar Kit (.ZIP)</a>
+      </div>
+      
+      <div class="logo-demo" style="background: var(--beige); border: 1px solid var(--beige-deep); align-items: stretch; text-align: left; padding: 32px; gap: 12px">
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <span style="font-family: var(--j); font-weight: 700; font-size: 12px; letter-spacing: 0.1em; color: var(--olive)">Fuentes Web</span>
+          <svg style="width: 24px; height: 24px" viewBox="0 0 24 24" fill="none" stroke="var(--olive)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 style="margin: 8px 0 4px 0">Paquete de Fuentes</h3>
+        <p style="font-size: 13px; color: var(--stone)">Tipografías oficiales Jost y Montserrat. Incluye archivos OTF, TTF y formatos optimizados para web (WOFF2).</p>
+        <a class="btn btn-dark" style="margin-top: auto; padding: 12px 20px; font-size: 11px; text-align: center; text-decoration: none" href="#descargar-fuentes">Descargar Fuentes (.ZIP)</a>
+      </div>
+      
+      <div class="logo-demo" style="background: var(--olive); border: 1px solid rgba(244,226,214,.12); align-items: stretch; text-align: left; padding: 32px; gap: 12px">
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <span style="font-family: var(--j); font-weight: 700; font-size: 12px; letter-spacing: 0.1em; color: rgba(244,226,214,.6)">Herramienta de produccion</span>
+          <svg style="width: 24px; height: 24px" viewBox="0 0 24 24" fill="none" stroke="rgba(244,226,214,.5)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9" stroke-linecap="round"/></svg>
+        </div>
+        <h3 style="margin: 8px 0 4px 0; color: var(--creme)">Canva · Brand Kit</h3>
+        <p style="font-size: 13px; color: rgba(244,226,214,.75); line-height: 1.6; margin-bottom: 14px">Todas las piezas de Bocus se producen en Canva. El Brand Kit contiene los colores oficiales, el logotipo y el gallo como elementos activos.</p>
+        <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px">
+          <div style="font-family: var(--j); font-weight: 700; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: rgba(244,226,214,.45); margin-bottom: 2px">Checklist de setup</div>
+          <div style="font-size: 12px; color: rgba(244,226,214,.8); display: flex; gap: 8px; align-items: flex-start"><span style="color: var(--orange); flex: none">+</span>Subir gallo-icono.png al Brand Kit como elemento de marca</div>
+          <div style="font-size: 12px; color: rgba(244,226,214,.8); display: flex; gap: 8px; align-items: flex-start"><span style="color: var(--orange); flex: none">+</span>Activar ITC Bauhaus desde Adobe Fonts (para editar logotipo en Illustrator)</div>
+          <div style="font-size: 12px; color: rgba(244,226,214,.8); display: flex; gap: 8px; align-items: flex-start"><span style="color: var(--orange); flex: none">+</span>Agregar Jost + Montserrat como fuentes del Brand Kit en Canva</div>
+          <div style="font-size: 12px; color: rgba(244,226,214,.8); display: flex; gap: 8px; align-items: flex-start"><span style="color: var(--orange); flex: none">+</span>Paleta de marca: creme #f4e2d6, olive #7a8158, orange #ef6a2b, brown #3f3833</div>
+        </div>
+        <a class="btn" style="margin-top: auto; padding: 12px 20px; font-size: 11px; text-align: center; text-decoration: none; background: rgba(244,226,214,.15); color: var(--creme); border: 1px solid rgba(244,226,214,.25); border-radius: 8px; display: block; letter-spacing: .08em; font-family: var(--j); font-weight: 700; text-transform: uppercase" href="https://canva.com" target="_blank">Abrir Canva</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<div class="footer">
+  <img class="footer-gallo" src="gallo-icono.png" alt="">
+  <div class="wrap">
+    <div class="footer-inner">
+      <div>
+        <div style="display:flex;align-items:center;gap:18px;margin-bottom:4px">
+          <img src="gallo-icono.png" alt="Gallo Bocus" style="width:52px;height:64px;object-fit:contain;filter:brightness(0) invert(1);opacity:0.9">
+          <div class="footer-logo">Bocus<span class="dot">.</span></div>
+        </div>
+        <div class="footer-tag">Cuisine de qualité</div>
+      </div>
+      <div class="footer-info">
+        Manual de Marca · Horeca SpA<br>
+        Versión 2026<br>
+        <span class="footer-url">bocus.cl</span>
+      </div>
+    </div>
+    <hr class="footer-divider">
+    <div style="display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2">
+      <span style="font-family:var(--j);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone)">Bauhaus · Bistro · Gastronomía</span>
+      <span style="font-family:var(--j);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone)">© 2026 Horeca SpA</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ INTERACTIVE JAVASCRIPT ══════════ -->
+<script>
+// --- TOAST SYSTEM ---
+function showToast(message) {
+  let toast = document.querySelector('.bocus-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.className = 'bocus-toast';
+    toast.innerHTML = '<span class="bocus-toast-dot"></span><span class="bocus-toast-text"></span>';
+    document.body.appendChild(toast);
+  }
+  toast.querySelector('.bocus-toast-text').textContent = message;
+  toast.classList.add('show');
+  
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2500);
+}
+
+// --- COLOR COPY SYSTEM ---
+document.querySelectorAll('.sw').forEach(sw => {
+  sw.style.cursor = 'pointer';
+  sw.addEventListener('click', () => {
+    const hexText = sw.querySelector('.hex').textContent.trim();
+    const nameText = sw.querySelector('.name').textContent.trim();
+    
+    navigator.clipboard.writeText(hexText).then(() => {
+      showToast(`Copiado ${nameText}: ${hexText}`);
+    }).catch(err => {
+      console.error('Error al copiar: ', err);
+    });
+  });
+});
+
+// --- TYPOGRAPHY PLAYGROUND ---
+const typoInput = document.getElementById('typo-input');
+const previews = {
+  'preview-jost-bold': text => text,
+  'preview-jost-medium': text => text,
+  'preview-jost-light': text => text.toUpperCase(),
+  'preview-mont-semi': text => text,
+  'preview-mont-regular': text => text
+};
+
+function updatePreviews() {
+  if (!typoInput) return;
+  const text = typoInput.value || 'Viene lo inolvidable.';
+  Object.keys(previews).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.textContent = previews[id](text);
+    }
+  });
+}
+
+if (typoInput) {
+  typoInput.addEventListener('input', updatePreviews);
+  typoInput.addEventListener('focus', () => {
+    typoInput.style.borderColor = 'var(--orange)';
+    typoInput.style.background = 'rgba(244, 226, 214, 0.08)';
+    typoInput.style.transition = 'all 0.3s ease';
+  });
+  typoInput.addEventListener('blur', () => {
+    typoInput.style.borderColor = 'rgba(244, 226, 214, 0.15)';
+    typoInput.style.background = 'rgba(244, 226, 214, 0.05)';
+  });
+}
+
+function setTypoText(val) {
+  if (typoInput) {
+    typoInput.value = val;
+    updatePreviews();
+  }
+}
+
+// Inicializar previsualizaciones
+updatePreviews();
+</script>
+</body>
+</html>

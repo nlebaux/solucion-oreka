@@ -1,189 +1,1980 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Parigo | Manual privado de marca</title>
-    <meta name="robots" content="noindex,nofollow,noarchive" />
-    <meta
-      name="description"
-      content="Manual privado de marca Parigo dentro de Solucion Oreka."
-    />
-    <link rel="stylesheet" href="../styles.css" />
-  </head>
-  <body>
-    <main class="wrap">
-      <div class="topbar">
-        <div class="crumb">Oreka privado · Parigo marca</div>
-        <a class="home-link" href="../">Volver al indice privado</a>
+<head>
+<meta charset="utf-8">
+<title>Parigó · Manual de Marca 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   VARIABLES — PALETA PARIGÓ
+═══════════════════════════════════════ */
+:root {
+  --bleu:    #1B3A7A;
+  --creme:   #ECE3CF;
+  --tiza:    #FAF6EC;
+  --or:      #C9A35A;
+  --vert:    #2F5C3D;
+  --bois:    #7A3E28;
+  --noir:    #1A1614;
+  --rouge:   #C42B2B;
+
+  --dm:      "Cinzel", serif;
+  --eb:      "Lora", serif;
+  --arch:    "Barlow Condensed", sans-serif;
+  --vibes:   "Lora", serif;
+}
+
+/* ═══════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--tiza);
+  color: var(--noir);
+  font-family: var(--eb);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════ */
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 56px; }
+section { padding: 104px 0; }
+section + section { border-top: 1px solid rgba(27,58,122,.12); }
+
+/* ═══════════════════════════════════════
+   TIPOGRAFÍA GLOBAL
+═══════════════════════════════════════ */
+.label {
+  font-family: var(--arch);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--or);
+  margin-bottom: 20px;
+  display: block;
+}
+
+h2 {
+  font-family: var(--dm);
+  font-size: clamp(38px, 5vw, 60px);
+  font-weight: 400;
+  letter-spacing: -.015em;
+  line-height: 1.08;
+  color: var(--bleu);
+  margin-bottom: 32px;
+}
+
+h3 {
+  font-family: var(--dm);
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: -.01em;
+  color: var(--bleu);
+  margin-bottom: 10px;
+}
+
+h4 {
+  font-family: var(--arch);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--bois);
+  margin-bottom: 8px;
+}
+
+p {
+  font-family: var(--eb);
+  font-size: 17px;
+  color: var(--noir);
+  max-width: 640px;
+  margin-bottom: 20px;
+}
+
+p:last-child { margin-bottom: 0; }
+
+hr.div {
+  border: none;
+  border-top: 1px solid rgba(27,58,122,.15);
+  margin: 56px 0;
+}
+
+/* ═══════════════════════════════════════
+   1. PORTADA
+═══════════════════════════════════════ */
+.cover {
+  background: var(--bleu);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 80px 56px;
+  text-align: center;
+}
+
+.cover-footer {
+  position: absolute;
+  bottom: 48px;
+  left: 56px;
+  right: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cover-footer span {
+  font-family: var(--arch);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.35);
+}
+
+/* Logo oval SVG inline */
+.cover-logo {
+  width: 220px;
+  height: 145px;
+  margin-bottom: 56px;
+}
+
+.cover-tagline {
+  font-family: var(--eb);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 26px;
+  color: rgba(255,255,255,.75);
+  letter-spacing: .06em;
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════
+   2. LA MARCA
+═══════════════════════════════════════ */
+.marca-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  margin-top: 56px;
+}
+
+.arq-item {
+  padding: 28px 0;
+  border-top: 1px solid rgba(27,58,122,.18);
+}
+
+.arq-item:first-child { border-top: none; }
+
+.arq-name {
+  font-family: var(--dm);
+  font-size: 22px;
+  color: var(--bleu);
+  margin-bottom: 6px;
+}
+
+.arq-desc {
+  font-family: var(--eb);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--bois);
+  max-width: 100%;
+  margin-bottom: 0;
+}
+
+.concepto-quote {
+  font-family: var(--dm);
+  font-size: clamp(22px, 3vw, 32px);
+  color: var(--bleu);
+  line-height: 1.35;
+  border-left: 3px solid var(--or);
+  padding-left: 28px;
+  margin-bottom: 40px;
+  font-weight: 400;
+}
+
+/* ═══════════════════════════════════════
+   3. COLOR
+═══════════════════════════════════════ */
+.palette-strip {
+  height: 10px;
+  display: flex;
+  margin-bottom: 64px;
+}
+.palette-strip span { flex: 1; }
+
+.sw-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid rgba(27,58,122,.12);
+  margin-bottom: 56px;
+}
+
+.sw {
+  padding: 0;
+  overflow: hidden;
+}
+
+.sw-chip {
+  height: 120px;
+  display: block;
+  width: 100%;
+}
+
+.sw-info {
+  padding: 16px 20px 20px;
+  background: var(--creme);
+  border-top: 1px solid rgba(27,58,122,.08);
+}
+
+.sw-hex {
+  font-family: var(--arch);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--noir);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.sw-name {
+  font-family: var(--eb);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--bois);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.sw-rol {
+  font-family: var(--eb);
+  font-size: 14px;
+  color: var(--noir);
+  opacity: .75;
+  line-height: 1.45;
+}
+
+.proporcion-badge {
+  font-family: var(--arch);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--or);
+  display: block;
+  margin-top: 6px;
+}
+
+.oasis-rule {
+  background: var(--vert);
+  color: #fff;
+  padding: 32px 40px;
+  margin-top: 8px;
+}
+
+.oasis-rule h4 {
+  color: rgba(255,255,255,.6);
+  margin-bottom: 12px;
+}
+
+.oasis-rule p {
+  color: rgba(255,255,255,.85);
+  font-size: 16px;
+  max-width: 100%;
+  margin-bottom: 0;
+}
+
+/* ═══════════════════════════════════════
+   4. TIPOGRAFÍA
+═══════════════════════════════════════ */
+.typo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 56px;
+}
+
+.typo-card {
+  background: var(--creme);
+  padding: 40px;
+}
+
+.typo-card.full { grid-column: 1 / -1; }
+
+.typo-specimen-dm {
+  font-family: var(--dm);
+  font-size: 72px;
+  line-height: 1;
+  color: var(--bleu);
+  letter-spacing: -.015em;
+  margin-bottom: 20px;
+}
+
+.typo-specimen-dm-i {
+  font-family: var(--dm);
+  font-size: 72px;
+  font-style: italic;
+  line-height: 1;
+  color: var(--bleu);
+  letter-spacing: -.015em;
+}
+
+.typo-specimen-eb {
+  font-family: var(--eb);
+  font-size: 28px;
+  line-height: 1.55;
+  color: var(--noir);
+  margin-bottom: 16px;
+}
+
+.typo-specimen-arch {
+  font-family: var(--arch);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--bois);
+  margin-bottom: 8px;
+}
+
+.typo-specimen-vibes {
+  font-family: var(--vibes);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 52px;
+  color: var(--bleu);
+  line-height: 1.25;
+}
+
+.typo-meta {
+  font-family: var(--arch);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--or);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.typo-role {
+  font-family: var(--eb);
+  font-size: 15px;
+  color: var(--bois);
+  max-width: 100%;
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+.pairing-box {
+  background: var(--bleu);
+  padding: 48px;
+  margin-top: 2px;
+}
+
+.pairing-dm {
+  font-family: var(--dm);
+  font-size: 52px;
+  color: #fff;
+  letter-spacing: -.015em;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.pairing-eb {
+  font-family: var(--eb);
+  font-size: 18px;
+  color: rgba(255,255,255,.7);
+  line-height: 1.65;
+  max-width: 520px;
+  margin-bottom: 0;
+}
+
+.tracking-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--eb);
+  font-size: 16px;
+  margin-top: 32px;
+}
+
+.tracking-table th {
+  font-family: var(--arch);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--or);
+  padding: 10px 16px 10px 0;
+  text-align: left;
+  border-bottom: 1px solid rgba(27,58,122,.15);
+}
+
+.tracking-table td {
+  padding: 12px 16px 12px 0;
+  border-bottom: 1px solid rgba(27,58,122,.08);
+  vertical-align: top;
+}
+
+.tracking-table td:first-child { font-family: var(--dm); font-size: 18px; color: var(--bleu); }
+.tracking-table td:last-child { color: var(--bois); font-style: italic; }
+
+/* ═══════════════════════════════════════
+   5. LOGO
+═══════════════════════════════════════ */
+.logo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin: 48px 0;
+}
+
+.logo-variant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 32px;
+  gap: 20px;
+  text-align: center;
+}
+
+.logo-variant.var-a { background: var(--bleu); }
+.logo-variant.var-b { background: var(--creme); }
+.logo-variant.var-c { background: var(--noir); }
+
+.logo-svg-sm {
+  width: 120px;
+  height: 78px;
+}
+
+.logo-variant-label {
+  font-family: var(--arch);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.logo-variant.var-a .logo-variant-label { color: rgba(255,255,255,.45); }
+.logo-variant.var-b .logo-variant-label { color: var(--bois); }
+.logo-variant.var-c .logo-variant-label { color: rgba(255,255,255,.35); }
+
+.logo-rules {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: 2px;
+}
+
+.logo-rule-card {
+  background: var(--creme);
+  padding: 32px;
+}
+
+.logo-rule-card h4 {
+  margin-bottom: 12px;
+}
+
+.logo-rule-card p {
+  font-size: 15px;
+  max-width: 100%;
+  margin-bottom: 0;
+}
+
+/* ═══════════════════════════════════════
+   6. VOZ Y TONO
+═══════════════════════════════════════ */
+.voz-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  margin-top: 56px;
+}
+
+.ejemplos-list {
+  list-style: none;
+  border-left: 3px solid var(--or);
+  padding-left: 28px;
+  margin: 24px 0;
+}
+
+.ejemplos-list li {
+  font-family: var(--dm);
+  font-size: 22px;
+  color: var(--bleu);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.ejemplos-list li:last-child { margin-bottom: 0; }
+
+.prohibidos-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  margin-top: 24px;
+}
+
+.prohibidos-table th {
+  font-family: var(--arch);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--or);
+  padding: 10px 0;
+  text-align: left;
+  border-bottom: 1px solid rgba(27,58,122,.15);
+}
+
+.prohibidos-table td {
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(27,58,122,.07);
+  vertical-align: top;
+}
+
+.prohibidos-table td:first-child {
+  font-family: var(--eb);
+  color: var(--rouge);
+  font-style: italic;
+  width: 40%;
+  padding-right: 20px;
+}
+
+.prohibidos-table td:last-child {
+  font-family: var(--eb);
+  color: var(--bois);
+  font-size: 14px;
+}
+
+.regla-maestra {
+  background: var(--bleu);
+  color: #fff;
+  padding: 40px;
+  margin-bottom: 48px;
+}
+
+.regla-maestra h4 {
+  color: rgba(255,255,255,.5);
+  margin-bottom: 16px;
+}
+
+.regla-maestra p {
+  font-family: var(--dm);
+  font-size: 22px;
+  color: #fff;
+  max-width: 100%;
+  line-height: 1.45;
+  margin-bottom: 0;
+}
+
+/* ═══════════════════════════════════════
+   7. FOTOGRAFÍA
+═══════════════════════════════════════ */
+.foto-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin: 48px 0;
+}
+
+.foto-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.foto-num {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 28px;
+  height: 28px;
+  background: var(--bleu);
+  color: #fff;
+  font-family: var(--arch);
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.foto-placeholder {
+  height: 220px;
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+}
+
+.foto-placeholder.p1 { background: #2F5C3D; }
+.foto-placeholder.p2 { background: #C9A35A; }
+.foto-placeholder.p3 { background: var(--creme); }
+.foto-placeholder.p4 { background: #7A3E28; }
+
+.foto-caption {
+  font-family: var(--arch);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  line-height: 1.35;
+  padding: 12px 16px;
+  background: var(--creme);
+}
+
+.foto-caption.c1 { color: var(--vert); }
+.foto-caption.c2 { color: var(--bois); }
+.foto-caption.c3 { color: var(--noir); }
+.foto-caption.c4 { color: var(--bois); }
+
+.foto-criterios {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+}
+
+.crit-card {
+  background: var(--creme);
+  padding: 28px 32px;
+}
+
+.crit-card h4 {
+  margin-bottom: 8px;
+}
+
+.crit-card p {
+  font-size: 15px;
+  max-width: 100%;
+  color: var(--bois);
+  margin-bottom: 0;
+}
+
+/* ═══════════════════════════════════════
+   8. GEOMETRÍA Y SEÑALÉTICA
+═══════════════════════════════════════ */
+.geo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  margin-top: 56px;
+}
+
+.radius-demo {
+  display: flex;
+  gap: 24px;
+  align-items: flex-end;
+  margin: 24px 0;
+}
+
+.r-box {
+  flex: 1;
+  height: 80px;
+  background: var(--bleu);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.r-box.r0 { border-radius: 0; }
+.r-box.r2 { border-radius: 2px; }
+.r-box.r-bad { border-radius: 16px; background: rgba(161,46,42,.18); border: 1.5px dashed var(--rouge); }
+
+.r-label {
+  font-family: var(--arch);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--bois);
+  margin-top: 8px;
+  text-align: center;
+}
+
+.r-label.bad { color: var(--rouge); }
+
+.spacing-scale {
+  display: flex;
+  gap: 0;
+  align-items: flex-end;
+  margin: 24px 0;
+}
+
+.sp {
+  background: var(--bleu);
+  flex-shrink: 0;
+}
+
+.sp-label {
+  font-family: var(--arch);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--bois);
+  margin-top: 6px;
+  text-align: center;
+}
+
+.pizarron {
+  background: var(--noir);
+  padding: 32px;
+  margin-top: 32px;
+}
+
+.piz-title {
+  font-family: var(--arch);
+  font-weight: 600;
+  color: #fff;
+  font-size: 20px;
+  letter-spacing: .06em;
+  margin-bottom: 6px;
+}
+
+.piz-subtitle {
+  font-family: var(--arch);
+  font-size: 13px;
+  color: rgba(255,255,255,.55);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.piz-precio {
+  font-family: var(--arch);
+  font-size: 28px;
+  font-weight: 600;
+  color: #fff;
+  display: block;
+}
+
+.piz-nota {
+  font-family: var(--arch);
+  font-size: 11px;
+  color: rgba(255,255,255,.4);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-top: 16px;
+  display: block;
+}
+
+/* ═══════════════════════════════════════
+   9. DO / DON'T
+═══════════════════════════════════════ */
+.dont-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: 48px;
+}
+
+.do-col, .dont-col {
+  padding: 40px;
+}
+
+.do-col {
+  background: var(--bleu);
+}
+
+.dont-col {
+  background: var(--creme);
+}
+
+.dd-head {
+  font-family: var(--arch);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  display: block;
+}
+
+.do-col .dd-head { color: rgba(255,255,255,.45); }
+.dont-col .dd-head { color: var(--rouge); }
+
+.dd-list {
+  list-style: none;
+}
+
+.dd-list li {
+  font-family: var(--eb);
+  font-size: 16px;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.dont-col .dd-list li {
+  border-bottom-color: rgba(27,58,122,.12);
+  color: var(--noir);
+}
+
+.do-col .dd-list li { color: rgba(255,255,255,.85); }
+
+.dd-list li::before {
+  font-family: var(--arch);
+  font-size: 10px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.do-col .dd-list li::before {
+  content: "SI";
+  color: var(--or);
+  letter-spacing: .1em;
+}
+
+.dont-col .dd-list li::before {
+  content: "NO";
+  color: var(--rouge);
+  letter-spacing: .1em;
+}
+
+/* ═══════════════════════════════════════
+   10. SUBMARCAS
+═══════════════════════════════════════ */
+.sub-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: 56px;
+}
+
+.sub-card {
+  padding: 56px;
+}
+
+.sub-card.leplat { background: var(--bleu); }
+.sub-card.alpaso { background: var(--creme); }
+
+.sub-eyebrow {
+  font-family: var(--arch);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.sub-card.leplat .sub-eyebrow { color: rgba(255,255,255,.4); }
+.sub-card.alpaso .sub-eyebrow { color: var(--vert); }
+
+.sub-name {
+  font-family: var(--dm);
+  font-size: 40px;
+  line-height: 1.05;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.sub-card.leplat .sub-name { color: #fff; }
+.sub-card.alpaso .sub-name { color: var(--bleu); }
+
+.sub-lema {
+  font-family: var(--eb);
+  font-style: italic;
+  font-size: 17px;
+  margin-bottom: 32px;
+  display: block;
+}
+
+.sub-card.leplat .sub-lema { color: rgba(255,255,255,.65); }
+.sub-card.alpaso .sub-lema { color: var(--bois); }
+
+.sub-formula {
+  list-style: none;
+  margin-bottom: 32px;
+}
+
+.sub-formula li {
+  font-family: var(--eb);
+  font-size: 15px;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.sub-card.alpaso .sub-formula li {
+  border-bottom-color: rgba(27,58,122,.1);
+}
+
+.sub-card.leplat .sub-formula li { color: rgba(255,255,255,.8); }
+.sub-card.alpaso .sub-formula li { color: var(--noir); }
+
+.sub-formula li::before {
+  content: "—";
+  font-family: var(--arch);
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+.sub-card.leplat .sub-formula li::before { color: var(--or); }
+.sub-card.alpaso .sub-formula li::before { color: var(--vert); }
+
+.sub-color-strip {
+  display: flex;
+  gap: 2px;
+  margin-top: 32px;
+}
+
+.sub-color-chip {
+  height: 6px;
+  flex: 1;
+}
+
+.sub-tag {
+  font-family: var(--arch);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  margin-right: 6px;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+.sub-card.leplat .sub-tag {
+  background: rgba(255,255,255,.12);
+  color: rgba(255,255,255,.6);
+}
+
+.sub-card.alpaso .sub-tag {
+  background: rgba(47,92,61,.12);
+  color: var(--vert);
+}
+
+/* ═══════════════════════════════════════
+   COLOFÓN
+═══════════════════════════════════════ */
+.colofonSection {
+  background: var(--bleu);
+  padding: 64px 56px;
+  text-align: center;
+}
+
+.colofonSection p {
+  font-family: var(--eb);
+  font-size: 16px;
+  color: rgba(255,255,255,.45);
+  max-width: 100%;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.colofonSection .colofonVibes {
+  font-family: var(--vibes);
+  font-size: 38px;
+  color: rgba(255,255,255,.7);
+  display: block;
+  margin-bottom: 20px;
+}
+
+/* ═══════════════════════════════════════
+   PRINT
+═══════════════════════════════════════ */
+@media print {
+  .cover { min-height: 297mm; page-break-after: always; }
+  section { page-break-inside: avoid; }
+}
+
+@media (max-width: 860px) {
+  .wrap { padding: 0 28px; }
+  .marca-grid,
+  .typo-grid,
+  .voz-grid,
+  .geo-grid,
+  .sub-grid,
+  .dont-grid,
+  .logo-rules,
+  .logo-grid,
+  .foto-criterios { grid-template-columns: 1fr; }
+  .sw-grid { grid-template-columns: repeat(2, 1fr); }
+  .foto-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════
+  01 · PORTADA
+═══════════════════════════════════ -->
+<div class="cover">
+  <!-- Logo oval SVG -->
+  <svg class="cover-logo" viewBox="0 0 220 145" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Parigó logotipo">
+    <ellipse cx="110" cy="72.5" rx="105" ry="67.5" stroke="white" stroke-width="2.5"/>
+    <ellipse cx="110" cy="72.5" rx="100" ry="62.5" stroke="white" stroke-width="1"/>
+    <text x="110" y="85" font-family="Cinzel, serif" font-size="36" font-weight="400" fill="white" text-anchor="middle" letter-spacing="-0.5">PARIGÓ</text>
+  </svg>
+
+  <div class="cover-tagline">El oasis parisino en el Barrio El Golf.</div>
+
+  <div class="cover-footer">
+    <span>PARIGÓ &middot; EL GOLF &middot; SANTIAGO</span>
+    <span>MANUAL DE MARCA &middot; 2026</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════
+  02 · LA MARCA
+═══════════════════════════════════ -->
+<section id="marca">
+  <div class="wrap">
+    <span class="label">02 &mdash; La Marca</span>
+
+    <div class="concepto-quote">
+      Parigó es la elegancia: lo esencial depurado hasta su forma más pura. Simpleza ante todo, con el espíritu parisino de quien sabe que menos es más.
+    </div>
+
+    <div class="marca-grid">
+      <div>
+        <h4>El nombre como estrategia</h4>
+        <p>
+          <em>Parigó</em> es la contracción chilena de <em>parisino</em>. No es una referencia turística a París. Es la palabra que emerge cuando alguien que vivió en París intenta explicar lo que extraña. París filtrado por Santiago.
+        </p>
+        <p>
+          Esta es una marca chilena con ADN francés, no una marca francesa. Esa distinción gobierna cada decisión visual.
+        </p>
+        <hr class="div">
+        <h4>El lugar como argumento</h4>
+        <p>
+          El Barrio El Golf es concreto, vidrio, torres corporativas, presión. Parigó es la pausa. Verde, cálido, sin prisa.
+        </p>
+        <p>
+          El toque parisino es sutil: como un detalle que notas en la segunda visita. No un tema, una filosofía. El buen gusto no se anuncia. Se percibe.
+        </p>
       </div>
 
-      <section class="hero">
-        <p class="eyebrow">Manual vivo</p>
-        <h1>Parigo · sistema de marca</h1>
-        <p>
-          Parigo debe sentirse como una pausa elegante dentro de El Golf: simpleza, criterio,
-          servicio y un ADN frances filtrado por Santiago. Este manual busca ordenar esa identidad
-          para que restaurante, al paso y futuras piezas hablen el mismo lenguaje.
-        </p>
-        <div class="meta">
-          <span class="chip">Concepto: oasis urbano</span>
-          <span class="chip">Estado: v2 privada</span>
-          <span class="chip">Ultima actualizacion: 2026-05-31</span>
-        </div>
-      </section>
+      <div>
+        <h4>Arquitectura de marca</h4>
 
-      <section class="stack">
-        <div class="kpi">
-          <div class="note">
-            <strong>Concepto central</strong>
-            <span>Elegancia esencial. Menos gesto, mas presencia.</span>
-          </div>
-          <div class="note">
-            <strong>ADN</strong>
-            <span>Marca chilena con sensibilidad francesa, no una caricatura parisina.</span>
-          </div>
-          <div class="note">
-            <strong>Objetivo</strong>
-            <span>Construir una casa de marca clara para salon, terraza y al paso.</span>
-          </div>
+        <div class="arq-item">
+          <div class="arq-name">Parigó</div>
+          <p class="arq-desc">La casa entera. Identidad madre.</p>
         </div>
 
-        <div class="section-grid">
-          <div class="panel">
-            <p class="eyebrow">Esencia</p>
-            <h2>Lo que debe sentirse</h2>
-            <ul class="list">
-              <li><strong>Pausa dentro del barrio.</strong> El Golf es tension, concreto y velocidad. Parigo debe ser respiro.</li>
-              <li><strong>Buen gusto sin explicacion.</strong> La marca no necesita gritarnos que es refinada.</li>
-              <li><strong>Servicio como argumento.</strong> La experiencia es parte del producto, no un agregado.</li>
-              <li><strong>Ritual y consistencia.</strong> La formula debe sentirse estable, reconocible y confiable.</li>
-            </ul>
-          </div>
-
-          <div class="panel">
-            <p class="eyebrow">Nombre</p>
-            <h2>Como entender Parigo</h2>
-            <ul class="list">
-              <li><strong>No es turismo a Paris.</strong> Es una sensibilidad, no una postal.</li>
-              <li><strong>Chileno con ADN frances.</strong> Esa tension es parte de su valor.</li>
-              <li><strong>Menos tema, mas filosofia.</strong> El frances entra como detalle y criterio, no como disfraz.</li>
-            </ul>
-          </div>
+        <div class="arq-item">
+          <div class="arq-name">Le Plat</div>
+          <p class="arq-desc">El salón. Un plato. Siempre bien hecho.</p>
+          <p style="font-size:14px;color:var(--bois);margin-top:8px;max-width:100%;">Color dominante: Bleu Parigó &middot; Tipografía: Cinzel</p>
         </div>
 
-        <div class="panel">
-          <p class="eyebrow">Paleta oficial</p>
-          <h2>Sistema cromatico base</h2>
-          <div class="palette">
-            <article class="swatch">
-              <div class="swatch-color" style="background:#1B3A7A;"></div>
-              <div class="swatch-body">
-                <strong>Bleu Parigo</strong>
-                <span>#1B3A7A · dominante, logo, salon, bloques clave</span>
-              </div>
-            </article>
-            <article class="swatch">
-              <div class="swatch-color" style="background:#ECE3CF;"></div>
-              <div class="swatch-body">
-                <strong style="color:#2d241c;">Creme Haussmann</strong>
-                <span>#ECE3CF · fondo principal y base neutra</span>
-              </div>
-            </article>
-            <article class="swatch">
-              <div class="swatch-color" style="background:#FAF6EC;"></div>
-              <div class="swatch-body">
-                <strong style="color:#2d241c;">Tiza</strong>
-                <span>#FAF6EC · fondo mas claro y aire visual</span>
-              </div>
-            </article>
-            <article class="swatch">
-              <div class="swatch-color" style="background:#C9A35A;"></div>
-              <div class="swatch-body">
-                <strong>Or Pale</strong>
-                <span>#C9A35A · acento fino, detalles, divisores</span>
-              </div>
-            </article>
-            <article class="swatch">
-              <div class="swatch-color" style="background:#2F5C3D;"></div>
-              <div class="swatch-body">
-                <strong>Vert Oasis</strong>
-                <span>#2F5C3D · vida, terraza, oasis, naturaleza</span>
-              </div>
-            </article>
-            <article class="swatch">
-              <div class="swatch-color" style="background:#7A5230;"></div>
-              <div class="swatch-body">
-                <strong>Bois</strong>
-                <span>#7A5230 · texto secundario y calidez material</span>
-              </div>
-            </article>
-          </div>
+        <div class="arq-item">
+          <div class="arq-name">Parigó al Paso</div>
+          <p class="arq-desc">La vitrina. Pan desde las 8.</p>
+          <p style="font-size:14px;color:var(--bois);margin-top:8px;max-width:100%;">Color dominante: Crème Haussmann &middot; Tipografía: Barlow Condensed</p>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="section-grid">
-          <div class="panel">
-            <p class="eyebrow">Arquitectura</p>
-            <h2>Casa de marca</h2>
-            <ul class="list">
-              <li><strong>Parigo.</strong> Marca madre y atmosfera general.</li>
-              <li><strong>Le Plat.</strong> Salon y terraza. Formula, ritual, servicio.</li>
-              <li><strong>Parigo al Paso.</strong> Extension agil y cotidiana, pero aun dentro del mismo universo.</li>
-              <li><strong>Regla.</strong> Cada submarca puede modular tono y ritmo, nunca romper la familia visual.</li>
-            </ul>
-          </div>
 
-          <div class="panel">
-            <p class="eyebrow">Tipografia</p>
-            <h2>Sistema recomendado</h2>
-            <ul class="list">
-              <li><strong>Display.</strong> DM Serif Display para titulares, hero copy, portadas y piezas editoriales.</li>
-              <li><strong>Body.</strong> EB Garamond para texto corrido y descripciones largas.</li>
-              <li><strong>Utility.</strong> Archivo Narrow para horarios, precios, señaletica y capas operativas.</li>
-              <li><strong>Script.</strong> Great Vibes solo como firma puntual, maximo una vez por pieza.</li>
-            </ul>
-          </div>
+<!-- ═══════════════════════════════════
+  03 · COLOR
+═══════════════════════════════════ -->
+<section id="color">
+  <div class="wrap">
+    <span class="label">03 &mdash; Color</span>
+    <h2>La paleta del oasis.</h2>
+
+    <!-- Tira de proporción -->
+    <div class="palette-strip">
+      <span style="background:#1B3A7A; flex:4;"></span>
+      <span style="background:#ECE3CF; flex:2.5;"></span>
+      <span style="background:#C42B2B; flex:1.5;"></span>
+      <span style="background:#C9A35A; flex:0.8;"></span>
+      <span style="background:#2F5C3D; flex:0.5;"></span>
+      <span style="background:#7A3E28; flex:0.3;"></span>
+      <span style="background:#1A1614; flex:0.4;"></span>
+    </div>
+
+    <!-- Swatches -->
+    <div class="sw-grid">
+
+      <div class="sw">
+        <div class="sw-chip" style="background:#1B3A7A;"></div>
+        <div class="sw-info">
+          <span class="sw-hex">#1B3A7A</span>
+          <span class="sw-name">Bleu Parigó</span>
+          <span class="sw-rol">Color primario. Logo, bloques clave, Le Plat. Domina el sistema.</span>
+          <span class="proporcion-badge">40% &mdash; primario</span>
         </div>
+      </div>
 
-        <div class="panel">
-          <p class="eyebrow">Fotografia</p>
-          <h2>Que imagenes sostienen la promesa</h2>
-          <ul class="list">
-            <li><strong>Primero la terraza.</strong> Follaje, luz oblicua, sensacion de pausa. Ese es el argumento visual mas fuerte.</li>
-            <li><strong>Luego el plato en mantel claro.</strong> Le Plat debe sentirse simple, ritual y bien hecho.</li>
-            <li><strong>Despues el interior.</strong> Madera, silla, textura, atmosfera y servicio.</li>
-            <li><strong>Ultimo la vitrina.</strong> Al paso existe, pero no debe comerse el tono de la casa principal.</li>
-          </ul>
+      <div class="sw">
+        <div class="sw-chip" style="background:#ECE3CF;"></div>
+        <div class="sw-info">
+          <span class="sw-hex">#ECE3CF</span>
+          <span class="sw-name">Crème Haussmann</span>
+          <span class="sw-rol">Fondo principal. Superficies neutras, cards. El fondo cálido del salón.</span>
+          <span class="proporcion-badge">25% &mdash; secundario</span>
         </div>
+      </div>
 
-        <div class="section-grid">
-          <div class="panel">
-            <p class="eyebrow">Tono</p>
-            <h2>Como habla Parigo</h2>
-            <ul class="list">
-              <li><strong>Calido y directo.</strong> Oraciones cortas. El punto como disciplina.</li>
-              <li><strong>Sin exclamaciones.</strong> Si una frase necesita gritar, esta mal escrita.</li>
-              <li><strong>Sin frances decorativo.</strong> Nada de caricatura ni frases postizas.</li>
-              <li><strong>Seguro.</strong> La marca se presenta con criterio, no con ansiedad comercial.</li>
-            </ul>
-          </div>
-
-          <div class="panel">
-            <p class="eyebrow">Do / Don't</p>
-            <h2>Control rapido</h2>
-            <ul class="list">
-              <li><strong>Si.</strong> Bleu dominante, fotos con mantel y luz natural, mucho aire y composicion sobria.</li>
-              <li><strong>Si.</strong> Verde oasis solo ligado a terraza, follaje o organicidad real.</li>
-              <li><strong>No.</strong> Rojo bistro dominante, rounded excesivo, marketing masivo o copy tipo viaje a Paris.</li>
-              <li><strong>No.</strong> Emojis, exclamaciones y frases vacias como “experiencia unica”.</li>
-            </ul>
-          </div>
+      <div class="sw">
+        <div class="sw-chip" style="background:#FAF6EC;border-bottom:1px solid rgba(27,58,122,.1);"></div>
+        <div class="sw-info">
+          <span class="sw-hex">#FAF6EC</span>
+          <span class="sw-name">Tiza</span>
+          <span class="sw-rol">Fondo más claro. Máximo espacio para respirar. La luz del papel impreso.</span>
+          <span class="proporcion-badge">base página</span>
         </div>
-      </section>
+      </div>
 
-      <p class="footer-note">
-        Esta es la base privada del manual de marca Parigo. Debe seguir madurando aqui mismo hasta convertirse en el frente canonico de la marca.
+      <div class="sw">
+        <div class="sw-chip" style="background:#C9A35A;"></div>
+        <div class="sw-info">
+          <span class="sw-hex">#C9A35A</span>
+          <span class="sw-name">Or Pâle</span>
+          <span class="sw-rol">Acento dorado. Precios, divisores finos, detalles del logo. Nunca como masa.</span>
+          <span class="proporcion-badge">8% &mdash; acento</span>
+        </div>
+      </div>
+
+      <div class="sw">
+        <div class="sw-chip" style="background:#2F5C3D;"></div>
+        <div class="sw-info">
+          <span class="sw-hex">#2F5C3D</span>
+          <span class="sw-name">Vert Oasis</span>
+          <span class="sw-rol">El color del oasis. Terraza, follaje, Al Paso. Siempre adyacente a algo natural.</span>
+          <span class="proporcion-badge">5% &mdash; auxiliar</span>
+        </div>
+      </div>
+
+      <div class="sw">
+        <div class="sw-chip" style="background:#7A3E28;"></div>
+        <div class="sw-info">
+          <span class="sw-hex">#7A3E28</span>
+          <span class="sw-name">Bois Ritz</span>
+          <span class="sw-rol">Texto secundario cálido. Etiquetas, madera, mesa, pan. Acompaña, no protagoniza.</span>
+          <span class="proporcion-badge">4% &mdash; auxiliar</span>
+        </div>
+      </div>
+
+      <div class="sw">
+        <div class="sw-chip" style="background:#1A1614;"></div>
+        <div class="sw-info">
+          <span class="sw-hex">#1A1614</span>
+          <span class="sw-name">Noir Carbon</span>
+          <span class="sw-rol">Todo el texto corrido, etiquetas, leyendas. Tinta sobre papel. Lectura sin esfuerzo.</span>
+          <span class="proporcion-badge">base texto</span>
+        </div>
+      </div>
+
+      <div class="sw">
+        <div class="sw-chip" style="background:#C42B2B;"></div>
+        <div class="sw-info">
+          <span class="sw-hex">#C42B2B</span>
+          <span class="sw-name">Rouge Geranio</span>
+          <span class="sw-rol">Tercer color del sistema. El color de los geranios de la terraza: contraste vital, firma hospitalaria, packaging, señalética de acción. Bleu, Crème y Rouge son la tríada principal.</span>
+          <span class="proporcion-badge" style="color:var(--rouge);">15% &mdash; tercer color</span>
+        </div>
+      </div>
+
+    </div><!-- /sw-grid -->
+
+    <!-- Regla del Vert Oasis -->
+    <div class="oasis-rule">
+      <h4>Regla del Vert Oasis</h4>
+      <p>
+        El #2F5C3D es el color del argumento visual contra el barrio corporativo. Aparece como elemento vivo y orgánico: siempre adyacente a algo natural (fotografía de terraza, follaje, margen de página con textura). Nunca como relleno plano de un bloque genérico. El verde no se puede aplicar en contenedores vacíos de imágenes.
       </p>
-    </main>
-  </body>
-  </html>
+    </div>
+
+    <hr class="div">
+
+    <!-- Combinaciones verificadas -->
+    <h4>Combinaciones verificadas WCAG AA</h4>
+    <div style="display:flex;gap:16px;margin-top:20px;flex-wrap:wrap;">
+      <div style="padding:16px 24px;background:#ECE3CF;">
+        <span style="font-family:var(--arch);font-size:13px;font-weight:600;color:#1A1614;">#1A1614 sobre #ECE3CF</span>
+        <span style="font-family:var(--arch);font-size:11px;color:var(--vert);margin-left:10px;letter-spacing:.08em;">AA</span>
+      </div>
+      <div style="padding:16px 24px;background:#1B3A7A;">
+        <span style="font-family:var(--arch);font-size:13px;font-weight:600;color:#fff;">#FFFFFF sobre #1B3A7A</span>
+        <span style="font-family:var(--arch);font-size:11px;color:rgba(255,255,255,.55);margin-left:10px;letter-spacing:.08em;">AA</span>
+      </div>
+      <div style="padding:16px 24px;background:#FAF6EC;border:1px solid rgba(27,58,122,.1);">
+        <span style="font-family:var(--arch);font-size:13px;font-weight:600;color:#1A1614;">#1A1614 sobre #FAF6EC</span>
+        <span style="font-family:var(--arch);font-size:11px;color:var(--vert);margin-left:10px;letter-spacing:.08em;">AA</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+  04 · TIPOGRAFÍA
+═══════════════════════════════════ -->
+<section id="tipografia">
+  <div class="wrap">
+    <span class="label">04 &mdash; Tipografía</span>
+    <h2>El contraste es el sistema.</h2>
+    <p>Cuatro fuentes. Un principio: la jerarquía viene del contraste de escala y carácter, no de la decoración.</p>
+
+    <div style="margin-top:56px;">
+
+      <!-- Cinzel -->
+      <div style="background:var(--creme);padding:48px;margin-bottom:2px;">
+        <span class="typo-meta">Cinzel &mdash; Display</span>
+        <div class="typo-specimen-dm">Parigó<span class="typo-specimen-dm-i" style="font-size:72px;margin-left:16px;">Parigó</span></div>
+        <p class="typo-role">Titulares, portadas, hero copy, números grandes. Voz Didone: autoridad francesa silenciosa. Tracking −0.01em. Regular + Italic.</p>
+      </div>
+
+      <!-- Lora -->
+      <div style="background:var(--tiza);padding:48px;margin-bottom:2px;border:1px solid rgba(27,58,122,.08);">
+        <span class="typo-meta">Lora &mdash; Body</span>
+        <div class="typo-specimen-eb">
+          "Un plato. Siempre bien hecho."<br>
+          <span style="font-style:italic;color:var(--bois);">El mismo plato. La misma salsa. Siempre.</span>
+        </div>
+        <p class="typo-role">Todo el texto corrido, descripciones, copies largos. Alta x-height, robusto. La fuente del descanso: no demanda atención. Peso 400, Italic 400, Medium 500. Tracking 0em. Mínimo 14px pantalla / 10pt impresión.</p>
+      </div>
+
+      <!-- Barlow Condensed -->
+      <div style="background:var(--creme);padding:48px;margin-bottom:2px;">
+        <span class="typo-meta">Barlow Condensed &mdash; Utility</span>
+        <div class="typo-specimen-arch">OPEN &middot; LUN—SAB 08:30—21:00 &middot; REYES LAVALLE 3310</div>
+        <div style="font-family:var(--arch);font-size:24px;font-weight:600;color:var(--bleu);margin:12px 0;">$25.000 &mdash; Le Plat</div>
+        <p class="typo-role">Etiquetas, horarios, precios, señalética, pizarrón, packaging. La fuente de la barra de zinc: funcional, clara, rápida. Regular + SemiBold. En mayúsculas: tracking +0.08em.</p>
+      </div>
+
+      <!-- Great Vibes -->
+      <div style="background:var(--bleu);padding:48px;margin-bottom:2px;">
+        <span class="typo-meta" style="color:rgba(255,255,255,.4);">Lora Italic &mdash; Acento editorial</span>
+        <div class="typo-specimen-vibes" style="color:#fff;">Bienvenue.</div>
+        <p class="typo-role" style="color:rgba(255,255,255,.6);max-width:100%;">Una firma. No una voz. Máximo una palabra o frase corta por pieza. Jamás en menús, señalética ni copy operacional. Regular.</p>
+      </div>
+
+    </div>
+
+    <!-- Pairing -->
+    <div class="pairing-box">
+      <div class="pairing-dm">El punto<br>como disciplina.</div>
+      <p class="pairing-eb">El contraste entre Cinzel (inscripcional romana, monumental) y Lora (serif humanista, cálida, legible) es el sistema. La jerarquía viene del contraste de escala y peso. No de la decoración.</p>
+    </div>
+
+    <!-- Tracking -->
+    <table class="tracking-table">
+      <thead>
+        <tr>
+          <th>Fuente</th>
+          <th>Tracking</th>
+          <th>Aplicación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cinzel</td>
+          <td><span style="font-family:var(--arch);font-size:14px;">−0.01em</span></td>
+          <td>Titulares, displays grandes</td>
+        </tr>
+        <tr>
+          <td>Lora</td>
+          <td><span style="font-family:var(--arch);font-size:14px;">0em</span></td>
+          <td>Texto corrido, párrafos</td>
+        </tr>
+        <tr>
+          <td>Barlow Condensed (caps)</td>
+          <td><span style="font-family:var(--arch);font-size:14px;">+0.08em</span></td>
+          <td>Etiquetas, señalética, horarios</td>
+        </tr>
+        <tr>
+          <td>Great Vibes</td>
+          <td><span style="font-family:var(--arch);font-size:14px;">0em</span></td>
+          <td>Firma script, máx. 1 por pieza</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr class="div">
+
+    <h4>Regla de idioma</h4>
+    <p>Español chileno registro profesional. Francés <strong>solo</strong> para nombres de producto establecidos: <em>croissant, plat, allongé, baguette, tarte, croque</em>. Nunca como relleno decorativo.</p>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+  05 · LOGO
+═══════════════════════════════════ -->
+<section id="logo">
+  <div class="wrap">
+    <span class="label">05 &mdash; Logo</span>
+    <h2>El óvalo no se altera.</h2>
+    <p>La forma oval es la silueta de la marca. No se transforma, no se recorta, no recibe sombras ni efectos.</p>
+
+    <!-- Variantes -->
+    <div class="logo-grid">
+
+      <div class="logo-variant var-a">
+        <svg class="logo-svg-sm" viewBox="0 0 120 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="60" cy="39" rx="56" ry="35.5" stroke="white" stroke-width="1.8"/>
+          <ellipse cx="60" cy="39" rx="51" ry="30.5" stroke="white" stroke-width="0.8"/>
+          <text x="60" y="46" font-family="Cinzel, serif" font-size="20" fill="white" text-anchor="middle">PARIGÓ</text>
+        </svg>
+        <span class="logo-variant-label">Estándar<br>Blanco sobre Azul</span>
+      </div>
+
+      <div class="logo-variant var-b">
+        <svg class="logo-svg-sm" viewBox="0 0 120 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="60" cy="39" rx="56" ry="35.5" stroke="#1B3A7A" stroke-width="1.8"/>
+          <ellipse cx="60" cy="39" rx="51" ry="30.5" stroke="#1B3A7A" stroke-width="0.8"/>
+          <text x="60" y="46" font-family="Cinzel, serif" font-size="20" fill="#1B3A7A" text-anchor="middle">PARIGÓ</text>
+        </svg>
+        <span class="logo-variant-label">Sobre crema<br>Azul sobre Crème</span>
+      </div>
+
+      <div class="logo-variant var-c">
+        <svg class="logo-svg-sm" viewBox="0 0 120 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="60" cy="39" rx="56" ry="35.5" stroke="white" stroke-width="1.8"/>
+          <ellipse cx="60" cy="39" rx="51" ry="30.5" stroke="white" stroke-width="0.8"/>
+          <text x="60" y="46" font-family="Cinzel, serif" font-size="20" fill="white" text-anchor="middle">PARIGÓ</text>
+        </svg>
+        <span class="logo-variant-label">Monocroma<br>Blanco sobre Noir</span>
+      </div>
+
+    </div>
+
+    <!-- Reglas -->
+    <div class="logo-rules">
+      <div class="logo-rule-card">
+        <h4>Protecciones del logo</h4>
+        <p>Área de protección mínima equivalente a la altura de la "P". No colocar texto ni gráficos dentro del área de protección. Escala mínima: 60px de ancho en digital.</p>
+      </div>
+      <div class="logo-rule-card">
+        <h4>Uso incorrecto</h4>
+        <p>No distorsionar el óvalo. No agregar bordes, sombras ni efectos. No cambiar los colores del sistema. No rotar ni inclinar. No usar sobre fotografías sin fondo de seguridad.</p>
+      </div>
+      <div class="logo-rule-card">
+        <h4>Archivos fuente</h4>
+        <p><strong>maestro:</strong> parigo-logo-vectorial.ai (edición, imprenta, cartelería). <strong>web:</strong> parigo-logo-web.jpeg (referencia). SVG en 3 variantes: pendiente de exportar desde el .ai.</p>
+      </div>
+      <div class="logo-rule-card">
+        <h4>Fondos permitidos</h4>
+        <p>Bleu Parigó (#1B3A7A) con logo blanco. Crème Haussmann (#ECE3CF) con logo azul. Tiza (#FAF6EC) con logo azul. Noir Carbon (#1A1614) con logo blanco.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+  06 · VOZ Y TONO
+═══════════════════════════════════ -->
+<section id="voz">
+  <div class="wrap">
+    <span class="label">06 &mdash; Voz y Tono</span>
+    <h2>El punto como disciplina.</h2>
+
+    <div class="regla-maestra">
+      <h4>La regla maestra</h4>
+      <p>Si una oración funciona con signo de exclamación, está mal escrita. Reescribir hasta que solo necesite punto.</p>
+    </div>
+
+    <div class="voz-grid">
+
+      <div>
+        <h4>Estilo</h4>
+        <p>Directo, cálido, humor seco. Oraciones cortas. El silencio entre frases es parte del copy. La marca habla una vez, en voz baja, y confía en el lector.</p>
+        <p>La pregunta que guía cada copy: ¿esto ayuda al lector a exhalar? Si le sube el pulso, reescribir.</p>
+
+        <h4 style="margin-top:32px;">Ejemplos de tono correcto</h4>
+        <ul class="ejemplos-list">
+          <li>"Pan desde las 8."</li>
+          <li>"Un plato. Siempre bien hecho."</li>
+          <li>"Sin propina. Con sueldo."</li>
+          <li>"Ven a descansar."</li>
+          <li>"El mismo plato. La misma salsa. Siempre."</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Prohibido siempre</h4>
+        <table class="prohibidos-table">
+          <thead>
+            <tr>
+              <th>Prohibido</th>
+              <th>Motivo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Signos de exclamación</td><td>Regla de voz de marca</td></tr>
+            <tr><td>Emojis (cualquiera)</td><td>Regla absoluta</td></tr>
+            <tr><td>"auténtico"</td><td>Overused en la categoría</td></tr>
+            <tr><td>"experiencia única"</td><td>Genérico vacío</td></tr>
+            <tr><td>"descubre" / "únete"</td><td>Tono de marketing masivo</td></tr>
+            <tr><td>"viaje a París"</td><td>Referencia turística incorrecta</td></tr>
+            <tr><td>"artesanal"</td><td>Overused en panadería</td></tr>
+            <tr><td>Francés decorativo</td><td>Kitsch, prohibido</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+  07 · FOTOGRAFÍA
+═══════════════════════════════════ -->
+<section id="fotografia">
+  <div class="wrap">
+    <span class="label">07 &mdash; Fotografía</span>
+    <h2>La terraza es el argumento.</h2>
+    <p>La fotografía no estiliza. Muestra. Luz natural oblicua de tarde, mantel blanco o crema, grano visible, sin overhead.</p>
+
+    <!-- Prioridad de shots -->
+    <div class="foto-grid">
+      <div class="foto-item">
+        <div class="foto-num">1</div>
+        <div class="foto-placeholder p1"></div>
+        <div class="foto-caption c1">Terraza + follaje<br>El oasis</div>
+      </div>
+      <div class="foto-item">
+        <div class="foto-num">2</div>
+        <div class="foto-placeholder p2"></div>
+        <div class="foto-caption c2">Plato en mesa<br>Le Plat</div>
+      </div>
+      <div class="foto-item">
+        <div class="foto-num">3</div>
+        <div class="foto-placeholder p3" style="border:1px solid rgba(27,58,122,.1);"></div>
+        <div class="foto-caption c3">Interior salón<br>Sillas rattan</div>
+      </div>
+      <div class="foto-item">
+        <div class="foto-num">4</div>
+        <div class="foto-placeholder p4"></div>
+        <div class="foto-caption c4">Vitrina<br>Al Paso</div>
+      </div>
+    </div>
+
+    <p style="font-family:var(--arch);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--bois);margin-top:8px;margin-bottom:40px;">La terraza con follaje es el activo visual más poderoso de la marca. Siempre primero.</p>
+
+    <!-- Criterios técnicos -->
+    <div class="foto-criterios">
+      <div class="crit-card">
+        <h4>Luz</h4>
+        <p>Natural oblicua, tarde. Nunca cenital. El grano debe ser visible. No clínico, no sobreenfocado.</p>
+      </div>
+      <div class="crit-card">
+        <h4>Superficie</h4>
+        <p>Mantel blanco o crema siempre presente en fotos de plato. El producto se muestra como se sirve, sin styling.</p>
+      </div>
+      <div class="crit-card">
+        <h4>Mood</h4>
+        <p>Descansado, no excitante. Cálido, no dramático. Cada foto debería bajar el pulso del espectador.</p>
+      </div>
+      <div class="crit-card">
+        <h4>Prohibido</h4>
+        <p>Fotografía flat-lay cenital de comida. Iluminación artificial de estudio. Fotos excesivamente retocadas o saturadas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+  08 · GEOMETRÍA Y SEÑALÉTICA
+═══════════════════════════════════ -->
+<section id="geometria">
+  <div class="wrap">
+    <span class="label">08 &mdash; Geometría y Señalética</span>
+    <h2>Cero ornamento.</h2>
+
+    <div class="geo-grid">
+
+      <div>
+        <h4>Border radius</h4>
+        <p>La referencia es la barra de zinc. Todo sharp.</p>
+
+        <div class="radius-demo">
+          <div>
+            <div class="r-box r0"><span style="font-family:var(--arch);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6);">0px</span></div>
+            <div class="r-label">Containers<br>Cards</div>
+          </div>
+          <div>
+            <div class="r-box r2"><span style="font-family:var(--arch);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6);">2px</span></div>
+            <div class="r-label">Tags<br>(máximo)</div>
+          </div>
+          <div>
+            <div class="r-box r-bad"><span style="font-family:var(--arch);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--rouge);">16px</span></div>
+            <div class="r-label bad">Prohibido<br>Pills</div>
+          </div>
+        </div>
+
+        <hr class="div" style="margin:32px 0;">
+
+        <h4>Escala de espaciado (8pt base)</h4>
+        <div class="spacing-scale">
+          <div>
+            <div class="sp" style="width:4px;height:4px;"></div>
+            <div class="sp-label">4</div>
+          </div>
+          <div style="margin-left:8px;">
+            <div class="sp" style="width:8px;height:8px;"></div>
+            <div class="sp-label">8</div>
+          </div>
+          <div style="margin-left:8px;">
+            <div class="sp" style="width:16px;height:16px;"></div>
+            <div class="sp-label">16</div>
+          </div>
+          <div style="margin-left:8px;">
+            <div class="sp" style="width:24px;height:24px;"></div>
+            <div class="sp-label">24</div>
+          </div>
+          <div style="margin-left:8px;">
+            <div class="sp" style="width:32px;height:32px;"></div>
+            <div class="sp-label">32</div>
+          </div>
+          <div style="margin-left:8px;">
+            <div class="sp" style="width:48px;height:48px;"></div>
+            <div class="sp-label">48</div>
+          </div>
+          <div style="margin-left:8px;">
+            <div class="sp" style="width:64px;height:64px;"></div>
+            <div class="sp-label">64</div>
+          </div>
+          <div style="margin-left:8px;">
+            <div class="sp" style="width:96px;height:96px;"></div>
+            <div class="sp-label">96</div>
+          </div>
+        </div>
+
+        <p style="font-size:14px;color:var(--bois);margin-top:16px;">Grilla: 12 columnas, 24px gutter, 1200px max.</p>
+        <p style="font-size:14px;color:var(--bois);">Divisores: línea hairline 1px en #1B3A7A o #1A1614 únicamente.</p>
+      </div>
+
+      <div>
+        <h4>Señalética &mdash; Pizarrón</h4>
+        <p>La tipografía de servicio: Barlow Condensed SemiBold, blanco sobre Noir Carbon. Sin marcos decorativos.</p>
+
+        <div class="pizarron">
+          <span class="piz-subtitle">Le Plat &mdash; Almuerzo</span>
+          <div class="piz-title">Filete de vacuno</div>
+          <div class="piz-title" style="margin-top:2px;">Salmón grillado</div>
+          <div class="piz-title" style="margin-top:2px;">Coliflor asada</div>
+          <span class="piz-precio">$25.000</span>
+          <span style="font-family:var(--arch);font-size:11px;color:rgba(255,255,255,.35);display:block;margin-top:4px;letter-spacing:.08em;text-transform:uppercase;">incluye entrada + papas + salsa</span>
+          <span class="piz-nota">Sin propina &middot; Por orden de llegada</span>
+        </div>
+
+        <p style="font-size:13px;color:var(--bois);margin-top:16px;">Márgenes mínimos: 16px todos los lados. Marcos decorativos: prohibido. Rayas del toldo físico (Rouge Geranio + Tiza) nunca como patrón digital.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+  09 · DO / DON'T
+═══════════════════════════════════ -->
+<section id="dodont">
+  <div class="wrap">
+    <span class="label">09 &mdash; Do / Don't</span>
+    <h2>Las reglas en una página.</h2>
+
+    <div class="dont-grid">
+
+      <div class="do-col">
+        <span class="dd-head">Hacer</span>
+        <ul class="dd-list">
+          <li>Bleu Parigó como color dominante</li>
+          <li>0px sharp en todos los containers</li>
+          <li>Lora para texto corrido</li>
+          <li>Cinzel en titulares</li>
+          <li>1 elemento italic por pieza (Lora italic)</li>
+          <li>Vert Oasis en contextos de terraza o follaje</li>
+          <li>Fotografía oblicua de tarde, mantel blanco</li>
+          <li>Punto como signo de puntuación</li>
+          <li>Silencio y espacio en blanco generoso</li>
+          <li>Francés solo en nombres de producto</li>
+        </ul>
+      </div>
+
+      <div class="dont-col">
+        <span class="dd-head">No hacer</span>
+        <ul class="dd-list">
+          <li>Rojo geranio (#C42B2B) como dominante</li>
+          <li>Rounded-2xl en containers o cards</li>
+          <li>Inter, Montserrat o Lato como body</li>
+          <li>Gradientes SaaS azul-violeta</li>
+          <li>Script en menús o señalética operacional</li>
+          <li>Vert Oasis como fill genérico plano</li>
+          <li>Fotografía flat-lay cenital de comida</li>
+          <li>Signos de exclamación en cualquier copy</li>
+          <li>Saturación de elementos por pieza</li>
+          <li>Francés decorativo (oh là là, magnifique)</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+  10 · SUBMARCAS
+═══════════════════════════════════ -->
+<section id="submarcas">
+  <div class="wrap">
+    <span class="label">10 &mdash; Submarcas</span>
+    <h2>Un mismo espíritu. Dos formatos.</h2>
+    <p>Le Plat y Parigó al Paso comparten el ADN de la casa madre. Cada una tiene su propio color dominante, tipografía líder y tono operativo.</p>
+  </div>
+
+  <div class="sub-grid">
+
+    <!-- Le Plat -->
+    <div class="sub-card leplat">
+      <span class="sub-eyebrow">Submarca &mdash; Salón</span>
+      <span class="sub-name">Le Plat</span>
+      <span class="sub-lema">El salón. Un plato. Siempre bien hecho.</span>
+
+      <ul class="sub-formula">
+        <li>Ensalada verde de entrada (lechuga, palta, apio)</li>
+        <li>Proteína a elección: filete $25.000 &middot; salmón $25.000 &middot; coliflor $19.500</li>
+        <li>Salsa secreta de la casa</li>
+        <li>Papas fritas con refill</li>
+        <li>30 vinos seleccionados</li>
+      </ul>
+
+      <p style="font-family:var(--eb);font-size:14px;color:rgba(255,255,255,.55);max-width:100%;line-height:1.55;margin-bottom:0;">Sin reservas. Por orden de llegada. Sin propina. Laptops bienvenidos. Chalas bienvenidas.</p>
+
+      <div class="sub-color-strip">
+        <div class="sub-color-chip" style="background:#1B3A7A; flex:5;"></div>
+        <div class="sub-color-chip" style="background:#C9A35A; flex:1;"></div>
+        <div class="sub-color-chip" style="background:#FAF6EC; flex:0.5;"></div>
+      </div>
+
+      <span class="sub-tag">Bleu Parigó dominante</span>
+      <span class="sub-tag">Cinzel</span>
+      <span class="sub-tag">unidad=parigo</span>
+    </div>
+
+    <!-- Parigó al Paso -->
+    <div class="sub-card alpaso">
+      <span class="sub-eyebrow">Submarca &mdash; Vitrina</span>
+      <span class="sub-name">Parigó<br>al Paso</span>
+      <span class="sub-lema">La vitrina. Pan desde las 8.</span>
+
+      <ul class="sub-formula">
+        <li>Panadería masa madre (hogazas, ciabattas, baguette)</li>
+        <li>Bollería y pastelería (croissants, facturas, galletas, muffins)</li>
+        <li>Sándwiches y ensaladas listas para llevar</li>
+        <li>Cafetería de especialidad y bebidas</li>
+        <li>Quesos importados y charcutería artesanal</li>
+      </ul>
+
+      <p style="font-family:var(--eb);font-size:14px;color:var(--bois);max-width:100%;line-height:1.55;margin-bottom:0;">Grab and go desde las 08:30 hasta las 21:00. Sin servicio a la mesa. Vitrina y barra frontal Reyes Lavalle.</p>
+
+      <div class="sub-color-strip">
+        <div class="sub-color-chip" style="background:#ECE3CF; flex:3;"></div>
+        <div class="sub-color-chip" style="background:#2F5C3D; flex:2;"></div>
+        <div class="sub-color-chip" style="background:#C9A35A; flex:1;"></div>
+      </div>
+
+      <span class="sub-tag">Crème dominante</span>
+      <span class="sub-tag">Barlow Condensed</span>
+      <span class="sub-tag">unidad=parigo-al-paso</span>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+  09 · PACKAGING Y SOPORTES FÍSICOS
+═══════════════════════════════════ -->
+<section id="packaging">
+<div class="wrap">
+
+  <span class="label">09 — Packaging y soportes físicos</span>
+  <h2>El detalle que se toca.</h2>
+  <p>En Parigó la experiencia no termina en el plato. Cada soporte físico es una extensión del mismo criterio: calidad real, sin exceso decorativo. El rouge geranio aparece aquí como sello de identidad, el mismo rojo de las flores que enmarcan la terraza. No como grito, sino como firma.</p>
+  <p>La referencia no es el bistró genérico: es la hoja de sala del Teatro Municipal de Las Condes, la tarjeta del concierge del Ritz, la servilleta doblada con precisión antes de que llegue el primer cliente.</p>
+
+  <hr class="div">
+
+  <!-- ── FILOSOFÍA DEL ROJO ── -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-bottom:80px;align-items:start;">
+    <div>
+      <h3>El rouge geranio como firma.</h3>
+      <p>El rojo no es un color de alerta ni de promoción. En Parigó es el color de las flores de la terraza, el color del toldo, el color que el vecino del Ritz ve cada día desde su ventana. En packaging aparece como acento de precisión: una línea, un sello, un lazo. Nunca fondo. Nunca ruido.</p>
+      <p>La regla es simple: si el rouge geranio aparece, lo demás debe guardar silencio. Un solo gesto rojo por pieza, visible pero no dominante. Como un geranio entre el verde.</p>
+    </div>
+    <div style="background:var(--creme);padding:40px;display:flex;flex-direction:column;gap:20px;">
+      <!-- Regla visual del rojo en packaging -->
+      <div style="display:flex;align-items:center;gap:16px;padding-bottom:20px;border-bottom:1px solid rgba(27,58,122,.1);">
+        <div style="width:40px;height:40px;background:var(--rouge);border-radius:50%;flex-shrink:0;"></div>
+        <div>
+          <span style="font-family:var(--arch);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--bleu);display:block;margin-bottom:3px;">Sello y firma</span>
+          <span style="font-family:var(--eb);font-size:14px;color:var(--noir);">Monograma, sello de cera, lazo, línea de corte.</span>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;padding-bottom:20px;border-bottom:1px solid rgba(27,58,122,.1);">
+        <div style="width:40px;height:4px;background:var(--rouge);flex-shrink:0;"></div>
+        <div>
+          <span style="font-family:var(--arch);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--bleu);display:block;margin-bottom:3px;">Acento lineal</span>
+          <span style="font-family:var(--eb);font-size:14px;color:var(--noir);">Filo de tarjeta, borde inferior de servilleta, línea de sobre.</span>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;">
+        <div style="width:40px;height:40px;border:2px solid var(--rouge);border-radius:50%;flex-shrink:0;"></div>
+        <div>
+          <span style="font-family:var(--arch);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--bleu);display:block;margin-bottom:3px;">Prohibido</span>
+          <span style="font-family:var(--eb);font-size:14px;color:var(--noir);">Rouge como fondo dominante, rouge en texto largo, doble uso por pieza.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TARJETA DE PRESENTACIÓN ── -->
+  <h3 style="margin-bottom:32px;">Tarjeta de presentación.</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:64px;align-items:start;">
+
+    <!-- Frente -->
+    <div>
+      <span style="font-family:var(--arch);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--or);display:block;margin-bottom:16px;">Cara A — frente</span>
+      <div style="width:100%;aspect-ratio:1.75/1;background:#FAF6EC;border:1px solid rgba(27,58,122,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+        <!-- Línea roja superior -->
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--rouge);"></div>
+        <!-- Logo oval simulado -->
+        <div style="width:96px;height:96px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+          <div style="width:88px;height:58px;border:1.5px solid var(--bleu);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+            <span style="font-family:var(--dm);font-size:12px;font-weight:400;color:var(--bleu);letter-spacing:.1em;">PARIGÓ</span>
+          </div>
+        </div>
+        <span style="font-family:var(--arch);font-size:9px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--bois);">El Golf · Santiago</span>
+      </div>
+    </div>
+
+    <!-- Reverso -->
+    <div>
+      <span style="font-family:var(--arch);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--or);display:block;margin-bottom:16px;">Cara B — datos</span>
+      <div style="width:100%;aspect-ratio:1.75/1;background:var(--bleu);border:1px solid rgba(27,58,122,.12);display:flex;flex-direction:column;justify-content:space-between;padding:24px 28px;position:relative;overflow:hidden;">
+        <!-- Línea roja inferior -->
+        <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--rouge);"></div>
+        <div>
+          <span style="font-family:var(--dm);font-size:14px;font-weight:400;color:#fff;letter-spacing:.06em;display:block;margin-bottom:4px;">Nombre Apellido</span>
+          <span style="font-family:var(--arch);font-size:9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);">Rol · Parigó</span>
+        </div>
+        <div>
+          <span style="font-family:var(--arch);font-size:9px;font-weight:400;letter-spacing:.08em;color:rgba(255,255,255,.55);display:block;">Reyes Lavalle 3310, Las Condes</span>
+          <span style="font-family:var(--arch);font-size:9px;font-weight:400;letter-spacing:.08em;color:rgba(255,255,255,.55);display:block;">@parigo.cl · parigo.cl</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="grid-column:1/-1;">
+      <p style="font-size:14px;color:var(--bois);max-width:100%;">90 × 50 mm. Cartulina cotton 350g, blanco natural (no blanco óptico). Logo en formato cuadrado: el oval PARIGÓ centrado dentro del área cuadrada, en Bleu Parigó. Impresión offset 2 tintas. La línea rouge es laminado rojo mate de 3 mm en el canto superior del frente y canto inferior del reverso. Sin barniz UV.</p>
+    </div>
+  </div>
+
+  <!-- ── SERVILLETA ── -->
+  <h3 style="margin-bottom:32px;">Servilleta de papel.</h3>
+  <div style="display:grid;grid-template-columns:2fr 1fr;gap:32px;margin-bottom:64px;align-items:start;">
+    <div>
+      <!-- Servilleta doblada simulada -->
+      <div style="background:#FAF6EC;border:1px solid rgba(27,58,122,.1);padding:48px;display:flex;align-items:center;justify-content:center;min-height:220px;position:relative;">
+        <!-- Sello central -->
+        <div style="width:112px;height:112px;display:flex;align-items:center;justify-content:center;">
+          <div style="width:104px;height:68px;border:1.5px solid var(--bleu);border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:.55;">
+            <span style="font-family:var(--dm);font-size:14px;font-weight:400;color:var(--bleu);letter-spacing:.1em;">PARIGÓ</span>
+          </div>
+        </div>
+        <!-- Línea roja inferior decorativa -->
+        <div style="position:absolute;bottom:24px;left:48px;right:48px;height:1px;background:var(--rouge);opacity:.6;"></div>
+      </div>
+    </div>
+    <div style="padding-top:8px;">
+      <h4>Especificación</h4>
+      <p style="font-size:14px;max-width:100%;color:var(--noir);">Servilleta 33 × 33 cm, 2 capas. Fondo tiza (#FAF6EC). Logo en su formato cuadrado centrado: cuadrado neutro con el oval PARIGÓ en Bleu Parigó al 55% de opacidad. Línea rouge geranio en el canto inferior, 1 pt.</p>
+      <p style="font-size:14px;max-width:100%;color:var(--bois);margin-top:12px;">El logo aparece solo en la capa superior cuando la servilleta está doblada en cuarto. Al desplegarse, el logo queda en el centro de la mesa.</p>
+    </div>
+  </div>
+
+  <!-- ── RESERVA / TARJETA DE MESA ── -->
+  <h3 style="margin-bottom:32px;">Tarjeta de reserva.</h3>
+  <p style="margin-bottom:32px;">Inspirada en la hoja de sala del Teatro Municipal de Las Condes: discreta, de papel de calidad, con la información precisa y nada más. El rouge aparece como el número de butaca en un programa de ópera.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:64px;">
+
+    <!-- Tarjeta mesa -->
+    <div>
+      <span style="font-family:var(--arch);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--or);display:block;margin-bottom:12px;">Número de mesa</span>
+      <div style="background:#FAF6EC;border:1px solid rgba(27,58,122,.1);padding:28px 24px;aspect-ratio:0.7/1;display:flex;flex-direction:column;justify-content:space-between;">
+        <div>
+          <span style="font-family:var(--dm);font-size:10px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--bleu);display:block;margin-bottom:8px;">Parigó</span>
+          <div style="width:32px;height:1px;background:var(--rouge);margin-bottom:16px;"></div>
+          <span style="font-family:var(--dm);font-size:52px;font-weight:400;color:var(--rouge);line-height:1;">7</span>
+        </div>
+        <span style="font-family:var(--arch);font-size:9px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:rgba(27,58,122,.4);">Mesa</span>
+      </div>
+    </div>
+
+    <!-- Tarjeta reserva confirmada -->
+    <div>
+      <span style="font-family:var(--arch);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--or);display:block;margin-bottom:12px;">Confirmación de reserva</span>
+      <div style="background:var(--bleu);border:1px solid rgba(27,58,122,.1);padding:28px 24px;aspect-ratio:0.7/1;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;">
+        <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--rouge);"></div>
+        <div>
+          <span style="font-family:var(--arch);font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);display:block;margin-bottom:12px;">Reserva confirmada</span>
+          <span style="font-family:var(--dm);font-size:15px;font-weight:400;color:#fff;display:block;letter-spacing:.04em;margin-bottom:4px;">Nombre Apellido</span>
+          <span style="font-family:var(--eb);font-size:13px;font-style:italic;color:rgba(255,255,255,.6);display:block;">2 personas · Le Plat</span>
+        </div>
+        <div>
+          <span style="font-family:var(--arch);font-size:9px;font-weight:400;letter-spacing:.1em;color:rgba(255,255,255,.4);display:block;">Sábado 7 junio 2026</span>
+          <span style="font-family:var(--arch);font-size:9px;font-weight:600;letter-spacing:.1em;color:var(--or);display:block;">13:30 hrs</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Etiqueta bolsa al paso -->
+    <div>
+      <span style="font-family:var(--arch);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--or);display:block;margin-bottom:12px;">Etiqueta Parigó al Paso</span>
+      <div style="background:var(--creme);border:1px solid rgba(27,58,122,.1);padding:28px 24px;aspect-ratio:0.7/1;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;">
+        <div>
+          <div style="width:52px;height:52px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+            <div style="width:48px;height:31px;border:1px solid var(--bleu);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+              <span style="font-family:var(--dm);font-size:7px;color:var(--bleu);letter-spacing:.08em;">PARIGÓ</span>
+            </div>
+          </div>
+          <span style="font-family:var(--arch);font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--bois);display:block;margin-bottom:4px;">Al Paso</span>
+          <span style="font-family:var(--eb);font-size:12px;font-style:italic;color:var(--noir);">Pan de masa madre</span>
+        </div>
+        <div style="border-top:1px solid var(--rouge);padding-top:10px;">
+          <span style="font-family:var(--arch);font-size:8px;font-weight:400;letter-spacing:.08em;color:rgba(27,58,122,.5);">Cadaqués · El Golf</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="grid-column:1/-1;">
+      <p style="font-size:14px;color:var(--bois);max-width:100%;">Papel offset 170g, textura ligera. La numeración de mesa en rouge es el único elemento de color intenso: legible desde la distancia, elegante de cerca. La tarjeta de reserva puede ser digital (misma paleta y tipografía) o física en papel algodón.</p>
+    </div>
+  </div>
+
+  <!-- ── SELLO Y CERA ── -->
+  <h3 style="margin-bottom:32px;">Sello de cera y sticker.</h3>
+  <div style="display:grid;grid-template-columns:1fr 2fr;gap:48px;margin-bottom:48px;align-items:center;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:24px;">
+      <!-- Sello de cera simulado -->
+      <div style="width:80px;height:80px;background:var(--rouge);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(196,43,43,.35);">
+        <div style="width:60px;height:40px;border:1.5px solid rgba(255,255,255,.7);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:var(--dm);font-size:9px;color:rgba(255,255,255,.9);letter-spacing:.1em;">P</span>
+        </div>
+      </div>
+      <span style="font-family:var(--arch);font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--bois);">Sello cera rouge</span>
+      <!-- Sello azul -->
+      <div style="width:80px;height:80px;background:var(--bleu);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(27,58,122,.3);">
+        <div style="width:60px;height:40px;border:1.5px solid rgba(255,255,255,.5);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:var(--dm);font-size:9px;color:rgba(255,255,255,.9);letter-spacing:.1em;">P</span>
+        </div>
+      </div>
+      <span style="font-family:var(--arch);font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--bois);">Sello cera bleu</span>
+    </div>
+    <div>
+      <p>El sello de cera con el monograma oval de Parigó es el elemento de hospitalidad de mayor impacto tactil. Se usa para cerrar bolsas de panadería artesanal, sobres de reserva impresos y cajas de regalo de charcutería.</p>
+      <p>Dos versiones según el soporte: rouge geranio sobre papel claro (tiza o crème), bleu Parigó sobre papel kraft o negro. Nunca sobre superficies brillantes.</p>
+      <div style="background:var(--creme);padding:20px 24px;margin-top:8px;border-left:3px solid var(--rouge);">
+        <span style="font-family:var(--arch);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--rouge);display:block;margin-bottom:6px;">Regla de uso</span>
+        <span style="font-family:var(--eb);font-size:15px;color:var(--noir);">El sello rouge es el único momento en que el rojo actúa como protagonista absoluto. Todos los demás elementos de la pieza deben ser neutros: tiza, crème o blanc.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TABLA RESUMEN ── -->
+  <hr class="div">
+  <h3 style="margin-bottom:24px;">Resumen de soportes.</h3>
+  <div style="overflow:hidden;border:1px solid rgba(27,58,122,.12);">
+    <table style="width:100%;border-collapse:collapse;font-family:var(--eb);font-size:15px;">
+      <thead>
+        <tr style="background:var(--bleu);">
+          <th style="font-family:var(--arch);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);padding:14px 20px;text-align:left;">Soporte</th>
+          <th style="font-family:var(--arch);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);padding:14px 20px;text-align:left;">Fondo</th>
+          <th style="font-family:var(--arch);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);padding:14px 20px;text-align:left;">Uso del rouge</th>
+          <th style="font-family:var(--arch);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);padding:14px 20px;text-align:left;">Tipografía principal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:var(--tiza);border-bottom:1px solid rgba(27,58,122,.08);">
+          <td style="padding:14px 20px;color:var(--noir);">Tarjeta de presentación</td>
+          <td style="padding:14px 20px;color:var(--bois);font-style:italic;">Tiza / Bleu Parigó</td>
+          <td style="padding:14px 20px;color:var(--rouge);">Línea de canto 3 mm</td>
+          <td style="padding:14px 20px;color:var(--noir);">Cinzel + Barlow Condensed</td>
+        </tr>
+        <tr style="background:var(--creme);border-bottom:1px solid rgba(27,58,122,.08);">
+          <td style="padding:14px 20px;color:var(--noir);">Servilleta de papel</td>
+          <td style="padding:14px 20px;color:var(--bois);font-style:italic;">Tiza</td>
+          <td style="padding:14px 20px;color:var(--rouge);">Línea canto inferior 1 pt</td>
+          <td style="padding:14px 20px;color:var(--noir);">Logo oval (Cinzel)</td>
+        </tr>
+        <tr style="background:var(--tiza);border-bottom:1px solid rgba(27,58,122,.08);">
+          <td style="padding:14px 20px;color:var(--noir);">Tarjeta de mesa</td>
+          <td style="padding:14px 20px;color:var(--bois);font-style:italic;">Tiza</td>
+          <td style="padding:14px 20px;color:var(--rouge);">Número de mesa en rouge</td>
+          <td style="padding:14px 20px;color:var(--noir);">Cinzel (numeral grande)</td>
+        </tr>
+        <tr style="background:var(--creme);border-bottom:1px solid rgba(27,58,122,.08);">
+          <td style="padding:14px 20px;color:var(--noir);">Tarjeta de reserva</td>
+          <td style="padding:14px 20px;color:var(--bois);font-style:italic;">Bleu Parigó</td>
+          <td style="padding:14px 20px;color:var(--rouge);">Franja vertical izquierda 3 mm</td>
+          <td style="padding:14px 20px;color:var(--noir);">Cinzel + Barlow Condensed</td>
+        </tr>
+        <tr style="background:var(--tiza);border-bottom:1px solid rgba(27,58,122,.08);">
+          <td style="padding:14px 20px;color:var(--noir);">Etiqueta Parigó al Paso</td>
+          <td style="padding:14px 20px;color:var(--bois);font-style:italic;">Crème Haussmann</td>
+          <td style="padding:14px 20px;color:var(--rouge);">Línea separadora inferior</td>
+          <td style="padding:14px 20px;color:var(--noir);">Cinzel + Lora italic</td>
+        </tr>
+        <tr style="background:var(--creme);">
+          <td style="padding:14px 20px;color:var(--noir);">Sello de cera</td>
+          <td style="padding:14px 20px;color:var(--bois);font-style:italic;">Rouge geranio o Bleu</td>
+          <td style="padding:14px 20px;color:var(--rouge);">Protagonista absoluto del sello</td>
+          <td style="padding:14px 20px;color:var(--noir);">Monograma oval (P)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</section>
+
+<!-- ═══════════════════════════════════
+  COLOFÓN
+═══════════════════════════════════ -->
+<div class="colofonSection">
+  <span class="colofonVibes">El buen gusto no se anuncia. Se percibe.</span>
+  <p>Parigó &middot; Reyes Lavalle 3310, Las Condes &middot; Manual de Marca versión 1.0 &middot; 2026</p>
+  <p style="margin-top:8px;">Fuente canónica: horeca/parigo/marca/identidad-visual.md</p>
+</div>
+
+</body>
+</html>
