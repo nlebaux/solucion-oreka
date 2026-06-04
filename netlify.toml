@@ -1,6 +1,16 @@
 [build]
   publish = "."
 
+[[redirects]]
+  from = "/privado"
+  to = "/_privado/"
+  status = 200
+
+[[redirects]]
+  from = "/privado/*"
+  to = "/_privado/:splat"
+  status = 200
+
 [[headers]]
   for = "/*"
   [headers.values]
