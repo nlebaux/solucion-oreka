@@ -1,6 +1,6 @@
 (function () {
-  var STORAGE_KEY = "oreka_private_access_v1";
-  var PASSWORD = "ORECA";
+  var STORAGE_KEY = "oreka_private_access_v2";
+  var PASSWORD = "oreka";
 
   function renderDenied() {
     document.documentElement.innerHTML = `
@@ -86,7 +86,7 @@
 
   var entered = window.prompt("Clave de acceso Oreka");
 
-  if ((entered || "").trim().toUpperCase() === PASSWORD) {
+  if ((entered || "").trim() === PASSWORD) {
     try {
       localStorage.setItem(STORAGE_KEY, "granted");
     } catch (error) {}
