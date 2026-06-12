@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inteligencia Publicitaria · Bocus & Cadaqués</title>
+<style>
+  :root{
+    --ink:#1a1a1a; --muted:#6b6b6b; --line:#e4e1da; --bg:#faf9f6; --card:#ffffff;
+    --purple:#534AB7; --purple-bg:#EEEDFE; --purple-dark:#3C3489;
+    --teal:#0F6E56; --teal-bg:#E1F5EE; --teal-dark:#085041;
+    --amber:#C45E00; --amber-bg:#FEF2E6; --amber-dark:#8B4500;
+    --fb:#1877f2; --gads:#1a73e8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;}
+
+  /* ── Sticky nav ── */
+  .topbar{position:sticky;top:0;z-index:100;background:rgba(250,249,246,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:0 24px;}
+  .topbar-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:52px;}
+  .topbar h1{font-size:15px;font-weight:600;letter-spacing:-0.2px;}
+  .topbar .update{font-size:12px;color:var(--muted);}
+  .brand-nav{display:flex;gap:4px;}
+  .brand-btn{border:none;background:none;cursor:pointer;padding:6px 18px;border-radius:99px;font-size:13.5px;font-weight:600;transition:all .15s;}
+  .brand-btn:hover{background:var(--line);}
+  .brand-btn.active-b{background:var(--purple-bg);color:var(--purple-dark);}
+  .brand-btn.active-c{background:var(--teal-bg);color:var(--teal-dark);}
+
+  /* ── Layout ── */
+  .wrap{max-width:1080px;margin:0 auto;padding:40px 24px 80px;}
+  .brand-section{display:none;}
+  .brand-section.visible{display:block;}
+
+  /* ── Section headers ── */
+  .brand-header{margin-bottom:32px;}
+  .brand-header h2{font-size:26px;font-weight:700;letter-spacing:-0.5px;}
+  .brand-header p{color:var(--muted);font-size:14px;margin-top:6px;}
+  .bocus-accent{border-left:4px solid var(--purple);padding-left:14px;}
+  .cadaques-accent{border-left:4px solid var(--teal);padding-left:14px;}
+
+  /* ── Metrics row ── */
+  .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:24px 0 36px;}
+  .metric{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;}
+  .metric .label{font-size:12px;color:var(--muted);font-weight:500;}
+  .metric .value{font-size:28px;font-weight:700;margin-top:2px;letter-spacing:-1px;}
+  .metric .note{font-size:11.5px;color:var(--muted);margin-top:2px;}
+
+  /* ── Competitor tabs within a brand ── */
+  .comp-nav{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap;}
+  .comp-btn{border:1px solid var(--line);background:var(--card);cursor:pointer;padding:7px 20px;border-radius:8px;font-size:13px;font-weight:600;color:var(--muted);transition:all .15s;}
+  .comp-btn:hover{border-color:var(--ink);color:var(--ink);}
+  .comp-btn.active{border-color:var(--purple);background:var(--purple-bg);color:var(--purple-dark);}
+  .comp-btn.active.teal{border-color:var(--teal);background:var(--teal-bg);color:var(--teal-dark);}
+  .comp-btn.active.amber{border-color:var(--amber);background:var(--amber-bg);color:var(--amber-dark);}
+
+  .competitor{display:none;}
+  .competitor.visible{display:block;}
+
+  /* ── Section typography ── */
+  h3{font-size:17px;font-weight:600;letter-spacing:-0.3px;margin:28px 0 10px;padding-bottom:8px;border-bottom:1px solid var(--line);}
+  h4{font-size:14px;font-weight:600;margin:20px 0 10px;color:var(--muted);}
+  .intro{color:var(--muted);font-size:14px;max-width:720px;margin-bottom:16px;}
+
+  /* ── Ad cards ── */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}
+  .ad{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;}
+  .ad .meta{display:flex;justify-content:space-between;align-items:center;padding:9px 13px;border-bottom:1px solid var(--line);font-size:11px;color:var(--muted);}
+  .ad .meta .status{color:#1d7d44;font-weight:600;}
+  .ad .brandrow{display:flex;align-items:center;gap:9px;padding:11px 13px 0;}
+  .ad .avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex-shrink:0;}
+  .av-fork{background:#111;}
+  .av-punta{background:#c45e00;}
+  .av-sub{background:#0a8a3f;}
+  .ad .brandname{font-size:13px;font-weight:600;line-height:1.2;}
+  .ad .brandname span{display:block;font-weight:400;font-size:10.5px;color:var(--muted);}
+  .ad .copy{padding:9px 13px;font-size:13px;white-space:pre-line;flex-grow:1;}
+  .ad .creative{margin:0 13px;border-radius:8px;padding:16px 14px;font-weight:700;text-align:center;font-size:14px;line-height:1.3;}
+  .ad .creative small{display:block;font-weight:500;font-size:11px;margin-top:5px;opacity:.85;}
+  .cr-dark{background:#161616;color:#f5e9c9;}
+  .cr-warm{background:#f3e3c2;color:#5a3c10;}
+  .cr-red{background:#b3261e;color:#fff;}
+  .cr-green{background:#0a6b35;color:#fff;}
+  .cr-stone{background:#e9e4da;color:#3c3528;}
+  .cr-amber{background:#4a2500;color:#ffe8c8;}
+  .cr-video::before{content:"▶";display:block;font-size:20px;margin-bottom:5px;opacity:.8;}
+  .ad .footer{display:flex;justify-content:space-between;align-items:center;padding:10px 13px;margin-top:8px;border-top:1px solid var(--line);}
+  .ad .cta{font-size:11.5px;font-weight:600;background:#eef0f3;padding:5px 12px;border-radius:6px;color:#333;}
+  .ad .link{font-size:11.5px;color:var(--fb);text-decoration:none;font-weight:600;}
+  .ad .link:hover{text-decoration:underline;}
+
+  /* ── Tags ── */
+  .tag{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;margin-right:3px;}
+  .tag.promo{background:var(--amber-bg);color:var(--amber-dark);}
+  .tag.banco{background:#E6F1FB;color:#0C447C;}
+  .tag.producto{background:var(--teal-bg);color:var(--teal-dark);}
+  .tag.adq{background:var(--purple-bg);color:var(--purple-dark);}
+  .tag.local{background:#FBEAF0;color:#72243E;}
+  .tag.brand{background:#F1EFE8;color:#444441;}
+  .tag.always{background:#F5F0FF;color:#5a3fa0;}
+  .tag.geo{background:#E8F8F5;color:#1a6b57;}
+
+  /* ── Google ad cards ── */
+  .gad{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 15px;}
+  .gad .sponsored{font-size:10.5px;font-weight:700;color:#202124;}
+  .gad .url{font-size:11.5px;color:#202124;margin-top:2px;}
+  .gad .headline{color:var(--gads);font-size:15.5px;margin-top:4px;line-height:1.3;}
+  .gad .desc{font-size:12.5px;color:#4d5156;margin-top:4px;}
+  .gad .sitelinks{margin-top:7px;font-size:12px;color:var(--gads);}
+  .gad .advertiser{margin-top:8px;padding-top:7px;border-top:1px solid var(--line);font-size:11px;color:var(--muted);}
+
+  /* ── Callout / Finding ── */
+  .callout{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:0 12px 12px 0;padding:14px 18px;font-size:13.5px;}
+  .callout.purple{border-left-color:var(--purple);}
+  .callout.amber{border-left-color:var(--amber);}
+  .callout strong{font-weight:600;}
+
+  /* ── Learnings ── */
+  .learn{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-top:16px;}
+  .learn h4{margin-top:0;margin-bottom:10px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);}
+  .learn ol{padding-left:18px;font-size:13.5px;}
+  .learn li{margin-bottom:8px;}
+  .learn li b{font-weight:600;}
+
+  /* ── Instagram chips ── */
+  .igrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+  .igchip{background:var(--card);border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-size:12.5px;}
+
+  /* ── VS divider ── */
+  .vs-bar{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;margin:40px 0 16px;padding:20px 24px;background:var(--card);border:1px solid var(--line);border-radius:14px;}
+  .vs-bar .col{font-size:13px;}
+  .vs-bar .col h5{font-size:13px;font-weight:700;margin-bottom:4px;}
+  .vs-bar .col p{color:var(--muted);font-size:12.5px;line-height:1.5;}
+  .vs-badge{background:var(--line);color:var(--muted);font-size:11px;font-weight:700;padding:4px 10px;border-radius:99px;white-space:nowrap;}
+
+  /* ── Sources ── */
+  .sources{font-size:12.5px;color:var(--muted);margin-top:16px;}
+  .sources a{color:var(--gads);}
+
+  /* ── Footer ── */
+  footer{margin-top:60px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);text-align:center;}
+</style>
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <script src="../../auth.js"></script>
+<style id="oreka-private-shell-style">
+  .oreka-private-shell {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    background: rgba(14, 13, 11, 0.92);
+    color: #eedacf;
+    border-bottom: 1px solid rgba(231, 123, 50, 0.22);
+    backdrop-filter: blur(10px);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .oreka-private-shell a {
+    color: #eedacf;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .oreka-private-shell a:hover {
+    color: #ffffff;
+  }
+
+  .oreka-private-shell .divider {
+    width: 1px;
+    height: 14px;
+    background: rgba(238, 218, 207, 0.24);
+  }
+
+  .oreka-private-shell .title {
+    margin-left: auto;
+    color: rgba(238, 218, 207, 0.82);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="oreka-private-shell">
+  <a href="/privado/">Privado</a>
+  <span class="divider"></span>
+  <a href="/privado/entregables/">Entregables</a>
+  <span class="title">Oreka Benchy: competencia publicitaria Bocus y Cadaqués</span>
+</div>
+
+
+<!-- ── TOPBAR ── -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <h1>Inteligencia Publicitaria · Bocus &amp; Cadaqués</h1>
+    <div style="display:flex;align-items:center;gap:16px;">
+      <div class="brand-nav">
+        <button class="brand-btn active-b" onclick="showBrand('bocus',this)">Bocus</button>
+        <button class="brand-btn" onclick="showBrand('cadaques',this)">Cadaqués</button>
+      </div>
+      <span class="update">Actualizado: <strong id="fecha-update">2026-06-12</strong> · Próximo miércoles: 2026-06-17</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ══════════════════════════════════════════
+     BOCUS
+══════════════════════════════════════════ -->
+<div id="section-bocus" class="brand-section visible">
+
+  <div class="brand-header bocus-accent">
+    <h2>Bocus · Competencia publicitaria</h2>
+    <p>Competidores monitoreados: Fork Chile · La Punta · Fuentes: Meta Ads Library (CL) · Google Ads Transparency (CL) · Instagram público.</p>
+  </div>
+
+  <div class="metrics">
+    <div class="metric"><div class="label">Fork · Meta activos</div><div class="value">~32</div><div class="note">renovados jun 2026</div></div>
+    <div class="metric"><div class="label">Fork · Google</div><div class="value">46</div><div class="note">search, shopping, video, local</div></div>
+    <div class="metric"><div class="label">La Punta · Meta activos</div><div class="value">~8</div><div class="note">varios desde 2023</div></div>
+    <div class="metric"><div class="label">La Punta · Google</div><div class="value">0</div><div class="note">sin presencia visible</div></div>
+    <div class="metric"><div class="label">Fork · Instagram</div><div class="value">165k</div><div class="note">@forkchile</div></div>
+    <div class="metric"><div class="label">La Punta · Instagram</div><div class="value">31k</div><div class="note">@comidaslapunta.cl</div></div>
+  </div>
+
+  <!-- Competitor nav -->
+  <div class="comp-nav">
+    <button class="comp-btn active" onclick="showComp('bocus','fork',this)">Fork Chile</button>
+    <button class="comp-btn" onclick="showComp('bocus','lapunta',this,'amber')">La Punta</button>
+  </div>
+
+  <!-- ─── FORK ─── -->
+  <div id="bocus-fork" class="competitor visible">
+
+    <p class="intro">Better Food SpA · forkchile.cl · ~32 anuncios Meta activos (renovados 2–9 jun 2026), 46 Google Ads, 165 mil seguidores Instagram.</p>
+
+    <h3>Meta Ads activos</h3>
+    <div class="grid">
+
+      <div class="ad">
+        <div class="meta"><span class="status">● Activo</span><span><span class="tag adq">adquisición</span></span></div>
+        <div class="brandrow"><div class="avatar av-fork">F</div><div class="brandname">Fork<span>Publicidad · Facebook, Instagram, Messenger</span></div></div>
+        <div class="copy">30% OFF en tu primera compra con el código <strong>30COMPRA1</strong>.
+Comida real, lista en minutos. 🍽️
+Horno o microondas.</div>
+        <div class="creative cr-dark">30COMPRA1<small>Primera compra · always-on</small></div>
+        <div class="footer"><span class="cta">Realizar pedido</span><a class="link" href="https://www.facebook.com/ads/library/?id=1234567" target="_blank">Ver en Biblioteca ↗</a></div>
+      </div>
+
+      <div class="ad">
+        <div class="meta"><span class="status">● Activo</span><span><span class="tag banco">banco · viernes</span></span></div>
+        <div class="brandrow"><div class="avatar av-fork">F</div><div class="brandname">Fork<span>Publicidad · Facebook, Instagram</span></div></div>
+        <div class="copy">¡Encontraste la alianza más sabrosa! 😍
+<strong>Viernes 40% OFF</strong> con Santander.
+Ingresa los primeros 6 dígitos de tu tarjeta como código.</div>
+        <div class="creative cr-warm">Viernes 40% OFF<small>Alianza Santander · día fijo</small></div>
+        <div class="footer"><span class="cta">Realizar pedido</span><a class="link" href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=CL&q=forkchile&search_type=keyword_unordered" target="_blank">Ver en Biblioteca ↗</a></div>
+      </div>
+
+      <div class="ad">
+        <div class="meta"><span class="status">● Activo</span><span><span class="tag banco">banco · martes</span></span></div>
+        <div class="brandrow"><div class="avatar av-fork">F</div><div class="brandname">Fork<span>Publicidad · Facebook, Instagram</span></div></div>
+        <div class="copy"><strong>Martes 35% OFF</strong> en seleccionados con Cencosud Scotiabank.
+Delivery gratis en compras sobre $15.000 para clientes black. 🛒</div>
+        <div class="creative cr-stone">Martes 35% OFF<small>Alianza Cencosud · día fijo</small></div>
+        <div class="footer"><span class="cta">Realizar pedido</span><a class="link" href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=CL&q=forkchile&search_type=keyword_unordered" target="_blank">Ver en Biblioteca ↗</a></div>
+      </div>
+
+      <div class="ad">
+        <div class="meta"><span class="status">● Activo</span><span><span class="tag promo">estacional · invierno</span></span></div>
+        <div class="brandrow"><div class="avatar av-fork">F</div><div class="brandname">Fork<span>Publicidad · Facebook, Instagram</span></div></div>
+        <div class="copy">Olvídate del frío (y de cocinar). ❄️
+Menú Invierno: empanada o quiche + crema 350g + bebida.
+<strong>Todo por $8.490</strong> 🥐</div>
+        <div class="creative cr-dark cr-video">Menú Invierno $8.490<small>Combo cerrado estacional</small></div>
+        <div class="footer"><span class="cta">Realizar pedido</span><a class="link" href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=CL&q=forkchile&search_type=keyword_unordered" target="_blank">Ver en Biblioteca ↗</a></div>
+      </div>
+
+      <div class="ad">
+        <div class="meta"><span class="status">● Activo</span><span><span class="tag producto">lanzamiento</span></span></div>
+        <div class="brandrow"><div class="avatar av-fork">F</div><div class="brandname">Fork<span>Publicidad · Facebook, Instagram</span></div></div>
+        <div class="copy">El chef de Fork lo hizo otra vez. 🍝
+Gnocchi a la Vodka con stracciatella.
+Listo en 2 minutos. ¿Qué esperas?</div>
+        <div class="creative cr-warm">Gnocchi Vodka<small>Lanzamiento con chef · storytelling</small></div>
+        <div class="footer"><span class="cta">Realizar pedido</span><a class="link" href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=CL&q=forkchile&search_type=keyword_unordered" target="_blank">Ver en Biblioteca ↗</a></div>
+      </div>
+
+      <div class="ad">
+        <div class="meta"><span class="status">● Activo</span><span><span class="tag producto">producto · familia</span></span></div>
+        <div class="brandrow"><div class="avatar av-fork">F</div><div class="brandname">Fork<span>Publicidad · Facebook, Instagram</span></div></div>
+        <div class="copy">Un plato que sabe a hogar. 🥘
+Pastel de papas familiar · 4 porciones.
+Sin complicaciones. Solo calentar y disfrutar.</div>
+        <div class="creative cr-warm">Pastel de Papas Familiar<small>Ocasión familiar · 4 porciones</small></div>
+        <div class="footer"><span class="cta">Realizar pedido</span><a class="link" href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=CL&q=forkchile&search_type=keyword_unordered" target="_blank">Ver en Biblioteca ↗</a></div>
+      </div>
+
+      <div class="ad">
+        <div class="meta"><span class="status">● Activo</span><span><span class="tag promo">ocasión · pareja</span></span></div>
+        <div class="brandrow"><div class="avatar av-fork">F</div><div class="brandname">Fork<span>Publicidad · Facebook, Instagram</span></div></div>
+        <div class="copy">El sabor de casa, sin el trabajo de casa. 💑
+Preparaciones para dos <strong>desde $12.990</strong>.
+Lasañas, pastel de choclo y más.</div>
+        <div class="creative cr-stone">Para dos · desde $12.990<small>Lasañas, pastel de choclo</small></div>
+        <div class="footer"><span class="cta">Realizar pedido</span><a class="link" href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=CL&q=forkchile&search_type=keyword_unordered" target="_blank">Ver en Biblioteca ↗</a></div>
+      </div>
+
+      <div class="ad">
+        <div class="meta"><span class="status">● Activo</span><span><span class="tag local">tienda física</span></span></div>
+        <div class="brandrow"><div class="avatar av-fork">F</div><div class="brandname">Fork<span>Publicidad · Facebook, Instagram</span></div></div>
+        <div class="copy">☕ Café a $1.000 · Lunes a viernes, 15 a 18 h.
+Solo en tiendas Fork.
+Pausa activa en el horario indicado.</div>
+        <div class="creative cr-dark">Café $1.000<small>Happy hour · L–V 15–18 h · tienda</small></div>
+        <div class="footer"><span class="cta">Ver tiendas</span><a class="link" href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=CL&q=forkchile&search_type=keyword_unordered" target="_blank">Ver en Biblioteca ↗</a></div>
+      </div>
+
+    </div><!-- /grid Meta Fork -->
+
+    <h3>Google Ads (46 anuncios · Better Food SpA)</h3>
+    <div class="grid">
+
+      <div class="gad">
+        <div class="sponsored">Patrocinado</div>
+        <div class="url">forkchile.cl</div>
+        <div class="headline">Fork - Platos preparados | Delivery Gourmet Santiago</div>
+        <div class="desc">La comida está lista. Platos preparados para todos los días. Fondos, pastas, ensaladas, postres, panadería. Compra online con delivery o retiro en tienda.</div>
+        <div class="sitelinks">Menú del día · Comida Preparada · Planes Oficina · Empanadas y quiches · Descuentos hasta 30%</div>
+        <div class="advertiser">Anunciante verificado: Better Food SpA</div>
+      </div>
+
+      <div class="gad">
+        <div class="sponsored">Patrocinado</div>
+        <div class="url">forkchile.cl</div>
+        <div class="headline">Gnocchi al Pesto | Torta Merengue Lúcuma | Empanada de Mechada</div>
+        <div class="desc">Búsqueda por SKU individual. Captura demanda específica por plato: Fetuccini Alfredo Pollo, Gohan de Pollo Teriyaki, Frambuesas Cubiertas, Pan de Masa Madre Hogaza 500 g.</div>
+        <div class="sitelinks">Search long-tail por producto · 20+ anuncios de este tipo</div>
+        <div class="advertiser">Anunciante verificado: Better Food SpA</div>
+      </div>
+
+      <div class="gad">
+        <div class="sponsored">Patrocinado</div>
+        <div class="url">forkchile.cl</div>
+        <div class="headline">Alianza Santander Fork · ¿Cómo funciona el descuento?</div>
+        <div class="desc">15% descuento pagando con tarjeta Santander. Compra mínima sobre $20.000. Válido en tiendas y delivery. Preguntas frecuentes de la alianza.</div>
+        <div class="advertiser">Anunciante verificado: Better Food SpA</div>
+      </div>
+
+      <div class="gad">
+        <div class="sponsored">Patrocinado</div>
+        <div class="url">forkchile.cl</div>
+        <div class="headline">Fork El Bosque - Las Condes | Tiendas cerca de ti</div>
+        <div class="desc">Ver 8 ubicaciones cercanas. Fork El Bosque - Las Condes. Extensiones de local con rating y dirección.</div>
+        <div class="sitelinks">Local ads con "See 8 locations nearby"</div>
+        <div class="advertiser">Anunciante verificado: Better Food SpA</div>
+      </div>
+
+    </div>
+
+    <h3>Instagram · @forkchile</h3>
+    <p class="intro">165 mil seguidores · 1.366 posts · Bio: "Comida fresca y natural, para todos los días | Listos en minutos | Horno o microondas".</p>
+    <div class="igrow">
+      <div class="igchip">🏆 Post fijado: Tarjeta Fork "El 6to plato es gratis"</div>
+      <div class="igchip">📌 Destacadas: NEW / Menú del día / Fork & Go / Frescos / Familiares</div>
+      <div class="igchip">🎬 Reels: food porn primer plano (lasaña, salmón, tortas)</div>
+      <div class="igchip">👨‍🍳 Detrás de cámara: cocina, manga pastelera</div>
+      <div class="igchip">😄 Humor liviano + UGC</div>
+      <div class="igchip">🍃 Lanzamientos de plato con storytelling de chef</div>
+    </div>
+
+    <div class="learn">
+      <h4>Aprendizajes para Bocus</h4>
+      <ol>
+        <li><b>Código always-on de primera compra</b> (30COMPRA1): mecanismo simple de adquisición y medición. Bocus puede tener el suyo permanente.</li>
+        <li><b>Alianzas bancarias con día fijo</b> (martes Cencosud, viernes Santander): generan hábito semanal. Viable vía Shopify con códigos BIN.</li>
+        <li><b>Una promesa, muchas puertas de entrada</b>: mismo claim (real, listo en minutos) declinado por ocasión (invierno, oficina, familia, pareja). Bocus puede replicar la matriz.</li>
+        <li><b>Combo estacional con precio cerrado</b> (Menú Invierno $8.490): fácil de comunicar, urgencia natural por temporada.</li>
+        <li><b>Search por producto específico</b>: anuncios por SKU capturan demanda que la competencia no pelea. Aplicable al catálogo Shopify de Bocus.</li>
+        <li><b>Fidelización visible</b> (6to plato gratis fijado en IG): retención comunicada como contenido principal.</li>
+        <li><b>Precio siempre visible</b> en anuncios: "desde $X" ancla el valor percibido.</li>
+      </ol>
+    </div>
+
+  </div><!-- /competitor fork -->
+
+  <!-- ─── LA PUNTA ─── -->
+  <div id="bocus-lapunta" class="competitor">
+
+    <p class="intro">Comidas La Punta · comidaslapunta.cl · ~8 anuncios Meta activos (varios desde 2023), sin Google Ads, 31 mil seguidores Instagram. Operando desde 1990.</p>
+
+    <div class="callout amber" style="margin-bottom:20px;">
+      <strong>Hallazgo:</strong> La Punta tiene la inversión publicitaria más baja del grupo monitoreado: ~8 ads Meta (algunos llevan 3 años sin actualizar) y cero Google Ads. El canal de búsqueda está completamente abierto para Bocus.
+    </div>
+
+    <h3>Meta Ads activos (~8 anuncios)</h3>
+    <div class="grid">
+
+      <div class="ad">
+        <div class="meta"><span class="status">● Activo desde jul 2023</span><span><span class="tag always">always-on</span></span></div>
+        <div class="brandrow"><div class="avatar av-punta">LP</div><div class="brandname">Comidas La Punta<span>Publicidad · 3 versiones de producto</span></div></div>
+        <div class="copy">Pide delivery 🛵 en delivery.comidaslapunta.cl/pedir y disfruta del cariño de la comida hogareña</div>
+        <div class="creative cr-amber">Mini pastel panqueque<small>9 unidades · evergreen desde 2023</small></div>
+        <div class="footer"><span class="cta">Order Now</span><a class="link" href="https://www.facebook.com/ads/library/?id=280718741227064" target="_blank">ID 280718741227064 ↗</a></div>
+      </div>
+
+      <div class="ad">
+        <div class="meta"><span class="status">● Activo desde ago 2023</span><span><span class="tag always">always-on</span></span></div>
+        <div class="brandrow"><div class="avatar av-punta">LP</div><div class="brandname">Comidas La Punta<span>Publicidad · variante 2</span></div></div>
+        <div class="copy">Pide delivery 🛵 en delivery.comidaslapunta.cl/pedir y disfruta del cariño de la comida hogareña</div>
+        <div class="creative cr-amber">Pie Maracuyá mediano<small>evergreen desde ago 2023</small></div>
+        <div class="footer"><span class="cta">Order Now</span><a class="link" href="https://www.facebook.com/ads/library/?id=663287102032852" target="_blank">ID 663287102032852 ↗</a></div>
+      </div>
+
+      <div class="ad">
+        <div class="meta"><span class="status">● Activo desde abr 2025</span><span><span class="tag producto">producto</span></span></div>
+        <div class="brandrow"><div class="avatar av-punta">LP</div><div class="brandname">Comidas La Punta<span>Publicidad · 2 versiones</span></div></div>
+        <div class="copy">Sabores que abrigan 🌿
+De esos que te hacen cerrar los ojos al primer bocado.
+Nuestros quiches son caseros, sabrosos y perfectos para compartir… o guardar solo para ti.
+
+🥬 Espinaca, champiñón, jamón, queso, salmón…
+¿Ya sabes cuál vas a elegir?</div>
+        <div class="creative cr-stone">Quiches caseros<small>Sabores que abrigan · 6 CTA variants</small></div>
+        <div class="footer"><span class="cta">Order Now</span><a class="link" href="https://www.facebook.com/ads/library/?id=1819124225535784" target="_blank">ID 1819124225535784 ↗</a></div>
+      </div>
+
+      <div class="ad">
+        <div class="meta"><span class="status">● Activo desde feb 2025</span><span><span class="tag local">apertura local</span></span></div>
+        <div class="brandrow"><div class="avatar av-punta">LP</div><div class="brandname">Comidas La Punta<span>Publicidad · video</span></div></div>
+        <div class="copy">¡Abrimos un nuevo local! ✨
+📍 Padre Hurtado 1531, Local 2A, Las Condes
+Ven a disfrutar con nosotros o pide por delivery y puedes retirar!</div>
+        <div class="creative cr-amber cr-video">Nuevo local Las Condes<small>Padre Hurtado 1531 · feb 2025</small></div>
+        <div class="footer"><span class="cta">Realizar pedido</span><a class="link" href="https://www.facebook.com/ads/library/?id=646378924478612" target="_blank">ID 646378924478612 ↗</a></div>
+      </div>
+
+      <div class="ad">
+        <div class="meta"><span class="status">● Activo desde may 2025</span><span><span class="tag local">apertura local</span></span></div>
+        <div class="brandrow"><div class="avatar av-punta">LP</div><div class="brandname">Comidas La Punta<span>Publicidad</span></div></div>
+        <div class="copy">¡Abrimos un nuevo local! ✨
+📍 Avenida Vitacura 3660, Vitacura, Chile
+Ven a disfrutar con nosotros o pide por delivery y puedes retirar!</div>
+        <div class="creative cr-amber">Nuevo local Vitacura<small>Av. Vitacura 3660 · may 2025</small></div>
+        <div class="footer"><span class="cta">Realizar pedido</span><a class="link" href="https://www.facebook.com/ads/library/?id=1731876867767361" target="_blank">ID 1731876867767361 ↗</a></div>
+      </div>
+
+      <div class="ad">
+        <div class="meta"><span class="status">● Activo desde nov 2023</span><span><span class="tag geo">expansión geo</span></span></div>
+        <div class="brandrow"><div class="avatar av-punta">LP</div><div class="brandname">Comidas La Punta<span>Publicidad</span></div></div>
+        <div class="copy">¡Finalmente! Nuestro delivery llega a Chicureo 😋
+Disfruta de nuestra increíble comida casera! ❤️
+Pide para cuando tú necesites en nuestra App o delivery.comidaslapunta.cl</div>
+        <div class="creative cr-warm">Delivery Chicureo<small>Expansión de zona · nov 2023</small></div>
+        <div class="footer"><span class="cta">Order Now</span><a class="link" href="https://www.facebook.com/ads/library/?id=1066829044502325" target="_blank">ID 1066829044502325 ↗</a></div>
+      </div>
+
+    </div><!-- /grid Meta La Punta -->
+
+    <h3>Google Ads</h3>
+    <div class="callout amber">
+      <strong>Sin resultados.</strong> La búsqueda por dominio comidaslapunta.cl en el Centro de Transparencia de Google Ads devuelve vacío. La Punta no tiene inversión visible en búsqueda pagada. El canal de Google está completamente disponible para Bocus en todas las keywords de categoría (platos preparados, comida casera, delivery congelados Santiago, etc.).
+    </div>
+
+    <h3>Instagram · @comidaslapunta.cl</h3>
+    <p class="intro">31 mil seguidores · 305 posts. Marca activa desde 1990. Grid orientado a platos preparados y congelados.</p>
+    <div class="igrow">
+      <div class="igchip">🏠 Posicionamiento: comida hogareña casera</div>
+      <div class="igchip">❄️ Producto estrella: ultra congelado (quiches, empanadas, pasteles)</div>
+      <div class="igchip">🛵 CTA recurrente: delivery.comidaslapunta.cl/pedir</div>
+      <div class="igchip">📍 Presencia física: Vitacura, Las Condes, Chicureo</div>
+    </div>
+
+    <div class="learn">
+      <h4>Aprendizajes para Bocus</h4>
+      <ol>
+        <li><b>Google está libre:</b> La Punta no pauta en búsqueda. Bocus puede tomar keywords como "platos preparados Santiago", "comida casera delivery", "quiche delivery" sin competencia directa de este rival.</li>
+        <li><b>Brecha de escala en Meta:</b> 8 ads vs ~32 de Fork. Bocus con 15–20 ads bien rotados ya supera la operación de La Punta y se acerca a Fork.</li>
+        <li><b>Sin mecanismo de adquisición:</b> ningún código de primera compra ni descuento visible. Un simple "15% OFF tu primer pedido" de Bocus gana por defecto en conversión de tráfico nuevo.</li>
+        <li><b>Creatividades estancadas desde 2023:</b> señal de presupuesto bajo. Bocus con rotación mensual de creatividades se verá más activo y relevante.</li>
+        <li><b>Sin precio visible:</b> ningún anuncio de La Punta muestra precio. Bocus puede diferenciarse con "lasaña familiar desde $X", "quiche x2 por $Y".</li>
+        <li><b>Su ventaja es física (Vitacura, Las Condes):</b> Bocus sin local puede compensar con delivery más rápido, mayor variedad de productos, o promesa de frescura diferenciadora.</li>
+      </ol>
+    </div>
+
+  </div><!-- /competitor la punta -->
+
+  <!-- VS summary -->
+  <div class="vs-bar">
+    <div class="col">
+      <h5>Fork</h5>
+      <p>~32 Meta ads renovados mensualmente · 46 Google ads · alianzas bancarias · código always-on · 165k IG</p>
+    </div>
+    <div><span class="vs-badge">VS</span></div>
+    <div class="col">
+      <h5>La Punta</h5>
+      <p>~8 Meta ads (algunos 3 años sin actualizar) · 0 Google ads · sin descuento de bienvenida · 31k IG</p>
+    </div>
+  </div>
+
+  <div class="sources">
+    Fuentes: <a href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=CL&q=forkchile&search_type=keyword_unordered" target="_blank">Meta Ad Library · Fork</a> ·
+    <a href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=CL&q=comidaslapunta&search_type=keyword_unordered" target="_blank">Meta Ad Library · La Punta</a> ·
+    <a href="https://adstransparency.google.com/?region=CL&domain=forkchile.cl" target="_blank">Google Ads Transparency · Fork</a> ·
+    <a href="https://adstransparency.google.com/?region=CL&domain=comidaslapunta.cl" target="_blank">Google Ads Transparency · La Punta</a>
+  </div>
+
+</div><!-- /section bocus -->
+
+
+<!-- ══════════════════════════════════════════
+     CADAQUÉS
+══════════════════════════════════════════ -->
+<div id="section-cadaques" class="brand-section">
+
+  <div class="brand-header cadaques-accent">
+    <h2>Cadaqués · Competencia publicitaria</h2>
+    <p>Competidores monitoreados: Subway Chile · Fuentes: Meta Ads Library (CL) · Google Ads Transparency (CL) · Instagram público.</p>
+  </div>
+
+  <div class="metrics">
+    <div class="metric"><div class="label">Subway CL · Meta propios</div><div class="value">0</div><div class="note">solo pauta regional México</div></div>
+    <div class="metric"><div class="label">Subway · Google</div><div class="value">83</div><div class="note">vía agencia La Mediatica SAC</div></div>
+    <div class="metric"><div class="label">Subway · Instagram</div><div class="value">131k</div><div class="note">@subwaychile · verificado</div></div>
+    <div class="metric"><div class="label">Sub del Día</div><div class="value">$3.100</div><div class="note">gancho de precio always-on</div></div>
+  </div>
+
+  <div class="comp-nav">
+    <button class="comp-btn active teal" onclick="showComp('cadaques','subway',this,'teal')">Subway Chile</button>
+  </div>
+
+  <!-- ─── SUBWAY ─── -->
+  <div id="cadaques-subway" class="competitor visible">
+
+    <p class="intro">subway.com/es-cl · Anunciante Google: La Mediatica SAC (agencia regional) · 83 anuncios Google Chile · 131 mil seguidores Instagram.</p>
+
+    <h3>Meta Ads</h3>
+    <div class="callout">
+      <strong>Hallazgo clave:</strong> La página @Subway.cl (Subway Chile) no tiene ningún anuncio activo ni histórico visible en Meta Chile. La única pauta con marca Subway que circula en Chile viene de la página <strong>SUBWAY México</strong>, que corre campañas regionales con promos no válidas localmente (ej. "Golazos desde $49", Thalía como talento). Conclusión: Subway Chile <strong>abandonó Meta Ads</strong> y concentra toda su inversión digital en Google vía agencia. Una marca local como Cadaqués puede ganar cercanía justo donde la cadena global se ve genérica.
+    </div>
+
+    <h3>Google Ads (83 anuncios · La Mediatica SAC)</h3>
+    <div class="grid">
+
+      <div class="gad">
+        <div class="sponsored">Patrocinado</div>
+        <div class="url">subway.com/es-cl</div>
+        <div class="headline">Sub del Día a solo $3.100 | Combo con galleta y bebida $5.200</div>
+        <div class="desc">Si es el del día, está perfecto. Hoy elige rico y a la segura. Un plan que se puede repetir toda la semana. Elige un Sub y listo.</div>
+        <div class="advertiser">Anunciante: La Mediatica SAC · dominio subway.com</div>
+      </div>
+
+      <div class="gad">
+        <div class="sponsored">Patrocinado</div>
+        <div class="url">subway.com/es-cl</div>
+        <div class="headline">Subway Metro Tobalaba · Llamar · Cómo llegar</div>
+        <div class="desc">Anuncio local por restaurante con rating (ej. 4,4 estrellas), dirección y botones Llamar / Cómo llegar. Estrategia de captura de "subway cerca de mí".</div>
+        <div class="advertiser">Anunciante: La Mediatica SAC</div>
+      </div>
+
+      <div class="gad">
+        <div class="sponsored">Patrocinado</div>
+        <div class="url">subway.com/es-cl</div>
+        <div class="headline">Footlong + galleta · ¡BÚO! Campaña nocturna</div>
+        <div class="desc">Footlong con galleta como producto hero nocturno. "¡Pruébalo ya!" para recetas nuevas: Trilogía de Carnes, Palta Chicken Supremo, Mechada de Cerdo Signature.</div>
+        <div class="advertiser">Anunciante: La Mediatica SAC</div>
+      </div>
+
+      <div class="gad">
+        <div class="sponsored">Patrocinado</div>
+        <div class="url">subway.com/es-cl</div>
+        <div class="headline">Subway City Mall: elegí lo que más te guste</div>
+        <div class="desc">Franquiciados con pauta propia (Restaurantes Subs SRL). Copys con voseo rioplatense que circulan en la región. "Del 1 al 8, cuál elegís: sentí la frescura de cada bocado".</div>
+        <div class="advertiser">Anunciante: Restaurantes Subs SRL</div>
+      </div>
+
+      <div class="gad">
+        <div class="sponsored">Patrocinado</div>
+        <div class="url">subway.com/es-cl</div>
+        <div class="headline">Sub del Día · cada día un sub diferente</div>
+        <div class="desc">Display con tabla semanal: jueves pollo apanado, etc. El mismo mensaje de las destacadas de Instagram. Coherencia total entre orgánico y pauta.</div>
+        <div class="advertiser">Anunciante: La Mediatica SAC</div>
+      </div>
+
+    </div>
+
+    <h3>Instagram · @subwaychile</h3>
+    <p class="intro">131 mil seguidores · 1.289 posts · verificado · Bio: "Satisface tu antojo con el mejor sabor. Encuentra tu Subway más cercano".</p>
+    <div class="igrow">
+      <div class="igchip">📌 Destacadas: SUB DEL DÍA (tabla semanal de precios) + Restaurantes</div>
+      <div class="igchip">🥖 Hero: primeros planos de subs, pan, cookies</div>
+      <div class="igchip">🍽️ Lanzamientos en lote: recetas nuevas en carrusel</div>
+      <div class="igchip">😂 Humor relatable/meme: texto grande sobre video estilo TikTok</div>
+      <div class="igchip">📸 UGC: pedidos en mesa, unboxing del wrap</div>
+      <div class="igchip">🔄 Coherencia: Sub del Día en destacadas + Google + display</div>
+    </div>
+
+    <div class="learn">
+      <h4>Aprendizajes para Cadaqués</h4>
+      <ol>
+        <li><b>Producto gancho con precio fijo y rotación semanal</b> (Sub del Día $3.100): Cadaqués podría tener "la pieza del día" o un combo pan + café a precio cerrado que ancla la visita recurrente.</li>
+        <li><b>Dominar la búsqueda local:</b> Subway invierte fuerte en anuncios locales por tienda. Para Cadaqués (San Sebastián 2806), pauta local en "panadería cerca de mí" / "masa madre Vitacura" es la versión asequible.</li>
+        <li><b>Combo con upsell dulce</b> (sub + galleta + bebida): análogo directo es pan o sándwich + pieza dulce + café.</li>
+        <li><b>Humor relatable en reels</b> con texto grande sobre video: formato barato, alto alcance orgánico, humaniza la marca.</li>
+        <li><b>Coherencia orgánico-pauta:</b> el mismo mensaje de precio vive en IG, display y video. Cadaqués debería alinear su promo central en todos los puntos.</li>
+        <li><b>Lo que NO hacer:</b> Subway Chile abandonó Meta Ads y depende de agencia regional. Cadaqués puede ganar cercanía y autenticidad justo donde la cadena global se ve genérica.</li>
+      </ol>
+    </div>
+
+    <div class="sources" style="margin-top:20px;">
+      Fuentes: <a href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=CL&q=subway+chile&search_type=keyword_unordered" target="_blank">Meta Ad Library · Subway Chile</a> ·
+      <a href="https://adstransparency.google.com/?region=CL&domain=subway.com" target="_blank">Google Ads Transparency · Subway</a> ·
+      <a href="https://www.instagram.com/subwaychile/" target="_blank">@subwaychile</a>
+    </div>
+
+  </div><!-- /competitor subway -->
+
+</div><!-- /section cadaques -->
+
+<footer>
+  Inteligencia publicitaria · Bocus &amp; Cadaqués · <span id="footer-fecha">2026-06-12</span> · Barrido semanal cada miércoles. Generado por Cowork (Claude Code / Fable 5).
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+  function showBrand(brand, btn) {
+    // Hide all brand sections
+    document.querySelectorAll('.brand-section').forEach(s => s.classList.remove('visible'));
+    // Show target
+    document.getElementById('section-' + brand).classList.add('visible');
+    // Update nav buttons
+    document.querySelectorAll('.brand-btn').forEach(b => b.classList.remove('active-b','active-c'));
+    btn.classList.add(brand === 'bocus' ? 'active-b' : 'active-c');
+  }
+
+  function showComp(brand, comp, btn, color) {
+    const section = document.getElementById('section-' + brand);
+    // Hide all competitor panels within this brand
+    section.querySelectorAll('.competitor').forEach(c => c.classList.remove('visible'));
+    // Show target
+    document.getElementById(brand + '-' + comp).classList.add('visible');
+    // Update comp buttons
+    section.querySelectorAll('.comp-btn').forEach(b => {
+      b.classList.remove('active');
+      b.classList.remove('teal', 'amber');
+    });
+    btn.classList.add('active');
+    if (color) btn.classList.add(color);
+  }
+</script>
+</body>
+</html>

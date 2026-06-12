@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparativa Impresoras Oficina La Pastora - CyberDay 2026</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Modern Design System - HSL Tailored Colors */
+        :root {
+            --primary: hsl(175, 84%, 32%);
+            --primary-hover: hsl(175, 84%, 25%);
+            --secondary: hsl(195, 85%, 41%);
+            --dark: hsl(222, 47%, 12%);
+            --dark-light: hsl(217, 33%, 17%);
+            --light-bg: hsl(210, 40%, 98%);
+            --card-bg: hsl(0, 0%, 100%);
+            --border-color: hsl(214, 32%, 91%);
+            --text-dark: hsl(215, 25%, 27%);
+            --text-muted: hsl(215, 16%, 47%);
+            --accent-green: hsl(142, 72%, 29%);
+            --accent-green-bg: hsl(143, 85%, 96%);
+            --accent-blue: hsl(201, 96%, 36%);
+            --accent-blue-bg: hsl(204, 94%, 94%);
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08);
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Base styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Container & Layout */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem 1.5rem;
+        }
+
+        /* Hero Header */
+        header {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .meta-tag {
+            background-color: var(--primary);
+            color: white;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            padding: 0.35rem 0.85rem;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            font-weight: 300;
+        }
+
+        /* Buttons & Actions */
+        .action-bar {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Typography */
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        /* Callouts / Alerts */
+        .callout {
+            padding: 1.25rem 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            border-left: 5px solid;
+            font-size: 0.95rem;
+        }
+
+        .callout-info {
+            background-color: var(--accent-blue-bg);
+            border-left-color: var(--accent-blue);
+            color: hsl(201, 80%, 25%);
+        }
+
+        .callout-tip {
+            background-color: var(--accent-green-bg);
+            border-left-color: var(--accent-green);
+            color: hsl(142, 60%, 20%);
+        }
+
+        .callout-title {
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Cost Table Section */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2.5rem;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Table Style */
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background-color: hsl(210, 30%, 96%);
+            font-weight: 600;
+            color: var(--dark);
+            padding: 1rem 1.25rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        td {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-dark);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: hsl(210, 40%, 99%);
+        }
+
+        .highlight-cell {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Grid of Printer Cards */
+        .printer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .printer-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            padding: 1.75rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .printer-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+
+        .printer-card.featured {
+            border: 2px solid var(--primary);
+        }
+
+        .printer-card.featured::before {
+            content: 'LA RECOMENDACIÓN';
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background-color: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 0.25rem 0.75rem;
+            border-radius: 5px;
+            letter-spacing: 1px;
+        }
+
+        .printer-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .printer-price {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .printer-badge {
+            background-color: var(--accent-green-bg);
+            color: var(--accent-green);
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .printer-features {
+            list-style-type: none;
+            margin: 1rem 0 1.5rem 0;
+            flex-grow: 1;
+        }
+
+        .printer-features li {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.25rem;
+            color: var(--text-dark);
+        }
+
+        .printer-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+            font-weight: 700;
+        }
+
+        .printer-features li.negative::before {
+            content: '✗';
+            color: hsl(0, 72%, 51%);
+        }
+
+        .printer-pros-cons {
+            background-color: var(--light-bg);
+            border-radius: 10px;
+            padding: 0.85rem 1rem;
+            font-size: 0.85rem;
+        }
+
+        .printer-pros-cons strong {
+            display: block;
+            margin-bottom: 0.25rem;
+            color: var(--dark);
+        }
+
+        /* Icons */
+        .icon {
+            display: inline-block;
+            vertical-align: middle;
+            width: 1.25rem;
+            height: 1.25rem;
+            fill: currentColor;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background-color: white;
+                color: black;
+                font-size: 10pt;
+            }
+            .container {
+                width: 100%;
+                max-width: 100%;
+                padding: 0;
+                margin: 0;
+            }
+            header {
+                background: none;
+                color: black;
+                box-shadow: none;
+                border: 2px solid black;
+                border-radius: 0;
+                padding: 2rem;
+                margin-bottom: 2rem;
+            }
+            header h1 {
+                font-size: 20pt;
+            }
+            header p {
+                font-size: 11pt;
+            }
+            .action-bar, .btn {
+                display: none !important;
+            }
+            .card, .printer-card {
+                border-radius: 0;
+                box-shadow: none;
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+            }
+            .printer-card:hover {
+                transform: none;
+            }
+            th {
+                background-color: #eee;
+            }
+            h2 {
+                page-break-after: avoid;
+            }
+        }
+    </style>
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <script src="../../auth.js"></script>
+<style id="oreka-private-shell-style">
+  .oreka-private-shell {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    background: rgba(14, 13, 11, 0.92);
+    color: #eedacf;
+    border-bottom: 1px solid rgba(231, 123, 50, 0.22);
+    backdrop-filter: blur(10px);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .oreka-private-shell a {
+    color: #eedacf;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .oreka-private-shell a:hover {
+    color: #ffffff;
+  }
+
+  .oreka-private-shell .divider {
+    width: 1px;
+    height: 14px;
+    background: rgba(238, 218, 207, 0.24);
+  }
+
+  .oreka-private-shell .title {
+    margin-left: auto;
+    color: rgba(238, 218, 207, 0.82);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="oreka-private-shell">
+  <a href="/privado/">Privado</a>
+  <span class="divider"></span>
+  <a href="/privado/entregables/">Entregables</a>
+  <span class="title">Oreka consultoria</span>
+</div>
+
+
+<div class="container">
+    <!-- Header -->
+    <header>
+        <span class="meta-tag">Equipo de Operaciones & RRHH</span>
+        <h1>Impresora para Oficina La Pastora</h1>
+        <p>Informe de adquisición y comparativa técnica de impresoras color y WiFi con alta eficiencia en consumibles (tanques de tinta). Prepárate para el CyberDay 2026.</p>
+        
+        <div class="action-bar">
+            <button class="btn" onclick="window.print()">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/>
+                </svg>
+                Imprimir o Guardar como PDF
+            </button>
+        </div>
+    </header>
+
+    <!-- Context callout -->
+    <div class="callout callout-info">
+        <div class="callout-title">
+            <svg class="icon" viewBox="0 0 24 24" style="margin-top: -3px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            Hito del Ecosistema Resuelto
+        </div>
+        <p>En el acta de la reunión operativa del 2026-04-28 se documentó el requerimiento: <em>"Infra digital: seguir sin papel; impresora pendiente histórica"</em>. El inicio del CyberDay Chile 2026 (del lunes 1 al miércoles 3 de junio) es la fecha propicia para comprar este equipamiento con excelente descuento.</p>
+    </div>
+
+    <!-- Section 1 -->
+    <h2>
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 11.9 13 12.5 13 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+        1. La Regla del Ahorro: Tanques de Tinta vs. Cartuchos
+    </h2>
+    <div class="card">
+        <p>Para cumplir estrictamente con tu condición de que <strong>"los cartuchos sean coherentes en el precio y cantidad de uso"</strong>, descartamos absolutamente las impresoras baratas de cartuchos tradicionales. El costo real de las impresoras vive en el insumo. En una oficina comercial, las impresoras con <strong>Sistema de Tanques de Tinta Continua</strong> son las únicas viables:</p>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        <th>Impresora de Cartuchos Tradicional</th>
+                        <th>Impresora de Tanque de Tinta Continua (Recomendada)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Tipo de Insumo</strong></td>
+                        <td>Cartuchos pequeños de plástico desechable</td>
+                        <td>Botellas de tinta líquida para rellenar tanques</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Precio del Set Completo</strong></td>
+                        <td>$60.000 a $80.000 CLP (4 unidades)</td>
+                        <td>$40.000 CLP aprox. (4 botellas de recarga)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rendimiento Real</strong></td>
+                        <td>~150 a 300 páginas</td>
+                        <td class="highlight-cell">~6.000 a 7.500 páginas</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Costo estimado por página</strong></td>
+                        <td>$100 a $250 CLP por hoja</td>
+                        <td class="highlight-cell">$1,5 a $2 CLP por hoja</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Frecuencia de Recarga</strong></td>
+                        <td>Muy alta (genera interrupciones constantes)</td>
+                        <td>Muy baja (puede durar de 1 a 2 años sin recargar)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="callout callout-tip">
+            <div class="callout-title">
+                <svg class="icon" viewBox="0 0 24 24" style="margin-top: -3px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Dato de Eficiencia
+            </div>
+            Una botella de tinta negra rinde más de 6.000 páginas y cuesta solo unos $10.000 CLP. El costo operativo baja más de un 95%, amortizando el valor de la máquina en los primeros meses.
+        </div>
+    </div>
+
+    <!-- Section 2 -->
+    <h2>
+        <svg class="icon" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        2. Alternativas en el Mercado Chileno
+    </h2>
+    <p>Hemos seleccionado las tres opciones líderes en Chile, clasificadas de acuerdo a su rendimiento, velocidad y aptitud para el trabajo administrativo de <strong>Louis</strong> (contabilidad/facturas) y <strong>Daniela</strong> (contratos/finiquitos):</p>
+    
+    <div class="printer-grid">
+        <!-- HP Smart Tank 750 (Featured) -->
+        <div class="printer-card featured">
+            <div class="printer-title">
+                HP Smart Tank 750
+                <span class="printer-badge">Recomendación</span>
+            </div>
+            <div class="printer-price">$189.990 - $209.990 CLP</div>
+            
+            <ul class="printer-features">
+                <li><strong>Velocidad ISO:</strong> 15 ppm negro / 9 ppm color (rápida)</li>
+                <li><strong>Alimentador Automático (ADF):</strong> Sí, 35 páginas</li>
+                <li><strong>Impresión Dúplex Automática:</strong> Sí, doble cara</li>
+                <li><strong>Conectividad:</strong> WiFi Dual banda, Ethernet, USB</li>
+                <li><strong>Tinta Negra:</strong> Pigmentada (no se corre)</li>
+            </ul>
+            
+            <div class="printer-pros-cons">
+                <strong>¿Por qué es la ganadora?</strong>
+                Ofrece ADF (alimentador de hojas) y doble cara por el precio de una impresora básica de Epson. Ideal para digitalizar contratos e informes de forma masiva en La Pastora.
+            </div>
+        </div>
+
+        <!-- Epson EcoTank L4260 -->
+        <div class="printer-card">
+            <div class="printer-title">
+                Epson EcoTank L4260
+                <span class="printer-badge" style="background-color: hsl(200, 30%, 94%); color: var(--text-dark);">Clásica</span>
+            </div>
+            <div class="printer-price">$210.000 - $219.990 CLP</div>
+            
+            <ul class="printer-features">
+                <li><strong>Velocidad ISO:</strong> 10,5 ppm negro / 5 ppm color</li>
+                <li class="negative"><strong>Alimentador Automático (ADF):</strong> No (cama plana)</li>
+                <li><strong>Impresión Dúplex Automática:</strong> Sí, doble cara</li>
+                <li><strong>Conectividad:</strong> Wi-Fi Direct, USB</li>
+                <li><strong>Tinta Negra:</strong> Pigmentada (alta nitidez)</li>
+            </ul>
+            
+            <div class="printer-pros-cons">
+                <strong>¿Por qué considerarla?</strong>
+                Muy compacta y confiable en su mecanismo de alimentación, pero es más lenta que la HP y no permite escanear fajos de hojas de manera desatendida.
+            </div>
+        </div>
+
+        <!-- Epson EcoTank L6270 -->
+        <div class="printer-card">
+            <div class="printer-title">
+                Epson EcoTank L6270
+                <span class="printer-badge" style="background-color: hsl(190, 80%, 95%); color: var(--accent-blue);">Premium</span>
+            </div>
+            <div class="printer-price">$390.000 - $430.000 CLP</div>
+            
+            <ul class="printer-features">
+                <li><strong>Velocidad ISO:</strong> 15,5 ppm negro / 8,5 ppm color</li>
+                <li><strong>Alimentador Automático (ADF):</strong> Sí, 30 páginas</li>
+                <li><strong>Impresión Dúplex Automática:</strong> Sí, doble cara</li>
+                <li><strong>Conectividad:</strong> Wi-Fi Direct, Ethernet, USB</li>
+                <li><strong>Tinta Negra:</strong> Pigmentada (PrecisionCore)</li>
+            </ul>
+            
+            <div class="printer-pros-cons">
+                <strong>¿Por qué considerarla?</strong>
+                Es una bestia corporativa de altísima duración, pero su precio equivale al doble del modelo HP, por lo que la relación costo-beneficio favorece a HP.
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 3 -->
+    <h2>
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+        3. El Factor Crítico en Oficina: Alimentador Automático (ADF)
+    </h2>
+    <div class="card">
+        <p>Una impresora hogareña obliga a levantar la tapa y colocar hoja por hoja sobre el cristal para escanear o fotocopiar. Para el equipo administrativo de Oreka, esto es ineficiente.</p>
+        
+        <p>El <strong>ADF (Alimentador Automático de Documentos)</strong> presente en la <strong>HP Smart Tank 750</strong> y la <strong>Epson L6270</strong> permite:</p>
+        <ul>
+            <li>Escanear contratos firmados de múltiples páginas (Daniela) de una sola vez y convertirlos automáticamente en un único archivo PDF.</li>
+            <li>Digitalizar las guías de despacho, facturas de compras de insumos gastronómicos o planillas contables del mes (Louis) de forma automática.</li>
+            <li>Fotocopiar informes y documentos internos sin requerir supervisión ni presencia manual hoja a hoja.</li>
+        </ul>
+    </div>
+
+    <!-- Section 4 -->
+    <h2>
+        <svg class="icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/></svg>
+        4. Estrategia de Adquisición para Nicolás
+    </h2>
+    <div class="card">
+        <ol style="margin-left: 1.5rem; margin-bottom: 1rem;">
+            <li style="margin-bottom: 0.5rem;"><strong>Utiliza portales comparadores de precio:</strong> Durante los días de Cyber (lunes 1 a miércoles 3 de junio), ingresa a <a href="https://www.solotodo.cl" target="_blank" style="color: var(--primary); font-weight: 600; text-decoration: none;">SoloTodo.cl</a> o <a href="https://www.knasta.cl" target="_blank" style="color: var(--primary); font-weight: 600; text-decoration: none;">Knasta.cl</a> y digita <strong>"HP Smart Tank 750"</strong> o <strong>"Epson L4260"</strong>.</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Verifica que sea la Oferta Real:</strong> El precio normal de la HP Smart Tank 750 bordea los $240.000 CLP. Si durante el CyberDay aparece por debajo de los **$200.000 CLP**, es una excelente compra.</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Compra con Factura Comercial:</strong> Al realizar el pago, asegúrate de ingresar los datos de facturación de tu empresa para justificar el gasto y recuperar el IVA de ser aplicable. Utiliza los datos de la consultora matriz:</li>
+        </ol>
+        
+        <div style="background-color: var(--light-bg); border: 1px solid var(--border-color); padding: 1.25rem; border-radius: 10px; margin-top: 1rem; font-family: monospace; font-size: 0.9rem;">
+            <strong>Razón Social:</strong> SOLUCIÓN OREKA LIMITADA<br>
+            <strong>RUT:</strong> 77.704.618-7<br>
+            <strong>Giro:</strong> Consultoría y Asesoría en Gestión de Administración Gastronómica (Exento de IVA)
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
