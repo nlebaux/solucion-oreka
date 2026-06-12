@@ -1,0 +1,2232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dossier Legal y Contable: Caso Don Carlos / Don Clan</title>
+  
+  <!-- SEO & Accessibility -->
+  <meta name="description" content="Dashboard forense de analisis financiero, contable y legal para la defensa del Caso Don Carlos y la marca Don Clan. Analisis de flujos, elusion, documentos e hitos clave.">
+  <meta name="author" content="Equipo de Defensa de Nicolas Le Baux">
+  
+  <!-- Google Fonts: Outfit for Headings, Plus Jakarta Sans for Body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* -------------------------------------------------------------
+       1. VARIABLES & DESIGN SYSTEM (MODO OSCURO PREMIUM HSL)
+       ------------------------------------------------------------- */
+    :root {
+      /* Colors */
+      --bg-base: #05070f;
+      --surface-glass: rgba(17, 27, 49, 0.6);
+      --surface-glass-hover: rgba(26, 39, 68, 0.75);
+      --border-glass: rgba(255, 255, 255, 0.05);
+      --border-glass-bright: rgba(255, 255, 255, 0.12);
+      
+      --color-primary: #1d5fa6;
+      --color-primary-light: #3d8be0;
+      --color-accent: #c8a951;
+      
+      /* Alerts & Statuses (Green, Amber, Pink Red) */
+      --color-success: #10b981;
+      --color-success-bg: rgba(16, 185, 129, 0.1);
+      --color-warning: #f59e0b;
+      --color-warning-bg: rgba(245, 158, 11, 0.1);
+      --color-danger: #f43f5e;
+      --color-danger-bg: rgba(244, 63, 94, 0.1);
+      
+      /* Typography */
+      --font-headers: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      
+      /* Animation Speeds */
+      --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      
+      /* Shadows */
+      --shadow-premium: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+
+    /* Reset & Base Styles */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(29, 95, 166, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(200, 169, 81, 0.08) 0%, transparent 40%);
+      background-attachment: fixed;
+      color: #e2e8f0;
+      font-family: var(--font-body);
+      line-height: 1.6;
+      font-weight: 400;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* -------------------------------------------------------------
+       2. REUSABLE UTILITIES & LAYOUT
+       ------------------------------------------------------------- */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Glassmorphism Cards */
+    .glass-card {
+      background: var(--surface-glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-glass);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: var(--shadow-premium);
+      transition: all var(--transition-normal);
+    }
+
+    .glass-card:hover {
+      border-color: var(--border-glass-bright);
+      transform: translateY(-2px);
+    }
+
+    /* Headers */
+    h1, h2, h3, h4 {
+      font-family: var(--font-headers);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, #fff 40%, #8cafd8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-bottom: 1px solid var(--border-glass);
+      padding-bottom: 0.75rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: #cbd5e1;
+    }
+
+    p {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .badge-success { background: var(--color-success-bg); color: var(--color-success); border: 1px solid rgba(16, 185, 129, 0.2); }
+    .badge-warning { background: var(--color-warning-bg); color: var(--color-warning); border: 1px solid rgba(245, 158, 11, 0.2); }
+    .badge-danger { background: var(--color-danger-bg); color: var(--color-danger); border: 1px solid rgba(244, 63, 94, 0.2); }
+    .badge-primary { background: rgba(29, 95, 166, 0.15); color: var(--color-primary-light); border: 1px solid rgba(29, 95, 166, 0.3); }
+
+    /* Icons */
+    .icon {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* -------------------------------------------------------------
+       3. HEADER SECTION
+       ------------------------------------------------------------- */
+    header {
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .header-logo-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .header-meta {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+
+    .header-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-glass);
+      padding: 0.4rem 1rem;
+      border-radius: 8px;
+    }
+
+    /* Main Navigation Tabs */
+    .tabs-nav {
+      display: flex;
+      background: rgba(17, 27, 49, 0.4);
+      border: 1px solid var(--border-glass);
+      border-radius: 12px;
+      padding: 0.4rem;
+      margin-bottom: 2rem;
+      gap: 0.25rem;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      flex: 1;
+      min-width: 160px;
+      background: transparent;
+      border: none;
+      color: #64748b;
+      padding: 0.8rem 1.2rem;
+      font-family: var(--font-headers);
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all var(--transition-fast);
+    }
+
+    .tab-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .tab-btn.active {
+      color: #fff;
+      background: rgba(29, 95, 166, 0.25);
+      border: 1px solid rgba(29, 95, 166, 0.2);
+      box-shadow: 0 4px 12px rgba(29, 95, 166, 0.15);
+    }
+
+    /* Tab Content Transitions */
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* -------------------------------------------------------------
+       4. CAPITULO 1: RADIOGRAFIA FINANCIERA & CONTABLE
+       ------------------------------------------------------------- */
+    .grid-2col {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .grid-2col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Custom Tables */
+    .table-container {
+      overflow-x: auto;
+      margin-top: 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-glass);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    th {
+      background-color: rgba(17, 27, 49, 0.9);
+      color: #fff;
+      font-family: var(--font-headers);
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+      border-bottom: 2px solid var(--border-glass-bright);
+    }
+
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border-glass);
+      color: #cbd5e1;
+    }
+
+    tr:hover td {
+      background-color: rgba(255, 255, 255, 0.01);
+    }
+
+    .number-col {
+      text-align: right;
+      font-family: monospace;
+      font-size: 0.95rem;
+    }
+
+    /* EERR Selector buttons inside Card */
+    .eerr-toggle-nav {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-glass);
+      padding-bottom: 0.75rem;
+    }
+
+    .eerr-toggle-btn {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-glass);
+      color: #94a3b8;
+      padding: 0.4rem 1rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-family: var(--font-headers);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .eerr-toggle-btn:hover, .eerr-toggle-btn.active {
+      color: #fff;
+      background: var(--color-primary);
+      border-color: var(--color-primary-light);
+    }
+
+    /* Forensic Box highlighting */
+    .forensic-callout {
+      background: rgba(245, 158, 11, 0.03);
+      border-left: 4px solid var(--color-warning);
+      padding: 1.25rem;
+      border-radius: 0 12px 12px 0;
+      margin-top: 1rem;
+    }
+
+    /* Related Parties Bar Chart */
+    .parties-chart-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    .party-bar-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .party-bar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .party-bar-label {
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .party-bar-value {
+      font-family: monospace;
+      color: var(--color-accent);
+      font-weight: 700;
+    }
+
+    .party-bar-outer {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-glass);
+      border-radius: 9999px;
+      height: 12px;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .party-bar-inner {
+      background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+      border-radius: 9999px;
+      height: 100%;
+      width: 0%; /* Populated by JS */
+      transition: width 1s cubic-bezier(0.1, 0.8, 0.3, 1);
+    }
+
+    .party-bar-detail {
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+
+    /* Triangulation Visual Flowchart */
+    .flowchart-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      position: relative;
+    }
+
+    .flowchart-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    .flowchart-step::after {
+      content: '';
+      position: absolute;
+      left: 17px;
+      top: 36px;
+      bottom: -16px;
+      width: 2px;
+      background: var(--border-glass);
+    }
+
+    .flowchart-step:last-child::after {
+      display: none;
+    }
+
+    .flowchart-node {
+      background: var(--color-primary);
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-headers);
+      font-weight: 700;
+      flex-shrink: 0;
+      box-shadow: 0 0 12px rgba(29, 95, 166, 0.3);
+      z-index: 2;
+    }
+
+    .flowchart-node.danger {
+      background: var(--color-danger);
+      box-shadow: 0 0 12px rgba(244, 63, 94, 0.3);
+    }
+
+    .flowchart-node.warning {
+      background: var(--color-warning);
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.3);
+    }
+
+    .flowchart-info {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid var(--border-glass);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+    }
+
+    .flowchart-title {
+      font-weight: 600;
+      color: #fff;
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .flowchart-desc {
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+
+    /* -------------------------------------------------------------
+       5. CAPITULO 2: DOSSIER LEGAL & EVIDENCIAS
+       ------------------------------------------------------------- */
+    /* Interactive Timeline */
+    .timeline-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+    }
+
+    @media (max-width: 992px) {
+      .timeline-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 576px) {
+      .timeline-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .timeline-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-glass);
+      border-radius: 12px;
+      padding: 1.25rem;
+      position: relative;
+    }
+
+    .timeline-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 1.25rem;
+      right: 1.25rem;
+      height: 4px;
+      border-radius: 0 0 4px 4px;
+      background: var(--color-primary);
+    }
+
+    .timeline-card.primary::before { background: var(--color-primary); }
+    .timeline-card.warning::before { background: var(--color-warning); }
+    .timeline-card.danger::before { background: var(--color-danger); }
+    .timeline-card.success::before { background: var(--color-success); }
+
+    .timeline-date {
+      font-family: monospace;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--color-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-card-title {
+      font-size: 1.05rem;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+
+    .timeline-card-desc {
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+
+    /* Red Alerts Section */
+    .alerts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .alert-red-card {
+      background: var(--color-danger-bg);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      border-radius: 12px;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: all var(--transition-normal);
+    }
+
+    .alert-red-card:hover {
+      border-color: rgba(244, 63, 94, 0.45);
+      box-shadow: 0 4px 20px rgba(244, 63, 94, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .alert-red-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .alert-red-title {
+      color: var(--color-danger);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .alert-red-text {
+      font-size: 0.85rem;
+      color: #cbd5e1;
+    }
+
+    /* Document Search Catalog */
+    .catalog-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .search-input-wrapper {
+      position: relative;
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .search-input {
+      width: 100%;
+      background: rgba(17, 27, 49, 0.8);
+      border: 1px solid var(--border-glass);
+      color: #fff;
+      padding: 0.6rem 1rem 0.6rem 2.5rem;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      transition: all var(--transition-fast);
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--color-primary-light);
+      box-shadow: 0 0 8px rgba(29, 95, 166, 0.25);
+    }
+
+    .search-icon-svg {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #64748b;
+      width: 16px;
+      height: 16px;
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-glass);
+      color: #94a3b8;
+      padding: 0.4rem 1rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-family: var(--font-headers);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      color: #fff;
+      background: rgba(29, 95, 166, 0.2);
+      border-color: var(--color-primary-light);
+    }
+
+    .documents-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 576px) {
+      .documents-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .document-card {
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid var(--border-glass);
+      border-radius: 12px;
+      transition: all var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .document-card:hover {
+      border-color: var(--border-glass-bright);
+      background: rgba(255, 255, 255, 0.02);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .document-header {
+      padding: 1.25rem;
+      border-bottom: 1px solid var(--border-glass);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .document-title-area {
+      flex: 1;
+    }
+
+    .document-card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: #fff;
+    }
+
+    .document-card-meta {
+      font-family: monospace;
+      font-size: 0.75rem;
+      color: var(--color-accent);
+    }
+
+    .document-body {
+      padding: 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .document-detail-text {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .document-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+    }
+
+    .document-btn-expand {
+      background: transparent;
+      border: none;
+      color: var(--color-primary-light);
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .document-btn-expand:hover {
+      color: #fff;
+    }
+
+    /* -------------------------------------------------------------
+       6. CAPITULO 3: ANEXOS & SOPORTE (CHATS, PLAUDS, BIOSERVICIOS)
+       ------------------------------------------------------------- */
+    .nested-tabs-nav {
+      display: flex;
+      border-bottom: 1px solid var(--border-glass);
+      margin-bottom: 1.5rem;
+      gap: 1rem;
+    }
+
+    .nested-tab-btn {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: #64748b;
+      padding: 0.6rem 0.25rem;
+      font-family: var(--font-headers);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .nested-tab-btn:hover {
+      color: #fff;
+    }
+
+    .nested-tab-btn.active {
+      color: var(--color-primary-light);
+      border-bottom-color: var(--color-primary-light);
+    }
+
+    .nested-tab-content {
+      display: none;
+    }
+
+    .nested-tab-content.active {
+      display: block;
+    }
+
+    /* WhatsApp Console */
+    .whatsapp-grid {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      border: 1px solid var(--border-glass);
+      border-radius: 12px;
+      overflow: hidden;
+      min-height: 600px;
+    }
+
+    @media (max-width: 992px) {
+      .whatsapp-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .chat-list-pane {
+      background: rgba(17, 27, 49, 0.4);
+      border-right: 1px solid var(--border-glass);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-pane-header {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border-glass);
+    }
+
+    .chat-items-container {
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .chat-list-item {
+      padding: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .chat-list-item:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .chat-list-item.active {
+      background: rgba(29, 95, 166, 0.15);
+      border-left: 3px solid var(--color-primary-light);
+    }
+
+    .chat-item-title {
+      font-weight: 600;
+      color: #fff;
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .chat-item-snippet {
+      font-size: 0.75rem;
+      color: #64748b;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chat-messages-pane {
+      display: flex;
+      flex-direction: column;
+      background: rgba(5, 7, 15, 0.9);
+    }
+
+    .chat-pane-active-header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border-glass);
+      background: rgba(17, 27, 49, 0.5);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chat-synthesis-box {
+      background: rgba(29, 95, 166, 0.05);
+      border: 1px solid rgba(29, 95, 166, 0.15);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      margin: 1rem 1.5rem;
+      font-size: 0.85rem;
+      color: #cbd5e1;
+    }
+
+    .chat-messages-container {
+      flex: 1;
+      padding: 1.5rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-height: 400px;
+    }
+
+    .whatsapp-message {
+      max-width: 80%;
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+      position: relative;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .whatsapp-message.sent {
+      align-self: flex-end;
+      background: #112a45;
+      border: 1px solid rgba(29, 95, 166, 0.3);
+      border-bottom-right-radius: 2px;
+    }
+
+    .whatsapp-message.received {
+      align-self: flex-start;
+      background: #1a1e29;
+      border: 1px solid var(--border-glass);
+      border-bottom-left-radius: 2px;
+    }
+
+    .message-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.25rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .message-sender {
+      color: var(--color-primary-light);
+    }
+
+    .message-sender.nicolas {
+      color: var(--color-accent);
+    }
+
+    .message-time {
+      color: #475569;
+      margin-left: 1rem;
+    }
+
+    .message-text {
+      color: #e2e8f0;
+      white-space: pre-wrap;
+    }
+
+    .highlight-search {
+      background: rgba(245, 158, 11, 0.3);
+      color: #fff;
+      padding: 0.1rem 0.2rem;
+      border-radius: 2px;
+      font-weight: bold;
+    }
+
+    /* Plaud Audio Transcripts Accordion */
+    .plaud-accordions {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .plaud-card {
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid var(--border-glass);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all var(--transition-normal);
+    }
+
+    .plaud-card.active {
+      border-color: var(--border-glass-bright);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .plaud-header {
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      background: rgba(17, 27, 49, 0.3);
+      user-select: none;
+    }
+
+    .plaud-title-block {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .plaud-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .plaud-arrow {
+      transition: transform var(--transition-normal);
+    }
+
+    .plaud-card.active .plaud-arrow {
+      transform: rotate(180deg);
+    }
+
+    .plaud-body {
+      display: none;
+      padding: 1.5rem;
+      border-top: 1px solid var(--border-glass);
+    }
+
+    .plaud-card.active .plaud-body {
+      display: block;
+      animation: slideDown 0.3s ease-out;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .plaud-summary {
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 3px solid var(--color-primary-light);
+      padding: 1rem;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      margin-bottom: 1.25rem;
+    }
+
+    .plaud-quote-box {
+      background: rgba(244, 63, 94, 0.03);
+      border: 1px solid rgba(244, 63, 94, 0.15);
+      border-left: 3px solid var(--color-danger);
+      padding: 1rem;
+      border-radius: 0 8px 8px 0;
+      margin-top: 0.75rem;
+    }
+
+    .plaud-quote-header {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-danger);
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+      letter-spacing: 0.05em;
+    }
+
+    .plaud-quote-text {
+      font-size: 0.85rem;
+      color: #e2e8f0;
+      font-style: italic;
+    }
+
+    /* -------------------------------------------------------------
+       7. FOOTER SECTION
+       ------------------------------------------------------------- */
+    footer {
+      margin-top: 4rem;
+      border-top: 1px solid var(--border-glass);
+      padding-top: 2rem;
+      text-align: center;
+      color: #475569;
+      font-size: 0.85rem;
+    }
+
+    footer p {
+      color: #475569;
+    }
+  </style>
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <script src="../../auth.js"></script>
+<style id="oreka-private-shell-style">
+  .oreka-private-shell {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    background: rgba(14, 13, 11, 0.92);
+    color: #eedacf;
+    border-bottom: 1px solid rgba(231, 123, 50, 0.22);
+    backdrop-filter: blur(10px);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .oreka-private-shell a {
+    color: #eedacf;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .oreka-private-shell a:hover {
+    color: #ffffff;
+  }
+
+  .oreka-private-shell .divider {
+    width: 1px;
+    height: 14px;
+    background: rgba(238, 218, 207, 0.24);
+  }
+
+  .oreka-private-shell .title {
+    margin-left: auto;
+    color: rgba(238, 218, 207, 0.82);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="oreka-private-shell">
+  <a href="/privado/">Privado</a>
+  <span class="divider"></span>
+  <a href="/privado/entregables/">Entregables</a>
+  <span class="title">Civil penal Don Carlos / Don Clan</span>
+</div>
+
+
+  <div class="container">
+    
+    <!-- -----------------------------------------------------------
+         MAIN HEADER
+         ----------------------------------------------------------- -->
+    <header>
+      <div class="header-logo-row">
+        <div>
+          <span class="badge badge-primary" style="margin-bottom: 0.5rem;">Expediente de Defensa Penal y Civil</span>
+          <h1 id="main-title">Dossier Legal y Contable: Caso Don Carlos / Don Clan</h1>
+          <p style="margin-bottom: 0;">Analisis Forense Multidimensional de Continuidad Operativa, Vaciamiento de Activos e Inconsistencia Financiera</p>
+        </div>
+        <div class="header-meta">
+          <div class="header-meta-item">
+            <svg class="icon" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V5h2v4z"/></svg>
+            <span>Estado: <strong>Estrategia Activa</strong></span>
+          </div>
+          <div class="header-meta-item">
+            <svg class="icon" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9zM4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2H4zm1 2h10v2H5V7zm10 8H5V10h10v5z"/></svg>
+            <span>Cliente: <strong>Nicolas Le Baux / NLB Inversiones</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Navigation Tabs -->
+      <nav class="tabs-nav" aria-label="Navegacion Principal">
+        <button class="tab-btn active" data-tab="tab-finance" id="nav-btn-finance">
+          <svg class="icon" viewBox="0 0 20 20"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/><path d="M12 2.252A8.001 8.001 0 0117.748 8H12V2.252z"/></svg>
+          Capitulo 1: Radiografia Financiera
+        </button>
+        <button class="tab-btn" data-tab="tab-legal" id="nav-btn-legal">
+          <svg class="icon" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 110-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg>
+          Capitulo 2: Dossier Legal
+        </button>
+        <button class="tab-btn" data-tab="tab-annex" id="nav-btn-annex">
+          <svg class="icon" viewBox="0 0 20 20"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 011 1v3a1 1 0 001 1h1a1 1 0 011 1v3a1 1 0 01-1 1h-1a1 1 0 00-1 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-3a1 1 0 00-1-1H2a1 1 0 01-1-1v-3a1 1 0 011-1h1a1 1 0 001-1V7z"/></svg>
+          Capitulo 3: Anexos y Soporte
+        </button>
+      </nav>
+    </header>
+
+    <!-- -----------------------------------------------------------
+         CAPITULO 1: RADIOGRAFIA FINANCIERA
+         ----------------------------------------------------------- -->
+    <main class="tab-content active" id="tab-finance">
+      
+      <div class="grid-2col">
+        
+        <!-- Estado de Resultados Reconstruido -->
+        <section class="glass-card" id="sec-tamarugo-eerr">
+          <h2>
+            <svg class="icon" style="color: var(--color-primary-light);" viewBox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zm6-4a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zm6-3a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
+            EERR de Tamarugo SpA (RUT 77.626.667-1)
+          </h2>
+          <p>
+            Reconstruccion forense de la situacion operacional a partir de los libros mayores y cierres contables oficiales de Kame One.
+          </p>
+          
+          <nav class="eerr-toggle-nav" aria-label="Selector de Periodo EERR">
+            <button class="eerr-toggle-btn active" data-eerr="eerr-full">Consolidado 2023 - 2026</button>
+            <button class="eerr-toggle-btn" data-eerr="eerr-2024-8m">Ene - Ago 2024 (Detalle)</button>
+          </nav>
+
+          <!-- Consolidated 2023 - 2026 EERR Table -->
+          <div class="eerr-pane active" id="eerr-full">
+            <div class="table-container">
+              <table id="table-eerr-consolidado">
+                <thead>
+                  <tr>
+                    <th>Concepto Contable (CLP)</th>
+                    <th class="number-col">2023 (Arranque)</th>
+                    <th class="number-col">2024 (Completo)</th>
+                    <th class="number-col">2025 (Completo)</th>
+                    <th class="number-col">2026 (Ene-Abr)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Ingresos / Ventas Afectas</td>
+                    <td class="number-col">$442.158.205</td>
+                    <td class="number-col">$2.798.926.850</td>
+                    <td class="number-col">$3.522.972.928</td>
+                    <td class="number-col">$1.195.886.498</td>
+                  </tr>
+                  <tr>
+                    <td>Costos de Explotacion</td>
+                    <td class="number-col">-$192.168.208</td>
+                    <td class="number-col">-$1.026.762.200</td>
+                    <td class="number-col">-$1.644.767.330</td>
+                    <td class="number-col">-$452.782.232</td>
+                  </tr>
+                  <tr style="font-weight: bold; background: rgba(255,255,255,0.02);">
+                    <td>Margen de Explotacion</td>
+                    <td class="number-col" style="color: #fff;">$249.989.997</td>
+                    <td class="number-col" style="color: #fff;">$1.772.164.650</td>
+                    <td class="number-col" style="color: #fff;">$1.878.205.598</td>
+                    <td class="number-col" style="color: #fff;">$743.104.266</td>
+                  </tr>
+                  <tr>
+                    <td>Gastos Administracion y Ventas</td>
+                    <td class="number-col">-$321.978.578</td>
+                    <td class="number-col">-$711.073.328</td>
+                    <td class="number-col">-$768.713.086</td>
+                    <td class="number-col">-$269.260.374</td>
+                  </tr>
+                  <tr>
+                    <td>Sueldos y Leyes Sociales</td>
+                    <td class="number-col">-$40.160.760</td>
+                    <td class="number-col">-$843.966.145</td>
+                    <td class="number-col">-$1.030.565.053</td>
+                    <td class="number-col">-$268.508.414</td>
+                  </tr>
+                  <tr>
+                    <td>Otros Gastos / Comisiones</td>
+                    <td class="number-col">-$7.425.081</td>
+                    <td class="number-col">-$73.696.104</td>
+                    <td class="number-col">-$95.757.792</td>
+                    <td class="number-col">-$23.082.975</td>
+                  </tr>
+                  <tr style="font-weight: 700; background: rgba(29, 95, 166, 0.1);">
+                    <td>Resultado Operacional Neto</td>
+                    <td class="number-col" style="color: var(--color-danger);">-$119.574.422</td>
+                    <td class="number-col" style="color: var(--color-success);">$143.429.073</td>
+                    <td class="number-col" style="color: var(--color-danger);">-$16.830.333</td>
+                    <td class="number-col" style="color: var(--color-success);">$182.252.503</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="forensic-callout">
+              <strong>Nota Forense de Analisis:</strong> La utilidad operacional del primer cuatrimestre de 2026 ($182,2M CLP) representa una proyeccion anual de $546,7M CLP, demostrando que la operacion es sumamente solvente. En 2025, el mes de diciembre registro $321,5M CLP en costo de venta y $26,8M CLP en gastos no necesarios (Art 21 LIR), lo que provoco el saldo operacional negativo anual de forma artificial.
+            </div>
+          </div>
+
+          <!-- Jan - Aug 2024 EERR Table -->
+          <div class="eerr-pane" id="eerr-2024-8m">
+            <div class="table-container">
+              <table id="table-eerr-8m">
+                <thead>
+                  <tr>
+                    <th>Cuenta / Concepto (Ene-Ago 2024)</th>
+                    <th class="number-col">Monto (CLP)</th>
+                    <th>Porcentaje / Notas</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Ventas Afectas (Ingresos Operativos)</td>
+                    <td class="number-col">$1.837.676.482</td>
+                    <td>100.0% - $229.7M CLP/mes promedio</td>
+                  </tr>
+                  <tr>
+                    <td>Costo de Venta (Insumos/Alimentos/Bebidas)</td>
+                    <td class="number-col">-$673.478.327</td>
+                    <td>36.6% de las ventas</td>
+                  </tr>
+                  <tr style="font-weight: bold;">
+                    <td>Margen de Explotacion</td>
+                    <td class="number-col">$1.164.198.155</td>
+                    <td>63.4% del ingreso bruto</td>
+                  </tr>
+                  <tr>
+                    <td>Arriendos (Gasto Operativo Local)</td>
+                    <td class="number-col">-$215.654.198</td>
+                    <td>$26.9M CLP/mes promedio (Gasto principal)</td>
+                  </tr>
+                  <tr>
+                    <td>Honorarios Profesionales</td>
+                    <td class="number-col">-$84.389.495</td>
+                    <td>Gasto alto de asesoria/defensa corporativa</td>
+                  </tr>
+                  <tr>
+                    <td>Multas e Intereses</td>
+                    <td class="number-col">-$15.582.128</td>
+                    <td>Evidencia cargos morosos asumidos por la SpA</td>
+                  </tr>
+                  <tr>
+                    <td>Gastos Legales</td>
+                    <td class="number-col">-$8.829.192</td>
+                    <td>Cargos procesales activos de la administracion</td>
+                  </tr>
+                  <tr>
+                    <td>Sueldos y Leyes Sociales</td>
+                    <td class="number-col">-$534.614.998</td>
+                    <td>Nomina operativa del restaurant</td>
+                  </tr>
+                  <tr style="font-weight: 700; background: rgba(16, 185, 129, 0.1);">
+                    <td>Utilidad Neta del Ejercicio</td>
+                    <td class="number-col">$127.744.009</td>
+                    <td>Utilidad solida en medio del proceso de quiebra de Los Otros</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Related Parties Egress Flow -->
+        <section class="glass-card" id="sec-related-parties">
+          <h2>
+            <svg class="icon" style="color: var(--color-accent);" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L10 10.586 13.586 7H12z" clip-rule="evenodd"/></svg>
+            Egresos a Related Parties (Red Piña)
+          </h2>
+          <p>
+            Trazabilidad de transferencias y egresos forenses identificados desde Tamarugo hacia entidades y personas de la Red Pina.
+          </p>
+          
+          <div class="parties-chart-container" id="parties-chart">
+            
+            <div class="party-bar-item">
+              <div class="party-bar-header">
+                <span class="party-bar-label">Luis Piña Castro (Personal)</span>
+                <span class="party-bar-value">$562.539.048</span>
+              </div>
+              <div class="party-bar-outer">
+                <div class="party-bar-inner" data-percentage="100%"></div>
+              </div>
+              <span class="party-bar-detail">Identificado en cartolas bancarias. Incluye $55.180.000 como anticipos de honorarios sin devolver en libro mayor.</span>
+            </div>
+
+            <div class="party-bar-item">
+              <div class="party-bar-header">
+                <span class="party-bar-label">Servicios Electricos / SEP SpA</span>
+                <span class="party-bar-value">$201.000.000</span>
+              </div>
+              <div class="party-bar-outer">
+                <div class="party-bar-inner" data-percentage="35.7%"></div>
+              </div>
+              <span class="party-bar-detail">Flujos por servicios e instalaciones de la red. Cruzado con cuenta "Otros por cobrar empresas" de $593.827.410.</span>
+            </div>
+
+            <div class="party-bar-item">
+              <div class="party-bar-header">
+                <span class="party-bar-label">Inversiones Cadaques SpA</span>
+                <span class="party-bar-value">$195.724.437</span>
+              </div>
+              <div class="party-bar-outer">
+                <div class="party-bar-inner" data-percentage="34.8%"></div>
+              </div>
+              <span class="party-bar-detail">Pagos efectuados desde Banco Santander. Corresponde a compras y margen logistico intermedio.</span>
+            </div>
+
+            <div class="party-bar-item">
+              <div class="party-bar-header">
+                <span class="party-bar-label">Daniel Cavieres (Bodeguero/Caja)</span>
+                <span class="party-bar-value">$130.321.193</span>
+              </div>
+              <div class="party-bar-outer">
+                <div class="party-bar-inner" data-percentage="23.2%"></div>
+              </div>
+              <span class="party-bar-detail">Monto acumulado en cartolas. Coincide con la cuenta "Fondos por Rendir" que tiene un saldo abierto de $82.699.757.</span>
+            </div>
+
+            <div class="party-bar-item">
+              <div class="party-bar-header">
+                <span class="party-bar-label">Bioservicios Industriales SpA</span>
+                <span class="party-bar-value">$103.500.000</span>
+              </div>
+              <div class="party-bar-outer">
+                <div class="party-bar-inner" data-percentage="18.4%" style="background: linear-gradient(90deg, var(--color-warning), #fbbf24);"></div>
+              </div>
+              <span class="party-bar-detail">Traspasos de caja directos. BioServicios abono $62.604.833, resultando en un neto recibido por Tamarugo de $20.456.197.</span>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Falsas Imputaciones & Elusion -->
+      <div class="grid-2col">
+        
+        <!-- Falsas Imputaciones Card -->
+        <section class="glass-card" style="border-color: rgba(245, 158, 11, 0.3);" id="sec-false-imputations">
+          <h2>
+            <svg class="icon" style="color: var(--color-warning);" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+            Las Falsas Imputaciones Contables a Nicolas Le Baux
+          </h2>
+          <p>
+            Descuadre forense injustificado detectado en los registros internos Kame de Tamarugo SpA en perjuicio del socio Nicolas Le Baux.
+          </p>
+
+          <div class="table-container" style="margin-bottom: 1.5rem;">
+            <table id="table-descuadre">
+              <thead>
+                <tr>
+                  <th>Origen del Registro</th>
+                  <th class="number-col">Movimientos</th>
+                  <th class="number-col">Debe / Imputaciones</th>
+                  <th class="number-col">Haber / Abonos</th>
+                  <th class="number-col">Saldo Neto</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Cartola Bancaria Real (Santander)</td>
+                  <td class="number-col">14</td>
+                  <td class="number-col">$0</td>
+                  <td class="number-col">$22.304.054</td>
+                  <td class="number-col" style="color: var(--color-success); font-weight: bold;">$22.304.054 (Recibido real)</td>
+                </tr>
+                <tr>
+                  <td>Libro Mayor Tamarugo (Kame)</td>
+                  <td class="number-col">52</td>
+                  <td class="number-col">$51.080.511</td>
+                  <td class="number-col">$22.443.449</td>
+                  <td class="number-col" style="color: var(--color-danger); font-weight: bold;">$28.637.062 (Deuda ficticia)</td>
+                </tr>
+                <tr style="background: rgba(244, 63, 94, 0.08); font-weight: bold;">
+                  <td>Brecha Forense Injustificada</td>
+                  <td class="number-col">38</td>
+                  <td class="number-col" style="color: var(--color-danger); font-family: monospace;">+$28.776.457</td>
+                  <td class="number-col">+$139.395</td>
+                  <td class="number-col" style="color: var(--color-danger);">-$28.776.457 (Descuadre)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 style="font-size: 1rem; color: #cbd5e1; margin-bottom: 0.5rem;">Ejemplo de Asiento Sospechoso en el Mayor:</h3>
+          <div class="glass-card" style="padding: 1rem; background: rgba(5,7,15,0.6); border-radius: 8px; font-family: monospace; font-size: 0.85rem; margin-bottom: 1.25rem;">
+            <strong>Voucher / Comprobante N° 694 (Fecha: 2023-08-21)</strong><br>
+            Glosa: "Fondo por rendir NICOLAS"<br>
+            Cuenta: 1.01.01.10 Fondos por Rendir (RUT 14.714.215-3)<br>
+            Monto Cargo: $1.000.000 CLP al Debe<br>
+            Estado: Pendiente sin firmas, sin cuenta de destino real, ni comprobante bancario adjunto.
+          </div>
+
+          <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-glass); padding: 1rem; border-radius: 8px;">
+            <strong style="color: #fff; font-size: 0.9rem;">Declaracion Categorica de Nicolas:</strong>
+            <p style="font-size: 0.85rem; margin-bottom: 0; margin-top: 0.25rem; font-style: italic;">
+              "Nunca recibi esos fondos de caja. No existe firma de recibo de esa plata en Kame ni firma fisica alguna. La administracion utilizo mi nombre sin mi conocimiento para ocultar retiros o desvios informales de fondos de la contraparte."
+            </p>
+          </div>
+        </section>
+        
+        <!-- Elusion & Embargo / Cadaques Card -->
+        <section class="glass-card" id="sec-elusion- cadaques">
+          <h2>
+            <svg class="icon" style="color: var(--color-danger);" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12 2a5 5 0 00-5 5v3H6a2 2 0 00-2 2v6a2 2 0 002 2h8a2 2 0 002-2v-6a2 2 0 00-2-2h-1V7a5 5 0 00-5-5zm3 8V7a3 3 0 10-6 0v3h6z" clip-rule="evenodd"/></svg>
+            Operativa de Elusion y Deuda Cadaques
+          </h2>
+          <p>
+            Estructura de elusion para esquivar el embargo de la TGR y reconocimiento de deudas con partes vinculadas.
+          </p>
+
+          <h3 style="font-size: 1.1rem; color: #fff;">Esquema de Elusion ante el Embargo TGR ($294,1M CLP)</h3>
+          <div class="flowchart-container" id="elusion-flowchart">
+            
+            <div class="flowchart-step">
+              <div class="flowchart-node danger">!</div>
+              <div class="flowchart-info">
+                <div class="flowchart-title">Marzo 2024: Embargo TGR sobre Los Otros SpA</div>
+                <div class="flowchart-desc">La Tesoreria General de la Republica traba un embargo por $294.196.517 (Exp. 10072-2024 Las Condes) congelando la cuenta corriente y las ventas Transbank de Los Otros SpA en el local de Isidora Goyenechea 2895.</div>
+              </div>
+            </div>
+
+            <div class="flowchart-step">
+              <div class="flowchart-node warning">→</div>
+              <div class="flowchart-info">
+                <div class="flowchart-title">Uso de Giuseppe Gambino / Tamarugo SpA como Puente</div>
+                <div class="flowchart-desc">Se activa Giuseppe SpA (creada por Guillermo en 2022 y renombrada a Tamarugo SpA por Luis Pina en dic-2023) como sociedad operadora puente para desviar la facturacion del local y eludir la accion del fisco.</div>
+              </div>
+            </div>
+
+            <div class="flowchart-step">
+              <div class="flowchart-node">✓</div>
+              <div class="flowchart-info">
+                <div class="flowchart-title">Evidencia por Chat de la Instruccion de la Contadora</div>
+                <div class="flowchart-desc">La contadora Diana Mendoza instruye explicitamente por chat: <strong>"seguir usando Giuseppe porq el embargo sigue el curso"</strong> (17-ago-2023), y coordina triangulaciones bancarias de desvio de fondos para proveedores.</div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="glass-card" style="margin-top: 1.5rem; padding: 1.25rem; border-color: rgba(29, 95, 166, 0.3); background: rgba(17, 27, 49, 0.4);">
+            <h3 style="font-size: 1rem; color: #fff; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+              <svg class="icon" style="color: var(--color-primary-light);" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 110-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg>
+              La Deuda con Inversiones Cadaques SpA
+            </h3>
+            <p style="font-size: 0.85rem; margin-bottom: 0; line-height: 1.5;">
+              El <strong>21 de junio de 2024</strong> se suscribe un reconocimiento de deuda notarial donde **Tamarugo SpA** asume un saldo insoluto de **$16.466.735 CLP** con Cadaques SpA (sobre una deuda original documentada por compras logísticas de $32.933.470 CLP). Este documento cuenta con una clausula de aceleracion de saldo total e intereses por mora en caso de retraso en las cuotas.
+            </p>
+          </div>
+        </section>
+
+      </div>
+
+    </main>
+
+    <!-- -----------------------------------------------------------
+         CAPITULO 2: DOSSIER LEGAL Y EVIDENCIAS
+         ----------------------------------------------------------- -->
+    <main class="tab-content" id="tab-legal">
+      
+      <!-- Interactive timeline of societies -->
+      <section class="glass-card" style="margin-bottom: 2rem;" id="sec-societies-timeline">
+        <h2>
+          <svg class="icon" style="color: var(--color-primary-light);" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1h2a1 1 0 001-1V2zm3 0a1 1 0 00-1-1H7a1 1 0 00-1 1v14a1 1 0 001 1h2a1 1 0 001-1V2zm3 0a1 1 0 00-1-1h-2a1 1 0 00-1 1v14a1 1 0 001 1h2a1 1 0 001-1V2zm3 0a1 1 0 00-1-1h-2a1 1 0 00-1 1v14a1 1 0 001 1h2a1 1 0 001-1V2z" clip-rule="evenodd"/></svg>
+          Linea de Tiempo Societaria del Despojo
+        </h2>
+        <p>
+          Evolucion y hitos clave de constituciones, cesiones de acciones e hitos operacionales del entramado empresarial.
+        </p>
+
+        <div class="timeline-container" id="timeline">
+          
+          <div class="timeline-card primary">
+            <div class="timeline-date">Octubre 2019</div>
+            <h3 class="timeline-card-title">Los Otros SpA</h3>
+            <div class="timeline-card-desc">
+              Constitucion de la operadora original del restaurant Don Carlos. Acciones: Francisco Rodriguez (66.5%), Guillermo Claverie (20%) y Nicolas Le Baux (13.5%). Nicolas ingreso aportando $45.000.000 en efectivo.
+            </div>
+          </div>
+
+          <div class="timeline-card warning">Febrero 2022</div>
+          <h3 class="timeline-card-title">Inversiones Dax SpA</h3>
+          <div class="timeline-card-desc">
+            Constituida por Nicolas al 100% como vehiculo para el Proyecto Espoz (Vitacura) que nunca abrio. Los Otros SpA financio retiros para Espoz por $32.7M en Q1 2023, cruzado con arriendos de 180 UF.
+          </div>
+
+          <div class="timeline-card danger">Agosto 2022</div>
+          <h3 class="timeline-card-title">Fundacion Giuseppe SpA</h3>
+          <div class="timeline-card-desc">
+            Guillermo Claverie constituye Giuseppe unilateralmente (100% acciones, $120M capital). Usada en 2023 para eludir embargo de TGR. Piña asume en dic-2023, renombrandola a Tamarugo SpA.
+          </div>
+
+          <div class="timeline-card success">Enero 2024</div>
+          <h3 class="timeline-card-title">Cesion express Girona</h3>
+          <div class="timeline-card-desc">
+            BCN SpA cede en un solo dia el 80% de Girona (dueña de marcas) a Luis Piña (16.2%) y BIORCA SpA (63.8%), violando el derecho de preferencia de Nicolas (Art. 9). Se traspasa local de Los Otros a Giuseppe.
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Urgent Red Alerts -->
+      <section class="glass-card" style="margin-bottom: 2rem;" id="sec-red-alerts">
+        <h2>
+          <svg class="icon" style="color: var(--color-danger);" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+          Alertas Rojas de Maxima Urgencia
+        </h2>
+        <p>
+          Hallazgos probatorios de alto impacto y riesgos criticos detectados directamente en los documentos del expediente.
+        </p>
+
+        <div class="alerts-grid">
+          
+          <div class="alert-red-card">
+            <div class="alert-red-header">
+              <span class="badge badge-danger">Garantia Personal</span>
+              <h3 class="alert-red-title">Claverie como Codeudor</h3>
+            </div>
+            <div class="alert-red-text">
+              Guillermo Claverie es <strong>codeudor solidario personal</strong> del subarrendamiento de Isidora Goyenechea 2985 (suscrito el 2021-06-03). Cualquier deuda insoluta de Los Otros SpA con los arrendadores (Pampa-Carrera/Ivanovic) puede cobrarse directamente sobre su patrimonio personal.
+            </div>
+          </div>
+
+          <div class="alert-red-card">
+            <div class="alert-red-header">
+              <span class="badge badge-danger">Riesgo en Quiebra</span>
+              <h3 class="alert-red-title">Retiros para Espoz / Dax</h3>
+            </div>
+            <div class="alert-red-text">
+              Los retiros desde Los Otros SpA para financiar Dax SpA / Proyecto Espoz (que sumaron **$32.700.000 CLP** solo en el primer trimestre de 2023) corresponden a transferencias expuestas a <strong>acciones de reintegro</strong> en la quiebra al carecer de contratos de mutuo o dividendos formales.
+            </div>
+          </div>
+
+          <div class="alert-red-card">
+            <div class="alert-red-header">
+              <span class="badge badge-danger">Prueba de Fraude</span>
+              <h3 class="alert-red-title">Instruccion de Giuseppe</h3>
+            </div>
+            <div class="alert-red-text">
+              Existe prueba escrita directa de la contadora Diana Mendoza (17-ago-2023) instruyendo el desvio comercial por chat: <strong>"seguir usando Giuseppe porq el embargo sigue el curso."</strong> Esta admision es clave para sostener fraude de acreedores y nulidad por continuacion de empresa.
+            </div>
+          </div>
+
+          <div class="alert-red-card">
+            <div class="alert-red-header">
+              <span class="badge badge-danger">Conflicto Arbitral</span>
+              <h3 class="alert-red-title">Rol de Yeny Bobadilla</h3>
+            </div>
+            <div class="alert-red-text">
+              Yeny Bobadilla aparece como mandataria especial de Luis Piña en la junta de Tamarugo SpA (06-ene-2025), siendo **la misma persona** designada originalmente como abogada arbitro de la disputa de subarrendamiento de Isidora. Conflicto de interes grave que vicia su imparcialidad.
+            </div>
+          </div>
+
+          <div class="alert-red-card">
+            <div class="alert-red-header">
+              <span class="badge badge-danger">Activo Robado</span>
+              <h3 class="alert-red-title">Uso Doloso de la Marca</h3>
+            </div>
+            <div class="alert-red-text">
+              Tamarugo SpA exploto la marca **"Don Clan Santiago"** sin autorizacion ni pago de regalias a su titular (NLB Inversiones SpA) durante **17 meses**, generando ventas estimadas de **$2.040 millones de pesos**. El registro marcario oficial de Nicolas esta vigente desde oct-2023.
+            </div>
+          </div>
+
+          <div class="alert-red-card">
+            <div class="alert-red-header">
+              <span class="badge badge-danger">Neteo de Cuentas</span>
+              <h3 class="alert-red-title">Financiamiento a Claverie</h3>
+            </div>
+            <div class="alert-red-text">
+              Nicolas Le Baux financio a Guillermo Claverie a nivel personal por un monto neto de **$27.139.531 CLP** (Scotiabank y Banco de Chile) entre 2021 y 2023. Desmiente la hipotesis de que Nicolas extraia dineros sin compensacion.
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 27 Documents Catalog -->
+      <section class="glass-card" id="sec-documents-catalog">
+        <h2>
+          <svg class="icon" style="color: var(--color-success);" viewBox="0 0 20 20"><path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/><path d="M9 10a1 1 0 011-1h3a1 1 0 110 2h-3a1 1 0 01-1-1zm-2 4a1 1 0 011-1h6a1 1 0 110 2H8a1 1 0 01-1-1z"/></svg>
+          Catalogo Completo de los 27 Documentos de Evidencia
+        </h2>
+        <p>
+          Acceso, buscador reactivo y clasificacion de la totalidad del arsenal documental del expediente.
+        </p>
+
+        <div class="catalog-controls">
+          <div class="search-input-wrapper">
+            <svg class="search-icon-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input type="text" class="search-input" id="doc-search" placeholder="Buscar documentos por titulo, fecha o palabras clave...">
+          </div>
+          <div class="filter-group" id="doc-filters" role="group" aria-label="Filtro de Documentos">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="Societario">Societarios</button>
+            <button class="filter-btn" data-filter="Financiero">Financieros</button>
+            <button class="filter-btn" data-filter="Marcas">Marcas</button>
+            <button class="filter-btn" data-filter="Judicial">Judicial/Laboral</button>
+          </div>
+        </div>
+
+        <div class="documents-grid" id="documents-grid">
+          <!-- Populated by Javascript -->
+        </div>
+      </section>
+
+    </main>
+
+    <!-- -----------------------------------------------------------
+         CAPITULO 3: ANEXOS Y SOPORTE
+         ----------------------------------------------------------- -->
+    <main class="tab-content" id="tab-annex">
+      
+      <div class="glass-card">
+        <!-- Nested Navigation for Annex Sub-Tabs -->
+        <nav class="nested-tabs-nav" aria-label="Sub-navegacion de Anexos">
+          <button class="nested-tab-btn active" data-nested="annex-bioservicios" id="btn-annex-bioservicios">3.1 Bioservicios Industriales</button>
+          <button class="nested-tab-btn" data-nested="annex-chats" id="btn-annex-chats">3.2 Consola de Chats WhatsApp</button>
+          <button class="nested-tab-btn" data-nested="annex-plaud" id="btn-annex-plaud">3.3 Transcripciones Plaud</button>
+        </nav>
+
+        <!-- 3.1 Bioservicios Industriales -->
+        <div class="nested-tab-content active" id="annex-bioservicios">
+          <h3>Realidad Financiera y Patrimonio Embargable de Luis Piña</h3>
+          <p>
+            Desmontando judicialmente el argumento de "Piña insolvente" mediante los balances reales extraídos del sistema Kame One de su empresa Bioservicios Industriales SpA (RUT 77.909.594-0).
+          </p>
+
+          <div class="grid-2col" style="margin-top: 1.5rem; margin-bottom: 0;">
+            <div class="glass-card" style="background: rgba(5,7,15,0.4); padding: 1.5rem;">
+              <h4 style="color: var(--color-accent); font-size: 1.1rem; margin-bottom: 0.75rem;">Cifras del Ejercicio Bioservicios (2025):</h4>
+              <ul style="list-style-type: none; display: flex; flex-direction: column; gap: 0.75rem;">
+                <li style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-glass); padding-bottom: 0.4rem;">
+                  <span>Ventas Declaradas (2025):</span>
+                  <strong style="color: #fff; font-family: monospace;">$2.015.858.343 CLP</strong>
+                </li>
+                <li style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-glass); padding-bottom: 0.4rem;">
+                  <span>Utilidad Neta del Ejercicio:</span>
+                  <strong style="color: var(--color-success); font-family: monospace;">$225.060.473 CLP</strong>
+                </li>
+                <li style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-glass); padding-bottom: 0.4rem;">
+                  <span>Descuadre en Balance 2025:</span>
+                  <strong style="color: var(--color-danger); font-family: monospace;">-$8.442.897 CLP</strong>
+                </li>
+                <li style="display: flex; justify-content: space-between; padding-bottom: 0.4rem;">
+                  <span>Diferencia de Resultado Visible:</span>
+                  <strong style="color: var(--color-warning); font-family: monospace;">$480.596.708 CLP</strong>
+                </li>
+              </ul>
+              <div class="forensic-callout" style="margin-top: 1rem; padding: 0.75rem 1rem;">
+                <strong>Evidencia de Solvencia:</strong> BioServicios Industriales SpA maneja una caja real solida, con factoring con ProntoCapital, mas de $60M en fondos mutuos y un volumen en MercadoLibre de $3.7B CLP en 2025. El relato de insolvencia de la contraparte es mendaz.
+              </div>
+            </div>
+
+            <div class="glass-card" style="background: rgba(5,7,15,0.4); padding: 1.5rem;">
+              <h4 style="color: #fff; font-size: 1.1rem; margin-bottom: 0.75rem;">Flujos Cruzados Tamarugo - Bioservicios:</h4>
+              <p style="font-size: 0.85rem; margin-bottom: 1rem;">
+                El analisis de cartolas 2025 a mayo 2026 demuestra un trafico bidireccional constante que apunta a confusion patrimonial:
+              </p>
+              <div class="table-container">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Flujo</th>
+                      <th class="number-col">Monto (CLP)</th>
+                      <th>Estado / Rastro</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Egresos Tamarugo a Bioservicios</td>
+                      <td class="number-col">-$107.148.636</td>
+                      <td>Cargos en cartola</td>
+                    </tr>
+                    <tr>
+                      <td>Abonos Bioservicios a Tamarugo</td>
+                      <td class="number-col">+$127.604.833</td>
+                      <td>Transferencias recibidas</td>
+                    </tr>
+                    <tr style="font-weight: bold; background: rgba(16, 185, 129, 0.05);">
+                      <td>Financiamiento Neto Recibido</td>
+                      <td class="number-col" style="color: var(--color-success);">+$20.456.197</td>
+                      <td>Neto a favor de Tamarugo</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3.2 Consola de Chats WhatsApp -->
+        <div class="nested-tab-content" id="annex-chats">
+          <h3>Consola Interactiva de Evidencia de Chats</h3>
+          <p>
+            Visualizacion de las conversaciones clave del caso, filtrables y con motor de busqueda dinamico por palabras clave.
+          </p>
+
+          <div class="whatsapp-grid">
+            <!-- Sidebar list of chats -->
+            <div class="chat-list-pane">
+              <div class="chat-pane-header">
+                <input type="text" class="search-input" id="chat-search" placeholder="Filtrar por palabra clave..." style="padding-left: 1rem;">
+              </div>
+              <div class="chat-items-container" id="chat-list-items">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+
+            <!-- Active chat viewport -->
+            <div class="chat-messages-pane" id="chat-viewport">
+              <!-- Populated by JS dynamically based on active selection -->
+            </div>
+          </div>
+        </div>
+
+        <!-- 3.3 Transcripciones Plaud -->
+        <div class="nested-tab-content" id="annex-plaud">
+          <h3>Registro Syntetico de Grabaciones Plaud</h3>
+          <p>
+            Módulos interactivos que compilan y resumen las declaraciones y audios incriminatorios del expediente de defensa.
+          </p>
+
+          <div class="plaud-accordions" id="plaud-accordions-list">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- -----------------------------------------------------------
+         FOOTER
+         ----------------------------------------------------------- -->
+    <footer>
+      <p>Dossier Legal y Contable - Caso Don Carlos / Don Clan - Mayo 2026</p>
+      <p style="font-size: 0.75rem; margin-top: 0.5rem; color: #334155;">Confidencial - Documento de Trabajo para Defensa Juridica Penal y Civil</p>
+    </footer>
+
+  </div>
+
+  <!-- -----------------------------------------------------------
+       JAVASCRIPT LOGIC
+       ----------------------------------------------------------- -->
+  <script>
+    /* =========================================================
+       1. DATA DEFINITIONS (FORENSIC & LEGAL SOURCES)
+       ========================================================= */
+
+    // 27 Legal Documents
+    const documentsData = [
+      { id: 1, file: "sentencia-laboral-los-otros-2022.md", date: "2022-09-06", title: "Sentencia RIT O-6830-2021: Ramos vs Isidora Premium", category: "Judicial", relevance: "Alta", desc: "Fallo que condena a Isidora Premium y absuelve a Los Otros SpA. Revela conflicto de interes de Guillermo Claverie actuando como abogado y socio administrador. Nicolas testifica." },
+      { id: 2, file: "constitucion-girona-2022.md", date: "2022-05-23", title: "Constitucion Inversiones Girona SpA", category: "Societario", relevance: "Critica", desc: "Estatutos de la sociedad Girona SpA, que posee las marcas. Su cesion del 80% express a Piña y Biorca violo el derecho preferente de Nicolas (Art 9)." },
+      { id: 3, file: "constitucion-dax-espoz-2022.md", date: "2022-02-25", title: "Constitucion Inversiones Dax SpA y Proyecto Espoz", category: "Societario", relevance: "Alta", desc: "Constitucion de Dax SpA para el fallido restaurant de Vitacura (Espoz 3060). Los Otros SpA financio arriendos por $32.7M en Q1 2023 expuestos en quiebra." },
+      { id: 4, file: "cesion-acciones-bcn-biorca-girona-2024.md", date: "2024-01-31", title: "Cesion BCN SpA a BIORCA SpA (Girona SpA)", category: "Societario", relevance: "Critica", desc: "BCN cede 63.8% de Girona a BIORCA SpA, cuya unica accionista es Josefina Aliste Bobadilla, hija de la administradora Yeny Bobadilla. Evidente colusion familiar." },
+      { id: 5, file: "cesion-acciones-bcn-pina-girona-2024.md", date: "2024-01-31", title: "Cesion BCN SpA a Luis Pina Castro (Girona SpA)", category: "Societario", relevance: "Critica", desc: "Cesion del 16.2% de Girona por BCN a Luis Piña, coordinada con la transferencia del establecimiento comercial Los Otros a Giuseppe SpA para eludir embargos." },
+      { id: 6, file: "eerr-tamarugo-ene-abr-2026-sintetico.md", date: "2026-05-15", title: "EERR Sintetico Tamarugo SpA (Ene-Abr 2026)", category: "Financiero", relevance: "Alta", desc: "Ventas de $1.195M CLP y utilidad neta de $182M CLP en 4 meses. Desmiente insolvencia de Tamarugo. Nicolas reclama un devengo no pagado de $6.15M/mes." },
+      { id: 7, file: "eerr-tamarugo-enero-agosto-2024.md", date: "2024-08-31", title: "EERR Tamarugo SpA (Enero-Agosto 2024)", category: "Financiero", relevance: "Alta", desc: "Ventas de $1.837M CLP, utilidad de $127,7M CLP y $15,6M en multas e intereses. Demuestra operacion comercial existosa en paralelo a quiebra de Los Otros." },
+      { id: 8, file: "giuseppe-tamarugo-paquete-societario-2022-2025.md", date: "2022-08-02", title: "Paquete Societario Giuseppe/Tamarugo SpA", category: "Societario", relevance: "Critica", desc: "Guillermo funda Giuseppe unilateralmente en 2022. Piña asume en dic-2023 y la renombra a Tamarugo. En enero 2024 simulan compraventa del restaurante." },
+      { id: 9, file: "los-otros-paquete-base-2019-2023.md", date: "2019-10-15", title: "Paquete Base Los Otros SpA (2019-2023)", category: "Societario", relevance: "Alta", desc: "Constitucion por Felix Jara Cadot. Rep. 31.822-2019. Accionistas originales: Francisco Rodriguez (66.5%), Guillermo Claverie (20%) y Nicolas (13.5%)." },
+      { id: 10, file: "neteo-nicolas-guillermo-claverie-bancos.md", date: "2024-11-20", title: "Neteo Bancario Nicolas - Guillermo Claverie", category: "Financiero", relevance: "Alta", desc: "Demuestra transferencias personales netas de Nicolas a Guillermo Claverie por $27.139.531 CLP (Scotiabank y Banco de Chile). Nicolas fue el financiador neto." },
+      { id: 11, file: "querella-nicolas-contra-pina.md", date: "2025-06-18", title: "Querella Criminal Ofensiva contra Luis Pina", category: "Judicial", relevance: "Alta", desc: "Primera querella ofensiva por administracion desleal y negociacion incompatible (abogado Harms). Denuncia uso ilegitimo de la marca Don Clan en local." },
+      { id: 12, file: "minuta-ataque-tamarugo-pina.md", date: "2026-05-17", title: "Minuta de Ataque Tamarugo: Demanda Civil ($234M)", category: "Judicial", relevance: "Critica", desc: "Estrategia civil Pereira/Jano por uso sin licencia de Don Clan Santiago durante 17 meses. Exige $204M de regalias mas $30M de daño moral." },
+      { id: 13, file: "certif-conservador-nicolas-girona-jun2025.md", date: "2025-06-26", title: "Certificado Conservador Comercio Girona SpA", category: "Societario", relevance: "Critica", desc: "Certifica que la designacion de Nicolas como administrador seguia inscrita al 25-jun-2025, legitimando su firma de resciliacion de marca de feb-2025." },
+      { id: 14, file: "citacion-junta-tamarugo-2025.md", date: "2025-01-06", title: "Citacion a Junta Extraordinaria de Tamarugo SpA", category: "Societario", relevance: "Critica", desc: "Pina cita a junta con 86.5% para reformar estatutos. NLB Inversiones (Nicolas) es citada con 13.5%. Yeny Bobadilla actua como mandataria de Pina." },
+      { id: 15, file: "cobro-arriendo-espoz-dax-febrero-2023.md", date: "2023-02-05", title: "Cobro de Arriendo Espoz a Nicolas (Feb 2023)", category: "Financiero", relevance: "Media", desc: "Cobro inicial de 180 UF ($6.354.819) sin multas a nombre de Nicolas por el local Vitacura, emitido por Parque Lo Curro." },
+      { id: 16, file: "cobro-arriendo-espoz-dax-noviembre-2024.md", date: "2024-11-05", title: "Cobro de Arriendo Espoz a Guillermo (Nov 2024)", category: "Financiero", relevance: "Alta", desc: "Cobro de 180 UF mas 305 UF en multas por mora ($18.419.112) a nombre de Guillermo Claverie. Acredita colapso financiero del local." },
+      { id: 17, file: "contrato-subarrendamiento-isidora-premium-los-otros-2021.md", date: "2021-06-03", title: "Subarrendamiento Isidora Premium a Los Otros SpA", category: "Societario", relevance: "Critica", desc: "Contrato fundacional de operacion. Renta 400 UF iniciales. Guillermo codeudor solidario personal. Yeny Bobadilla designada arbitra de la clausula." },
+      { id: 18, file: "correos-certificados-nueva-de-lyon-jul2025.md", date: "2025-07-10", title: "Notificacion por Chilexpress Nueva de Lyon 105", category: "Judicial", relevance: "Alta", desc: "Foto de sobres certificados Chilexpress impresos el 2025-07-10. Desmiente notificaciones procesales eficaces previas." },
+      { id: 19, file: "derecho-autor-manual-marca-don-clan-2025.md", date: "2025-02-24", title: "Derecho de Autor DDI Manual de Marca Don Clan", category: "Marcas", relevance: "Alta", desc: "Inscripcion DDI codigo 72cfhd del manual de marca de Don Clan por Nicolas (TGR $7.629). Evidencia de propiedad intelectual y control de concepto." },
+      { id: 20, file: "embargo-tgr-los-otros-2024.md", date: "2024-03-08", title: "Embargo TGR sobre Los Otros SpA", category: "Financiero", relevance: "Critica", desc: "Acta de embargo preventivo sobre Transbank de Los Otros SpA por $294.196.517. Provoca la migracion de facturacion hacia Giuseppe/Tamarugo." },
+      { id: 21, file: "escrito-inapi-don-carlos-1275668.md", date: "2025-05-07", title: "Objecion INAPI Marca Don Carlos (Victoria Films)", category: "Marcas", relevance: "Alta", desc: "Escrito presentador por Jose Manuel Urenda Ossa objetando la transferencia de marca Don Carlos a Girona SpA en favor de Victoria Films." },
+      { id: 22, file: "finanzas-don-carlos-resumen-flujo-q1-2023.md", date: "2023-04-01", title: "Flujo de Caja Los Otros SpA (Q1 2023)", category: "Financiero", relevance: "Alta", desc: "Muestra retiros no autorizados de Los Otros SpA hacia Dax SpA ($32.7M) y pagos de deudas de Bellavista ($6.3M) durante acumulacion de deudas prevesionales." },
+      { id: 23, file: "inscripcion-giuseppe-tamarugo-registro-comercio.md", date: "2023-12-29", title: "Certificado Modificacion Estatutos Tamarugo SpA", category: "Societario", relevance: "Alta", desc: "Inscripcion en Registro de Comercio de Santiago del cambio de nombre de Giuseppe SpA a Tamarugo SpA y entrada formal de Luis Piña." },
+      { id: 24, file: "junta-extraordinaria-girona-nov2024.md", date: "2024-11-20", title: "Acta de Junta Extraordinaria Girona SpA (Nov 2024)", category: "Societario", relevance: "Critica", desc: "Acta de junta sin citacion de Nicolas. Nombra administradora a Yeny Bobadilla. Nicolas no conocia la participacion de Piña en Girona en esa fecha." },
+      { id: 25, file: "minuta-honorarios-ecclefield-espoz-2022.md", date: "2022-02-15", title: "Minuta de Honorarios Abogado Ecclefield (Espoz)", category: "Societario", relevance: "Media", desc: "Honorarios de UF 100 cobrados a Nicolas Le Baux en febrero 2022 para Dax SpA y patentes en Vitacura. Muestra independencia de gestion." },
+      { id: 26, file: "plan-pago-cadaques-2024.md", date: "2024-06-21", title: "Convenio de Pago Tamarugo a Cadaques SpA", category: "Financiero", relevance: "Alta", desc: "Tamarugo SpA reconoce saldo pendiente de $16.466.735 CLP con Cadaques (original $32.9M CLP). Clausula de aceleracion de saldo total ante mora." },
+      { id: 27, file: "sentencia-laboral-los-otros-2022.md", date: "2022-09-06", title: "Sentencia Laboral Los Otros SpA (RIT O-6830-2021)", category: "Judicial", relevance: "Alta", desc: "Los Otros SpA es absuelta; Isidora Premium es condenada. Guillermo Claverie representa a Los Otros SpA como abogado, configurando conflicto societario." }
+    ];
+
+    // WhatsApp Chats Data
+    const chatsData = [
+      {
+        id: "diana",
+        sender: "Diana Mendoza (Contadora)",
+        snippet: "seguir usando Giuseppe porq el embargo sigue el curso",
+        synthesis: "Diana Mendoza (administradora y contadora). Gestiono pagos, SII e imposiciones. Este chat es clave por contener instrucciones escritas de elusion de embargos mediante el desvio contable a Giuseppe SpA, credenciales del SII en texto claro y balances interempresa.",
+        messages: [
+          { sender: "Diana", text: "Esto es la deuda en tesoreria. Son los ivas que hemos realizado convenio.", time: "2022-07-21 11:32", nicolas: false },
+          { sender: "Diana", text: "Francisco me pidio pagar un leasing de bellavista antes de las 14:00hrs. Son 3.417.620.", time: "2022-07-28 10:14", nicolas: false },
+          { sender: "Nicolas", text: "Ok, pagalo desde Los Otros.", time: "2022-07-28 10:18", nicolas: true },
+          { sender: "Diana", text: "en tesoreria me dijieron q la cuota q se pago en junio con el banco estado... fue la de junio 2024.", time: "2023-08-17 09:44", nicolas: false },
+          { sender: "Nicolas", text: "Chuta ese fui yo", time: "2023-08-17 09:46", nicolas: true },
+          { sender: "Diana", text: "seguir usando Giuseppe porq el embargo sigue el curso.", time: "2023-08-17 15:20", nicolas: false },
+          { sender: "Diana", text: "Claves SII Cadaques RUT 77.427.765-k / clave LomoLiso23. Getnet Giuseppe RUT 124035988 / clave Guillermo2023. Kame Los Otros doncarlos2023", time: "2023-10-11 14:22", nicolas: false },
+          { sender: "Nicolas", text: "Y los ivas que faltan por pagar son Junio, julio y septiembre?", time: "2023-10-30 11:05", nicolas: true },
+          { sender: "Diana", text: "Sip.", time: "2023-10-30 11:07", nicolas: false }
+        ]
+      },
+      {
+        id: "guillermo",
+        sender: "Guillermo Claverie (Socio/Operador)",
+        snippet: "Debemos 312 millones !!!",
+        synthesis: "Guillermo Claverie Bravo (socio del 20% y abogado). Chat privado que documenta la transicion de la cooperacion al conflicto. Admite la deuda de IVA real de $312 millones en 2023 y profiere amenazas de carcel contra Nicolas en julio 2024.",
+        messages: [
+          { sender: "Guillermo", text: "mañana voy a Tesorería a tratar de solucionar la cagada en que nos metiste", time: "2023-08-17 19:15", nicolas: false },
+          { sender: "Guillermo", text: "de lo contrario ya te tendría fuera, es indispensable rayar la cancha y ver como salgo o como tú sales, y como me vas a pagar.", time: "2023-08-18 10:20", nicolas: false },
+          { sender: "Guillermo", text: "Viste la deuda de Iva? Debemos 312 millones !!!", time: "2023-08-18 10:22", nicolas: false },
+          { sender: "Guillermo", text: "ya tomé una decisión con respecto a no seguir vinculados, o sales tú o salgo yo", time: "2023-08-23 16:40", nicolas: false },
+          { sender: "Guillermo", text: "Nicolás, debes restituir los 10 millones que sacaste", time: "2023-10-03 11:32", nicolas: false },
+          { sender: "Guillermo", text: "Oye delincuente, ¿cuando piensas sacarme de aval?", time: "2024-07-19 09:12", nicolas: false },
+          { sender: "Guillermo", text: "dime como me vas a pagar lo que robaste. Sacame de aval. Imagino que te importa tú reputación y tampoco quieres terminar en la carcel", time: "2024-07-19 09:18", nicolas: false }
+        ]
+      },
+      {
+        id: "yeny",
+        sender: "Yeny Bobadilla (Mandataria/Arbitro)",
+        snippet: "Instrucciones de testimonio en juicio laboral",
+        synthesis: "Yeny Macarena Bobadilla (abogada laboralista y mandataria especial). El chat detalla la coordinacion de defensas contra demandas laborales, coaching a Nicolas sobre que declarar en audiencias para evadir la continuidad laboral, y el traspaso societario a Piña.",
+        messages: [
+          { sender: "Yeny", text: "Hola Nicolas. Te paso los documentos del juicio para que los revises.", time: "2021-09-30 11:22", nicolas: false },
+          { sender: "Yeny", text: "Instrucciones de testimonio: Debes insistir en que son sociedades juridicas totalmente distintas. Nicolas actua de forma independiente, no habia relacion directa...", time: "2022-08-25 15:44", nicolas: false },
+          { sender: "Yeny", text: "Excelente! Sentencia favorable Los Otros SpA vs ex-trabajadores Isidora Premium.", time: "2022-09-13 17:05", nicolas: false },
+          { sender: "Nicolas", text: "Yeny, me informaron que hay una orden de incautacion por la moto. Que hacemos?", time: "2025-02-21 11:15", nicolas: true },
+          { sender: "Yeny", text: "Lo reviso inmediatamente con el tribunal. No entregues nada por ahora.", time: "2025-02-21 11:22", nicolas: false }
+        ]
+      },
+      {
+        id: "ogp",
+        sender: "Oficina Gestion de Proveedores (OGP)",
+        snippet: "Migrar proveedores a Cadaques",
+        synthesis: "Oficina de Gestion de Proveedores. Contiene la orden directa de Francisco Rodriguez de migrar toda la facturacion de proveedores hacia Cadaques SpA en mayo 2023 para eludir acciones tributarias, con firmas bancarias presignadas por Louis Le Baux.",
+        messages: [
+          { sender: "Francisco", text: "Debemos migrar los proveedores a Cadaques inmediatamente. Si les pagas y negocias despues no sirve de mucho.", time: "2023-05-15 11:32", nicolas: false },
+          { sender: "Nicolas", text: "Louis, agregale 5% al total neto de Cadaques por concepto 'Servicio Logistico'", time: "2023-06-01 10:14", nicolas: true },
+          { sender: "Louis", text: "Facturas de insumos directos a Los Otros, el resto a Cadaques. Las corcheteamos juntas.", time: "2023-05-12 16:44", nicolas: false },
+          { sender: "Louis", text: "Esta toda la chequera de Cadaques presignada por mi parte antes de viajar.", time: "2023-05-30 09:20", nicolas: false }
+        ]
+      },
+      {
+        id: "directorio",
+        sender: "Directorio DC (Socios)",
+        snippet: "Francisco crea grupo para salida",
+        synthesis: "Directorio DC. Francisco Rodriguez crea este grupo de socios para coordinar de forma dirigida la salida de Nicolas, bloqueando activamente sus pagos e instrumentando a Luis Piña.",
+        messages: [
+          { sender: "Enrique", text: "Francisco no esta tomando las decisiones mas racionales para el negocio en este momento.", time: "2024-01-04 11:05", nicolas: false },
+          { sender: "Francisco", text: "Propongo que Eduardo Escobar compre el 20% de Pina, asi te dejo pavimentado el camino para que le ofrezcas tu parte Nicolas.", time: "2024-05-28 10:12", nicolas: false },
+          { sender: "Eduardo", text: "Ya se hizo la propuesta formal de compra del 20% a Pina.", time: "2024-05-29 11:32", nicolas: false },
+          { sender: "Enrique", text: "Atencion Nicolas. Pina converso con Guillermo sobre la propuesta de Eduardo y prefiere no vender sin su aprobacion.", time: "2024-05-29 15:44", nicolas: false }
+        ]
+      }
+    ];
+
+    // Plaud Recordings Data
+    const plaudData = [
+      {
+        id: "plaud-fiscal",
+        title: "Declaracion Fiscal Querella Pina",
+        summary: "Declaracion ante fiscal Lilian Parra por la querella de Luis Piña. Refuta la imputacion de doble venta de la marca. Expone que la cesion a Girona jul-2024 nunca se pago ni inscribio, y fue formalmente resciliada en feb-2025 ante notario. Acredita que la remocion de Nicolas en Girona fue nula (sin citacion a junta) y que el SII lo mantuvo como representante legal.",
+        quote: "Si la contraparte afirma que fui removido de Girona en feb-2025, deben explicar por que no fui citado a junta y por que el SII me mantuvo en sus registros hasta feb-2026. La resciliacion de marca que firme es plenamente valida y licita."
+      },
+      {
+        id: "plaud-pina",
+        title: "Llamada con Luis Piña (Agosto 2024)",
+        summary: "Grabacion donde Luis Piña Castro admite ser un simple palo blanco que responde a los intereses de Guillermo Claverie y Francisco. Ofrece un 'combo' de salida, presionando a Nicolas con la inminente quiebra de Los Otros SpA para forzarlo a entregar sus marcas y participacion sin compensacion real.",
+        quote: "Pina me dijo directamente en la llamada que la quiebra de Los Otros ya estaba decidida e ingresada, y que debia aceptar el trato que ellos ofrecian de forma inmediata o me quedaria con las manos vacias."
+      },
+      {
+        id: "plaud-salgado",
+        title: "Reuniones con Enrique Salgado",
+        summary: "Mediaciones del abogado Enrique Salgado Navarrete. Enrique ofrece de forma verbal reconocer a Nicolas el 80% de utilidades de Girona en un intento de transar extrajudicialmente, lo que constituye una admision implicita del legitimo derecho de propiedad que Nicolas tiene sobre los activos del restaurant.",
+        quote: "Salgado reconocio que mi posicion era solida y por eso intento mediar ofreciendo participaciones elevadas de Girona, mientras por debajo ejecutaba las cesiones express de Girona a favor de la familia Bobadilla."
+      },
+      {
+        id: "plaud-escobar",
+        title: "Asesoria de Eduardo Escobar (Abril 2024)",
+        summary: "Módulo sobre el rol de Eduardo Escobar como asesor estrategico y testigo clave de Nicolas. Documenta que el pago de honorarios de $1.000.000 (Libro Mayor Tamarugo 2024, Boleta de Honorarios N° 25 de fecha 24-abr-2024) corresponde a sus servicios profesionales legítimos para pavimentar la salida del socio.",
+        quote: "Eduardo actuo siempre en mi beneficio, asesorando la oferta a Pina de compra del 20% para desbloquear mi salida. Sus honorarios de Tamarugo estan respaldados formalmente."
+      }
+    ];
+
+    /* =========================================================
+       2. TAB SWITCHING SYSTEM
+       ========================================================= */
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active class from buttons and contents
+        tabButtons.forEach(b => b.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+
+        // Add active to clicked
+        btn.classList.add('active');
+        const targetTab = btn.getAttribute('data-tab');
+        document.getElementById(targetTab).classList.add('active');
+
+        // Trigger chart animation if clicking Capitulo 1
+        if (targetTab === 'tab-finance') {
+          animateChartBars();
+        }
+      });
+    });
+
+    // Helper: Animate Related Party chart bars on show
+    function animateChartBars() {
+      const bars = document.querySelectorAll('.party-bar-inner');
+      bars.forEach(bar => {
+        const percentage = bar.getAttribute('data-percentage');
+        bar.style.width = percentage;
+      });
+    }
+
+    // Trigger chart animation on load
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(animateChartBars, 200);
+      renderDocuments("all");
+      renderChatsList();
+      renderActiveChat("diana");
+      renderPlaudAccordions();
+    });
+
+    /* =========================================================
+       3. CAPITULO 1: EERR TOGGLE VIEW
+       ========================================================= */
+    const eerrToggleButtons = document.querySelectorAll('.eerr-toggle-btn');
+    const eerrPanes = document.querySelectorAll('.eerr-pane');
+
+    eerrToggleButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        eerrToggleButtons.forEach(b => b.classList.remove('active'));
+        eerrPanes.forEach(p => p.classList.remove('active'));
+
+        btn.classList.add('active');
+        const targetEerr = btn.getAttribute('data-eerr');
+        document.getElementById(targetEerr).classList.add('active');
+      });
+    });
+
+    /* =========================================================
+       4. CAPITULO 2: 27 DOCUMENTS ENGINE (SEARCH & FILTER)
+       ========================================================= */
+    const docSearchInput = document.getElementById('doc-search');
+    const filterButtons = document.querySelectorAll('#doc-filters .filter-btn');
+
+    let currentDocFilter = "all";
+    let docSearchQuery = "";
+
+    // Event Listeners for Filters
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentDocFilter = btn.getAttribute('data-filter');
+        filterAndRenderDocs();
+      });
+    });
+
+    // Search input reactive filtering
+    docSearchInput.addEventListener('input', (e) => {
+      docSearchQuery = e.target.value.toLowerCase();
+      filterAndRenderDocs();
+    });
+
+    function filterAndRenderDocs() {
+      const filtered = documentsData.filter(doc => {
+        const matchesFilter = (currentDocFilter === "all" || doc.category === currentDocFilter);
+        const matchesSearch = (
+          doc.title.toLowerCase().includes(docSearchQuery) ||
+          doc.file.toLowerCase().includes(docSearchQuery) ||
+          doc.desc.toLowerCase().includes(docSearchQuery) ||
+          doc.date.includes(docSearchQuery)
+        );
+        return matchesFilter && matchesSearch;
+      });
+
+      renderFilteredDocs(filtered);
+    }
+
+    function renderFilteredDocs(docs) {
+      const grid = document.getElementById('documents-grid');
+      grid.innerHTML = "";
+
+      if (docs.length === 0) {
+        grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: #64748b;">No se encontraron documentos legal que coincidan con la busqueda.</div>`;
+        return;
+      }
+
+      docs.forEach(doc => {
+        const card = document.createElement('article');
+        card.className = "document-card";
+        
+        let relBadgeClass = "badge-primary";
+        if (doc.relevance === "Critica") relBadgeClass = "badge-danger";
+        if (doc.relevance === "Alta") relBadgeClass = "badge-warning";
+
+        card.innerHTML = `
+          <div class="document-header">
+            <div class="document-title-area">
+              <span class="document-card-meta">${doc.date} | ${doc.file}</span>
+              <h3 class="document-card-title">${doc.title}</h3>
+            </div>
+            <span class="badge ${relBadgeClass}">${doc.relevance}</span>
+          </div>
+          <div class="document-body">
+            <p class="document-detail-text">${doc.desc}</p>
+            <div class="document-footer">
+              <span class="badge badge-primary" style="opacity: 0.85;">${doc.category}</span>
+              <span style="color: #64748b; font-family: monospace;">ID DOC: 0${doc.id}</span>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function renderDocuments(filter) {
+      currentDocFilter = filter;
+      filterAndRenderDocs();
+    }
+
+    /* =========================================================
+       5. CAPITULO 3: BIOSERVICIOS & CHATS CONSOLE & PLAUDS
+       ========================================================= */
+
+    // Annex Sub-tab swapping
+    const nestedTabButtons = document.querySelectorAll('.nested-tab-btn');
+    const nestedTabContents = document.querySelectorAll('.nested-tab-content');
+
+    nestedTabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        nestedTabButtons.forEach(b => b.classList.remove('active'));
+        nestedTabContents.forEach(c => c.classList.remove('active'));
+
+        btn.classList.add('active');
+        const targetNested = btn.getAttribute('data-nested');
+        document.getElementById(targetNested).classList.add('active');
+      });
+    });
+
+    // Chats rendering
+    let activeChatId = "diana";
+    let chatSearchQuery = "";
+
+    const chatSearchInput = document.getElementById('chat-search');
+    chatSearchInput.addEventListener('input', (e) => {
+      chatSearchQuery = e.target.value.toLowerCase();
+      renderChatsList();
+      renderActiveChat(activeChatId);
+    });
+
+    function renderChatsList() {
+      const container = document.getElementById('chat-list-items');
+      container.innerHTML = "";
+
+      chatsData.forEach(chat => {
+        const item = document.createElement('div');
+        item.className = `chat-list-item ${chat.id === activeChatId ? 'active' : ''}`;
+        item.setAttribute('data-chat-id', chat.id);
+        
+        item.innerHTML = `
+          <div class="chat-item-title">${chat.sender}</div>
+          <div class="chat-item-snippet">${chat.snippet}</div>
+        `;
+
+        item.addEventListener('click', () => {
+          activeChatId = chat.id;
+          renderChatsList();
+          renderActiveChat(activeChatId);
+        });
+
+        container.appendChild(item);
+      });
+    }
+
+    function renderActiveChat(chatId) {
+      const view = document.getElementById('chat-viewport');
+      const chat = chatsData.find(c => c.id === chatId);
+
+      if (!chat) return;
+
+      let highlightedMessages = chat.messages;
+      
+      // If search query exists, filter messages and highlight matches
+      if (chatSearchQuery) {
+        highlightedMessages = chat.messages.map(msg => {
+          if (msg.text.toLowerCase().includes(chatSearchQuery)) {
+            // Safe replace without HTML injection
+            const regex = new RegExp(`(${escapeRegExp(chatSearchQuery)})`, 'gi');
+            const highlightedText = msg.text.replace(regex, '<span class="highlight-search">$1</span>');
+            return { ...msg, highlightedText };
+          }
+          return msg;
+        });
+      }
+
+      view.innerHTML = `
+        <div class="chat-pane-active-header">
+          <h4 style="margin: 0; font-size: 1.1rem; color: #fff;">${chat.sender}</h4>
+          <span class="badge badge-primary">Conversacion Registrada</span>
+        </div>
+        <div class="chat-synthesis-box">
+          <strong>Sintesis del Chat:</strong> ${chat.synthesis}
+        </div>
+        <div class="chat-messages-container" id="chat-messages-scroll">
+          ${highlightedMessages.map(msg => {
+            const senderClass = msg.nicolas ? 'nicolas' : '';
+            const msgClass = msg.nicolas ? 'sent' : 'received';
+            const displayText = msg.highlightedText || msg.text;
+
+            return `
+              <div class="whatsapp-message ${msgClass}">
+                <div class="message-meta">
+                  <span class="message-sender ${senderClass}">${msg.sender}</span>
+                  <span class="message-time">${msg.time}</span>
+                </div>
+                <div class="message-text">${displayText}</div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+
+      // Auto-scroll to bottom of chat
+      const scrollBox = document.getElementById('chat-messages-scroll');
+      if (scrollBox) {
+        scrollBox.scrollTop = scrollBox.scrollHeight;
+      }
+    }
+
+    function escapeRegExp(string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    // Plaud accordions rendering
+    function renderPlaudAccordions() {
+      const container = document.getElementById('plaud-accordions-list');
+      container.innerHTML = "";
+
+      plaudData.forEach((plaud, index) => {
+        const card = document.createElement('div');
+        card.className = `plaud-card ${index === 0 ? 'active' : ''}`;
+        
+        card.innerHTML = `
+          <div class="plaud-header">
+            <div class="plaud-title-block">
+              <svg class="icon" style="color: var(--color-accent);" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 11-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.895-4.21-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 111.415 1.415A4.973 4.973 0 0115 10a4.973 4.973 0 01-1.414 3.536 1 1 0 11-1.415-1.414A2.973 2.973 0 0013 10c0-.828-.335-1.58-.879-2.121a1 1 0 010-1.415z" clip-rule="evenodd"/></svg>
+              <h4 class="plaud-title">${plaud.title}</h4>
+            </div>
+            <svg class="plaud-arrow icon" style="color: #64748b;" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          </div>
+          <div class="plaud-body">
+            <div class="plaud-summary">
+              <strong>Sintesis del Audio:</strong> ${plaud.summary}
+            </div>
+            <div class="plaud-quote-box">
+              <div class="plaud-quote-header">Declaracion Mas Critica</div>
+              <div class="plaud-quote-text">"${plaud.quote}"</div>
+            </div>
+          </div>
+        `;
+
+        const header = card.querySelector('.plaud-header');
+        header.addEventListener('click', () => {
+          const isActive = card.classList.contains('active');
+          
+          // Collapse all
+          document.querySelectorAll('.plaud-card').forEach(c => c.classList.remove('active'));
+          
+          if (!isActive) {
+            card.classList.add('active');
+          }
+        });
+
+        container.appendChild(card);
+      });
+    }
+
+  </script>
+</body>
+</html>

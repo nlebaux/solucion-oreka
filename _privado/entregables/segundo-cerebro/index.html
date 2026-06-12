@@ -1,0 +1,3151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cerebro NLB2 - Panel de Control & Mapa de Contextos</title>
+    <!-- Google Fonts: Outfit (headings) & Plus Jakarta Sans (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- GFM Markdown Parser (marked.js) from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Chart.js from CDN for metrics visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        /* Modern Premium CSS System - Dark Theme Base */
+        :root {
+            --bg-base: #070b13;
+            --bg-surface: rgba(13, 20, 35, 0.7);
+            --bg-surface-solid: #0d1423;
+            --bg-card: rgba(19, 29, 51, 0.6);
+            --bg-card-hover: rgba(27, 41, 72, 0.8);
+            
+            --border-glow: rgba(99, 102, 241, 0.2);
+            --border-soft: rgba(255, 255, 255, 0.06);
+            --border-light: rgba(255, 255, 255, 0.12);
+            
+            /* Curated HSL Color Palettes */
+            --accent-holding: #818cf8;      /* NLB SpA - Indigo */
+            --accent-holding-glow: rgba(129, 140, 248, 0.35);
+            
+            --accent-horeca: #f59e0b;       /* Horeca - Amber */
+            --accent-horeca-glow: rgba(245, 158, 11, 0.35);
+            
+            --accent-cadaques: #10b981;     /* Cadaqués - Emerald */
+            --accent-cadaques-glow: rgba(16, 185, 129, 0.35);
+            
+            --accent-oreka: #06b6d4;        /* Oreka - Cyan */
+            --accent-oreka-glow: rgba(6, 182, 212, 0.35);
+            
+            --accent-danger: #f43f5e;       /* Blockers / Don Clan - Rose */
+            --accent-danger-glow: rgba(244, 63, 94, 0.35);
+            
+            --accent-neutral: #94a3b8;      /* Default - Slate */
+            --accent-neutral-glow: rgba(148, 163, 184, 0.35);
+            
+            /* Text Hierarchy */
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            --text-cyan: #22d3ee;
+            
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-display: 'Outfit', sans-serif;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+            --shadow-premium: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+            --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.15);
+        }
+
+        /* Base Resets & Layout */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.03) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Sidebar Navigation */
+        aside.sidebar {
+            width: 280px;
+            background: var(--bg-surface);
+            border-right: 1px solid var(--border-soft);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            z-index: 10;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 3rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-holding), var(--accent-oreka));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 80%);
+            animation: rotateGlow 8s linear infinite;
+        }
+
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .logo-text h1 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #ffffff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text p {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: -2px;
+        }
+
+        nav.nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex-grow: 1;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.85rem 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border: 1px solid transparent;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .nav-item svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-item:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.04);
+        }
+
+        .nav-item.active {
+            color: #ffffff;
+            background: rgba(99, 102, 241, 0.15);
+            border-color: rgba(99, 102, 241, 0.25);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.05);
+        }
+
+        .nav-item.active svg {
+            stroke: var(--accent-holding);
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-soft);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--accent-oreka);
+        }
+
+        .profile-info h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .profile-info p {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* Main Content Container */
+        main.main-content {
+            margin-left: 280px;
+            flex-grow: 1;
+            padding: 2rem 3rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Header Area */
+        header.top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-soft);
+        }
+
+        .header-title h2 {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-title p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .status-pill {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            padding: 0.4rem 0.8rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #10b981;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0.6; }
+            50% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 14px #10b981; }
+            100% { transform: scale(0.9); opacity: 0.6; }
+        }
+
+        .live-time {
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-soft);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+        }
+
+        /* Grid Dashboard Cards (Tab Viewports) */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* KPI Quick Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent-neutral);
+        }
+
+        .metric-card.holding::before { background: var(--accent-holding); }
+        .metric-card.horeca::before { background: var(--accent-horeca); }
+        .metric-card.cadaques::before { background: var(--accent-cadaques); }
+        .metric-card.oreka::before { background: var(--accent-oreka); }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--border-light);
+            box-shadow: var(--shadow-premium);
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .metric-value {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .metric-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: auto;
+            padding-top: 0.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .badge {
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge.active { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+        .badge.preactive { background: rgba(6, 182, 212, 0.15); color: #22d3ee; }
+        .badge.legal { background: rgba(129, 140, 248, 0.15); color: #818cf8; }
+        .badge.critical { background: rgba(244, 63, 94, 0.15); color: #fb7185; }
+
+        /* Blockers & Hitos Grid Section */
+        .dashboard-row-2 {
+            display: grid;
+            grid-template-columns: 1.8fr 1.2fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .dashboard-row-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-soft);
+            border-radius: 20px;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            box-shadow: var(--shadow-premium);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-soft);
+            padding-bottom: 1rem;
+        }
+
+        .panel-header h3 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .panel-header h3 svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--accent-holding);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        /* Interactive Diagram & Interactive Cards (Tab 1 & 2) */
+        .hierarchical-viewer {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .hierarchical-viewer {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .interactive-tree {
+            background: rgba(13, 20, 35, 0.4);
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            padding: 1.25rem;
+            max-height: 480px;
+            overflow-y: auto;
+        }
+
+        .tree-node {
+            margin-left: 1.5rem;
+            border-left: 1px dashed rgba(255, 255, 255, 0.1);
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .tree-node::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 14px;
+            width: 10px;
+            height: 1px;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .tree-root {
+            margin-left: 0;
+            border-left: none;
+            padding-left: 0;
+        }
+
+        .tree-root::before {
+            display: none;
+        }
+
+        .node-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.6rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            user-select: none;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .node-label:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+        }
+
+        .node-label.selected {
+            background: rgba(99, 102, 241, 0.15);
+            color: #ffffff;
+            font-weight: 600;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .node-label svg {
+            width: 16px;
+            height: 16px;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .node-label.active-state svg { stroke: var(--accent-cadaques); }
+        .node-label.preactive-state svg { stroke: var(--accent-oreka); }
+        .node-label.legal-state svg { stroke: var(--accent-holding); }
+        .node-label.historical-state svg { stroke: var(--accent-neutral); }
+
+        .node-badge {
+            font-size: 0.65rem;
+            padding: 0.1rem 0.35rem;
+            border-radius: 3px;
+            font-weight: 700;
+            margin-left: auto;
+            text-transform: uppercase;
+        }
+
+        .meta-detail-card {
+            background: rgba(19, 29, 51, 0.4);
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            height: 100%;
+        }
+
+        .meta-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.75rem;
+        }
+
+        .meta-title-row h4 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .meta-label {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .meta-value {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .meta-files-list {
+            margin-top: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .file-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-oreka);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-family: monospace;
+            padding: 0.45rem 0.75rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 6px;
+            border: 1px solid var(--border-soft);
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .file-link:hover {
+            background: rgba(6, 182, 212, 0.08);
+            border-color: rgba(6, 182, 212, 0.3);
+            color: var(--text-cyan);
+            transform: translateX(3px);
+        }
+
+        .file-link svg {
+            width: 14px;
+            height: 14px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .file-read-badge {
+            margin-left: auto;
+            background: rgba(6, 182, 212, 0.15);
+            color: var(--text-cyan);
+            font-size: 0.65rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Blockers Table */
+        .blockers-table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table.blockers-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        table.blockers-table th, table.blockers-table td {
+            padding: 0.85rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        table.blockers-table th {
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+
+        table.blockers-table td {
+            color: var(--text-secondary);
+        }
+
+        table.blockers-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .impact-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .impact-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        .impact-dot.critical { background: var(--accent-danger); box-shadow: 0 0 8px var(--accent-danger); animation: pulseBlocker 1.5s infinite; }
+        .impact-dot.high { background: var(--accent-horeca); }
+        .impact-dot.medium { background: #eab308; }
+
+        @keyframes pulseBlocker {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+
+        /* Timeline Hitos */
+        .hitos-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .hitos-timeline::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .timeline-item {
+            position: relative;
+        }
+
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--bg-surface-solid);
+            border: 2px solid var(--accent-neutral);
+            position: absolute;
+            left: -20px;
+            top: 5px;
+            z-index: 2;
+        }
+
+        .timeline-item.current .timeline-dot {
+            border-color: var(--accent-holding);
+            box-shadow: 0 0 10px var(--accent-holding);
+        }
+
+        .timeline-item.future .timeline-dot {
+            border-color: var(--accent-oreka);
+        }
+
+        .timeline-time {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--accent-holding);
+            letter-spacing: 0.5px;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-item.future .timeline-time {
+            color: var(--accent-oreka);
+        }
+
+        .timeline-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-soft);
+            border-radius: 8px;
+            padding: 0.85rem;
+        }
+
+        .timeline-card ul {
+            list-style: none;
+            padding-left: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .timeline-card li {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.4rem;
+        }
+
+        .timeline-card li::before {
+            content: '•';
+            color: var(--accent-oreka);
+            font-weight: bold;
+        }
+
+        /* Router & Auditor Tools (Tab 3) */
+        .router-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .router-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .search-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-container input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            padding: 1rem 1rem 1rem 3rem;
+            color: #ffffff;
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+
+        .search-container input:focus {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--accent-holding);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.1);
+        }
+
+        .search-container svg {
+            position: absolute;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            stroke: var(--text-muted);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .router-result-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-height: 380px;
+            overflow-y: auto;
+        }
+
+        .router-result-item {
+            background: rgba(13, 20, 35, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: var(--transition-smooth);
+        }
+
+        .router-result-item:hover {
+            border-color: rgba(255,255,255,0.08);
+            transform: translateX(4px);
+        }
+
+        .router-keyword {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 0.9rem;
+        }
+
+        .router-path {
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: var(--accent-oreka);
+        }
+
+        /* Realtime Rule Auditor */
+        .auditor-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .auditor-textarea {
+            width: 100%;
+            height: 140px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            padding: 1rem;
+            color: #ffffff;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            resize: none;
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+
+        .auditor-textarea:focus {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent-oreka);
+        }
+
+        .audit-results {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            padding: 1rem;
+            min-height: 100px;
+        }
+
+        .audit-results-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .audit-badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .audit-check-badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            border: 1px solid transparent;
+        }
+
+        .audit-check-badge.success {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+
+        .audit-check-badge.error {
+            background: rgba(244, 63, 94, 0.15);
+            color: #fb7185;
+            border-color: rgba(244, 63, 94, 0.2);
+        }
+
+        .audit-log-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .audit-log-item {
+            font-size: 0.85rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .audit-log-item.error {
+            background: rgba(244, 63, 94, 0.05);
+            border-left: 3px solid var(--accent-danger);
+            color: var(--text-secondary);
+        }
+
+        .audit-log-item.success {
+            background: rgba(16, 185, 129, 0.05);
+            border-left: 3px solid var(--accent-cadaques);
+            color: var(--text-secondary);
+        }
+
+        /* Rules Cards */
+        .rules-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .rule-bullet {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-soft);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-size: 0.85rem;
+        }
+
+        .rule-bullet h5 {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .rule-bullet p {
+            color: var(--text-secondary);
+        }
+
+        /* Teams View (Tab 4) */
+        .team-filter-bar {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-soft);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .filter-btn:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: #ffffff;
+        }
+
+        .filter-btn.active {
+            background: var(--accent-holding);
+            border-color: var(--accent-holding);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(129, 140, 248, 0.25);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .team-card {
+            background: rgba(19, 29, 51, 0.4);
+            border: 1px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            transition: var(--transition-smooth);
+        }
+
+        .team-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255,255,255,0.08);
+            box-shadow: var(--shadow-premium);
+        }
+
+        .team-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .team-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.08));
+            border: 1px solid var(--border-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .team-info h4 {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .team-info p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .team-body {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .team-meta-row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .team-label {
+            color: var(--text-muted);
+        }
+
+        .team-val {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* AI Agents & Skills (Tab 5) */
+        .ai-roles-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .ai-roles-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .orquesta-card {
+            background: rgba(13, 20, 35, 0.4);
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: var(--transition-smooth);
+        }
+
+        .orquesta-card:hover {
+            border-color: rgba(255, 255, 255, 0.08);
+            background: rgba(13, 20, 35, 0.6);
+        }
+
+        .orquesta-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-soft);
+            font-size: 1.1rem;
+        }
+
+        .orquesta-info h5 {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 0.15rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .orquesta-info p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .orquesta-tag {
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        .orquesta-tag.architect { background: rgba(129, 140, 248, 0.15); color: #818cf8; }
+        .orquesta-tag.processor { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+        .orquesta-tag.executor { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+        .orquesta-tag.classifier { background: rgba(6, 182, 212, 0.15); color: #22d3ee; }
+        .orquesta-tag.human { background: rgba(244, 63, 94, 0.15); color: #fb7185; }
+
+        .agent-skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .as-card {
+            background: rgba(19, 29, 51, 0.4);
+            border: 1px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .as-card:hover {
+            border-color: rgba(255, 255, 255, 0.08);
+            transform: translateY(-3px);
+        }
+
+        .as-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.5rem;
+        }
+
+        .as-header h4 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .as-type-badge {
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.06);
+            color: var(--text-secondary);
+        }
+        .as-type-badge.agent { background: rgba(6, 182, 212, 0.15); color: #22d3ee; }
+        .as-type-badge.skill { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+
+        .as-card p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            flex-grow: 1;
+        }
+
+        .as-footer {
+            font-size: 0.75rem;
+            font-family: monospace;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            padding-top: 0.5rem;
+        }
+
+        /* Slide-over Drawer Styles */
+        .doc-reader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 99;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition-smooth);
+        }
+
+        .doc-reader-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .doc-reader-drawer {
+            position: fixed;
+            top: 0;
+            right: -800px; /* Hidden by default */
+            width: 800px;
+            max-width: 90vw;
+            height: 100vh;
+            background: #0b111e;
+            border-left: 1px solid var(--border-light);
+            box-shadow: -10px 0 40px rgba(0,0,0,0.8);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .doc-reader-drawer.active {
+            right: 0;
+        }
+
+        .drawer-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-soft);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(19, 29, 51, 0.6);
+            backdrop-filter: blur(10px);
+        }
+
+        .drawer-title-area h4 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .drawer-title-area span {
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: var(--accent-oreka);
+            margin-top: 0.1rem;
+            display: block;
+        }
+
+        .drawer-actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .drawer-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-soft);
+            color: var(--text-secondary);
+            padding: 0.5rem 0.85rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: var(--transition-smooth);
+        }
+
+        .drawer-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .drawer-btn:hover {
+            background: rgba(255,255,255,0.08);
+            color: #ffffff;
+            border-color: var(--border-light);
+        }
+
+        .drawer-btn.close {
+            padding: 0.5rem;
+            border-radius: 50%;
+        }
+
+        .drawer-btn.close:hover {
+            background: rgba(244, 63, 94, 0.15);
+            border-color: rgba(244, 63, 94, 0.3);
+            color: var(--accent-danger);
+        }
+
+        .drawer-body {
+            flex-grow: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            background: #090d16;
+        }
+
+        .drawer-loading {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            height: 100%;
+            color: var(--text-muted);
+        }
+
+        .drawer-loading.active {
+            display: flex;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.05);
+            border-top-color: var(--accent-holding);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Markdown Rendering Themes */
+        .markdown-body {
+            display: none;
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4 {
+            font-family: var(--font-display);
+            color: #ffffff;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding-bottom: 0.4rem;
+        }
+
+        .markdown-body h1 { font-size: 1.75rem; }
+        .markdown-body h2 { font-size: 1.4rem; color: var(--accent-holding); }
+        .markdown-body h3 { font-size: 1.2rem; color: var(--accent-oreka); }
+        .markdown-body h4 { font-size: 1.05rem; }
+
+        .markdown-body p, .markdown-body ul, .markdown-body ol {
+            margin-bottom: 1.2rem;
+        }
+
+        .markdown-body ul, .markdown-body ol {
+            padding-left: 1.5rem;
+        }
+
+        .markdown-body li {
+            margin-bottom: 0.4rem;
+        }
+
+        .markdown-body blockquote {
+            background: rgba(99, 102, 241, 0.05);
+            border-left: 4px solid var(--accent-holding);
+            padding: 0.75rem 1.25rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: var(--text-primary);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .markdown-body code {
+            font-family: monospace;
+            font-size: 0.85rem;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 0.15rem 0.35rem;
+            border-radius: 4px;
+            color: #f43f5e;
+        }
+
+        .markdown-body pre {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-soft);
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin-bottom: 1.2rem;
+        }
+
+        .markdown-body pre code {
+            background: transparent;
+            padding: 0;
+            border-radius: 0;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+        }
+
+        .markdown-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.85rem;
+        }
+
+        .markdown-body th, .markdown-body td {
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 0.65rem 0.85rem;
+            text-align: left;
+        }
+
+        .markdown-body th {
+            background: rgba(255, 255, 255, 0.04);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .markdown-body tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+    </style>
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <script src="../../auth.js"></script>
+<style id="oreka-private-shell-style">
+  .oreka-private-shell {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    background: rgba(14, 13, 11, 0.92);
+    color: #eedacf;
+    border-bottom: 1px solid rgba(231, 123, 50, 0.22);
+    backdrop-filter: blur(10px);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .oreka-private-shell a {
+    color: #eedacf;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .oreka-private-shell a:hover {
+    color: #ffffff;
+  }
+
+  .oreka-private-shell .divider {
+    width: 1px;
+    height: 14px;
+    background: rgba(238, 218, 207, 0.24);
+  }
+
+  .oreka-private-shell .title {
+    margin-left: auto;
+    color: rgba(238, 218, 207, 0.82);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="oreka-private-shell">
+  <a href="/privado/">Privado</a>
+  <span class="divider"></span>
+  <a href="/privado/entregables/">Entregables</a>
+  <span class="title">Segundo cerebro</span>
+</div>
+
+
+    <div class="dashboard-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <a href="#" class="logo-area">
+                <div class="logo-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <div class="logo-text">
+                    <h1>CEREBRO NLB2</h1>
+                    <p>Codex Dashboard</p>
+                </div>
+            </a>
+
+            <nav class="nav-menu">
+                <div class="nav-item active" onclick="switchTab('tab-overview', this)">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+                    Vista General
+                </div>
+                <div class="nav-item" onclick="switchTab('tab-contextos', this)">
+                    <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                    Estructura & Mapa
+                </div>
+                <div class="nav-item" onclick="switchTab('tab-router', this)">
+                    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    Router & Auditor
+                </div>
+                <div class="nav-item" onclick="switchTab('tab-equipo', this)">
+                    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    Equipo Humano
+                </div>
+                <div class="nav-item" onclick="switchTab('tab-ia', this)">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                    Orquesta de IAs
+                </div>
+                <div class="nav-item" onclick="switchTab('tab-metricas', this)">
+                    <svg viewBox="0 0 24 24"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+                    Métricas del Cerebro
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar">NLB</div>
+                    <div class="profile-info">
+                        <h4>Nicolás Le Baux</h4>
+                        <p>Fundador & Decisor</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-title">
+                    <h2 id="page-title">Vista General</h2>
+                    <p id="page-subtitle">Segundo cerebro profesional y ecosistema empresarial corporativo.</p>
+                </div>
+                <div class="system-status">
+                    <div class="status-pill">
+                        <div class="status-dot"></div>
+                        <span>Beta Activa (Cierre: 26-05)</span>
+                    </div>
+                    <div class="live-time" id="clock">2026-05-24 20:12:37</div>
+                </div>
+            </header>
+
+            <!-- TAB 1: OVERVIEW -->
+            <div id="tab-overview" class="tab-content active">
+                
+                <!-- Metrics Quick Cards -->
+                <div class="metrics-grid">
+                    <div class="metric-card holding">
+                        <div class="metric-label">Holding Base</div>
+                        <div class="metric-value">NLB SpA</div>
+                        <div class="metric-footer">
+                            <span>Defensa legal & Activos</span>
+                            <span class="badge legal">Legal</span>
+                        </div>
+                    </div>
+                    <div class="metric-card horeca">
+                        <div class="metric-label">Horeca SpA (Ventas Bocus)</div>
+                        <div class="metric-value">$40M - $50M</div>
+                        <div class="metric-footer">
+                            <span>Meta: $60M (Julio 2026)</span>
+                            <span class="badge active">Activo</span>
+                        </div>
+                    </div>
+                    <div class="metric-card cadaques">
+                        <div class="metric-label">Cadaqués SpA</div>
+                        <div class="metric-value">San Sebastián</div>
+                        <div class="metric-footer">
+                            <span>Panadería | 100% NLB SpA</span>
+                            <span class="badge active">Activo</span>
+                        </div>
+                    </div>
+                    <div class="metric-card oreka">
+                        <div class="metric-label">Consultora Oreka</div>
+                        <div class="metric-value">INDAP $42M</div>
+                        <div class="metric-footer">
+                            <span>Margen: 50% Validado</span>
+                            <span class="badge active">Activo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 1.5rem;"></div>
+
+                <!-- Row 2: Blockers and Hitos -->
+                <div class="dashboard-row-2">
+                    
+                    <!-- Critical Blockers Panel -->
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>
+                                <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                                Bloqueos Críticos del Ecosistema
+                            </h3>
+                            <span class="badge critical">6 Activos</span>
+                        </div>
+                        <div class="blockers-table-container">
+                            <table class="blockers-table">
+                                <thead>
+                                    <tr>
+                                        <th>Bloqueo / Asunto</th>
+                                        <th>Sociedad</th>
+                                        <th>Impacto</th>
+                                        <th>Acción de Mitigación</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="font-weight: 600;">Cierre formal Fase 1 Tienda M.Rural</td>
+                                        <td>Tienda M.Rural</td>
+                                        <td>
+                                            <div class="impact-indicator text-danger">
+                                                <div class="impact-dot critical"></div>
+                                                Crítico
+                                            </div>
+                                        </td>
+                                        <td>Encuentro presencial con Rodrigo Diaz; no pasar a Fase 2 sin recepción.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight: 600;">Pugna legal Don Clan con Tamarugo</td>
+                                        <td>NLB SpA</td>
+                                        <td>
+                                            <div class="impact-indicator" style="color: #fb7185;">
+                                                <div class="impact-dot high"></div>
+                                                Alto (Patrimonial)
+                                            </div>
+                                        </td>
+                                        <td>Seguimiento estratégico y penal con abogados Carlos Pereira y equipo.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight: 600;">Video Comté sin editar</td>
+                                        <td>Bocus</td>
+                                        <td>
+                                            <div class="impact-indicator" style="color: #fb7185;">
+                                                <div class="impact-dot high"></div>
+                                                Alto
+                                            </div>
+                                        </td>
+                                        <td>Nicolás finaliza edición con editor Lucho.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight: 600;">Upselling Shopify en configuración</td>
+                                        <td>Bocus</td>
+                                        <td>
+                                            <div class="impact-indicator" style="color: #fb7185;">
+                                                <div class="impact-dot high"></div>
+                                                Alto
+                                            </div>
+                                        </td>
+                                        <td>Nicolás termina la configuración de aplicación alternativa.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight: 600;">Carta y precios sin definir</td>
+                                        <td>Parigo al Paso</td>
+                                        <td>
+                                            <div class="impact-indicator" style="color: #fbbf24;">
+                                                <div class="impact-dot medium"></div>
+                                                Medio
+                                            </div>
+                                        </td>
+                                        <td>Nicolás y equipo confirman la carta comercial final.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight: 600;">Precios de transferencia sin definir</td>
+                                        <td>Prod. Masas</td>
+                                        <td>
+                                            <div class="impact-indicator" style="color: #fbbf24;">
+                                                <div class="impact-dot medium"></div>
+                                                Medio
+                                            </div>
+                                        </td>
+                                        <td>Reunión con Freddy + Louis para fijar costos intercompany.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Critical Milestones Panel -->
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>
+                                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                Hitos Críticos Próximos
+                            </h3>
+                        </div>
+                        <div class="hitos-timeline">
+                            <div class="timeline-item current">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-time">Esta Semana (18-24 Mayo)</div>
+                                <div class="timeline-card">
+                                    <ul>
+                                        <li>Yube/Taxaudit: ejecutar Sesión 1 checklist.</li>
+                                        <li>INDAP: Encuentro con Rodrigo Diaz para cierre Fase 1.</li>
+                                        <li>Bocus: terminar app de upselling.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="timeline-item future">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-time">Fin de Mayo (25-31 Mayo)</div>
+                                <div class="timeline-card">
+                                    <ul>
+                                        <li>Yube/Taxaudit: entrega contable final (25-05).</li>
+                                        <li>INDAP: Aprobación formal informe (Libera $16.8M).</li>
+                                        <li>Workspace: Cierre formal de la fase beta (26-05).</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="timeline-item future">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-time">Julio 2026</div>
+                                <div class="timeline-card">
+                                    <ul>
+                                        <li>Bocus: Alcanzar meta de $60M/mensuales.</li>
+                                        <li>Cadaqués: Implementación formal de KPIs consolidados.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- TAB 2: CONTEXTS & STRUCTURE -->
+            <div id="tab-contextos" class="tab-content">
+                
+                <div class="panel-card">
+                    <div class="panel-header">
+                        <h3>
+                            <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                            Estructura de Directorio & Estado de Contextos
+                        </h3>
+                        <span class="badge legal">Haz clic en un nodo para cargar sus metadatos</span>
+                    </div>
+
+                    <div class="hierarchical-viewer">
+                        
+                        <!-- Interactive Tree Diagram -->
+                        <div class="interactive-tree">
+                            <div class="tree-node tree-root">
+                                <div class="node-label selected legal-state" onclick="selectNode('nlb-root', this)">
+                                    <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                                    <span>nlb2-codex (Raíz)</span>
+                                    <span class="node-badge" style="background: var(--accent-holding); color: #fff;">Base</span>
+                                </div>
+                                
+                                <div class="tree-node">
+                                    <div class="node-label legal-state" onclick="selectNode('nlb-spa', this)">
+                                        <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                                        <span>nlb-spa/ (Holding)</span>
+                                        <span class="node-badge" style="background: var(--accent-holding); color: #fff;">Legal</span>
+                                    </div>
+                                    <div class="tree-node">
+                                        <div class="node-label legal-state" onclick="selectNode('don-clan', this)">
+                                            <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                                            <span>documentos-legales/don-clan/</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tree-node">
+                                    <div class="node-label active-state" onclick="selectNode('horeca', this)">
+                                        <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                                        <span>horeca/ (Operadora)</span>
+                                        <span class="node-badge" style="background: var(--accent-horeca); color: #fff;">Activo</span>
+                                    </div>
+                                    <div class="tree-node">
+                                        <div class="node-label active-state" onclick="selectNode('bocus', this)">
+                                            <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                                            <span>bocus/ (Delivery)</span>
+                                        </div>
+                                    </div>
+                                    <div class="tree-node">
+                                        <div class="node-label active-state" onclick="selectNode('parigo', this)">
+                                            <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                                            <span>parigo/ (Restaurante)</span>
+                                        </div>
+                                    </div>
+                                    <div class="tree-node">
+                                        <div class="node-label preactive-state" onclick="selectNode('produccion-masas', this)">
+                                            <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                                            <span>produccion-masas/</span>
+                                            <span class="node-badge" style="background: var(--accent-oreka); color: #fff;">Preactivo</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tree-node">
+                                    <div class="node-label active-state" onclick="selectNode('cadaques', this)">
+                                        <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                                        <span>cadaques/ (Panadería)</span>
+                                        <span class="node-badge" style="background: var(--accent-cadaques); color: #fff;">Activo</span>
+                                    </div>
+                                </div>
+
+                                <div class="tree-node">
+                                    <div class="node-label active-state" onclick="selectNode('oreka', this)">
+                                        <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                                        <span>oreka/ (Consultora Base)</span>
+                                        <span class="node-badge" style="background: var(--accent-oreka); color: #fff;">Activo</span>
+                                    </div>
+                                    <div class="tree-node">
+                                        <div class="node-label active-state" onclick="selectNode('tienda-mundo-rural', this)">
+                                            <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                                            <span>proyectos/tienda-mundo-rural/</span>
+                                        </div>
+                                    </div>
+                                    <div class="tree-node">
+                                        <div class="node-label historical-state" onclick="selectNode('don-carlos', this)">
+                                            <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                                            <span>proyectos-historicos/don-carlos/</span>
+                                            <span class="node-badge" style="background: var(--accent-neutral); color: #fff;">Histórico</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tree-node">
+                                    <div class="node-label historical-state" onclick="selectNode('inbox-transit', this)">
+                                        <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                                        <span>inbox/ (Bot Telegram Transit)</span>
+                                    </div>
+                                    <div class="tree-node">
+                                        <div class="node-label historical-state" onclick="selectNode('por-procesar', this)">
+                                            <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                                            <span>por-procesar/ (Cuarentena Binarios)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dynamic Meta Card Panel -->
+                        <div class="meta-detail-card" id="meta-card">
+                            <div class="meta-title-row">
+                                <div>
+                                    <h4 id="meta-name">nlb2-codex (Raíz del Cerebro)</h4>
+                                    <p id="meta-desc" style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">Orquestador global y base del segundo cerebro de Nicolás Le Baux.</p>
+                                </div>
+                                <span class="badge legal" id="meta-state-badge" style="background: var(--accent-holding); color: #fff;">Base</span>
+                            </div>
+
+                            <div class="meta-grid">
+                                <div class="meta-item">
+                                    <span class="meta-label">Ruta Workspace</span>
+                                    <span class="meta-value" id="meta-path">/ (Raíz)</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-label">Prioridad en Auditorías</span>
+                                    <span class="meta-value" id="meta-priority">Base Operativa</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-label">Responsable Principal</span>
+                                    <span class="meta-value" id="meta-owner">Nicolás Le Baux</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-label">Hito Crítico Asociado</span>
+                                    <span class="meta-value" id="meta-milestone">Cierre de Fase Beta (26-05)</span>
+                                </div>
+                            </div>
+
+                            <div style="margin-top: 0.5rem;">
+                                <span class="meta-label" style="font-weight: 700; color: #ffffff;">Archivos del Contexto (Haz clic para leerlos)</span>
+                                <div class="meta-files-list" id="meta-files">
+                                    <!-- Populated dynamically via JS -->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- TAB 3: ROUTER & REALTIME AUDITOR -->
+            <div id="tab-router" class="tab-content">
+                
+                <div class="router-grid">
+                    
+                    <!-- Left Column: Context Router -->
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>
+                                <svg viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                                Router Inteligente de Contexto
+                            </h3>
+                        </div>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Escribe palabras clave o temas para encontrar qué contexto activar y qué reglas seguir inmediatamente en el chat.</p>
+                        
+                        <div class="search-container">
+                            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            <input type="text" id="router-search" placeholder="Escribe 'bocus', 'tamarugo', 'l\'entrecôte', 'oreka'..." oninput="handleRouteSearch()">
+                        </div>
+
+                        <div class="router-result-box" id="router-results">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Real-time Rules Auditor -->
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>
+                                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                                Auditor de Cumplimiento Doctrinario (Realtime)
+                            </h3>
+                        </div>
+                        <div class="auditor-container">
+                            <p style="font-size: 0.85rem; color: var(--text-muted);">Pega o escribe texto (como montos, fechas, RUTs, o párrafos enteros) para auditar instantáneamente las reglas de formato obligatorias del cerebro.</p>
+                            <textarea class="auditor-textarea" id="audit-input" placeholder="Pega tu texto aquí... Por ejemplo: 'RUT: 12345678-9, fecha 2026-05-24 o YYMMDD en archivo, monto de $25.000 CLP—o USD 250.55'" oninput="runRealtimeAudit()"></textarea>
+                            
+                            <div class="audit-results">
+                                <div class="audit-results-title">Resultados de Auditoría</div>
+                                <div class="audit-badge-row" id="audit-badges">
+                                    <!-- Dynamic Badges -->
+                                </div>
+                                <ul class="audit-log-list" id="audit-log">
+                                    <!-- Dynamic Logs -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div style="margin-top: 1.5rem;"></div>
+
+                <!-- Global Rules Reference -->
+                <div class="panel-card">
+                    <div class="panel-header">
+                        <h3>Reglas de Formato Globales del Cerebro</h3>
+                    </div>
+                    <div class="rules-card-grid">
+                        <div class="rule-bullet">
+                            <h5>🚫 Sin Guion Largo (Em Dash)</h5>
+                            <p>Está estrictamente prohibido el uso del guion largo (—) en cualquier texto. Usar guion simple o reescribir la frase.</p>
+                        </div>
+                        <div class="rule-bullet">
+                            <h5>📅 Fechas ISO & Nombres</h5>
+                            <p>Usar formato <code>YYYY-MM-DD</code> en base de datos y CSVs. Usar formato <code>YYMMDD</code> exclusivamente en nombres de archivos.</p>
+                        </div>
+                        <div class="rule-bullet">
+                            <h5>💰 Montos Monetarios</h5>
+                            <p>CLP sin decimales (ej: $10.000). USD con exactamente 2 decimales (ej: $250.00).</p>
+                        </div>
+                        <div class="rule-bullet">
+                            <h5>📇 RUT Oficial</h5>
+                            <p>Siempre en formato formal <code>XXXXXXXX-X</code> (sin puntos adicionales pero obligatoriamente con guion antes del dígito verificador).</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- TAB 4: TEAMS & ROLES -->
+            <div id="tab-equipo" class="tab-content">
+                
+                <div class="panel-card">
+                    <div class="panel-header">
+                        <h3>Directorio Transversal del Equipo Humano</h3>
+                        <span class="badge active" id="team-counter">11 Integrantes</span>
+                    </div>
+
+                    <div class="team-filter-bar">
+                        <button class="filter-btn active" onclick="filterTeam('all', this)">Todos</button>
+                        <button class="filter-btn" onclick="filterTeam('Oreka', this)">Oreka (Administración)</button>
+                        <button class="filter-btn" onclick="filterTeam('Horeca', this)">Horeca (Gastronomía)</button>
+                        <button class="filter-btn" onclick="filterTeam('Cadaqués', this)">Cadaqués</button>
+                        <button class="filter-btn" onclick="filterTeam('Externo', this)">Especialistas Externos</button>
+                    </div>
+
+                    <div class="team-grid" id="team-cards-container">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- TAB 5: AI ORCHESTRATION -->
+            <div id="tab-ia" class="tab-content">
+                
+                <!-- Orquesta Section Title -->
+                <div class="panel-card">
+                    <div class="panel-header">
+                        <h3>La Orquesta Multi-IA & Modelos Operativos</h3>
+                        <span class="badge legal">5 Roles Asignados</span>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: -0.5rem;">Definición estricta de responsabilidades, ventanas de contexto y fronteras de ejecución de proveedores de Inteligencia Artificial.</p>
+                    
+                    <div class="ai-roles-section">
+                        <div class="orquesta-card">
+                            <div class="orquesta-avatar">🧠</div>
+                            <div class="orquesta-info">
+                                <h5>Claude (Opus / Sonnet 4.5+) <span class="orquesta-tag architect">Arquitecto</span></h5>
+                                <p>Diseño de doctrina, decisiones de arquitectura mayores, análisis de fondo y redacción legal sensible (Don Carlos / Don Clan). Prohibido hacer escrituras directas de bajo nivel en el repo.</p>
+                            </div>
+                        </div>
+                        <div class="orquesta-card">
+                            <div class="orquesta-avatar">⚡</div>
+                            <div class="orquesta-info">
+                                <h5>Antigravity (Google Gemini) <span class="orquesta-tag processor">Procesador Masivo</span></h5>
+                                <p>Ingesta del inbox, OCR, lectura de PDFs complejos y facturas, contabilidad masiva y síntesis histórica con grandes ventanas de contexto (¡Mi Rol!).</p>
+                            </div>
+                        </div>
+                        <div class="orquesta-card">
+                            <div class="orquesta-avatar">⚙️</div>
+                            <div class="orquesta-info">
+                                <h5>Codex (OpenAI) <span class="orquesta-tag executor">Ejecutor Mecánico</span></h5>
+                                <p>Renombrar archivos, mover directorios, normalizar formatos de bitácoras, scripts batch y ejecución mecánica de planes aprobados.</p>
+                            </div>
+                        </div>
+                        <div class="orquesta-card">
+                            <div class="orquesta-avatar">🔍</div>
+                            <div class="orquesta-info">
+                                <h5>Haiku 4.5 (Anthropic) <span class="orquesta-tag classifier">Clasificador</span></h5>
+                                <p>Clasificación ágil y barata de mensajes del bot Telegram, etiquetado estructural y primeras validaciones de llegada.</p>
+                            </div>
+                        </div>
+                        <div class="orquesta-card" style="grid-column: 1 / -1;">
+                            <div class="orquesta-avatar">👑</div>
+                            <div class="orquesta-info">
+                                <h5>Nicolás Le Baux <span class="orquesta-tag human">Humano / Decisor Final</span></h5>
+                                <p>El cerebro decisor absoluto. Valida cada cambio de doctrina, aprueba hitos estratégicos y valida precios de transferencia y defensas penales/civiles.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 1.5rem;"></div>
+
+                <!-- Specialized Agents & Skills Catalog -->
+                <div class="panel-card">
+                    <div class="panel-header">
+                        <h3>Catálogo de Agentes Especializados & Skills</h3>
+                        <span class="badge legal">11 Módulos Activos</span>
+                    </div>
+                    <div class="agent-skills-grid">
+                        
+                        <!-- Agents -->
+                        <div class="as-card">
+                            <div class="as-header">
+                                <h4>finanzas-nlb-spa</h4>
+                                <span class="as-type-badge agent">Agente</span>
+                            </div>
+                            <p>CRUD de finanzas y flujos del holding personal de Nicolás. Conciliación y facturas extranjeras.</p>
+                            <div class="as-footer">_sistema/agentes/finanzas-nlb-spa.md</div>
+                        </div>
+
+                        <div class="as-card">
+                            <div class="as-header">
+                                <h4>finanzas-horeca</h4>
+                                <span class="as-type-badge agent">Agente</span>
+                            </div>
+                            <p>CRUD centralizado de operaciones Horeca. Filtra por columna 'unidad' (Bocus, Parigo, Prod. Masas).</p>
+                            <div class="as-footer">_sistema/agentes/finanzas-horeca.md</div>
+                        </div>
+
+                        <div class="as-card">
+                            <div class="as-header">
+                                <h4>finanzas-cadaques</h4>
+                                <span class="as-type-badge agent">Agente</span>
+                            </div>
+                            <p>CRUD financiero de la panadería artesanal Cadaqués. Métrica de rentabilidad.</p>
+                            <div class="as-footer">_sistema/agentes/finanzas-cadaques.md</div>
+                        </div>
+
+                        <div class="as-card">
+                            <div class="as-header">
+                                <h4>finanzas-oreka</h4>
+                                <span class="as-type-badge agent">Agente</span>
+                            </div>
+                            <p>Gestión de facturación administrativa y cobros por consultorías externas (ej: INDAP).</p>
+                            <div class="as-footer">_sistema/agentes/finanzas-oreka.md</div>
+                        </div>
+
+                        <div class="as-card">
+                            <div class="as-header">
+                                <h4>defensa-don-clan</h4>
+                                <span class="as-type-badge agent">Agente</span>
+                            </div>
+                            <p>Análisis de pruebas, redacción de escritos legales y defensa penal/civil del caso Don Carlos vs Tamarugo.</p>
+                            <div class="as-footer">_sistema/agentes/defensa-don-clan.md</div>
+                        </div>
+
+                        <div class="as-card">
+                            <div class="as-header">
+                                <h4>tributario</h4>
+                                <span class="as-type-badge agent">Agente</span>
+                            </div>
+                            <p>Análisis e inteligencia tributaria cruzada intercompany, optimización y cruce con el SII.</p>
+                            <div class="as-footer">_sistema/agentes/tributario.md</div>
+                        </div>
+
+                        <div class="as-card">
+                            <div class="as-header">
+                                <h4>financiero</h4>
+                                <span class="as-type-badge agent">Agente</span>
+                            </div>
+                            <p>Análisis consolidado transversal, márgenes, rentabilidades globales y valorización de holdings.</p>
+                            <div class="as-footer">_sistema/agentes/financiero.md</div>
+                        </div>
+
+                        <!-- Skills -->
+                        <div class="as-card">
+                            <div class="as-header">
+                                <h4>auditoria-sistema</h4>
+                                <span class="as-type-badge skill">Skill</span>
+                            </div>
+                            <p>Metodología automática para auditar la salud del workspace y verificar cumplimiento de SISTEMA.md.</p>
+                            <div class="as-footer">_sistema/skills/auditoria-sistema.md</div>
+                        </div>
+
+                        <div class="as-card">
+                            <div class="as-header">
+                                <h4>chequeo-cerebro</h4>
+                                <span class="as-type-badge skill">Skill</span>
+                            </div>
+                            <p>Validación mecánica ágil de 12 puntos clave de la doctrina. Devuelve estado rápido.</p>
+                            <div class="as-footer">_sistema/skills/chequeo-cerebro.md</div>
+                        </div>
+
+                        <div class="as-card">
+                            <div class="as-header">
+                                <h4>informe-mensual-venta</h4>
+                                <span class="as-type-badge skill">Skill</span>
+                            </div>
+                            <p>Compilación del informe mensual gastronómico. Integra Fudo, Gastrokaizen y Menu Engineering.</p>
+                            <div class="as-footer">_sistema/skills/informe-mensual-venta...</div>
+                        </div>
+
+                        <div class="as-card">
+                            <div class="as-header">
+                                <h4>registro-contrato-dt</h4>
+                                <span class="as-type-badge skill">Skill</span>
+                            </div>
+                            <p>Protocolo estándar para registrar formalmente contratos de trabajo en la Dirección del Trabajo.</p>
+                            <div class="as-footer">_sistema/skills/registro-contrato-dt.md</div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- TAB 6: METRICS & EXPLANATION -->
+            <div id="tab-metricas" class="tab-content">
+                
+                <!-- Section 1: How the Brain Works -->
+                <div class="panel-card" style="margin-bottom: 1.5rem;">
+                    <div class="panel-header">
+                        <h3>¿Cómo Funciona Nuestro Segundo Cerebro?</h3>
+                        <span class="badge active">Doctrina Operativa</span>
+                    </div>
+                    <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
+                        El cerebro de Nicolás Le Baux funciona como una <strong>red de contextos descentralizados pero centralmente orquestados</strong>. No es una base de datos estática, sino un ecosistema vivo que integra decisiones contables, expedientes de defensa jurídica y procedimientos gastronómicos a través de una <strong>tríada documental</strong> obligatoria y un flujo automatizado de archivos.
+                    </p>
+                    
+                    <div class="rules-card-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+                        <div class="rule-bullet" style="background: rgba(129, 140, 248, 0.03); border: 1px solid rgba(129, 140, 248, 0.1); border-radius: 12px; padding: 1.25rem;">
+                            <h5 style="color: var(--accent-holding); font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; font-family: var(--font-display);">🪐 1. El Alma (Doctrina / SISTEMA.md)</h5>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin-top: 0.25rem;">
+                                Define el <strong>núcleo operativo y legal</strong> de cada entidad. Contiene el alcance del contexto, la propiedad societaria, los hitos clave, los agentes asignados y las reglas de cruce de contexto. Es el manual de vuelo que cualquier IA lee obligatoriamente al activarse.
+                            </p>
+                        </div>
+                        <div class="rule-bullet" style="background: rgba(6, 182, 212, 0.03); border: 1px solid rgba(6, 182, 212, 0.1); border-radius: 12px; padding: 1.25rem;">
+                            <h5 style="color: var(--accent-oreka); font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; font-family: var(--font-display);">📁 2. El Cuerpo (Información / contexto.md)</h5>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin-top: 0.25rem;">
+                                Consolida la <strong>fuente de verdad operacional y documental</strong>. Alberga la historia de la marca, los contratos firmados, las credenciales, los canales activos de venta (Shopify/Fudo) y las directrices de los proyectos vigentes.
+                            </p>
+                        </div>
+                        <div class="rule-bullet" style="background: rgba(245, 158, 11, 0.03); border: 1px solid rgba(245, 158, 11, 0.1); border-radius: 12px; padding: 1.25rem;">
+                            <h5 style="color: var(--accent-horeca); font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; font-family: var(--font-display);">📜 3. La Memoria (Historial / bitacora.md)</h5>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin-top: 0.25rem;">
+                                El <strong>registro cronológico inalterable</strong> de cada decisión relevante, ingreso/egreso financiero o reunión procesada. Se actualiza mediante el formato estricto con fecha, modelo de IA autora y título descriptivo.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Interactive Chart & Analysis -->
+                <div class="panel-grid-2" style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; align-items: start;">
+                    
+                    <!-- Left: Graphic Chart of Project Density -->
+                    <div class="panel-card">
+                        <div class="panel-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h3>Gráfico de Densidad & Complejidad por Proyecto</h3>
+                            <div class="chart-controls" style="display: flex; gap: 0.5rem;">
+                                <button class="filter-btn active" id="sort-total-btn" onclick="updateChartSort('total')" style="font-size: 0.75rem; padding: 0.25rem 0.5rem; height: auto;">Total</button>
+                                <button class="filter-btn" id="sort-alma-btn" onclick="updateChartSort('alma')" style="font-size: 0.75rem; padding: 0.25rem 0.5rem; height: auto;">Alma</button>
+                                <button class="filter-btn" id="sort-contexto-btn" onclick="updateChartSort('contexto')" style="font-size: 0.75rem; padding: 0.25rem 0.5rem; height: auto;">Contexto</button>
+                                <button class="filter-btn" id="sort-bitacora-btn" onclick="updateChartSort('bitacora')" style="font-size: 0.75rem; padding: 0.25rem 0.5rem; height: auto;">Bitácora</button>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem; margin-top: -0.5rem;">
+                            Visualización comparativa de la densidad documental de cada proyecto en una escala de 0 a 100 por componente. La longitud total representa el peso relativo de la entidad en el Cerebro.
+                        </p>
+                        <div style="position: relative; height: 380px; width: 100%;">
+                            <canvas id="metricsChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Right: Statistics & Diagnostics -->
+                    <div class="panel-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; min-height: 462px;">
+                        <div>
+                            <div class="panel-header">
+                                <h3>Métricas Clave</h3>
+                            </div>
+                            
+                            <div class="stats-col" style="display: flex; flex-direction: column; gap: 1rem; margin-top: 0.5rem;">
+                                <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-soft); border-radius: 10px; padding: 0.75rem 1rem;">
+                                    <span style="font-size: 0.75rem; color: var(--text-muted); display: block; text-transform: uppercase;">Promedio Alma (Doctrina)</span>
+                                    <div style="display: flex; align-items: baseline; gap: 0.5rem; margin-top: 0.25rem;">
+                                        <span style="font-size: 1.5rem; font-weight: 700; color: var(--accent-holding);">76.0</span>
+                                        <span style="font-size: 0.75rem; color: #34d399;">✓ Óptimo</span>
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.05); height: 4px; border-radius: 2px; margin-top: 0.5rem; overflow: hidden;">
+                                        <div style="background: var(--accent-holding); width: 76%; height: 100%;"></div>
+                                    </div>
+                                </div>
+
+                                <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-soft); border-radius: 10px; padding: 0.75rem 1rem;">
+                                    <span style="font-size: 0.75rem; color: var(--text-muted); display: block; text-transform: uppercase;">Promedio Contexto (Información)</span>
+                                    <div style="display: flex; align-items: baseline; gap: 0.5rem; margin-top: 0.25rem;">
+                                        <span style="font-size: 1.5rem; font-weight: 700; color: var(--accent-oreka);">76.5</span>
+                                        <span style="font-size: 0.75rem; color: #34d399;">✓ Óptimo</span>
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.05); height: 4px; border-radius: 2px; margin-top: 0.5rem; overflow: hidden;">
+                                        <div style="background: var(--accent-oreka); width: 76.5%; height: 100%;"></div>
+                                    </div>
+                                </div>
+
+                                <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-soft); border-radius: 10px; padding: 0.75rem 1rem;">
+                                    <span style="font-size: 0.75rem; color: var(--text-muted); display: block; text-transform: uppercase;">Promedio Bitácora (Historial)</span>
+                                    <div style="display: flex; align-items: baseline; gap: 0.5rem; margin-top: 0.25rem;">
+                                        <span style="font-size: 1.5rem; font-weight: 700; color: var(--accent-horeca);">69.5</span>
+                                        <span style="font-size: 0.75rem; color: var(--accent-horeca);">⚡ En Crecimiento</span>
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.05); height: 4px; border-radius: 2px; margin-top: 0.5rem; overflow: hidden;">
+                                        <div style="background: var(--accent-horeca); width: 69.5%; height: 100%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 1.5rem; background: rgba(16,185,129,0.03); border: 1px solid rgba(16,185,129,0.15); border-radius: 10px; padding: 1rem;">
+                            <h5 style="color: #34d399; font-size: 0.8rem; font-weight: 700; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.25rem;">
+                                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                Estado General del Cerebro
+                            </h5>
+                            <p style="font-size: 0.78rem; color: var(--text-secondary); line-height: 1.4;">
+                                La densidad documental del cerebro es equilibrada. Las marcas gastronómicas Bocus y Parigó muestran la mayor densidad histórica, mientras que la unidad técnica Producción de Masas (Preactiva) se encuentra en su fase inicial de robustecimiento.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+        <!-- Slide-over Document Reader Drawer -->
+        <div id="doc-reader-overlay" class="doc-reader-overlay" onclick="closeDocumentViewer()"></div>
+        <div id="doc-reader-drawer" class="doc-reader-drawer">
+            <div class="drawer-header">
+                <div class="drawer-title-area">
+                    <h4 id="drawer-filename">Cargando...</h4>
+                    <span id="drawer-path">/ruta-del-archivo</span>
+                </div>
+                <div class="drawer-actions">
+                    <button class="drawer-btn" onclick="copyDrawerContent()" title="Copiar Contenido">
+                        <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        <span>Copiar</span>
+                    </button>
+                    <button class="drawer-btn close" onclick="closeDocumentViewer()" title="Cerrar">
+                        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                </div>
+            </div>
+            <div class="drawer-body">
+                <div id="drawer-loading" class="drawer-loading active">
+                    <div class="spinner"></div>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem;">Cargando documento markdown...</p>
+                </div>
+                <div id="drawer-content" class="markdown-body">
+                    <!-- Parsed HTML will go here -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Javascript Logic for Tabs, Search, and Audit Tool -->
+    <script>
+        // Realtime Clock
+        function updateClock() {
+            const clockEl = document.getElementById('clock');
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            clockEl.textContent = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Switch Tabs
+        function switchTab(tabId, el) {
+            // Remove active classes
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            
+            // Set active
+            document.getElementById(tabId).classList.add('active');
+            el.classList.add('active');
+            
+            // Update Title
+            const titleEl = document.getElementById('page-title');
+            const subtitleEl = document.getElementById('page-subtitle');
+            
+            if (tabId === 'tab-overview') {
+                titleEl.textContent = 'Vista General';
+                subtitleEl.textContent = 'Segundo cerebro profesional y ecosistema empresarial corporativo.';
+            } else if (tabId === 'tab-contextos') {
+                titleEl.textContent = 'Estructura & Mapa del Cerebro';
+                subtitleEl.textContent = 'Relación legal y árbol de directorios de nlb2-codex.';
+            } else if (tabId === 'tab-router') {
+                titleEl.textContent = 'Router de Contextos & Auditor';
+                subtitleEl.textContent = 'Gatilladores automáticos de carpetas y verificación de reglas de formato.';
+            } else if (tabId === 'tab-equipo') {
+                titleEl.textContent = 'Equipo & Especialistas';
+                subtitleEl.textContent = 'Nómina y roles de los operadores humanos del holding.';
+            } else if (tabId === 'tab-ia') {
+                titleEl.textContent = 'Orquesta de Inteligencia Artificial';
+                subtitleEl.textContent = 'Ecosistema de agentes inteligentes y skills técnicas del cerebro.';
+            } else if (tabId === 'tab-metricas') {
+                titleEl.textContent = 'Métricas & Funcionamiento del Cerebro';
+                subtitleEl.textContent = 'Análisis de complejidad, densidad y estado documental de las entidades.';
+                setTimeout(initMetricsChart, 50);
+            }
+        }
+
+        // Context Metadata Database
+        const nodeData = {
+            'nlb-root': {
+                name: 'nlb2-codex (Raíz del Cerebro)',
+                desc: 'Orquestador global y base del segundo cerebro de Nicolás Le Baux.',
+                state: 'Base',
+                path: '/',
+                priority: 'Crítica / Global',
+                owner: 'Nicolás Le Baux',
+                milestone: 'Higiene del workspace integral post-auditoría',
+                badgeColor: 'var(--accent-holding)',
+                files: [
+                    { name: 'SISTEMA.md (Orquestador global)', path: 'SISTEMA.md' },
+                    { name: 'MAPA-RAPIDO.md (Guía rápida)', path: 'MAPA-RAPIDO.md' },
+                    { name: 'INDICE-ECOSISTEMA.md (Detalle financiero y operativo)', path: 'INDICE-ECOSISTEMA.md' },
+                    { name: 'README.md (Introducción del cerebro)', path: 'README.md' },
+                    { name: 'AGENTS.md (Alias de auto-carga)', path: 'AGENTS.md' },
+                    { name: 'CLAUDE.md (Enlace Cowork)', path: 'CLAUDE.md' }
+                ]
+            },
+            'nlb-spa': {
+                name: 'NLB SpA',
+                desc: 'Holding corporativo y patrimonial de Nicolás Le Baux. Centraliza facturas de servicios y software extranjero.',
+                state: 'activo',
+                path: 'nlb-spa/',
+                priority: 'Alta',
+                owner: 'Nicolás Le Baux',
+                milestone: 'Control legal Don Clan',
+                badgeColor: 'var(--accent-holding)',
+                files: [
+                    { name: 'SISTEMA.md (Reglas del holding)', path: 'nlb-spa/SISTEMA.md' },
+                    { name: 'contexto.md (Contexto legal y societario)', path: 'nlb-spa/contexto.md' },
+                    { name: 'bitacora.md (Registro de hitos y actas)', path: 'nlb-spa/bitacora.md' }
+                ]
+            },
+            'don-clan': {
+                name: 'documentos-legales/don-clan/',
+                desc: 'Expedientes jurídicos y defensa estratégica de Don Clan y Don Carlos contra Tamarugo.',
+                state: 'legal',
+                path: 'nlb-spa/documentos-legales/don-clan/defensa-civil-penal/',
+                priority: 'Legal / Alta',
+                owner: 'Nicolás + Abogados Pereira/Mora/Jano',
+                milestone: 'Resolución de la pugna marcaria y penal',
+                badgeColor: 'var(--accent-holding)',
+                files: [
+                    { name: 'SISTEMA.md (Doctrina jurídica del caso)', path: 'nlb-spa/documentos-legales/don-clan/defensa-civil-penal/SISTEMA.md' },
+                    { name: 'bitacora.md (Bitácora judicial de defensa)', path: 'nlb-spa/documentos-legales/don-clan/defensa-civil-penal/bitacora.md' },
+                    { name: 'argumentacion-estrategica.md (Fondo y pruebas)', path: 'nlb-spa/documentos-legales/don-clan/defensa-civil-penal/argumentacion-estrategica.md' },
+                    { name: 'cronologia.md (Hitos temporales clave)', path: 'nlb-spa/documentos-legales/don-clan/defensa-civil-penal/cronologia.md' },
+                    { name: 'indice-evidencia.md (Cruce de evidencias)', path: 'nlb-spa/documentos-legales/don-clan/defensa-civil-penal/indice-evidencia.md' },
+                    { name: 'presentacion-abogados.md (Estrategia Pereira/Jano)', path: 'nlb-spa/documentos-legales/don-clan/defensa-civil-penal/presentacion-abogados.md' },
+                    { name: 'procedimientos.md (Pasos jurídicos)', path: 'nlb-spa/documentos-legales/don-clan/defensa-civil-penal/procedimientos.md' },
+                    { name: 'README.md (Introducción a la carpeta legal)', path: 'nlb-spa/documentos-legales/don-clan/defensa-civil-penal/README.md' }
+                ]
+            },
+            'horeca': {
+                name: 'Horeca SpA',
+                desc: 'Sociedad operadora gastronómica. Casa matriz de las marcas de delivery y restaurantes.',
+                state: 'activo',
+                path: 'horeca/',
+                priority: 'Alta',
+                owner: 'Freddy Moreno + Daniela Pérez',
+                milestone: 'Consolidación RRHH centralizado',
+                badgeColor: 'var(--accent-horeca)',
+                files: [
+                    { name: 'SISTEMA.md (Matriz de Horeca)', path: 'horeca/SISTEMA.md' },
+                    { name: 'contexto.md (Procedimientos de local)', path: 'horeca/contexto.md' },
+                    { name: 'bitacora.md (Bitácora centralizada Horeca)', path: 'horeca/bitacora.md' },
+                    { name: 'equipo-transversal.md (Roles y organigrama)', path: 'horeca/equipo-transversal.md' }
+                ]
+            },
+            'bocus': {
+                name: 'Bocus SpA',
+                desc: 'Línea de negocio de delivery premium online. Marca estrella del grupo Horeca SpA.',
+                state: 'activo',
+                path: 'horeca/bocus/',
+                priority: 'Alta',
+                owner: 'Nicolás Le Baux + Cristian (York)',
+                milestone: 'Meta de $60M/mes en Julio 2026',
+                badgeColor: 'var(--accent-horeca)',
+                files: [
+                    { name: 'SISTEMA.md (Doctrina Bocus)', path: 'horeca/bocus/SISTEMA.md' },
+                    { name: 'contexto.md (Campañas Meta y Shopify)', path: 'horeca/bocus/contexto.md' },
+                    { name: 'bitacora.md (Hitos comerciales Bocus)', path: 'horeca/bocus/bitacora.md' },
+                    { name: 'procedimientos.md (Logística y despacho)', path: 'horeca/bocus/procedimientos.md' }
+                ]
+            },
+            'parigo': {
+                name: 'Parigo & Parigo al Paso',
+                desc: 'Restaurante físico en La Pastora y cafetería/panadería al paso. Contiene submarca gourmet "Le Plat".',
+                state: 'activo',
+                path: 'horeca/parigo/',
+                priority: 'Alta',
+                owner: 'Nicolás Cajica (Chef) + Laura (Ventas)',
+                milestone: 'Definir carta comercial final y precios al paso',
+                badgeColor: 'var(--accent-horeca)',
+                files: [
+                    { name: 'SISTEMA.md (Procedimiento operativo Parigo)', path: 'horeca/parigo/SISTEMA.md' },
+                    { name: 'contexto.md (Distribución de turnos y caja)', path: 'horeca/parigo/contexto.md' },
+                    { name: 'bitacora.md (Hitos diarios)', path: 'horeca/parigo/bitacora.md' },
+                    { name: 'le-plat.md (Fórmulas y plato único Le Plat)', path: 'horeca/parigo/le-plat.md' },
+                    { name: 'procedimientos.md (Manuales de servicio)', path: 'horeca/parigo/procedimientos.md' }
+                ]
+            },
+            'produccion-masas': {
+                name: 'Producción de Masas',
+                desc: 'Unidad técnica de panificación para abastecer a Cadaqués y Parigo. Centraliza panadería artesanal.',
+                state: 'preactivo',
+                path: 'horeca/produccion-masas/',
+                priority: 'Media',
+                owner: 'Jared (Producción) + Freddy Moreno',
+                milestone: 'Definir precios de transferencia intercompany',
+                badgeColor: 'var(--accent-oreka)',
+                files: [
+                    { name: 'SISTEMA.md (Formulaciones y stock preactivo)', path: 'horeca/produccion-masas/SISTEMA.md' }
+                ]
+            },
+            'cadaques': {
+                name: 'Cadaqués SpA',
+                desc: 'Panadería artesanal en San Sebastián 2806. Marca de alta calidad técnica propiedad 100% de NLB SpA.',
+                state: 'activo',
+                path: 'cadaques/',
+                priority: 'Media',
+                owner: 'Peter (Panadero) + Roxy (Venta)',
+                milestone: 'Subir legal 100% NLB SpA y configurar KPIs',
+                badgeColor: 'var(--accent-cadaques)',
+                files: [
+                    { name: 'SISTEMA.md (Doctrina Cadaqués)', path: 'cadaques/SISTEMA.md' },
+                    { name: 'contexto.md (Turnos y e-commerce)', path: 'cadaques/contexto.md' },
+                    { name: 'bitacora.md (Hitos comerciales de local)', path: 'cadaques/bitacora.md' },
+                    { name: 'protocolo-operaciones.md (Formatos de producción)', path: 'cadaques/protocolo-operaciones.md' },
+                    { name: 'equipo.md (Planilla de personal)', path: 'cadaques/equipo.md' }
+                ]
+            },
+            'oreka': {
+                name: 'Consultora Solución Oreka Ltda.',
+                desc: 'Equipo administrativo, contable y logístico del grupo (90% Nicolás, 10% Louis). Asesora y gestiona proyectos externos.',
+                state: 'activo',
+                path: 'oreka/',
+                priority: 'Base',
+                owner: 'Nicolás Le Baux + Louis Le Baux',
+                milestone: 'Cobros y facturación transversal',
+                badgeColor: 'var(--accent-oreka)',
+                files: [
+                    { name: 'SISTEMA.md (Protocolo Oreka)', path: 'oreka/SISTEMA.md' },
+                    { name: 'contexto.md (Contratos y balances)', path: 'oreka/contexto.md' },
+                    { name: 'bitacora.md (Hitos de consultoría global)', path: 'oreka/bitacora.md' }
+                ]
+            },
+            'tienda-mundo-rural': {
+                name: 'Tienda Mundo Rural (INDAP)',
+                desc: 'Proyecto de desarrollo agrícola en ejecución. Plataforma en marcha blanca. Margen comercial de 50%.',
+                state: 'activo',
+                path: 'oreka/proyectos/tienda-mundo-rural/',
+                priority: 'Crítica',
+                owner: 'Nicolás + Pamela Valdés (Admin)',
+                milestone: 'Recepción formal de Fase 1 con Rodrigo Diaz',
+                badgeColor: 'var(--accent-oreka)',
+                files: [
+                    { name: 'SISTEMA.md (Protocolo INDAP)', path: 'oreka/proyectos/tienda-mundo-rural/SISTEMA.md' },
+                    { name: 'contexto.md (Seguimiento comercial)', path: 'oreka/proyectos/tienda-mundo-rural/contexto.md' },
+                    { name: 'bitacora.md (Hitos de ejecución)', path: 'oreka/proyectos/tienda-mundo-rural/bitacora.md' }
+                ]
+            },
+            'don-carlos': {
+                name: 'Histórico Don Carlos',
+                desc: 'Trayectoria y memoria operativa gastronómica del origen de la pugna legal Don Clan. Preservación histórica.',
+                state: 'histórico',
+                path: 'oreka/proyectos-historicos/don-carlos/',
+                priority: 'Baja / Histórico',
+                owner: 'Nicolás Le Baux',
+                milestone: 'Preservación de aprendizajes',
+                badgeColor: 'var(--accent-neutral)',
+                files: [
+                    { name: 'README.md (Introducción del histórico)', path: 'oreka/proyectos-historicos/don-carlos/README.md' }
+                ]
+            },
+            'inbox-transit': {
+                name: 'Inbox / Bot Telegram',
+                desc: 'Rampa de entrada automática de archivos de Telegram. Flujo transitorio que debe quedar vacío al cierre de ciclo.',
+                state: 'Tránsito',
+                path: 'inbox/',
+                priority: 'Baja',
+                owner: 'Haiku 4.5 (Clasificador)',
+                milestone: 'Higiene diaria de rampa de entrada',
+                badgeColor: 'var(--accent-neutral)',
+                files: [
+                    { name: 'README.md (Protocolo de clasificado)', path: 'inbox/README.md' }
+                ]
+            },
+            'por-procesar': {
+                name: 'por-procesar/ (Cuarentena)',
+                desc: 'Almacén de binarios pesados o crudos pendientes de transcripción formal o traducción a formato AI.',
+                state: 'Cuarentena',
+                path: 'por-procesar/',
+                priority: 'Baja',
+                owner: 'Antigravity (Gemini)',
+                milestone: 'Auditar INDICE.csv de archivos crudos',
+                badgeColor: 'var(--accent-neutral)',
+                files: [
+                    { name: 'PROTOCOLO.md (Norma de ingesta)', path: 'por-procesar/PROTOCOLO.md' }
+                ]
+            }
+        };
+
+        // Select Node in interactive Tree View
+        function selectNode(key, el) {
+            // Remove selection class
+            document.querySelectorAll('.node-label').forEach(label => label.classList.remove('selected'));
+            
+            // Set selected
+            el.classList.add('selected');
+            
+            // Load Meta
+            const data = nodeData[key];
+            if (data) {
+                document.getElementById('meta-name').textContent = data.name;
+                document.getElementById('meta-desc').textContent = data.desc;
+                document.getElementById('meta-path').textContent = data.path;
+                document.getElementById('meta-priority').textContent = data.priority;
+                document.getElementById('meta-owner').textContent = data.owner;
+                document.getElementById('meta-milestone').textContent = data.milestone;
+                
+                const stateBadge = document.getElementById('meta-state-badge');
+                stateBadge.textContent = data.state;
+                stateBadge.style.backgroundColor = data.badgeColor;
+
+                // Build files list
+                const filesContainer = document.getElementById('meta-files');
+                filesContainer.innerHTML = '';
+                data.files.forEach(file => {
+                    const button = document.createElement('div');
+                    button.className = 'file-link';
+                    button.onclick = () => openDocumentViewer(file.path);
+                    button.innerHTML = `
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        <span>${file.name}</span>
+                        <span class="file-read-badge">Leer</span>
+                    `;
+                    filesContainer.appendChild(button);
+                });
+            }
+        }
+        // Load default root node files
+        selectNode('nlb-root', document.querySelector('.tree-root .node-label'));
+
+        // Document Viewer Logic
+        let currentDocumentContent = '';
+
+        function openDocumentViewer(filePath) {
+            const drawer = document.getElementById('doc-reader-drawer');
+            const overlay = document.getElementById('doc-reader-overlay');
+            const loading = document.getElementById('drawer-loading');
+            const content = document.getElementById('drawer-content');
+            const filenameEl = document.getElementById('drawer-filename');
+            const pathEl = document.getElementById('drawer-path');
+
+            // Set file metadata in drawer header
+            const filename = filePath.split('/').pop();
+            filenameEl.textContent = filename;
+            pathEl.textContent = `/${filePath}`;
+
+            // Show drawer & loading screen
+            overlay.classList.add('active');
+            drawer.classList.add('active');
+            loading.classList.add('active');
+            content.style.display = 'none';
+
+            // Check if open in file:/// protocol (CORS restriction)
+            if (window.location.protocol === 'file:') {
+                loading.classList.remove('active');
+                content.style.display = 'block';
+                content.innerHTML = `
+                    <div style="background: rgba(244, 63, 94, 0.08); border: 1px solid rgba(244, 63, 94, 0.2); border-radius: 12px; padding: 2rem; text-align: center; margin-top: 2rem;">
+                        <h3 style="color: var(--accent-danger); margin-top: 0; border-bottom: none; font-size: 1.3rem;">⚠️ Restricción de CORS en el Navegador</h3>
+                        <p style="margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Estás abriendo el panel directamente como un archivo local (<code>file://</code>). Por seguridad, los navegadores bloquean la lectura de otros archivos locales desde código JavaScript.</p>
+                        <p style="font-weight: 700; color: #ffffff; margin-bottom: 1rem;">Para leer tus archivos .md directamente en esta pantalla, por favor entra a través del servidor local:</p>
+                        <a href="http://localhost:8080/cerebro-nlb2.html" target="_blank" style="display: inline-block; background: var(--accent-holding); color: #ffffff; text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 700; transition: var(--transition-smooth); box-shadow: 0 4px 15px rgba(129, 140, 248, 0.3);" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">Abrir en Servidor Local (Puerto 8080)</a>
+                    </div>
+                `;
+                return;
+            }
+
+            // Fetch Markdown file from the local server
+            fetch(filePath)
+                .then(res => {
+                    if (!res.ok) throw new Error(`Status: ${res.status}`);
+                    return res.text();
+                })
+                .then(text => {
+                    currentDocumentContent = text;
+                    loading.classList.remove('active');
+                    content.style.display = 'block';
+                    
+                    // Render GFM Markdown
+                    if (typeof marked !== 'undefined') {
+                        content.innerHTML = marked.parse(text);
+                    } else {
+                        content.innerHTML = parseSimpleMarkdown(text);
+                    }
+                })
+                .catch(err => {
+                    loading.classList.remove('active');
+                    content.style.display = 'block';
+                    content.innerHTML = `
+                        <div style="text-align: center; margin-top: 4rem; color: var(--text-muted);">
+                            <svg viewBox="0 0 24 24" width="48" height="48" stroke="var(--accent-danger)" stroke-width="2" fill="none" style="margin-bottom: 1rem;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                            <h3 style="color: #ffffff; border-bottom: none; margin-top: 0;">Error al cargar el documento</h3>
+                            <p style="font-size: 0.85rem; max-width: 340px; margin: 0.5rem auto; line-height: 1.5;">No se pudo leer el archivo <code>${filePath}</code>.<br>Por favor, confirma que el servidor local en el puerto 8080 esté encendido y que el archivo exista en la ruta indicada.</p>
+                        </div>
+                    `;
+                });
+        }
+
+        function closeDocumentViewer() {
+            document.getElementById('doc-reader-drawer').classList.remove('active');
+            document.getElementById('doc-reader-overlay').classList.remove('active');
+        }
+
+        function copyDrawerContent() {
+            if (currentDocumentContent) {
+                navigator.clipboard.writeText(currentDocumentContent)
+                    .then(() => {
+                        const copyBtnSpan = document.querySelector('.drawer-btn span');
+                        const originalText = copyBtnSpan.textContent;
+                        copyBtnSpan.textContent = '¡Copiado!';
+                        copyBtnSpan.parentElement.style.color = '#34d399';
+                        setTimeout(() => {
+                            copyBtnSpan.textContent = originalText;
+                            copyBtnSpan.parentElement.style.color = '';
+                        }, 2000);
+                    });
+            }
+        }
+
+        // Lightweight Markdown Fallback parser
+        function parseSimpleMarkdown(md) {
+            let html = md
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+            
+            html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+            html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+            html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+            html = html.replace(/^#### (.*$)/gim, '<h4>$1</h4>');
+            
+            html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            
+            html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+            html = html.replace(/`(.*?)`/g, '<code>$1</code>');
+            
+            html = html.replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>');
+            html = html.replace(/^\s*-\s+(.*$)/gim, '<li>$1</li>');
+            
+            html = html.replace(/\n/g, '<br>');
+            
+            return html;
+        }
+
+        // Router Keywords Database
+        const routerDatabase = [
+            { keyword: 'bocus', path: 'horeca/bocus/SISTEMA.md', desc: 'Delivery online premium, Meta Ads, Shopify.' },
+            { keyword: 'delivery', path: 'horeca/bocus/SISTEMA.md', desc: 'Canal digital Bocus.' },
+            { keyword: 'shopify', path: 'horeca/bocus/SISTEMA.md', desc: 'Plataforma e-commerce Bocus.' },
+            { keyword: 'horeca', path: 'horeca/SISTEMA.md', desc: 'Matriz gastronómica y transacciones consolidadas.' },
+            { keyword: 'la pastora', path: 'horeca/parigo/SISTEMA.md', desc: 'Restaurante Parigo físico y masas.' },
+            { keyword: 'parigo', path: 'horeca/parigo/SISTEMA.md', desc: 'Cafetería al paso y local Reyes Lavalle.' },
+            { keyword: 'le plat', path: 'horeca/parigo/SISTEMA.md', desc: 'Restaurante fórmula plato único de Parigo.' },
+            { keyword: 'l\'entrecôte', path: 'horeca/parigo/SISTEMA.md', desc: 'Concepto gastronómico de Le Plat.' },
+            { keyword: 'cadaqués', path: 'cadaques/SISTEMA.md', desc: 'Panadería artesanal de San Sebastián.' },
+            { keyword: 'baguette', path: 'cadaques/SISTEMA.md', desc: 'Fórmula y venta de Cadaqués.' },
+            { keyword: 'tamarugo', path: 'nlb-spa/SISTEMA.md', desc: 'Pugna legal Don Clan en holding.' },
+            { keyword: 'don clan', path: 'nlb-spa/SISTEMA.md', desc: 'Expediente defensa civil y penal (Tamarugo).' },
+            { keyword: 'don carlos', path: 'oreka/proyectos-historicos/don-carlos/', desc: 'Trayectoria y memoria del restaurante original.' },
+            { keyword: 'oreka', path: 'oreka/SISTEMA.md', desc: 'Administración transversal del grupo.' },
+            { keyword: 'tienda mundo rural', path: 'oreka/proyectos/tienda-mundo-rural/SISTEMA.md', desc: 'Proyecto INDAP.' },
+            { keyword: 'INDAP', path: 'oreka/proyectos/tienda-mundo-rural/SISTEMA.md', desc: 'Contrato y entregas de Mundo Rural.' },
+            { keyword: 'aligot', path: 'oreka/proyectos/aligot-otec/SISTEMA.md', desc: 'Capacitación OTEC (Preactivo).' },
+            { keyword: 'sport francés', path: 'oreka/SISTEMA.md', desc: 'Proyecto preactivo en asesoría.' },
+            { keyword: 'iniciativa', path: 'iniciativas/SISTEMA.md', desc: 'Side-projects personales.' }
+        ];
+
+        // Search Router Action
+        function handleRouteSearch() {
+            const query = document.getElementById('router-search').value.toLowerCase().trim();
+            const resultsContainer = document.getElementById('router-results');
+            resultsContainer.innerHTML = '';
+
+            const filtered = routerDatabase.filter(item => 
+                item.keyword.toLowerCase().includes(query) || 
+                item.desc.toLowerCase().includes(query)
+            );
+
+            if (filtered.length === 0) {
+                resultsContainer.innerHTML = `<div style="text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 2rem;">No se encontraron gatilladores. Por defecto, escala a <strong>oreka/SISTEMA.md</strong></div>`;
+                return;
+            }
+
+            filtered.forEach(item => {
+                const row = document.createElement('div');
+                row.className = 'router-result-item';
+                row.innerHTML = `
+                    <div>
+                        <span class="router-keyword">"${item.keyword}"</span>
+                        <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">${item.desc}</div>
+                    </div>
+                    <span class="router-path" style="cursor: pointer; text-decoration: underline;" onclick="openDocumentViewer('${item.path}')">${item.path}</span>
+                `;
+                resultsContainer.appendChild(row);
+            });
+        }
+        handleRouteSearch(); // Init Search Router
+
+        // Realtime Auditor Engine
+        function runRealtimeAudit() {
+            const text = document.getElementById('audit-input').value;
+            const badgesContainer = document.getElementById('audit-badges');
+            const logContainer = document.getElementById('audit-log');
+            
+            badgesContainer.innerHTML = '';
+            logContainer.innerHTML = '';
+
+            if (!text.trim()) {
+                badgesContainer.innerHTML = `<span class="audit-check-badge success">Esperando entrada...</span>`;
+                return;
+            }
+
+            let emDashCount = 0;
+            let rutMatch = text.match(/\d{7,8}-[\dKk]/g);
+            let hasWrongRut = false;
+            let isoDates = text.match(/\d{4}-\d{2}-\d{2}/g);
+            let rawDates = text.match(/\b\d{6}\b/g); // YYMMDD typical in files
+            let monetaryCLP = text.match(/\$\d{1,3}(\.\d{3})*(?!\d)/g);
+            let monetaryUSD = text.match(/\$\d+(\.\d{2})\b/g);
+
+            // 1. Audit Em Dash (prohibido guion largo)
+            if (text.includes('—')) {
+                emDashCount = (text.match(/—/g) || []).length;
+            }
+
+            // Render Badges and Logs
+            // Dash check
+            if (emDashCount > 0) {
+                badgesContainer.innerHTML += `<span class="audit-check-badge error">❌ Em Dash Detectado (${emDashCount})</span>`;
+                logContainer.innerHTML += `<li class="audit-log-item error">⚠️ ERROR: Encontrado guion largo '—'. Está estrictamente prohibido. Reemplazar por guion simple '-' o reformular.</li>`;
+            } else {
+                badgesContainer.innerHTML += `<span class="audit-check-badge success">✓ Sin Em Dash</span>`;
+            }
+
+            // RUT Check
+            if (rutMatch) {
+                badgesContainer.innerHTML += `<span class="audit-check-badge success">✓ RUT Detectado (${rutMatch.length})</span>`;
+                rutMatch.forEach(rut => {
+                    logContainer.innerHTML += `<li class="audit-log-item success">✓ RUT Correcto: "${rut}" cumple con el formato XXXXXXXX-X.</li>`;
+                });
+            }
+            // Check for wrong RUT format (e.g. dots or wrong dash)
+            const wrongRuts = text.match(/\b\d{1,3}(\.\d{3}){2}-[\dKk]\b/g);
+            if (wrongRuts) {
+                badgesContainer.innerHTML += `<span class="audit-check-badge error">❌ RUT con Puntos</span>`;
+                wrongRuts.forEach(rut => {
+                    logContainer.innerHTML += `<li class="audit-log-item error">⚠️ ERROR: El RUT "${rut}" contiene puntos. La regla estipula XXXXXXXX-X sin puntos.</li>`;
+                });
+            }
+
+            // Date Checks
+            if (isoDates) {
+                badgesContainer.innerHTML += `<span class="audit-check-badge success">✓ Fecha ISO (${isoDates.length})</span>`;
+                isoDates.forEach(d => {
+                    logContainer.innerHTML += `<li class="audit-log-item success">✓ Fecha ISO Correcta: "${d}" para base de datos/bitácoras.</li>`;
+                });
+            }
+            if (rawDates) {
+                badgesContainer.innerHTML += `<span class="audit-check-badge success">✓ Clic Fecha File (${rawDates.length})</span>`;
+                rawDates.forEach(d => {
+                    logContainer.innerHTML += `<li class="audit-log-item success">✓ Fecha YYMMDD "${d}" detectada (Válida únicamente para nombres de archivo).</li>`;
+                });
+            }
+
+            // Currency checks
+            if (monetaryCLP) {
+                logContainer.innerHTML += `<li class="audit-log-item success">✓ Monto CLP detectado sin decimales: ${monetaryCLP.join(', ')}</li>`;
+            }
+            // If CLP contains decimal points
+            const clpDecimals = text.match(/\$\d{1,3}(\.\d{3})*,\d{2}\b/g);
+            if (clpDecimals) {
+                badgesContainer.innerHTML += `<span class="audit-check-badge error">❌ CLP con Decimales</span>`;
+                logContainer.innerHTML += `<li class="audit-log-item error">⚠️ ERROR: Encontrado monto CLP con decimales "${clpDecimals.join(', ')}". La regla estipula CLP sin decimales.</li>`;
+            }
+
+            if (logContainer.innerHTML === '') {
+                logContainer.innerHTML = `<li class="audit-log-item success" style="background: rgba(16,185,129,0.02)">El texto ingresado cumple con las normativas básicas o no contiene elementos auditables específicos.</li>`;
+            }
+        }
+        runRealtimeAudit(); // Init Auditor
+
+        // Human Team Database
+        const teamData = [
+            { name: 'Nicolás Le Baux', role: 'Fundador & Director General', company: 'Oreka / Global', phone: 'nlebaux@gmail.com', details: 'Responsable final estratégico de todas las marcas y defensas jurídicas.' },
+            { name: 'Louis Le Baux', role: 'Contabilidad y Logística', company: 'Oreka', phone: 'Contacto en TBD', details: 'A cargo de consolidación contable y gestión operacional Oreka Ltda.' },
+            { name: 'Daniela Pérez', role: 'Dirección de Recursos Humanos', company: 'Oreka', phone: 'Contacto en TBD', details: 'Estructuración consolidada de RRHH a nivel transversal.' },
+            { name: 'Freddy Moreno', role: 'Operaciones & Gastronomía', company: 'Horeca / Cadaqués', phone: 'Contacto en TBD', details: 'Dirección de locales físicos, cocina y estandarización.' },
+            { name: 'Nicolás Cajica', role: 'Chef de Cocina', company: 'Horeca / Parigo', phone: 'Gastronomía Parigo', details: 'Estandarización de la carta y operación del restaurante físico.' },
+            { name: 'Jared', role: 'Jefe de Producción', company: 'Horeca / Masas', phone: 'Prod. Masas', details: 'Operación técnica de la panadería transversal.' },
+            { name: 'Peter', role: 'Producción Técnica', company: 'Cadaqués', phone: 'Producción Cadaqués', details: 'Panadería artesanal del local San Sebastián.' },
+            { name: 'Roxy', role: 'Jefe de Ventas', company: 'Cadaqués', phone: 'Venta Cadaqués', details: 'E-commerce, UberEats y atención directa.' },
+            { name: 'Laura', role: 'Ventas & Mostrador', company: 'Horeca / Parigo', phone: 'Parigo al Paso', details: 'Atención comercial en la cafetería Parigo al paso.' },
+            { name: 'Pamela Valdés', role: 'Administradora Operativa', company: 'Externo', phone: 'Tienda Mundo Rural', details: 'Gestión local y auditorías de inventario INDAP.' },
+            { name: 'Cristian (Agencia York)', role: 'Meta Ads & Growth', company: 'Externo', phone: 'Agencia Externa', details: 'Crecimiento de ventas y ticket Bocus/Cadaqués.' }
+        ];
+
+        // Filter and Build Team List
+        function filterTeam(filter, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+
+            const container = document.getElementById('team-cards-container');
+            container.innerHTML = '';
+
+            const filtered = teamData.filter(member => {
+                if (filter === 'all') return true;
+                return member.company.includes(filter);
+            });
+
+            document.getElementById('team-counter').textContent = `${filtered.length} Integrantes`;
+
+            filtered.forEach(m => {
+                const card = document.createElement('div');
+                card.className = 'team-card';
+                card.innerHTML = `
+                    <div class="team-header">
+                        <div class="team-avatar">${m.name.split(' ').map(n=>n[0]).join('')}</div>
+                        <div class="team-info">
+                            <h4>${m.name}</h4>
+                            <p>${m.role}</p>
+                        </div>
+                    </div>
+                    <div class="team-body">
+                        <div class="team-meta-row">
+                            <span class="team-label">Entidad</span>
+                            <span class="team-val" style="color: var(--accent-oreka); font-weight: 700;">${m.company}</span>
+                        </div>
+                        <div class="team-meta-row">
+                            <span class="team-label">Contacto</span>
+                            <span class="team-val">${m.phone}</span>
+                        </div>
+                        <p style="font-size: 0.78rem; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.03); padding-top: 0.5rem; margin-top: 0.25rem;">
+                            ${m.details}
+                        </p>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+        filterTeam('all'); // Init Team List
+
+        // Chart.js Metrics Logic
+        let myChartInstance = null;
+        let activeSort = 'total';
+
+        const chartProjects = [
+            { id: 'don-clan', name: 'Defensa Don Clan (Legal)', alma: 95, contexto: 80, bitacora: 75 },
+            { id: 'horeca', name: 'Horeca SpA (Matriz)', alma: 85, contexto: 80, bitacora: 95 },
+            { id: 'bocus', name: 'Bocus (Delivery)', alma: 70, contexto: 90, bitacora: 90 },
+            { id: 'parigo', name: 'Parigó & Le Plat (Local)', alma: 75, contexto: 95, bitacora: 90 },
+            { id: 'cadaques', name: 'Cadaqués SpA (Panadería)', alma: 70, contexto: 85, bitacora: 75 },
+            { id: 'nlb-spa', name: 'NLB SpA (Holding)', alma: 90, contexto: 75, bitacora: 80 },
+            { id: 'oreka', name: 'Solución Oreka (Admin)', alma: 75, contexto: 70, bitacora: 70 },
+            { id: 'tienda-mundo-rural', name: 'Tienda Mundo Rural (INDAP)', alma: 80, contexto: 85, bitacora: 70 },
+            { id: 'produccion-masas', name: 'Producción de Masas (Técnica)', alma: 40, contexto: 55, bitacora: 30 },
+            { id: 'don-carlos', name: 'Histórico Don Carlos', alma: 20, contexto: 40, bitacora: 10 }
+        ];
+
+        function initMetricsChart() {
+            const ctx = document.getElementById('metricsChart');
+            if (!ctx) return;
+
+            // Sort data according to activeSort
+            let sortedData = [...chartProjects];
+            if (activeSort === 'total') {
+                sortedData.sort((a, b) => (b.alma + b.contexto + b.bitacora) - (a.alma + a.contexto + a.bitacora));
+            } else {
+                sortedData.sort((a, b) => b[activeSort] - a[activeSort]);
+            }
+
+            const labels = sortedData.map(item => item.name);
+            const almaValues = sortedData.map(item => item.alma);
+            const contextoValues = sortedData.map(item => item.contexto);
+            const bitacoraValues = sortedData.map(item => item.bitacora);
+
+            if (myChartInstance) {
+                myChartInstance.destroy();
+            }
+
+            myChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Alma (SISTEMA.md / Doctrina)',
+                            data: almaValues,
+                            backgroundColor: '#818cf8',
+                            borderWidth: 0,
+                            borderRadius: 4
+                        },
+                        {
+                            label: 'Contexto (contexto.md / Información)',
+                            data: contextoValues,
+                            backgroundColor: '#06b6d4',
+                            borderWidth: 0,
+                            borderRadius: 4
+                        },
+                        {
+                            label: 'Bitácora (bitacora.md / Historial)',
+                            data: bitacoraValues,
+                            backgroundColor: '#f59e0b',
+                            borderWidth: 0,
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#cbd5e1',
+                                font: {
+                                    family: 'Plus Jakarta Sans',
+                                    size: 11
+                                }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#0d1423',
+                            titleColor: '#f8fafc',
+                            titleFont: { family: 'Outfit', weight: 'bold' },
+                            bodyColor: '#cbd5e1',
+                            bodyFont: { family: 'Plus Jakarta Sans' },
+                            borderColor: 'rgba(255,255,255,0.08)',
+                            borderWidth: 1,
+                            callbacks: {
+                                footer: (tooltipItems) => {
+                                    let sum = 0;
+                                    tooltipItems.forEach(function(tooltipItem) {
+                                        sum += tooltipItem.parsed.x;
+                                    });
+                                    return 'Total: ' + sum + ' pts';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            stacked: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.03)'
+                            },
+                            ticks: {
+                                color: '#64748b',
+                                font: { family: 'Plus Jakarta Sans', size: 10 }
+                            }
+                        },
+                        y: {
+                            stacked: true,
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#f8fafc',
+                                font: { family: 'Outfit', size: 11, weight: '500' }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateChartSort(sortType) {
+            activeSort = sortType;
+            // Update active states on buttons
+            document.getElementById('sort-total-btn').classList.remove('active');
+            document.getElementById('sort-alma-btn').classList.remove('active');
+            document.getElementById('sort-contexto-btn').classList.remove('active');
+            document.getElementById('sort-bitacora-btn').classList.remove('active');
+
+            document.getElementById(`sort-${sortType}-btn`).classList.add('active');
+            initMetricsChart();
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,2342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solución Horeca SpA - Informe de Costeos & Márgenes</title>
+    <!-- Google Fonts: Outfit (headings) & Plus Jakarta Sans (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Modern Premium CSS System - Dark Theme Base */
+        :root {
+            --bg-base: #060913;
+            --bg-surface: rgba(11, 17, 32, 0.7);
+            --bg-surface-solid: #0d1425;
+            --bg-card: rgba(17, 27, 49, 0.6);
+            --bg-card-hover: rgba(25, 39, 70, 0.8);
+            
+            --border-glow: rgba(245, 158, 11, 0.2);
+            --border-soft: rgba(255, 255, 255, 0.05);
+            --border-light: rgba(255, 255, 255, 0.1);
+            
+            /* Curated HSL Color Palettes */
+            --accent-holding: #818cf8;      /* NLB SpA - Indigo / Parigo Le Plat */
+            --accent-horeca: #f59e0b;       /* Horeca - Amber / Bocus Platos */
+            --accent-horeca-glow: rgba(245, 158, 11, 0.35);
+            
+            --accent-cadaques: #10b981;     /* Cadaqués - Emerald / Parigo al Paso */
+            --accent-oreka: #06b6d4;        /* Oreka - Cyan / Enigmas */
+            --accent-danger: #f43f5e;       /* Warnings / Perros - Rose */
+            --accent-success: #10b981;
+            
+            /* Text Hierarchy */
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            --text-amber: #fbbf24;
+            
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-display: 'Outfit', sans-serif;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+            --shadow-premium: 0 10px 30px -10px rgba(0, 0, 0, 0.8);
+            --shadow-glow: 0 0 20px rgba(245, 158, 11, 0.15);
+        }
+
+        /* Base Resets & Layout */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(245, 158, 11, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(129, 140, 248, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.02) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Sidebar Navigation */
+        aside.sidebar {
+            width: 280px;
+            background: var(--bg-surface);
+            border-right: 1px solid var(--border-soft);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            z-index: 10;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 3rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-horeca), var(--accent-holding));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 80%);
+            animation: rotateGlow 8s linear infinite;
+        }
+
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .logo-text h1 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #ffffff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text p {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: -2px;
+        }
+
+        nav.nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex-grow: 1;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.85rem 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border: 1px solid transparent;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .nav-item svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-item:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.04);
+        }
+
+        .nav-item.active {
+            color: #ffffff;
+            background: rgba(245, 158, 11, 0.15);
+            border-color: rgba(245, 158, 11, 0.25);
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.05);
+        }
+
+        .nav-item.active svg {
+            stroke: var(--accent-horeca);
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-soft);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--accent-horeca);
+        }
+
+        .profile-info h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .profile-info p {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* Main Content Container */
+        main.main-content {
+            margin-left: 280px;
+            flex-grow: 1;
+            padding: 2rem 3rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Header Area */
+        header.top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-soft);
+        }
+
+        .header-title h2 {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-title p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .status-pill {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+            padding: 0.4rem 0.8rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #f59e0b;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #f59e0b;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0.6; }
+            50% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 14px #f59e0b; }
+            100% { transform: scale(0.9); opacity: 0.6; }
+        }
+
+        .live-time {
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-soft);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+        }
+
+        /* Grid Dashboard Cards (Tab Viewports) */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* KPI Quick Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent-neutral);
+        }
+
+        .metric-card.parigo-paso::before { background: var(--accent-cadaques); }
+        .metric-card.parigo-plat::before { background: var(--accent-holding); }
+        .metric-card.bocus-plato::before { background: var(--accent-horeca); }
+        .metric-card.bocus-web::before { background: var(--accent-danger); }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--border-light);
+            box-shadow: var(--shadow-premium);
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .metric-value {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .metric-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: auto;
+            padding-top: 0.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .badge {
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge.success { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+        .badge.warning { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+        .badge.danger { background: rgba(244, 63, 94, 0.15); color: #fb7185; }
+
+        /* Blockers & Hitos Grid Section */
+        .dashboard-row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .dashboard-row-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-soft);
+            border-radius: 20px;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            box-shadow: var(--shadow-premium);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-soft);
+            padding-bottom: 1rem;
+        }
+
+        .panel-header h3 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .panel-header h3 svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--accent-horeca);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        /* Costing Progress bars */
+        .chart-box {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            justify-content: center;
+        }
+
+        .bar-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .bar-label-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .progress-track {
+            height: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 9999px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 9999px;
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Business Unit Tab View Styles */
+        .bu-layout {
+            display: grid;
+            grid-template-columns: 1.6fr 1.4fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .bu-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .bu-tabs-nav {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .bu-tab-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-soft);
+            color: var(--text-secondary);
+            padding: 0.6rem 1.25rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .bu-tab-btn:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: #ffffff;
+        }
+
+        .bu-tab-btn.active {
+            background: var(--accent-horeca);
+            border-color: var(--accent-horeca);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.25);
+        }
+
+        /* Item Grid for Tops and Alerts */
+        .item-list-box {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .item-card-row {
+            background: rgba(13, 20, 35, 0.4);
+            border: 1px solid var(--border-soft);
+            border-radius: 10px;
+            padding: 0.85rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition-smooth);
+        }
+
+        .item-card-row:hover {
+            border-color: rgba(255,255,255,0.08);
+            background: rgba(13, 20, 35, 0.6);
+            transform: translateX(4px);
+        }
+
+        .item-name {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 0.9rem;
+        }
+
+        .item-category {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.15rem;
+        }
+
+        .item-cost-details {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            text-align: right;
+        }
+
+        .item-margin-val {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+
+        .item-margin-val.success { color: #34d399; }
+        .item-margin-val.danger { color: #fb7185; }
+
+        /* Simulator Styles */
+        .sim-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+        }
+
+        .sim-input-row {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .sim-input-row label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sim-input-row input, .sim-input-row select {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-soft);
+            border-radius: 8px;
+            padding: 0.75rem;
+            color: #ffffff;
+            outline: none;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            transition: var(--transition-smooth);
+        }
+
+        .sim-input-row input:focus, .sim-input-row select:focus {
+            border-color: var(--accent-horeca);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .sim-result-box {
+            background: rgba(245, 158, 11, 0.03);
+            border: 1px solid rgba(245, 158, 11, 0.15);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .sim-result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            padding-bottom: 0.5rem;
+        }
+
+        .sim-result-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .sim-result-lbl {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .sim-result-val {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: #ffffff;
+        }
+
+        .sim-result-val.primary {
+            color: var(--accent-amber);
+            font-size: 1.4rem;
+        }
+
+        .sim-result-val.primary-utilidad {
+            color: #34d399;
+            font-size: 1.25rem;
+        }
+
+        .sim-alert-box {
+            background: rgba(13, 20, 35, 0.4);
+            border: 1px solid var(--border-soft);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Warnings Panel list */
+        .warning-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .warning-item {
+            background: rgba(244, 63, 94, 0.03);
+            border: 1px solid rgba(244, 63, 94, 0.1);
+            border-left: 4px solid var(--accent-danger);
+            border-radius: 0 8px 8px 0;
+            padding: 0.85rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .warning-title {
+            font-weight: 700;
+            font-size: 0.88rem;
+            color: #ffffff;
+        }
+
+        .warning-desc {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            margin-top: 0.15rem;
+        }
+
+        .warning-unit {
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            background: rgba(244, 63, 94, 0.15);
+            color: #fb7185;
+            text-transform: uppercase;
+        }
+
+        /* Checklist Panel */
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            background: rgba(255,255,255,0.01);
+            border: 1px solid var(--border-soft);
+            border-radius: 8px;
+            padding: 0.85rem;
+            transition: var(--transition-smooth);
+        }
+
+        .check-item:hover {
+            background: rgba(255,255,255,0.03);
+        }
+
+        .check-checkbox {
+            margin-top: 0.2rem;
+            cursor: pointer;
+            accent-color: var(--accent-horeca);
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Original Table & Point Placement Layout */
+        .original-table-layout {
+            display: grid;
+            grid-template-columns: 1.45fr 1.55fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 1100px) {
+            .original-table-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .interactive-coordinate-plane {
+            width: 100%;
+            height: 480px;
+            background: rgba(13, 20, 35, 0.5);
+            border: 1px solid var(--border-soft);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-premium);
+        }
+
+        /* Quadrant backdrops */
+        .quadrant-bg {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            display: flex;
+            padding: 1.5rem;
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            pointer-events: none;
+            opacity: 0.15;
+            transition: var(--transition-smooth);
+        }
+
+        /* Q1: Star Top Right */
+        .quad-star {
+            top: 0;
+            right: 0;
+            background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.15), transparent 70%);
+            color: var(--accent-cadaques);
+            justify-content: flex-end;
+            align-items: flex-start;
+        }
+        /* Q2: Puzzle Top Left */
+        .quad-puzzle {
+            top: 0;
+            left: 0;
+            background: radial-gradient(circle at top left, rgba(6, 182, 212, 0.15), transparent 70%);
+            color: var(--accent-oreka);
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+        /* Q3: Plowhorse Bottom Right */
+        .quad-plowhorse {
+            bottom: 0;
+            right: 0;
+            background: radial-gradient(circle at bottom right, rgba(245, 158, 11, 0.15), transparent 70%);
+            color: var(--accent-horeca);
+            justify-content: flex-end;
+            align-items: flex-end;
+        }
+        /* Q4: Dog Bottom Left */
+        .quad-dog {
+            bottom: 0;
+            left: 0;
+            background: radial-gradient(circle at bottom left, rgba(244, 63, 94, 0.15), transparent 70%);
+            color: var(--accent-danger);
+            justify-content: flex-start;
+            align-items: flex-end;
+        }
+
+        /* Active highlight for quadrants */
+        .interactive-coordinate-plane.high-star .quad-star { opacity: 0.45; }
+        .interactive-coordinate-plane.high-puzzle .quad-puzzle { opacity: 0.45; }
+        .interactive-coordinate-plane.high-plowhorse .quad-plowhorse { opacity: 0.45; }
+        .interactive-coordinate-plane.high-dog .quad-dog { opacity: 0.45; }
+
+        /* Grid lines */
+        .grid-line-x {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 70%; /* Target Margin 70% */
+            height: 2px;
+            border-bottom: 2px dashed rgba(255, 255, 255, 0.12);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .grid-line-y {
+            position: absolute;
+            left: 50%; /* Popularity Median 50% */
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            border-left: 2px dashed rgba(255, 255, 255, 0.12);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .axis-labels-y {
+            position: absolute;
+            left: 10px;
+            bottom: 71%;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            font-weight: 700;
+            z-index: 2;
+            text-transform: uppercase;
+        }
+
+        .axis-labels-x {
+            position: absolute;
+            left: 51%;
+            top: 10px;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            font-weight: 700;
+            z-index: 2;
+            text-transform: uppercase;
+        }
+
+        /* Dynamic Glowing Point */
+        .dynamic-point {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            z-index: 5;
+            transform: translate(-50%, 50%); /* Center the dot exactly on its coordinates */
+            bottom: 70%; /* Default starting point */
+            left: 50%;
+            transition: left 0.6s cubic-bezier(0.25, 1, 0.2, 1), bottom 0.6s cubic-bezier(0.25, 1, 0.2, 1);
+            box-shadow: 0 0 20px #ffffff;
+        }
+
+        .dynamic-point.star { background-color: var(--accent-cadaques); box-shadow: 0 0 25px var(--accent-cadaques), 0 0 10px #ffffff; }
+        .dynamic-point.puzzle { background-color: var(--accent-oreka); box-shadow: 0 0 25px var(--accent-oreka), 0 0 10px #ffffff; }
+        .dynamic-point.plowhorse { background-color: var(--accent-horeca); box-shadow: 0 0 25px var(--accent-horeca), 0 0 10px #ffffff; }
+        .dynamic-point.dog { background-color: var(--accent-danger); box-shadow: 0 0 25px var(--accent-danger), 0 0 10px #ffffff; }
+
+        /* Point Pulse effect */
+        .dynamic-point::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: inherit;
+            animation: pulsePoint 1.5s infinite;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        @keyframes pulsePoint {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(2.5); opacity: 0; }
+        }
+
+        /* Dynamic floating label */
+        .point-floating-label {
+            position: absolute;
+            background: rgba(13, 20, 37, 0.9);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 0.5rem 0.8rem;
+            white-space: nowrap;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #ffffff;
+            box-shadow: var(--shadow-premium);
+            pointer-events: none;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 6;
+        }
+
+        .point-floating-label span {
+            display: block;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-top: 0.15rem;
+        }
+
+        /* Interactive Original Table Styles */
+        .table-container {
+            width: 100%;
+            max-height: 480px;
+            overflow-y: auto;
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            background: rgba(13, 20, 35, 0.3);
+        }
+
+        table.original-cost-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+        }
+
+        table.original-cost-table th, table.original-cost-table td {
+            padding: 0.7rem 0.85rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        table.original-cost-table th {
+            background: rgba(13, 20, 35, 0.7);
+            color: var(--text-muted);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.5px;
+            position: sticky;
+            top: 0;
+            z-index: 3;
+            backdrop-filter: blur(10px);
+        }
+
+        table.original-cost-table tr {
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        table.original-cost-table tr:hover td {
+            background: rgba(255, 255, 255, 0.04);
+            color: #ffffff;
+        }
+
+        table.original-cost-table tr.selected td {
+            background: rgba(245, 158, 11, 0.12);
+            color: #ffffff;
+            border-bottom-color: rgba(245, 158, 11, 0.25);
+        }
+
+        .search-table-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search-table-input {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-soft);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            color: #ffffff;
+            outline: none;
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            width: 260px;
+            transition: var(--transition-smooth);
+        }
+
+        .search-table-input:focus {
+            border-color: var(--accent-horeca);
+            background: rgba(255, 255, 255, 0.06);
+            width: 320px;
+        }
+
+        .quadrant-micro-badge {
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.15rem 0.35rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+        .quadrant-micro-badge.star { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+        .quadrant-micro-badge.puzzle { background: rgba(6, 182, 212, 0.15); color: #22d3ee; }
+        .quadrant-micro-badge.plowhorse { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+        .quadrant-micro-badge.dog { background: rgba(244, 63, 94, 0.15); color: #fb7185; }
+
+        .selected-detail-panel {
+            background: rgba(245, 158, 11, 0.03);
+            border: 1px solid rgba(245, 158, 11, 0.15);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .filter-header-select {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-soft);
+            border-radius: 6px;
+            padding: 0.4rem 0.8rem;
+            color: #ffffff;
+            font-size: 0.82rem;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .filter-header-select:focus {
+            border-color: var(--accent-horeca);
+        }
+
+    </style>
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <script src="../../auth.js"></script>
+<style id="oreka-private-shell-style">
+  .oreka-private-shell {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    background: rgba(14, 13, 11, 0.92);
+    color: #eedacf;
+    border-bottom: 1px solid rgba(231, 123, 50, 0.22);
+    backdrop-filter: blur(10px);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .oreka-private-shell a {
+    color: #eedacf;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .oreka-private-shell a:hover {
+    color: #ffffff;
+  }
+
+  .oreka-private-shell .divider {
+    width: 1px;
+    height: 14px;
+    background: rgba(238, 218, 207, 0.24);
+  }
+
+  .oreka-private-shell .title {
+    margin-left: auto;
+    color: rgba(238, 218, 207, 0.82);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="oreka-private-shell">
+  <a href="/privado/">Privado</a>
+  <span class="divider"></span>
+  <a href="/privado/entregables/">Entregables</a>
+  <span class="title">Horeca finanzas y operaciones</span>
+</div>
+
+
+    <div class="dashboard-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <a href="#" class="logo-area">
+                <div class="logo-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <div class="logo-text">
+                    <h1>SOLUCIÓN HORECA</h1>
+                    <p>Costes & Márgenes</p>
+                </div>
+            </a>
+
+            <nav class="nav-menu">
+                <div class="nav-item active" onclick="switchTab('tab-dashboard', this)">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+                    Resumen Ejecutivo
+                </div>
+                <div class="nav-item" onclick="switchTab('tab-unidades', this)">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    Análisis de Unidades
+                </div>
+                <div class="nav-item" onclick="switchTab('tab-menu-eng', this)">
+                    <svg viewBox="0 0 24 24"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+                    Ingeniería de Menú
+                </div>
+                <div class="nav-item" onclick="switchTab('tab-simulador', this)">
+                    <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+                    Simulador de Precios
+                </div>
+                <div class="nav-item" onclick="switchTab('tab-alertas', this)">
+                    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    Consola de Alertas
+                </div>
+                <div class="nav-item" onclick="switchTab('tab-estrategia', this)">
+                    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    Estrategia Horeca
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar">H</div>
+                    <div class="profile-info">
+                        <h4>Dirección Oreka</h4>
+                        <p>Holding Administraciones</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-title">
+                    <h2 id="page-title">Resumen Ejecutivo</h2>
+                    <p id="page-subtitle">Estructura analítica de precios de venta y costeo por unidad de negocio gastronómica.</p>
+                </div>
+                <div class="system-status">
+                    <div class="status-pill">
+                        <div class="status-dot"></div>
+                        <span>Doctrina Oficial: 2026-05-22</span>
+                    </div>
+                    <div class="live-time" id="clock">2026-05-24 20:12:37</div>
+                </div>
+            </header>
+
+            <!-- TAB 1: EXECUTIVE SUMMARY -->
+            <div id="tab-dashboard" class="tab-content active">
+                
+                <!-- Quick Metrics Grid -->
+                <div class="metrics-grid">
+                    <div class="metric-card parigo-paso">
+                        <div class="metric-label">Al Paso</div>
+                        <div class="metric-value">75.4% Margen</div>
+                        <div class="metric-footer">
+                            <span>Materia Prima: 24.6%</span>
+                            <span class="badge success">Excelente</span>
+                        </div>
+                    </div>
+                    <div class="metric-card parigo-plat">
+                        <div class="metric-label">Le Plat</div>
+                        <div class="metric-value">73.2% Margen</div>
+                        <div class="metric-footer">
+                            <span>Materia Prima: 26.8%</span>
+                            <span class="badge success">Saludable</span>
+                        </div>
+                    </div>
+                    <div class="metric-card bocus-plato">
+                        <div class="metric-label">Bocus Platos Listos</div>
+                        <div class="metric-value">64.5% Margen</div>
+                        <div class="metric-footer">
+                            <span>Materia Prima: 35.5%</span>
+                            <span class="badge warning">Controlado</span>
+                        </div>
+                    </div>
+                    <div class="metric-card bocus-web">
+                        <div class="metric-label">Quesos, Charcutería y Conservas</div>
+                        <div class="metric-value">56.6% Margen</div>
+                        <div class="metric-footer">
+                            <span>Materia Prima: 43.4%</span>
+                            <span class="badge danger">Crítico (Brie)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 1.5rem;"></div>
+
+                <!-- Row 2: Charts and Quick Alerts -->
+                <div class="dashboard-row-2">
+                    
+                    <!-- Costing Progress Bars Card -->
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>
+                                <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+                                Comparativa de Margen vs Costo de Materia Prima (% MP)
+                            </h3>
+                        </div>
+                        <div class="chart-box">
+                            
+                            <div class="bar-container">
+                                <div class="bar-label-row">
+                                    <span>Al Paso</span>
+                                    <span style="color: var(--accent-cadaques);">75.4% Margen / 24.6% MP</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="progress-fill" style="width: 75.4%; background: var(--accent-cadaques);"></div>
+                                </div>
+                            </div>
+
+                            <div class="bar-container">
+                                <div class="bar-label-row">
+                                    <span>Le Plat</span>
+                                    <span style="color: var(--accent-holding);">73.2% Margen / 26.8% MP</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="progress-fill" style="width: 73.2%; background: var(--accent-holding);"></div>
+                                </div>
+                            </div>
+
+                            <div class="bar-container">
+                                <div class="bar-label-row">
+                                    <span>Bocus Platos Listos</span>
+                                    <span style="color: var(--accent-horeca);">64.5% Margen / 35.5% MP</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="progress-fill" style="width: 64.5%; background: var(--accent-horeca);"></div>
+                                </div>
+                            </div>
+
+                            <div class="bar-container">
+                                <div class="bar-label-row">
+                                    <span>Quesos, Charcutería y Conservas</span>
+                                    <span style="color: var(--accent-danger);">56.6% Margen / 43.4% MP</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="progress-fill" style="width: 56.6%; background: var(--accent-danger);"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Executive Summary Text panel -->
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>Carta del Directorio</h3>
+                        </div>
+                        <div style="font-size: 0.88rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 1rem;">
+                            <p>En cumplimiento con el plan de ordenamiento financiero del holding, este informe detalla el costeo real y márgenes brutos de la operación de **Solución Horeca SpA**.</p>
+                            <p>Se evidencia un desbalance notable entre los formatos físicos de alta rotación (como Al Paso con **75.4% de margen** y Le Plat con **73.2%**) frente a la comercialización de quesos, charcutería y conservas, donde los productos importados presionan los costos hasta un crítico **43.4% de materia prima promedio**, afectando la rentabilidad neta.</p>
+                            <div class="sim-alert-box" style="border-left: 3px solid var(--accent-horeca);">
+                                <strong>Directriz Clave:</strong> Es prioritario ajustar precios en Quesos, Charcutería y Conservas y capitalizar el excelente margen de contribución del formato Al Paso en Reyes Lavalle y San Sebastián.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- TAB 2: DETAILED ANALYSIS BY BU -->
+            <div id="tab-unidades" class="tab-content">
+                
+                <div class="bu-tabs-nav">
+                    <button class="bu-tab-btn active" onclick="switchBUTab('bu-parigo-paso', this)">Al Paso</button>
+                    <button class="bu-tab-btn" onclick="switchBUTab('bu-parigo-plat', this)">Le Plat</button>
+                    <button class="bu-tab-btn" onclick="switchBUTab('bu-bocus-plato', this)">Bocus Platos Listos</button>
+                    <button class="bu-tab-btn" onclick="switchBUTab('bu-bocus-web', this)">Quesos, Charcutería y Conservas</button>
+                </div>
+
+                <!-- BU 1: Parigo al paso -->
+                <div id="bu-parigo-paso" class="bu-tab-content bu-layout" style="display: grid;">
+                    
+                    <!-- Left: Tops List -->
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>Rentabilidad del Catálogo (50 Ítems Analizados)</h3>
+                            <span class="badge success">Margen MP 75.4%</span>
+                        </div>
+                        
+                        <div class="item-list-box">
+                            <h4 style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.25rem;">Mayor Margen Porcentual (%)</h4>
+                            <div class="item-card-row">
+                                <div>
+                                    <span class="item-name">Ciabatta individual 150 gr. AP</span>
+                                    <div class="item-category">Categoría: Panes</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val success">94.6% Margen</div>
+                                    <div>Neto: $1,008 | Costo: $54</div>
+                                </div>
+                            </div>
+                            <div class="item-card-row">
+                                <div>
+                                    <span class="item-name">Hogaza MM Blanca 600 gr. AP</span>
+                                    <div class="item-category">Categoría: Panes</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val success">92.1% Margen</div>
+                                    <div>Neto: $3,529 | Costo: $279</div>
+                                </div>
+                            </div>
+                            <div class="item-card-row">
+                                <div>
+                                    <span class="item-name">Baguette 300 gramos AP</span>
+                                    <div class="item-category">Categoría: Panes</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val success">91.7% Margen</div>
+                                    <div>Neto: $1,849 | Costo: $154</div>
+                                </div>
+                            </div>
+
+                            <h4 style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); margin-top: 0.75rem; margin-bottom: 0.25rem;">Mayor Margen Absoluto ($)</h4>
+                            <div class="item-card-row">
+                                <div>
+                                    <span class="item-name">Desayuno Parigo (solo huevos) AP</span>
+                                    <div class="item-category">Categoría: Desayunos</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val success">+$4,975 Margen</div>
+                                    <div>Neto: $6,303 | Costo: $1,328 (78.9%)</div>
+                                </div>
+                            </div>
+                            <div class="item-card-row">
+                                <div>
+                                    <span class="item-name">Desayuno Parigo Clásico AP</span>
+                                    <div class="item-category">Categoría: Desayunos</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val success">+$4,920 Margen</div>
+                                    <div>Neto: $6,303 | Costo: $1,383 (78.1%)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Analysis and alerts -->
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>Alertas y Desviaciones Críticas</h3>
+                        </div>
+                        <div class="item-list-box">
+                            <div class="item-card-row" style="border-left: 3px solid var(--accent-danger);">
+                                <div>
+                                    <span class="item-name">Jugo de Naranja Natural AP</span>
+                                    <div class="item-category">Materia prima de alta volatilidad</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val danger">53.9% Costo MP</div>
+                                    <div>Neto: $2,941 | Costo: $1,587</div>
+                                </div>
+                            </div>
+                            <div class="item-card-row" style="border-left: 3px solid var(--accent-horeca);">
+                                <div>
+                                    <span class="item-name">Ensalada Mediterránea AP</span>
+                                    <div class="item-category">Materia prima desajustada en mesa</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val danger" style="color: #fbbf24;">47.3% Costo MP</div>
+                                    <div>Neto: $6,723 | Costo: $3,179</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; margin-top: 1rem;">
+                            <strong>Comentario del Analista:</strong> La panadería de masa madre artesanal presenta el margen bruto más saludable del grupo debido a la relación costo/precio del trigo. Sin embargo, platos complementarios como jugos frescos o ensaladas con proteínas de alto costo diluyen el margen general. Se debe monitorear el precio de compra del cítrico crudo.
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- BU 2: Parigo Le Plat -->
+                <div id="bu-parigo-plat" class="bu-tab-content bu-layout" style="display: none;">
+                    
+                    <!-- Left: Tops List -->
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>Rentabilidad de Le Plat (14 Ítems)</h3>
+                            <span class="badge success" style="background: rgba(129, 140, 248, 0.15); color: #818cf8;">Margen MP 73.2%</span>
+                        </div>
+                        
+                        <div class="item-list-box">
+                            <h4 style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.25rem;">Mayor Margen Porcentual (%)</h4>
+                            <div class="item-card-row">
+                                <div>
+                                    <span class="item-name">Paté de Campaña PG</span>
+                                    <div class="item-category">Categoría: Entradas</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val success">83.0% Margen</div>
+                                    <div>Neto: $8,824 | Costo: $1,502</div>
+                                </div>
+                            </div>
+                            <div class="item-card-row">
+                                <div>
+                                    <span class="item-name">Tostada Francesa PG</span>
+                                    <div class="item-category">Categoría: Postres</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val success">78.6% Margen</div>
+                                    <div>Neto: $5,042 | Costo: $1,078</div>
+                                </div>
+                            </div>
+                            <div class="item-card-row">
+                                <div>
+                                    <span class="item-name">Coliflor con Papas y Salsa PG</span>
+                                    <div class="item-category">Categoría: Vegetarianos</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val success">77.7% Margen</div>
+                                    <div>Neto: $16,387 | Costo: $3,650</div>
+                                </div>
+                            </div>
+
+                            <h4 style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); margin-top: 0.75rem; margin-bottom: 0.25rem;">Mayor Margen Absoluto ($)</h4>
+                            <div class="item-card-row">
+                                <div>
+                                    <span class="item-name">Salmón con Papas y Salsa Pgo</span>
+                                    <div class="item-category">Categoría: Pescados</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val success">+$15,152 Margen</div>
+                                    <div>Neto: $21,008 | Costo: $5,856 (27.9%)</div>
+                                </div>
+                            </div>
+                            <div class="item-card-row">
+                                <div>
+                                    <span class="item-name">Lomo con Papas y Salsa PGO</span>
+                                    <div class="item-category">Categoría: Carnes</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val success">+$14,708 Margen</div>
+                                    <div>Neto: $21,008 | Costo: $6,300 (30.0%)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Analysis and alerts -->
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>Alertas y Desviaciones Críticas</h3>
+                        </div>
+                        <div class="item-list-box">
+                            <div class="item-card-row" style="border-left: 3px solid var(--accent-horeca);">
+                                <div>
+                                    <span class="item-name">Tiramisú PG</span>
+                                    <div class="item-category">Postre con menor margen porcentual</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val danger" style="color: #fbbf24;">36.0% Costo MP</div>
+                                    <div>Neto: $5,882 | Costo: $2,119</div>
+                                </div>
+                            </div>
+                            <div class="item-card-row" style="border-left: 3px solid var(--accent-horeca);">
+                                <div>
+                                    <span class="item-name">Roast Beef PG</span>
+                                    <div class="item-category">Corte premium de vacuno en entrada</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val danger" style="color: #fbbf24;">32.3% Costo MP</div>
+                                    <div>Neto: $10,084 | Costo: $3,256</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; margin-top: 1rem;">
+                            <strong>Comentario del Analista:</strong> Le Plat muestra una excelente disciplina de márgenes en cocina, logrando un notable promedio del 73.2%. Los platos fuertes de lomo y salmón aportan un margen de contribución absoluto altísimo por mesa ($14k+ cada uno), lo que solventa holgadamente el refill ilimitado de papas fritas.
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- BU 3: Bocus Platos Preparados -->
+                <div id="bu-bocus-plato" class="bu-tab-content bu-layout" style="display: none;">
+                    
+                    <!-- Left: Tops List -->
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>Rentabilidad de Bocus Platos Listos (12 Ítems)</h3>
+                            <span class="badge warning">Margen MP 64.5%</span>
+                        </div>
+                        
+                        <div class="item-list-box">
+                            <h4 style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.25rem;">Mayor Margen Porcentual (%)</h4>
+                            <div class="item-card-row">
+                                <div>
+                                    <span class="item-name">Salmón Eneldo Bocus</span>
+                                    <div class="item-category">Categoría: Entradas</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val success">78.4% Margen</div>
+                                    <div>Neto: $9,244 | Costo: $1,997</div>
+                                </div>
+                            </div>
+                            <div class="item-card-row">
+                                <div>
+                                    <span class="item-name">Plato de Charcutería Bocus</span>
+                                    <div class="item-category">Categoría: Entradas</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val success">75.8% Margen</div>
+                                    <div>Neto: $7,983 | Costo: $1,935</div>
+                                </div>
+                            </div>
+                            <div class="item-card-row">
+                                <div>
+                                    <span class="item-name">Tártaro de Salmón Bocus</span>
+                                    <div class="item-category">Categoría: Entradas</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val success">69.9% Margen</div>
+                                    <div>Neto: $11,765 | Costo: $3,541</div>
+                                </div>
+                            </div>
+
+                            <h4 style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); margin-top: 0.75rem; margin-bottom: 0.25rem;">Mayor Margen Absoluto ($)</h4>
+                            <div class="item-card-row">
+                                <div>
+                                    <span class="item-name">Tártaro de Salmón Bocus</span>
+                                    <div class="item-category">Categoría: Entradas</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val success">+$8,224 Margen</div>
+                                    <div>Neto: $11,765 | Costo: $3,541</div>
+                                </div>
+                            </div>
+                            <div class="item-card-row">
+                                <div>
+                                    <span class="item-name">Salmón Eneldo Bocus</span>
+                                    <div class="item-category">Categoría: Entradas</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val success">+$7,247 Margen</div>
+                                    <div>Neto: $9,244 | Costo: $1,997</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Analysis and alerts -->
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>Alertas y Desviaciones Críticas</h3>
+                        </div>
+                        <div class="item-list-box">
+                            <div class="item-card-row" style="border-left: 3px solid var(--accent-danger);">
+                                <div>
+                                    <span class="item-name">Ensalada Mediterránea Bocus</span>
+                                    <div class="item-category" style="color: #fb7185; font-weight: bold;">⚠️ DATO FALTANTE EN EXCEL</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="badge danger" style="padding: 0.3rem 0.6rem;">Sin Costeo</div>
+                                    <div>Solicitar ficha técnica</div>
+                                </div>
+                            </div>
+                            <div class="item-card-row" style="border-left: 3px solid var(--accent-danger);">
+                                <div>
+                                    <span class="item-name">Tiramisú Bocus (Envasado)</span>
+                                    <div class="item-category">Exceso de costo en elaboración individual</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val danger">51.4% Costo MP</div>
+                                    <div>Neto: $4,202 | Costo: $2,160</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; margin-top: 1rem;">
+                            <strong>Comentario del Analista:</strong> Los platos listos para llevar tienen mayor Food Cost relativo por el empaque de atmósfera y porcionado. Es indispensable obtener la ficha de costeo de la *Ensalada mediterránea Bocus* que está faltante en los archivos del inbox y recalcular el gramaje del postre tiramisú individual de Bocus Platos Listos.
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- BU 4: Bocus Web -->
+                <div id="bu-bocus-web" class="bu-tab-content bu-layout" style="display: none;">
+                    
+                    <!-- Left: Tops List -->
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>Rentabilidad de Quesos, Charcutería y Conservas (19 Ítems)</h3>
+                            <span class="badge danger">Margen MP 56.6%</span>
+                        </div>
+                        
+                        <div class="item-list-box">
+                            <h4 style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.25rem;">Mayor Margen Porcentual (%)</h4>
+                            <div class="item-card-row">
+                                <div>
+                                    <span class="item-name">Frasco Cebolla Caramelizada Bocus</span>
+                                    <div class="item-category">Categoría: Frascos (Producción interna)</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val success">86.6% Margen</div>
+                                    <div>Neto: $4,622 | Costo: $620</div>
+                                </div>
+                            </div>
+                            <div class="item-card-row">
+                                <div>
+                                    <span class="item-name">Petit Basque Uni</span>
+                                    <div class="item-category">Categoría: Quesos Enteros</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val success">79.6% Margen</div>
+                                    <div>Neto: $24,790 | Costo: $5,051</div>
+                                </div>
+                            </div>
+                            <div class="item-card-row">
+                                <div>
+                                    <span class="item-name">Frasco Terrine de Campagne Bocus</span>
+                                    <div class="item-category">Categoría: Frascos (Producción interna)</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val success">71.4% Margen</div>
+                                    <div>Neto: $4,622 | Costo: $1,324</div>
+                                </div>
+                            </div>
+
+                            <h4 style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); margin-top: 0.75rem; margin-bottom: 0.25rem;">Mayor Margen Absoluto ($)</h4>
+                            <div class="item-card-row">
+                                <div>
+                                    <span class="item-name">Petit Basque Uni</span>
+                                    <div class="item-category">Categoría: Quesos Enteros</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val success">+$19,739 Margen</div>
+                                    <div>Neto: $24,790 | Costo: $5,051</div>
+                                </div>
+                            </div>
+                            <div class="item-card-row">
+                                <div>
+                                    <span class="item-name">Saucissons 320 gramos</span>
+                                    <div class="item-category">Categoría: Embutidos</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val success">+$5,272 Margen</div>
+                                    <div>Neto: $9,076 | Costo: $3,804 (41.9%)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Analysis and alerts -->
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>Alertas Críticas de Precios (Costo > 50%)</h3>
+                        </div>
+                        <div class="item-list-box" style="max-height: 380px; overflow-y: auto;">
+                            <div class="item-card-row" style="border-left: 3px solid var(--accent-danger);">
+                                <div>
+                                    <span class="item-name">Brie 200 gramos</span>
+                                    <div class="item-category">Queso importado con precio web desactualizado</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val danger" style="font-weight: 800;">63.1% Costo MP</div>
+                                    <div>Neto: $4,958 | Costo: $3,131</div>
+                                </div>
+                            </div>
+                            <div class="item-card-row" style="border-left: 3px solid var(--accent-danger);">
+                                <div>
+                                    <span class="item-name">Tabla Trilogía de Quesos</span>
+                                    <div class="item-category">Tabla pre-armada web (IVA incluido PVP: $7,000)</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val danger">56.9% Costo MP</div>
+                                    <div>Neto: $5,882 | Costo: $3,348</div>
+                                </div>
+                            </div>
+                            <div class="item-card-row" style="border-left: 3px solid var(--accent-danger);">
+                                <div>
+                                    <span class="item-name">Tabla Charcutería Especial</span>
+                                    <div class="item-category">Tabla pre-armada web (IVA incluido PVP: $8,000)</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val danger">58.2% Costo MP</div>
+                                    <div>Neto: $6,723 | Costo: $3,912</div>
+                                </div>
+                            </div>
+                            <div class="item-card-row" style="border-left: 3px solid var(--accent-danger);">
+                                <div>
+                                    <span class="item-name">Tabla Queso Especial</span>
+                                    <div class="item-category">Tabla pre-armada web (IVA incluido PVP: $7,500)</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val danger">55.6% Costo MP</div>
+                                    <div>Neto: $6,303 | Costo: $3,504</div>
+                                </div>
+                            </div>
+                            <div class="item-card-row" style="border-left: 3px solid var(--accent-danger);">
+                                <div>
+                                    <span class="item-name">Callaqui Untable 200 gramos</span>
+                                    <div class="item-category">Queso artesanal local untable</div>
+                                </div>
+                                <div class="item-cost-details">
+                                    <div class="item-margin-val danger">55.7% Costo MP</div>
+                                    <div>Neto: $5,210 | Costo: $2,900</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; margin-top: 1rem;">
+                            <strong>Comentario del Analista:</strong> La categoría de Quesos, Charcutería y Conservas presenta el menor margen promedio (56.6%) del grupo. Esto es consecuencia directa de revender quesos de importación premium cuyos costos de adquisición se elevaron pero sus precios web en Shopify no han sido actualizados, arrastrando márgenes peligrosos inferiores al 40% en ítems clave como el Brie de 200g.
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- TAB 3: MENU ENGINEERING (INTERACTIVE TABLE & PLACEMENT POINT) -->
+            <div id="tab-menu-eng" class="tab-content">
+                
+                <div class="panel-card" style="margin-bottom: 1.5rem;">
+                    <div class="panel-header">
+                        <h3>Matriz de Posicionamiento de Ingeniería de Menú (Menu Engineering)</h3>
+                        <div style="display: flex; gap: 0.75rem; align-items: center;">
+                            <span style="font-size: 0.8rem; color: var(--text-muted);">Filtrar por Categoría Operacional:</span>
+                            <select id="menu-tbl-filter" class="filter-header-select" onchange="filterMenuTable()">
+                                <option value="All">Todas las Categorías (Consolidado)</option>
+                                <option value="Le Plat">Le Plat (Restaurante)</option>
+                                <option value="Al Paso">Al Paso (Cafetería/Panadería)</option>
+                                <option value="Bocus Platos Listos">Bocus Platos Listos (Envasados)</option>
+                                <option value="Quesos, Charcutería y Conservas">Quesos, Charcutería y Conservas (Picoteos)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: -0.5rem;">
+                        **Instrucciones**: Selecciona o haz clic en cualquier fila de la **Tabla Original** de la izquierda. Verás cómo el **Punto de Posición** se desliza de forma fluida en el plano cartesiano derecho para ubicar visualmente el producto dentro de su respectivo cuadrante.
+                    </p>
+                </div>
+
+                <div class="original-table-layout">
+                    
+                    <!-- LEFT COLUMN: ORIGINAL TABLE -->
+                    <div class="panel-card">
+                        <div class="search-table-bar">
+                            <h4 style="font-size: 0.95rem; font-weight: 700; color: #ffffff;">Tabla Original de Productos</h4>
+                            <input type="text" id="table-search-input" class="search-table-input" placeholder="Buscar producto por nombre..." oninput="filterMenuTable()">
+                        </div>
+
+                        <div class="table-container">
+                            <table class="original-cost-table" id="master-menu-table">
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Categoría</th>
+                                        <th style="text-align: center;">Popularidad</th>
+                                        <th style="text-align: center;">Margen</th>
+                                        <th style="text-align: center;">Cuadrante</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="table-body-target">
+                                    <!-- Populated dynamically via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT COLUMN: INTERACTIVE COORDINATE PLANE -->
+                    <div class="panel-card" style="justify-content: flex-start;">
+                        <div class="panel-header" style="border-bottom: none; padding-bottom: 0;">
+                            <h3>Plano de Posicionamiento Cartesiano</h3>
+                        </div>
+
+                        <div class="interactive-coordinate-plane" id="coordinate-canvas">
+                            
+                            <!-- Quadrant backdrops -->
+                            <div class="quadrant-bg quad-puzzle">🧩 ENIGMA (Puzzle)</div>
+                            <div class="quadrant-bg quad-star">⭐ ESTRELLA (Star)</div>
+                            <div class="quadrant-bg quad-dog">🐕 PERRO (Dog)</div>
+                            <div class="quadrant-bg quad-plowhorse">🐴 CABALLO DE BATALLA (Plowhorse)</div>
+
+                            <!-- Coordinate Grid Axis Lines -->
+                            <div class="grid-line-x"></div>
+                            <div class="grid-line-y"></div>
+
+                            <!-- Axis Indicators -->
+                            <div class="axis-labels-y">Meta Margen: 70%</div>
+                            <div class="axis-labels-x">Mediana Venta: 50</div>
+
+                            <!-- Dynamically positioned glowing point -->
+                            <div class="dynamic-point star" id="glowing-coordinate-point" style="left: 78%; bottom: 92.1%;">
+                                <!-- Floating tooltip inside the dot -->
+                                <div class="point-floating-label" id="point-label">
+                                    Hogaza MM Blanca AP
+                                    <span id="point-coords">Popularidad: 78 | Margen: 92.1%</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Dynamic action recommendations based on selected product -->
+                        <div class="selected-detail-panel" id="selection-recommendation-panel">
+                            <strong style="color: #ffffff; font-size: 0.9rem;" id="panel-sel-title">Producto Seleccionado: Hogaza MM Blanca AP</strong>
+                            <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5;" id="panel-sel-text">
+                                **Acción Estratégica**: Producto Estrella. Alta rentabilidad (92.1%) y alta rotación. Mantener estricto control de calidad del fermentado, estandarizar receta y potenciar volumen de ventas en mostrador físico.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- TAB 4: SIMULATOR & CALCULATOR -->
+            <div id="tab-simulador" class="tab-content">
+                
+                <div class="bu-layout">
+                    
+                    <!-- Left: Simulator input -->
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>Simulador de Precios de Venta</h3>
+                        </div>
+                        <div class="sim-grid">
+                            
+                            <div class="sim-input-row">
+                                <label for="sim-bu">Unidad de Negocio Destino</label>
+                                <select id="sim-bu" onchange="applyBUSetting()">
+                                     <option value="paso">Al Paso (Target Food Cost: 25%)</option>
+                                     <option value="plat">Le Plat (Target Food Cost: 27%)</option>
+                                     <option value="plato">Bocus Platos Listos (Target Food Cost: 35%)</option>
+                                     <option value="web" selected>Quesos, Charcutería y Conservas (Target Food Cost: 40%)</option>
+                                </select>
+                            </div>
+
+                            <div class="sim-input-row">
+                                <label for="sim-cost">Costo de Materia Prima / Ración (CLP)</label>
+                                <input type="number" id="sim-cost" value="3130" placeholder="Ej: 3130" oninput="calculateSimValues()">
+                            </div>
+
+                            <div class="sim-input-row">
+                                <label for="sim-margin-target">Costo de Materia Prima Objetivo (% MP)</label>
+                                <input type="number" id="sim-margin-target" value="40" min="5" max="95" placeholder="Ej: 40" oninput="calculateSimValues()">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Right: Results output -->
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>Estructura de Precios Requerida</h3>
+                        </div>
+                        <div class="sim-result-box">
+                            <div class="sim-result-item">
+                                <span class="sim-result-lbl">Precio de Venta NETO Requerido</span>
+                                <span class="sim-result-val" id="res-neto">$0</span>
+                            </div>
+                            <div class="sim-result-item">
+                                <span class="sim-result-lbl">Impuesto al Valor Agregado (19% IVA)</span>
+                                <span class="sim-result-val" id="res-iva">$0</span>
+                            </div>
+                            <div class="sim-result-item" style="border-top: 2px solid rgba(255,255,255,0.06); padding-top: 0.75rem;">
+                                <span class="sim-result-lbl" style="font-weight: bold; color: #ffffff;">Precio Venta Público sugerido (PVP)</span>
+                                <span class="sim-result-val primary" id="res-pvp">$0</span>
+                            </div>
+                            <div class="sim-result-item">
+                                <span class="sim-result-lbl">Margen Bruto de Contribución ($)</span>
+                                <span class="sim-result-val primary-utilidad" id="res-utilidad">$0</span>
+                            </div>
+                            <div class="sim-result-item">
+                                <span class="sim-result-lbl">Margen Comercial Bruto (%)</span>
+                                <span class="sim-result-val" id="res-pct" style="color: #34d399;">60.0%</span>
+                            </div>
+                        </div>
+
+                        <div class="sim-alert-box" id="sim-recommendation" style="border-left: 3px solid var(--accent-horeca);">
+                            <!-- Dynamic text recommendation -->
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- TAB 5: WARNINGS CONSOLE -->
+            <div id="tab-alertas" class="tab-content">
+                
+                <div class="panel-card">
+                    <div class="panel-header">
+                        <h3>Alertas Críticas de Costeo del Ecosistema</h3>
+                        <span class="badge danger">10 Alertas de Desviación</span>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: -0.5rem;">Listado oficial de productos gastronómicos que superan los umbrales de coste de materia prima tolerables establecidos en el informe corporativo.</p>
+                    
+                    <div class="warning-list">
+                        
+                        <div class="warning-item">
+                            <div>
+                                <span class="warning-title">Queso Brie 200 gramos (Costo: 63.1% MP)</span>
+                                <div class="warning-desc">El costo de adquisición ($3,131) presiona el precio neto web de $4,958. Urgente subir precio de venta al público a $8,900 en Shopify.</div>
+                            </div>
+                            <span class="warning-unit">Quesos, Charcutería y Conservas</span>
+                        </div>
+
+                        <div class="warning-item">
+                            <div>
+                                <span class="warning-title">Tabla Trilogía Queso (Costo: 56.9% MP)</span>
+                                <div class="warning-desc">El costo ($3,348) deja un margen insuficiente para absorber costos de despacho y packaging. Incrementar precio al público.</div>
+                            </div>
+                            <span class="warning-unit">Quesos, Charcutería y Conservas</span>
+                        </div>
+
+                        <div class="warning-item">
+                            <div>
+                                <span class="warning-title">Tabla Charcutería Especial (Costo: 58.2% MP)</span>
+                                <div class="warning-desc">Registra un costo de adquisición de charcutería importada de $3,912 contra precio público de $8,000. Margen comercial crítico.</div>
+                            </div>
+                            <span class="warning-unit">Quesos, Charcutería y Conservas</span>
+                        </div>
+
+                        <div class="warning-item">
+                            <div>
+                                <span class="warning-title">Tabla Queso Especial (Costo: 55.6% MP)</span>
+                                <div class="warning-desc">Costo elevado de materia prima de quesería francesa ($3,504). Subir PVP sugerido.</div>
+                            </div>
+                            <span class="warning-unit">Quesos, Charcutería y Conservas</span>
+                        </div>
+
+                        <div class="warning-item">
+                            <div>
+                                <span class="warning-title">Callaqui Untable 200 gramos (Costo: 55.7% MP)</span>
+                                <div class="warning-desc">Costo técnico del queso local de $2,900. Margen neto muy por debajo del objetivo web del 60%.</div>
+                            </div>
+                            <span class="warning-unit">Quesos, Charcutería y Conservas</span>
+                        </div>
+
+                        <div class="warning-item" style="border-left-color: var(--accent-horeca);">
+                            <div>
+                                <span class="warning-title">Jugo de Naranja Natural (Costo: 53.9% MP)</span>
+                                <div class="warning-desc">El precio de compra de naranjas frescas ($1,587/ración) diluye el margen del mostrador. Evaluar ajuste estacional de carta.</div>
+                            </div>
+                            <span class="warning-unit" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">Al Paso</span>
+                        </div>
+
+                        <div class="warning-item" style="border-left-color: var(--accent-horeca);">
+                            <div>
+                                <span class="warning-title">Tiramisú Bocus Envasado (Costo: 51.4% MP)</span>
+                                <div class="warning-desc">Costo de $2,160 para precio neto de $4,202. Exceso en coste de elaboración individual de pastelería delivery.</div>
+                            </div>
+                            <span class="warning-unit">Bocus Platos Listos</span>
+                        </div>
+
+                        <div class="warning-item" style="border-left-color: var(--accent-horeca);">
+                            <div>
+                                <span class="warning-title">Ensalada Mediterránea AP (Costo: 47.3% MP)</span>
+                                <div class="warning-desc">Costo técnico de $3,179 en mostrador. Se requiere revisar gramajes de quesos y aceitunas en cocina.</div>
+                            </div>
+                            <span class="warning-unit" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">Al Paso</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- TAB 6: STRATEGIC RECOMMENDATIONS -->
+            <div id="tab-estrategia" class="tab-content">
+                
+                <div class="bu-layout">
+                    
+                    <!-- Left: Strategic list -->
+                    <div class="panel-card" style="grid-column: 1 / -1;">
+                        <div class="panel-header">
+                            <h3>Recomendaciones Estratégicas y Plan de Acción de la Gerencia</h3>
+                        </div>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 1rem;">
+                            
+                            <p>Para recuperar la rentabilidad objetivo del holding Solución Horeca SpA, se ha redactado el siguiente plan de remediación financiera. Marca las tareas que vayas revisando o ejecutando con tu equipo de operaciones:</p>
+                            
+                            <div class="item-list-box" style="margin-top: 0.5rem;">
+                                <div class="check-item">
+                                    <input type="checkbox" class="check-checkbox" id="chk-brie">
+                                    <div>
+                                         <strong style="color: #ffffff;">Actualización de Queso Brie 200 gr en Shopify (Quesos, Charcutería y Conservas)</strong>
+                                         <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">Incrementar el precio de venta al público inmediato en la plataforma web para ajustarse a los costos de importación vigentes ($3,131 de coste). Retornar al costo de materia prima estándar de ~35%.</p>
+                                    </div>
+                                </div>
+
+                                <div class="check-item">
+                                    <input type="checkbox" class="check-checkbox" id="chk-tablas">
+                                    <div>
+                                         <strong style="color: #ffffff;">Recargo del 15% - 20% a Tablas Pre-armadas de Quesos y Embutidos</strong>
+                                         <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">Las tablas (Trilogía de Quesos, Charcutería Especial y Queso Especial) presentan costos del ~57%. Debido a la mano de obra de montaje, empaque y porcionado, se requiere subir los PVP de $7,000, $8,000 y $7,500 en al menos un 15%.</p>
+                                    </div>
+                                </div>
+
+                                <div class="check-item">
+                                    <input type="checkbox" class="check-checkbox" id="chk-pan">
+                                    <div>
+                                         <strong style="color: #ffffff;">Enfoque Comercial en la Panadería Artesanal Al Paso</strong>
+                                         <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">Capitalizar la altísima rentabilidad de Al Paso (75.4% de margen bruto) liderada por panes individuales y hogazas. Enfocar las campañas publicitarias en potenciar este mostrador físico.</p>
+                                    </div>
+                                </div>
+
+                                <div class="check-item">
+                                    <input type="checkbox" class="check-checkbox" id="chk-jugo">
+                                    <div>
+                                        <strong style="color: #ffffff;">Revisión de Proveedor o Precio de Jugo de Naranja Natural</strong>
+                                        <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">Corregir de forma inmediata el precio al público del Jugo de Naranja natural o evaluar sustitutos de proveedores para mitigar el 53.9% de costo de materia prima.</p>
+                                    </div>
+                                </div>
+
+                                <div class="check-item">
+                                    <input type="checkbox" class="check-checkbox" id="chk-faltante">
+                                    <div>
+                                        <strong style="color: #ffffff;">Solicitar Ficha Técnica de Ensalada Mediterránea Bocus</strong>
+                                        <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">Solicitar formalmente a cocina la ficha de ingredientes y gramajes de este plato faltante en la planilla para proceder a su costeo y catalogación formal.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <!-- Javascript Logic for Tabs, Search, and Auditor Tool -->
+    <script>
+        // Realtime Clock
+        function updateClock() {
+            const clockEl = document.getElementById('clock');
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            clockEl.textContent = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Switch Tabs
+        function switchTab(tabId, el) {
+            // Remove active classes
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            
+            // Set active
+            document.getElementById(tabId).classList.add('active');
+            el.classList.add('active');
+            
+            // Update Title
+            const titleEl = document.getElementById('page-title');
+            const subtitleEl = document.getElementById('page-subtitle');
+            
+            if (tabId === 'tab-dashboard') {
+                titleEl.textContent = 'Resumen Ejecutivo';
+                subtitleEl.textContent = 'Estructura analítica de precios de venta y costeo por unidad de negocio gastronómica.';
+            } else if (tabId === 'tab-unidades') {
+                titleEl.textContent = 'Análisis por Unidad de Negocio';
+                subtitleEl.textContent = 'Desglose comercial, tops de rentabilidad y alertas específicas de las marcas.';
+            } else if (tabId === 'tab-menu-eng') {
+                titleEl.textContent = 'Ingeniería de Menú (Menu Engineering)';
+                subtitleEl.textContent = 'Mapeo interactivo de popularidad y rentabilidad por producto en plano cartesiano.';
+                // Trigger filter to update the tree and dots
+                setTimeout(filterMenuTable, 100);
+            } else if (tabId === 'tab-simulador') {
+                titleEl.textContent = 'Simulador de Márgenes';
+                subtitleEl.textContent = 'Simulación inteligente de precios y recargos comerciales según directrices.';
+            } else if (tabId === 'tab-alertas') {
+                titleEl.textContent = 'Consola de Alertas de Costos';
+                subtitleEl.textContent = 'Listado de desviaciones financieras sobre el Food Cost estándar del grupo.';
+            } else if (tabId === 'tab-estrategia') {
+                titleEl.textContent = 'Estrategia y Plan de Acción';
+                subtitleEl.textContent = 'Recomendaciones concretas de la gerencia de finanzas de Solución Horeca SpA.';
+            }
+        }
+
+        // Switch Business Unit Tabs
+        function switchBUTab(buId, el) {
+            document.querySelectorAll('.bu-tab-content').forEach(content => content.style.display = 'none');
+            document.querySelectorAll('.bu-tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(buId).style.display = 'grid';
+            el.classList.add('active');
+        }
+
+        // Simulator Logic
+        const targetSettings = {
+            'paso': 25,
+            'plat': 27,
+            'plato': 35,
+            'web': 40
+        };
+
+        function applyBUSetting() {
+            const bu = document.getElementById('sim-bu').value;
+            const targetField = document.getElementById('sim-margin-target');
+            
+            // Set default target food cost
+            targetField.value = targetSettings[bu];
+            
+            // If Web is selected, fill default Brief cost
+            if (bu === 'web') {
+                document.getElementById('sim-cost').value = 3130;
+            } else if (bu === 'paso') {
+                document.getElementById('sim-cost').value = 279;
+            } else if (bu === 'plat') {
+                document.getElementById('sim-cost').value = 5856;
+            } else {
+                document.getElementById('sim-cost').value = 1997;
+            }
+
+            calculateSimValues();
+        }
+
+        function calculateSimValues() {
+            const cost = parseFloat(document.getElementById('sim-cost').value) || 0;
+            const targetPct = parseFloat(document.getElementById('sim-margin-target').value) || 40;
+            
+            if (cost <= 0 || targetPct <= 0 || targetPct >= 100) {
+                return;
+            }
+
+            // Calculations
+            // Target Food Cost = Cost / NetPrice => NetPrice = Cost / (targetPct / 100)
+            const netPrice = Math.round(cost / (targetPct / 100));
+            const iva = Math.round(netPrice * 0.19);
+            const pvp = netPrice + iva;
+            const marginAmount = netPrice - cost;
+
+            // Render results
+            document.getElementById('res-neto').textContent = `$${netPrice.toLocaleString('es-CL')}`;
+            document.getElementById('res-iva').textContent = `$${iva.toLocaleString('es-CL')}`;
+            document.getElementById('res-pvp').textContent = `$${pvp.toLocaleString('es-CL')}`;
+            document.getElementById('res-utilidad').textContent = `$${marginAmount.toLocaleString('es-CL')}`;
+            document.getElementById('res-pct').textContent = `${(100 - targetPct).toFixed(1)}%`;
+
+            // Recommendation text
+            const recEl = document.getElementById('sim-recommendation');
+            const bu = document.getElementById('sim-bu').value;
+            
+            let recText = `<strong>Recomendación Operativa:</strong> `;
+            if (bu === 'web' && cost === 3130) {
+                recText += `Para el queso <strong>Brie 200 gr</strong> (costo de $3,131), con un coste de materia prima objetivo del 35% al 40%, el PVP final al público debe rondar los <strong>$8,900</strong> a <strong>$10,900</strong>. El precio actual de venta web ($5,900) representa una desviación crítica y debe actualizarse inmediatamente en Shopify.`;
+            } else if (targetPct > 50) {
+                recText += `Un costo de materia prima superior al 50% es arriesgado para la operación Horeca. Se sugerige buscar proveedores alternativos, disminuir la porción o incrementar significativamente el precio de venta para llevar el coste bajo el 40%.`;
+            } else {
+                recText += `Este precio sugerido permite absorber cómodamente los gastos operativos logísticos, mano de obra y packaging de la unidad Horeca SpA.`;
+            }
+            recEl.innerHTML = recText;
+        }
+
+        // Run default simulation calculation
+        applyBUSetting();
+
+        // ==========================================================
+        // MENU ENGINEERING MASTER DATABASE (OPERATIONAL CATEGORIES)
+        // ==========================================================
+        const menuEngineeringDatabase = [
+            // Category: Al Paso (Cafetería/Panadería)
+            { name: 'Ciabatta Ind. 150g AP', x: 85, y: 94.6, category: 'Estrella', opCategory: 'Al Paso', pvp: 1200, cost: 54, action: 'Mantener receta, gramaje y calidad estricta del trigo. Potenciar ventas secundarias en mostrador.' },
+            { name: 'Hogaza MM Blanca 600g AP', x: 78, y: 92.1, category: 'Estrella', opCategory: 'Al Paso', pvp: 4200, cost: 279, action: 'Líder en volumen físico. Mantener estricto control de fermentación lenta de masa madre. Sin cambios.' },
+            { name: 'Baguette 300g AP', x: 92, y: 91.7, category: 'Estrella', opCategory: 'Al Paso', pvp: 2200, cost: 154, action: 'Baguette estrella del mostrador AP. Empujar visibilidad comercial directa.' },
+            { name: 'Desayuno Huevos AP', x: 65, y: 78.9, category: 'Estrella', opCategory: 'Al Paso', pvp: 7500, cost: 1328, action: 'Excelente rentabilidad. Mantener calidad de huevos de gallina libre y ofrecer upselling de café.' },
+            { name: 'Jugo Naranja AP', x: 82, y: 46.1, category: 'Caballo', opCategory: 'Al Paso', pvp: 3500, cost: 1587, action: 'Muy popular pero con coste del 53.9% de materia prima. Ajustar precio al público de inmediato a $4.200.' },
+            { name: 'Ensalada Med. AP', x: 22, y: 52.7, category: 'Perro', opCategory: 'Al Paso', pvp: 8000, cost: 3179, action: 'Costo alto (47.3%) y baja rotación. Disminuir gramaje de quesos/aceitunas en ensaladera o retirar.' },
+
+            // Category: Le Plat (Restaurante)
+            { name: 'Salmón Papas Pgo', x: 74, y: 72.1, category: 'Estrella', opCategory: 'Le Plat', pvp: 25000, cost: 5856, action: 'Plato estrella del restaurante Le Plat. Aporta el mayor margen absoluto. Mantener gramaje de salmón.' },
+            { name: 'Lomo Papas Pgo', x: 80, y: 70.0, category: 'Estrella', opCategory: 'Le Plat', pvp: 25000, cost: 6300, action: 'Alta rotación de mesa. Asegurar consistencia del refill de papas y vigilar costos del filete de lomo.' },
+            { name: 'Paté Campaña PG', x: 25, y: 83.0, category: 'Enigma', opCategory: 'Le Plat', pvp: 10500, cost: 1502, action: 'Excelente margen. Se sugiere colocarlo como sugerencia del chef o recomendación directa del garzón.' },
+            { name: 'Coliflor con Papas PG', x: 30, y: 77.7, category: 'Enigma', opCategory: 'Le Plat', pvp: 19500, cost: 3650, action: 'Plato vegetariano con excelente margen. Destacar en la carta física o Meta Ads.' },
+            { name: 'Tostada Francesa PG', x: 40, y: 78.6, category: 'Enigma', opCategory: 'Le Plat', pvp: 6000, cost: 1078, action: 'Postre rentable de baja demanda. Ofrecer en promociones de té o café media tarde.' },
+            { name: 'Tiramisú PG', x: 60, y: 64.0, category: 'Caballo', opCategory: 'Le Plat', pvp: 7000, cost: 2119, action: 'Postre de alta demanda. Se sugiere reducir la porción a 180g o subir PVP sutilmente.' },
+            { name: 'Roast Beef PG', x: 28, y: 67.7, category: 'Perro', opCategory: 'Le Plat', pvp: 12000, cost: 3256, action: 'Baja demanda y costo al límite (32.3%). Retirar de la carta o reformular con otro corte.' },
+
+            // Category: Bocus Platos Listos (Envasados)
+            { name: 'Salmón Eneldo Bocus', x: 70, y: 78.4, category: 'Estrella', opCategory: 'Bocus Platos Listos', pvp: 11000, cost: 1997, action: 'Producto estrella envasado. Mantener cadena de frío y hermeticidad de atmósfera.' },
+            { name: 'Plato Charcutería Bocus', x: 62, y: 75.8, category: 'Estrella', opCategory: 'Bocus Platos Listos', pvp: 9500, cost: 1935, action: 'Alta demanda en delivery. Mantener porciones estandarizadas de fiambres.' },
+            { name: 'Tártaro Salmón Bocus', x: 45, y: 69.9, category: 'Enigma', opCategory: 'Bocus Platos Listos', pvp: 14000, cost: 3541, action: 'Margen saludable. Ofrecer en campañas web de Bocus como entrada gourmet.' },
+            { name: 'Ensalada César Bocus', x: 68, y: 67.9, category: 'Caballo', opCategory: 'Bocus Platos Listos', pvp: 11000, cost: 2990, action: 'Muy popular. Vigilar costo de crutones y pollo. Ajustar precio web en Shopify a $12.500.' },
+            { name: 'Tiramisú Bocus', x: 55, y: 48.6, category: 'Caballo', opCategory: 'Bocus Platos Listos', pvp: 5000, cost: 2160, action: 'Costo del 51.4% de materia prima. Incrementar precio Shopify a $5.900 o achicar pote.' },
+
+            // Category: Quesos, Charcutería y Conservas (Picoteos)
+            { name: 'Frasco Cebolla Bocus', x: 55, y: 86.6, category: 'Estrella', opCategory: 'Quesos, Charcutería y Conservas', pvp: 5500, cost: 620, action: 'Elaborado internamente con excelente margen bruto. Incluir de regalo promocional en compras grandes.' },
+            { name: 'Petit Basque Uni', x: 18, y: 79.6, category: 'Enigma', opCategory: 'Quesos, Charcutería y Conservas', pvp: 29500, cost: 5051, action: 'Queso premium entero. Promocionar para eventos corporativos o regalos ejecutivos de alta gama.' },
+            { name: 'Frasco Terrine Bocus', x: 35, y: 71.4, category: 'Enigma', opCategory: 'Quesos, Charcutería y Conservas', pvp: 5500, cost: 1324, action: 'Producción interna rentable. Colocar en paquetes de ofertas combinadas de charcutería.' },
+            { name: 'Brie 200 gramos', x: 90, y: 36.9, category: 'Caballo', opCategory: 'Quesos, Charcutería y Conservas', pvp: 5900, cost: 3131, action: 'ALERTA MÁXIMA: Costo del 63.1%. Urgente elevar precio de venta web a $8.900.' },
+            { name: 'Tabla Trilogía Quesos', x: 75, y: 43.1, category: 'Caballo', opCategory: 'Quesos, Charcutería y Conservas', pvp: 7000, cost: 3348, action: 'Costo del 56.9%. Subir precio al público a $8.900 para cubrir empaque y envío.' },
+            { name: 'Tabla Charcutería Esp.', x: 72, y: 41.8, category: 'Caballo', opCategory: 'Quesos, Charcutería y Conservas', pvp: 8000, cost: 3912, action: 'Costo del 58.2%. Elevar PVP a $9.900 inmediatamente en Shopify.' },
+            { name: 'Tabla Queso Especial', x: 67, y: 44.4, category: 'Caballo', opCategory: 'Quesos, Charcutería y Conservas', pvp: 7500, cost: 3504, action: 'Costo del 55.6%. Elevar PVP en web a $9.500 para recuperar margen del 60%.' },
+            { name: 'Callaqui Untable 200g', x: 32, y: 44.3, category: 'Perro', opCategory: 'Quesos, Charcutería y Conservas', pvp: 6200, cost: 2900, action: 'Costo alto (55.7%) y baja venta. Reemplazar por proveedor local más económico o descontinuar.' }
+        ];
+
+        let selectedItemIndex = 1; // Default Hogaza MM
+
+        // Render Table & Filter
+        function filterMenuTable() {
+            const catFilter = document.getElementById('menu-tbl-filter').value;
+            const searchVal = document.getElementById('table-search-input').value.toLowerCase().trim();
+            const tbody = document.getElementById('table-body-target');
+            
+            tbody.innerHTML = '';
+
+            const filtered = menuEngineeringDatabase.filter(item => {
+                const matchesCat = (catFilter === 'All' || item.opCategory === catFilter);
+                const matchesSearch = item.name.toLowerCase().includes(searchVal);
+                return matchesCat && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 2rem;">No se encontraron productos en esta categoría.</td></tr>`;
+                return;
+            }
+
+            filtered.forEach((item) => {
+                const tr = document.createElement('tr');
+                const isSelected = (item.name === menuEngineeringDatabase[selectedItemIndex].name);
+                if (isSelected) tr.className = 'selected';
+                
+                tr.onclick = () => selectRow(item);
+                tr.innerHTML = `
+                    <td style="font-weight: 700; color: #ffffff;">${item.name}</td>
+                    <td style="color: var(--accent-oreka); font-weight: 600;">${item.opCategory}</td>
+                    <td style="text-align: center; font-family: monospace;">${item.x}</td>
+                    <td style="text-align: center; font-family: monospace; font-weight: 700; color: ${item.y >= 70 ? '#34d399' : '#fb7185'}">${item.y}%</td>
+                    <td style="text-align: center;">
+                        <span class="quadrant-micro-badge ${item.category.toLowerCase() === 'caballo' ? 'plowhorse' : item.category.toLowerCase()}">${item.category === 'Caballo' ? 'Caballo' : item.category}</span>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+            
+            // If the currently selected item is not in the filtered list, select the first item of the filtered list
+            const stillContainsSelected = filtered.some(i => i.name === menuEngineeringDatabase[selectedItemIndex].name);
+            if (!stillContainsSelected && filtered.length > 0) {
+                selectRow(filtered[0]);
+            }
+        }
+
+        // Row Selection Logic
+        function selectRow(item) {
+            // Find actual index in master database
+            const masterIndex = menuEngineeringDatabase.findIndex(i => i.name === item.name);
+            if (masterIndex !== -1) {
+                selectedItemIndex = masterIndex;
+            }
+
+            // Refresh table selection highlight
+            filterMenuTable();
+
+            // 1. Move Point smoothly in CSS
+            const dot = document.getElementById('glowing-coordinate-point');
+            dot.style.left = `${item.x}%`;
+            dot.style.bottom = `${item.y}%`;
+
+            // Change dot class based on category
+            dot.className = `dynamic-point ${item.category.toLowerCase() === 'caballo' ? 'plowhorse' : item.category.toLowerCase()}`;
+
+            // Update floating tooltip label
+            document.getElementById('point-label').firstChild.textContent = item.name + ' ';
+            document.getElementById('point-coords').textContent = `Popularidad: ${item.x} | Margen: ${item.y}%`;
+
+            // 2. Highlights active quadrant background visual glow
+            const canvas = document.getElementById('coordinate-canvas');
+            canvas.className = 'interactive-coordinate-plane'; // Reset highlights
+            if (item.category === 'Estrella') canvas.classList.add('high-star');
+            if (item.category === 'Enigma') canvas.classList.add('high-puzzle');
+            if (item.category === 'Caballo') canvas.classList.add('high-plowhorse');
+            if (item.category === 'Perro') canvas.classList.add('high-dog');
+
+            // 3. Update Recommendation panel
+            document.getElementById('panel-sel-title').textContent = `Producto Seleccionado: ${item.name} (${item.category})`;
+            document.getElementById('panel-sel-text').innerHTML = `
+                <strong>Categoría Operacional</strong>: ${item.opCategory} | **Doctrina**: ${item.category}<br>
+                <strong>Estructura Financiera</strong>: Neto: $${item.pvp.toLocaleString('es-CL')} | Costo: $${item.cost.toLocaleString('es-CL')} (${(100 - item.y).toFixed(1)}% Costo Materia Prima)<br>
+                <strong>Acción Sugerida</strong>: ${item.action}
+            `;
+        }
+
+        // Initialize Table View
+        filterMenuTable();
+        // Load initial row values into recommendation card
+        selectRow(menuEngineeringDatabase[1]); // Hogaza MM Blanca AP
+
+    </script>
+</body>
+</html>
