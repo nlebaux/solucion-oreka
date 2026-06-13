@@ -10,7 +10,14 @@
     --purple:#534AB7; --purple-bg:#EEEDFE; --purple-dark:#3C3489;
     --teal:#0F6E56; --teal-bg:#E1F5EE; --teal-dark:#085041;
     --amber:#C45E00; --amber-bg:#FEF2E6; --amber-dark:#8B4500;
+    --rose:#8B1A1A; --rose-bg:#FDEAEA; --rose-dark:#5C0D0D;
+    --olive:#5A6820; --olive-bg:#F0F3E4; --olive-dark:#3D4A12;
     --fb:#1877f2; --gads:#1a73e8;
+    --niu:#1B3A6B; --niu-bg:#E8EFF8; --niu-dark:#0f2344;
+    --ue:#1a7340; --ue-bg:#E4F5EC; --ue-dark:#0d5228;
+    --rappi:#c94000; --rappi-bg:#FFF0E8; --rappi-dark:#8c2d00;
+    --pya:#b71c1c; --pya-bg:#FDE8E8; --pya-dark:#7f0f0f;
+    --plat:#2C4A7C; --plat-bg:#EAF0FB; --plat-dark:#1a2f52;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;}
@@ -25,6 +32,7 @@
   .brand-btn:hover{background:var(--line);}
   .brand-btn.active-b{background:var(--purple-bg);color:var(--purple-dark);}
   .brand-btn.active-c{background:var(--teal-bg);color:var(--teal-dark);}
+  .brand-btn.active-p{background:var(--plat-bg);color:var(--plat-dark);}
 
   /* ── Layout ── */
   .wrap{max-width:1080px;margin:0 auto;padding:40px 24px 80px;}
@@ -71,6 +79,32 @@
   .av-fork{background:#111;}
   .av-punta{background:#c45e00;}
   .av-sub{background:#0a8a3f;}
+  .av-crudo{background:#8B1A1A;}
+  .av-popular{background:#5A6820;}
+  .av-niu{background:#1B3A6B;}
+  .av-ue{background:#1a7340;}
+  .av-rappi{background:#c94000;}
+  .av-pya{background:#b71c1c;}
+  .tag.rose{background:var(--rose-bg);color:var(--rose-dark);}
+  .tag.olive{background:var(--olive-bg);color:var(--olive-dark);}
+  .comp-btn.active.rose{border-color:var(--rose);background:var(--rose-bg);color:var(--rose-dark);}
+  .comp-btn.active.olive{border-color:var(--olive);background:var(--olive-bg);color:var(--olive-dark);}
+  .comp-btn.active.niu{border-color:var(--niu);background:var(--niu-bg);color:var(--niu-dark);}
+  .comp-btn.active.ue{border-color:var(--ue);background:var(--ue-bg);color:var(--ue-dark);}
+  .comp-btn.active.rappi{border-color:var(--rappi);background:var(--rappi-bg);color:var(--rappi-dark);}
+  .comp-btn.active.pya{border-color:var(--pya);background:var(--pya-bg);color:var(--pya-dark);}
+  .callout.rose{border-left-color:var(--rose);}
+  .callout.olive{border-left-color:var(--olive);}
+  .callout.niu{border-left-color:var(--niu);}
+  .callout.ue{border-left-color:var(--ue);}
+  .callout.rappi{border-left-color:var(--rappi);}
+  .callout.pya{border-left-color:var(--pya);}
+  .cr-rose{background:#3d0808;color:#fde8e8;}
+  .cr-olive{background:#2a3110;color:#e8f0c8;}
+  .cr-niu{background:#0d1f3c;color:#c8d8f0;}
+  .cr-ue{background:#0d3d1e;color:#c8f0d8;}
+  .cr-rappi{background:#3d1200;color:#ffe8d8;}
+  .cr-pya{background:#3d0808;color:#fde0d8;}
   .ad .brandname{font-size:13px;font-weight:600;line-height:1.2;}
   .ad .brandname span{display:block;font-weight:400;font-size:10.5px;color:var(--muted);}
   .ad .copy{padding:9px 13px;font-size:13px;white-space:pre-line;flex-grow:1;}
@@ -200,6 +234,7 @@
       <div class="brand-nav">
         <button class="brand-btn active-b" onclick="showBrand('bocus',this)">Bocus</button>
         <button class="brand-btn" onclick="showBrand('cadaques',this)">Cadaqués</button>
+        <button class="brand-btn" onclick="showBrand('plataformas',this)">Plataformas</button>
       </div>
       <span class="update">Actualizado: <strong id="fecha-update">2026-06-12</strong> · Próximo miércoles: 2026-06-17</span>
     </div>
@@ -215,7 +250,7 @@
 
   <div class="brand-header bocus-accent">
     <h2>Bocus · Competencia publicitaria</h2>
-    <p>Competidores monitoreados: Fork Chile · La Punta · Fuentes: Meta Ads Library (CL) · Google Ads Transparency (CL) · Instagram público.</p>
+    <p>Competidores monitoreados: Fork Chile · La Punta · Crudo Sin Censura · Niu Sushi · Fuentes: Meta Ads Library (CL) · Google Ads Transparency (CL) · Instagram público.</p>
   </div>
 
   <div class="metrics">
@@ -223,14 +258,21 @@
     <div class="metric"><div class="label">Fork · Google</div><div class="value">46</div><div class="note">search, shopping, video, local</div></div>
     <div class="metric"><div class="label">La Punta · Meta activos</div><div class="value">~8</div><div class="note">varios desde 2023</div></div>
     <div class="metric"><div class="label">La Punta · Google</div><div class="value">0</div><div class="note">sin presencia visible</div></div>
+    <div class="metric"><div class="label">Crudo · Meta activos</div><div class="value">1</div><div class="note">expansión despacho jun 2026</div></div>
+    <div class="metric"><div class="label">Crudo · Google</div><div class="value">0</div><div class="note">sin presencia visible</div></div>
     <div class="metric"><div class="label">Fork · Instagram</div><div class="value">165k</div><div class="note">@forkchile</div></div>
     <div class="metric"><div class="label">La Punta · Instagram</div><div class="value">31k</div><div class="note">@comidaslapunta.cl</div></div>
+    <div class="metric"><div class="label">Crudo · Instagram</div><div class="value">80k</div><div class="note">@crudosincensura</div></div>
+    <div class="metric"><div class="label">Niu Sushi · Meta activos</div><div class="value">~30</div><div class="note">promos diarias rotativas</div></div>
+    <div class="metric"><div class="label">Niu Sushi · Google</div><div class="value">0</div><div class="note">sin presencia visible</div></div>
   </div>
 
   <!-- Competitor nav -->
   <div class="comp-nav">
     <button class="comp-btn active" onclick="showComp('bocus','fork',this)">Fork Chile</button>
     <button class="comp-btn" onclick="showComp('bocus','lapunta',this,'amber')">La Punta</button>
+    <button class="comp-btn" onclick="showComp('bocus','crudo',this,'rose')">Crudo Sin Censura</button>
+    <button class="comp-btn" onclick="showComp('bocus','niu',this,'niu')">Niu Sushi</button>
   </div>
 
   <!-- ─── FORK ─── -->
@@ -489,24 +531,187 @@ Pide para cuando tú necesites en nuestra App o delivery.comidaslapunta.cl</div>
 
   </div><!-- /competitor la punta -->
 
-  <!-- VS summary -->
-  <div class="vs-bar">
-    <div class="col">
-      <h5>Fork</h5>
-      <p>~32 Meta ads renovados mensualmente · 46 Google ads · alianzas bancarias · código always-on · 165k IG</p>
+  <!-- ─── CRUDO SIN CENSURA ─── -->
+  <div id="bocus-crudo" class="competitor">
+
+    <p class="intro">crudosincensura.cl · Primer delivery de crudo de Chile desde 2013 · tartar, ceviche, carpaccio, tiradito · 3 locales (Providencia, MUT Tobalaba) · 80k seguidores Instagram.</p>
+
+    <div class="callout rose" style="margin-bottom:20px;">
+      <strong>Hallazgo:</strong> 1 anuncio Meta activo (expansión de zona de despacho, jun 2026) y 0 Google Ads. Con 80k seguidores, es la marca de mayor audiencia orgánica que menos invierte en pauta del grupo Bocus. Canal de búsqueda completamente libre.
     </div>
-    <div><span class="vs-badge">VS</span></div>
-    <div class="col">
-      <h5>La Punta</h5>
-      <p>~8 Meta ads (algunos 3 años sin actualizar) · 0 Google ads · sin descuento de bienvenida · 31k IG</p>
+
+    <h3>Meta Ads activos (~1 anuncio)</h3>
+    <div class="grid">
+
+      <div class="ad">
+        <div class="meta"><span class="status">● Activo desde 3 jun 2026</span><span><span class="tag geo">expansión geo</span></span></div>
+        <div class="brandrow"><div class="avatar av-crudo">CSC</div><div class="brandname">Crudo Sin Censura<span>Publicidad · Facebook, Instagram, Messenger, Audience Network</span></div></div>
+        <div class="copy">Aprovecha! Ampliamos a casi todo Santiago nuestro costo de despacho base de <strong>$1.990</strong>.
+Puedes pedir desde La Reina, Peñalolén, La Florida, San Miguel, Santiago, Vitacura o La Dehesa pagando como si estuvieras cerca.
+Exclusivo en crudosincensura.cl por tiempo limitado.</div>
+        <div class="creative cr-rose">Despacho $1.990 · casi todo Santiago<small>Palanca: reducción barrera geográfica</small></div>
+        <div class="footer"><span class="cta">Comprar</span><a class="link" href="https://www.facebook.com/ads/library/?id=1758819095107149" target="_blank">ID 1758819095107149 ↗</a></div>
+      </div>
+
+    </div>
+
+    <h3>Google Ads</h3>
+    <div class="callout rose">
+      <strong>Sin resultados.</strong> crudosincensura.cl no aparece en el Centro de Transparencia de Google. Con 80k seguidores y delivery activo, el canal de búsqueda está completamente disponible para Bocus en keywords como "tartar delivery Santiago", "ceviche delivery", "comida gourmet delivery Santiago".
+    </div>
+
+    <h3>Instagram · @crudosincensura</h3>
+    <p class="intro">80 mil seguidores · Primer delivery de crudo de Chile desde nov 2013. 3 locales en Santiago.</p>
+    <div class="igrow">
+      <div class="igchip">🐟 Producto hero: tartar, ceviche, carpaccio, tiradito</div>
+      <div class="igchip">📍 3 locales: Sta. Isabel 0506 (Providencia) · MUT Tobalaba + 1 más</div>
+      <div class="igchip">🛵 Delivery propio + Rappi + UberEats</div>
+      <div class="igchip">⏱️ 40 horas laborales — posicionamiento de employer branding</div>
+      <div class="igchip">🎬 Reels: experiencia de delivery + humor de consumidor</div>
+    </div>
+
+    <div class="learn">
+      <h4>Aprendizajes para Bocus</h4>
+      <ol>
+        <li><b>Mismo modelo, diferente producto:</b> ambos son delivery de comida premium lista para consumir. La narrativa de "experiencia de delivery" de Crudo es referencia para cómo Bocus comunica su propuesta.</li>
+        <li><b>Pauta sobre despacho, no sobre producto:</b> su único ad habla de precio de envío, no del menú. Bocus puede diferenciarse pautando platos específicos con precio visible.</li>
+        <li><b>Google completamente libre:</b> ningún competidor directo de Bocus pauta en búsqueda. Primera marca en hacerlo gana sin puja.</li>
+        <li><b>Expansión por cobertura como palanca:</b> Crudo usa despacho barato para crecer geográficamente. Si Bocus ya tiene cobertura, puede enfocarse en frecuencia y ticket.</li>
+        <li><b>Despacho como argumento de conversión:</b> "$1.990 despacho" es el copy central. "Despacho gratis sobre $X" de Bocus es una respuesta directa y más atractiva.</li>
+      </ol>
+    </div>
+
+  </div><!-- /competitor crudo -->
+
+  <!-- ─── NIU SUSHI ─── -->
+  <div id="bocus-niu" class="competitor">
+
+    <p class="intro">niusushi.cl · ~30 anuncios Meta activos en Chile · 0 Google Ads CL · La operación publicitaria Meta más intensa del grupo: promos diarias rotativas, deals exclusivos por app y lanzamientos de producto frecuentes.</p>
+
+    <h3>Meta Ads activos</h3>
+    <div class="grid">
+      <div class="ad">
+        <div class="meta"><span>🟢 Activo · 2 versiones</span><span class="status">desde 15 abr 2026</span></div>
+        <div class="brandrow"><div class="avatar av-niu">N</div><div class="brandname">Niu Sushi Bar &amp; Delivery<span>niusushi.cl · ID: 1600849481006379</span></div></div>
+        <div class="copy">Para los Fanáticos de Niu Sushi, cada día nuevos rolls en promoción.
+Rolls con hasta 65% OFF
+Pide online en niusushi.cl o por la APP NIU</div>
+        <div class="creative cr-niu">ROLLS CON HASTA 65% OFF<small>Descuento diario rotativo · App NIU</small></div>
+        <div class="footer">
+          <span><span class="tag promo">65% OFF</span><span class="tag adq">App install</span></span>
+          <a class="link" href="https://www.facebook.com/ads/library/?id=1600849481006379" target="_blank">Ver en biblioteca →</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="meta"><span>🟢 Activo · múltiples versiones</span><span class="status">desde 15 abr 2026</span></div>
+        <div class="brandrow"><div class="avatar av-niu">N</div><div class="brandname">Niu Sushi Bar &amp; Delivery<span>niusushi.cl · IDs: 939698755515752 · 1311353933959087 · +2 más</span></div></div>
+        <div class="copy">En Niu encuentras cada día una promo para ti 😉 ¡Revisa la de hoy y no te quedes con las ganas!
+Pide en niusushi.cl o por la APP Niu 📲</div>
+        <div class="creative cr-niu">#ROLLDELDIA $2.900 · #MARTESPARA2 $12.900 · #NIUPARATODOS $16.900<small>Promo distinta cada día — rotación permanente</small></div>
+        <div class="footer">
+          <span><span class="tag promo">Promos diarias</span><span class="tag always">Siempre activo</span></span>
+          <a class="link" href="https://www.facebook.com/ads/library/?id=939698755515752" target="_blank">Ver en biblioteca →</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="meta"><span>🟢 Activo · múltiples versiones</span><span class="status">desde 21 may 2026</span></div>
+        <div class="brandrow"><div class="avatar av-niu">N</div><div class="brandname">Niu Sushi Bar &amp; Delivery<span>niusushi.cl · IDs: 1526166172590467 · 4408167692764261 · +3 más</span></div></div>
+        <div class="copy">Probar siempre nuevos sabores en Niu... ¡Sagraaado!
+Nuevo Tori Coreano 🍣🇰🇷 Queso crema, palta, cebollín, pollo frito en cubos, salsa coreana, salsa unagui.
+Pídelo por niusushi.cl o nuestra app Niu Foods 📲</div>
+        <div class="creative cr-niu cr-video">NUEVO TORI COREANO · $5.900<small>Edición limitada 🚨 · lanzamiento fusión coreana</small></div>
+        <div class="footer">
+          <span><span class="tag producto">Lanzamiento</span><span class="tag promo">$5.900</span></span>
+          <a class="link" href="https://www.facebook.com/ads/library/?id=1526166172590467" target="_blank">Ver en biblioteca →</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="meta"><span>🟢 Activo</span><span class="status">desde 4 jun 2026</span></div>
+        <div class="brandrow"><div class="avatar av-niu">N</div><div class="brandname">Niu Sushi Bar &amp; Delivery<span>niusushi.cl · ID: 1324571719646782</span></div></div>
+        <div class="copy">¿Con antojo de tu roll favorito? Los Jueves de Junio traen un roll distinto a $3.900 cada semana 👀
+Descubre el de hoy en la APP Niu 📲</div>
+        <div class="creative cr-niu">ROLL TEMPURA A $3.900<small>Exclusivo por la APP Niu · Jueves de Junio</small></div>
+        <div class="footer">
+          <span><span class="tag adq">App exclusivo</span><span class="tag promo">$3.900</span></span>
+          <a class="link" href="https://www.facebook.com/ads/library/?id=1324571719646782" target="_blank">Ver en biblioteca →</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="meta"><span>🟢 Activo</span><span class="status">desde 11 jun 2026</span></div>
+        <div class="brandrow"><div class="avatar av-niu">N</div><div class="brandname">Niu Sushi Bar &amp; Delivery<span>niusushi.cl · ID: 2236049750560215</span></div></div>
+        <div class="copy">Lanzamos una promo exclusiva para que te des un gustito este finde. 😎
+Tori Panko + California Acevichado por solo $7.900. ¡Jueves a domingo exclusivamente por nuestra App NIU 📲!</div>
+        <div class="creative cr-niu">2 ROLLS A $7.900<small>Exclusivo App · Jueves a domingo</small></div>
+        <div class="footer">
+          <span><span class="tag adq">App exclusivo</span><span class="tag promo">$7.900</span></span>
+          <a class="link" href="https://www.facebook.com/ads/library/?id=2236049750560215" target="_blank">Ver en biblioteca →</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="meta"><span>🟢 Activo · múltiples versiones</span><span class="status">desde 3 may 2026</span></div>
+        <div class="brandrow"><div class="avatar av-niu">N</div><div class="brandname">Niu Sushi Bar &amp; Delivery<span>niusushi.cl · IDs: 1451186207049857 · 1707415550580390 · +2 más</span></div></div>
+        <div class="copy">¡Comenzó la tempurada de relajo! 😍🍣 Ahora Niu Sushi estará abierto los domingos ¡Sagrado! Ya no tienes excusa para quedarte sin tu sushi favorito!</div>
+        <div class="creative cr-niu cr-video">ABIERTO LOS DOMINGOS · 12:00 A 23:30 HRS<small>Expansión de horario · todas las sucursales</small></div>
+        <div class="footer">
+          <span><span class="tag brand">Horario</span><span class="tag geo">Todas las sucursales</span></span>
+          <a class="link" href="https://www.facebook.com/ads/library/?id=1451186207049857" target="_blank">Ver en biblioteca →</a>
+        </div>
+      </div>
+    </div>
+
+    <h3>Google Ads</h3>
+    <div class="callout niu">
+      <strong>Sin resultados.</strong> niusushi.cl no aparece en el Centro de Transparencia de Google para región CL. A pesar de ser la marca con más anuncios Meta del grupo, no invierte en search. Keywords como "sushi delivery Santiago", "sushi a domicilio Vitacura" o "rolls delivery Las Condes" están sin competencia pagada directa de Niu.
+    </div>
+
+    <h3>Instagram · @niusushi</h3>
+    <div class="igrow">
+      <div class="igchip">🍣 Pilares: promos diarias, lanzamientos, humor de fanáticos</div>
+      <div class="igchip">🏷️ Hashtags identidad: #FrescuraSagrada · #NIULovers · #NiuParaTodos</div>
+      <div class="igchip">📲 App NIU / Niu Foods como canal exclusivo de deals</div>
+      <div class="igchip">🇰🇷 Fusión coreana como línea de innovación (Tori Coreano)</div>
+      <div class="igchip">🗓️ Expansión a domingos reciente (jun 2026)</div>
+    </div>
+
+    <div class="learn">
+      <h4>Aprendizajes para Bocus</h4>
+      <ol>
+        <li><b>Promo rotation como estrategia de contenido:</b> Niu no corre una campaña, corre un sistema de contenido. Un deal distinto cada día (#RollDelDía, #MartesPara2, #NiuParaTodos) mantiene la marca top-of-mind sin fatiga. Es la operación Meta más activa del grupo con ~30 anuncios simultáneos.</li>
+        <li><b>App exclusiva como motor de fidelización:</b> cada deal marcado "Exclusivo por la APP" tiene doble propósito — impulsa instalaciones nuevas y recompensa a usuarios frecuentes. Bocus podría evaluar si su canal propio (web o app) tiene un deal permanente que justifique instalar o registrarse.</li>
+        <li><b>Precio ancla bajo como gancho de prueba:</b> $2.900 por un roll, $3.900 los jueves, $5.900 por lanzamiento de fusión. Los precios de entrada son bajos para que el cliente pruebe; los combos (#NiuParaTodos $16.900) suben el ticket. Bocus puede aplicar esta escalada de precio en su menú comunicado.</li>
+        <li><b>0 Google Ads:</b> ninguna marca de sushi delivery invierte en search en Chile. Bocus puede capturar "sushi saludable delivery Santiago" o keywords relacionadas sin competencia pagada de Niu.</li>
+        <li><b>Fusión como innovación constante:</b> el Tori Coreano como edición limitada genera urgencia y cobertura orgánica. Bocus puede replicar la táctica de "edición limitada" en su categoría para generar ciclos de novedad.</li>
+      </ol>
+    </div>
+
+    <div class="sources">
+      Fuentes: <a href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=CL&q=niu+sushi&search_type=keyword_unordered" target="_blank">Meta Ad Library · Niu Sushi</a> ·
+      <a href="https://adstransparency.google.com/?region=CL&domain=niusushi.cl" target="_blank">Google Ads · Niu Sushi</a> ·
+      <a href="https://www.niusushi.cl" target="_blank">niusushi.cl</a>
+    </div>
+
+  </div><!-- /competitor niu -->
+
+  <!-- Resumen comparativo -->
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin:40px 0 16px;">
+    <h4 style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:14px;">Resumen competidores Bocus</h4>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;font-size:13px;">
+      <div><strong>Fork</strong><br><span style="color:var(--muted);">~32 Meta · 46 Google · 165k IG · código 30COMPRA1 + bancos</span></div>
+      <div><strong>La Punta</strong><br><span style="color:var(--muted);">~8 Meta (2023) · 0 Google · 31k IG · sin descuento</span></div>
+      <div><strong>Crudo Sin Censura</strong><br><span style="color:var(--muted);">1 Meta · 0 Google · 80k IG · pauta solo sobre despacho</span></div>
+      <div><strong>Niu Sushi</strong><br><span style="color:var(--muted);">~30 Meta · 0 Google · promos diarias rotativas · app exclusivos · fusión coreana</span></div>
     </div>
   </div>
 
   <div class="sources">
     Fuentes: <a href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=CL&q=forkchile&search_type=keyword_unordered" target="_blank">Meta Ad Library · Fork</a> ·
     <a href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=CL&q=comidaslapunta&search_type=keyword_unordered" target="_blank">Meta Ad Library · La Punta</a> ·
-    <a href="https://adstransparency.google.com/?region=CL&domain=forkchile.cl" target="_blank">Google Ads Transparency · Fork</a> ·
-    <a href="https://adstransparency.google.com/?region=CL&domain=comidaslapunta.cl" target="_blank">Google Ads Transparency · La Punta</a>
+    <a href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=CL&q=crudosincensura&search_type=keyword_unordered" target="_blank">Meta Ad Library · Crudo</a> ·
+    <a href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=CL&q=niu+sushi&search_type=keyword_unordered" target="_blank">Meta Ad Library · Niu Sushi</a> ·
+    <a href="https://adstransparency.google.com/?region=CL&domain=forkchile.cl" target="_blank">Google Ads · Fork</a> ·
+    <a href="https://adstransparency.google.com/?region=CL&domain=comidaslapunta.cl" target="_blank">Google Ads · La Punta</a> ·
+    <a href="https://adstransparency.google.com/?region=CL&domain=crudosincensura.cl" target="_blank">Google Ads · Crudo</a> ·
+    <a href="https://adstransparency.google.com/?region=CL&domain=niusushi.cl" target="_blank">Google Ads · Niu Sushi</a>
   </div>
 
 </div><!-- /section bocus -->
@@ -519,18 +724,21 @@ Pide para cuando tú necesites en nuestra App o delivery.comidaslapunta.cl</div>
 
   <div class="brand-header cadaques-accent">
     <h2>Cadaqués · Competencia publicitaria</h2>
-    <p>Competidores monitoreados: Subway Chile · Fuentes: Meta Ads Library (CL) · Google Ads Transparency (CL) · Instagram público.</p>
+    <p>Competidores monitoreados: Subway Chile · La Popular Pizza y Pan · Fuentes: Meta Ads Library (CL) · Google Ads Transparency (CL) · Instagram público.</p>
   </div>
 
   <div class="metrics">
     <div class="metric"><div class="label">Subway CL · Meta propios</div><div class="value">0</div><div class="note">solo pauta regional México</div></div>
     <div class="metric"><div class="label">Subway · Google</div><div class="value">83</div><div class="note">vía agencia La Mediatica SAC</div></div>
+    <div class="metric"><div class="label">La Popular · Meta activos</div><div class="value">0</div><div class="note">sin pauta · solo orgánico</div></div>
+    <div class="metric"><div class="label">La Popular · Google</div><div class="value">0</div><div class="note">sin presencia visible</div></div>
     <div class="metric"><div class="label">Subway · Instagram</div><div class="value">131k</div><div class="note">@subwaychile · verificado</div></div>
-    <div class="metric"><div class="label">Sub del Día</div><div class="value">$3.100</div><div class="note">gancho de precio always-on</div></div>
+    <div class="metric"><div class="label">La Popular · Instagram</div><div class="value">147k</div><div class="note">@lapopularpizzaypan · 10k posts</div></div>
   </div>
 
   <div class="comp-nav">
     <button class="comp-btn active teal" onclick="showComp('cadaques','subway',this,'teal')">Subway Chile</button>
+    <button class="comp-btn" onclick="showComp('cadaques','lapopular',this,'olive')">La Popular Pizza y Pan</button>
   </div>
 
   <!-- ─── SUBWAY ─── -->
@@ -612,14 +820,315 @@ Pide para cuando tú necesites en nuestra App o delivery.comidaslapunta.cl</div>
     </div>
 
     <div class="sources" style="margin-top:20px;">
-      Fuentes: <a href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=CL&q=subway+chile&search_type=keyword_unordered" target="_blank">Meta Ad Library · Subway Chile</a> ·
-      <a href="https://adstransparency.google.com/?region=CL&domain=subway.com" target="_blank">Google Ads Transparency · Subway</a> ·
-      <a href="https://www.instagram.com/subwaychile/" target="_blank">@subwaychile</a>
+      Fuentes: <a href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=CL&q=subway+chile&search_type=keyword_unordered" target="_blank">Meta Ad Library · Subway</a> ·
+      <a href="https://adstransparency.google.com/?region=CL&domain=subway.com" target="_blank">Google Ads · Subway</a>
     </div>
 
   </div><!-- /competitor subway -->
 
+  <!-- ─── LA POPULAR ─── -->
+  <div id="cadaques-lapopular" class="competitor">
+
+    <p class="intro">lapopularpizzaypan.cl · Pizza + panadería masa madre + croissant + brunch · 147k seguidores Instagram · 10.000+ posts · UberEats en San Sebastián (mismo eje que Cadaqués).</p>
+
+    <div class="callout olive" style="margin-bottom:20px;">
+      <strong>Hallazgo:</strong> La Popular es la marca con más seguidores orgánicos del grupo monitoreado (147k), construidos sin un solo peso en pauta pagada — 0 Meta Ads y 0 Google Ads. Tiene un local en UberEats en San Sebastián, calle de Cadaqués (San Sebastián 2806). Competencia física directa.
+    </div>
+
+    <h3>Meta Ads</h3>
+    <div class="callout olive">
+      <strong>Sin resultados.</strong> Búsqueda por @lapopularpizzaypan y keywords "La Popular pizza" devuelven 0 anuncios propios. Toda su base de 147k seguidores se construyó sin pauta Meta. El canal está completamente disponible para Cadaqués.
+    </div>
+
+    <h3>Google Ads</h3>
+    <div class="callout olive">
+      <strong>Sin resultados.</strong> lapopularpizzaypan.cl no aparece en el Centro de Transparencia de Google. Cadaqués puede tomar keywords como "panadería masa madre Vitacura", "croissant artesanal Santiago", "pan masa madre delivery" sin competencia pagada de La Popular.
+    </div>
+
+    <h3>Instagram · @lapopularpizzaypan</h3>
+    <p class="intro">147 mil seguidores · 10.000+ posts · Bio: "Pizza / Panadería masa madre / croissant / brunch / cervezas / cóctel" · Posicionamiento: "El placer de lo cotidiano".</p>
+    <div class="igrow">
+      <div class="igchip">🍕 Producto ancla: pizza artesanal masa madre ($14.100 Margarita)</div>
+      <div class="igchip">🥐 Croissant Dulce de Leche $4.400</div>
+      <div class="igchip">🍞 Pan Hogaza Semillas $4.900 · Baguette $2.800</div>
+      <div class="igchip">☕ Brunch + cervezas + cóctel (extensión de ticket)</div>
+      <div class="igchip">📍 UberEats: local San Sebastián (mismo eje que Cadaqués)</div>
+      <div class="igchip">🌾 Claim: "100% artesanal y fermentado con masa madre"</div>
+    </div>
+
+    <div class="learn">
+      <h4>Aprendizajes para Cadaqués</h4>
+      <ol>
+        <li><b>Referente orgánico del segmento:</b> 147k seguidores sin pauta. Analizar su contenido es la mejor clase gratuita de qué funciona en pan/masa madre en Santiago.</li>
+        <li><b>Todo el canal pago libre:</b> la primera marca que pague en "panadería masa madre Santiago" gana sin resistencia. Cadaqués puede capturar esa demanda antes que nadie.</li>
+        <li><b>Competencia de pasillo literal:</b> su UberEats está en San Sebastián, a metros de Cadaqués. El diferenciador de Cadaqués debe ser claro: ¿precio? ¿variedad? ¿experiencia de local? ¿masa madre más auténtica?</li>
+        <li><b>Precios referencia del segmento:</b> Baguette $2.800 · Croissant $4.400 · Hogaza $4.900. Ancla la percepción de lo que vale el pan artesanal en Santiago.</li>
+        <li><b>Brunch como extensión de ticket:</b> La Popular amplió su propuesta con cerveza y cóctel. Cadaqués podría evaluar una extensión similar para subir ticket en horario no-desayuno.</li>
+      </ol>
+    </div>
+
+    <div class="sources" style="margin-top:20px;">
+      Fuentes: <a href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=CL&q=lapopularpizzaypan&search_type=keyword_unordered" target="_blank">Meta Ad Library · La Popular</a> ·
+      <a href="https://adstransparency.google.com/?region=CL&domain=lapopularpizzaypan.cl" target="_blank">Google Ads · La Popular</a> ·
+      <a href="https://www.lapopularpizzaypan.cl" target="_blank">lapopularpizzaypan.cl</a>
+    </div>
+
+  </div><!-- /competitor la popular -->
+
+  <!-- Resumen comparativo Cadaqués -->
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin:40px 0 16px;">
+    <h4 style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:14px;">Resumen competidores Cadaqués</h4>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;font-size:13px;">
+      <div><strong>Subway Chile</strong><br><span style="color:var(--muted);">0 Meta · 83 Google (agencia) · 131k IG · Sub del Día $3.100</span></div>
+      <div><strong>La Popular Pizza y Pan</strong><br><span style="color:var(--muted);">0 Meta · 0 Google · 147k IG · puro orgánico · local en San Sebastián</span></div>
+    </div>
+  </div>
+
 </div><!-- /section cadaques -->
+
+<!-- ══════════════════════════════════════════
+     PLATAFORMAS DE DELIVERY
+══════════════════════════════════════════ -->
+<div id="section-plataformas" class="brand-section">
+
+  <div class="brand-header" style="border-left:4px solid var(--plat);padding-left:14px;">
+    <h2>Plataformas de Delivery · Inteligencia publicitaria</h2>
+    <p>Plataformas monitoreadas: UberEats · Rappi · PedidosYa · Fuentes: Meta Ads Library (CL) · Google Ads Transparency (CL).</p>
+  </div>
+
+  <div class="metrics">
+    <div class="metric"><div class="label">UberEats · Meta activos</div><div class="value">~99</div><div class="note">partner restaurants</div></div>
+    <div class="metric"><div class="label">UberEats · Google</div><div class="value">0</div><div class="note">sin pauta en CL</div></div>
+    <div class="metric"><div class="label">Rappi · Meta activos</div><div class="value">~15</div><div class="note">consumer + B2B + repartidores</div></div>
+    <div class="metric"><div class="label">Rappi · Google</div><div class="value">0</div><div class="note">sin pauta en CL</div></div>
+    <div class="metric"><div class="label">PedidosYa · Meta activos</div><div class="value">~20</div><div class="note">fútbol + cupones</div></div>
+    <div class="metric"><div class="label">PedidosYa · Google</div><div class="value">0</div><div class="note">sin pauta en CL</div></div>
+  </div>
+
+  <div class="comp-nav">
+    <button class="comp-btn active ue" onclick="showComp('plataformas','ubereats',this,'ue')">UberEats</button>
+    <button class="comp-btn" onclick="showComp('plataformas','rappi',this,'rappi')">Rappi</button>
+    <button class="comp-btn" onclick="showComp('plataformas','pedidosya',this,'pya')">PedidosYa</button>
+  </div>
+
+  <!-- ─── UBEREATS ─── -->
+  <div id="plataformas-ubereats" class="competitor visible">
+
+    <p class="intro">ubereats.com · ~99 anuncios Meta activos en Chile · 0 Google Ads CL · Estrategia: partner restaurants como protagonistas de las creatividades, suscripción Uber One como gancho de retención.</p>
+
+    <h3>Meta Ads activos</h3>
+    <div class="grid">
+      <div class="ad">
+        <div class="meta"><span>🟢 Activo · 9 versiones</span><span class="status">desde 21 abr 2026</span></div>
+        <div class="brandrow"><div class="avatar av-ue">UE</div><div class="brandname">Uber Eats Chile<span>ubereats.com · IDs: 984500887475912 · 1756184548690213 · +7 más</span></div></div>
+        <div class="copy">Regístrate. Entregas con costo de envío a $0 y ventajas para suscriptores de Uber One. Pedidos elegibles. Se aplican Términos y tarifas.</div>
+        <div class="creative cr-ue cr-video">PARTNER RESTAURANTS<small>Santa Isabel · La Punta · Farmacias Ahumada · Tamashi Sushi · Feroz Chocolates</small></div>
+        <div class="footer">
+          <span><span class="tag adq">Adquisición</span><span class="tag always">Uber One</span></span>
+          <a class="link" href="https://www.facebook.com/ads/library/?id=984500887475912" target="_blank">Ver en biblioteca →</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="meta"><span>🟢 Activo · 3 versiones</span><span class="status">desde 13-14 may 2026</span></div>
+        <div class="brandrow"><div class="avatar av-ue">UE</div><div class="brandname">Uber Eats Chile<span>ubereats.com · IDs: 1647447846536002 · 1331074285583771</span></div></div>
+        <div class="copy">¿Tienes antojo de algo? Recíbelo a domicilio. La app de Uber Eats tiene muchas opciones y siempre está agregando más.</div>
+        <div class="creative cr-ue cr-video">ANTOJO A DOMICILIO<small>Amplia selección · siempre agregando opciones</small></div>
+        <div class="footer">
+          <span><span class="tag brand">Awareness</span></span>
+          <a class="link" href="https://www.facebook.com/ads/library/?id=1647447846536002" target="_blank">Ver en biblioteca →</a>
+        </div>
+      </div>
+    </div>
+
+    <h3>Google Ads</h3>
+    <div class="callout ue">
+      <strong>Sin resultados en Chile.</strong> ubereats.com no aparece en Google Ads Transparency para región CL. Todo el presupuesto está en Meta. Búsquedas como "delivery comida Santiago" o "pedir comida a domicilio" no tienen competencia pagada de UberEats — oportunidad para que Bocus/Cadaqués capturen esa demanda directamente.
+    </div>
+
+    <div class="learn">
+      <h4>Aprendizajes para Bocus y Cadaqués</h4>
+      <ol>
+        <li><b>Featured partner = publicidad gratuita:</b> UberEats muestra restaurantes socios en sus propios anuncios (La Punta apareció en la campaña activa de UberEats). Estar bien posicionado en la app — buena calificación, fotos, volumen de pedidos — aumenta la probabilidad de salir en los creativos de la plataforma.</li>
+        <li><b>Uber One como palanca de fidelización:</b> la suscripción consolida hábito de pedido. Si Bocus o Cadaqués aparecen frecuentemente en pedidos Uber One, ganan presencia de marca sin pagar pauta.</li>
+        <li><b>0 Google Ads = oportunidad abierta:</b> ninguna plataforma captura intención de búsqueda en Google. "Delivery masa madre Santiago", "almuerzo saludable a domicilio Vitacura" son keywords sin competencia directa de las plataformas.</li>
+      </ol>
+    </div>
+
+    <div class="sources">
+      Fuentes: <a href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=CL&q=uber+eats&search_type=keyword_unordered" target="_blank">Meta Ad Library · UberEats</a> ·
+      <a href="https://adstransparency.google.com/?region=CL&domain=ubereats.com" target="_blank">Google Ads Transparency · ubereats.com</a>
+    </div>
+
+  </div><!-- /ubereats -->
+
+  <!-- ─── RAPPI ─── -->
+  <div id="plataformas-rappi" class="competitor">
+
+    <p class="intro">rappi.com · ~15 anuncios propios activos (de ~640 resultados que mencionan Rappi) · 0 Google Ads CL · Tres frentes simultáneos: consumidor, reclutamiento de repartidores y captación B2B de restaurantes.</p>
+
+    <h3>Meta Ads activos</h3>
+    <div class="grid">
+      <div class="ad">
+        <div class="meta"><span>🟢 Activo · 14 versiones</span><span class="status">desde 4 jun 2026</span></div>
+        <div class="brandrow"><div class="avatar av-rappi">R</div><div class="brandname">Rappi Chile<span>rappi.com · IDs: 1302285038706313 · 1474368660568742 · +12 más</span></div></div>
+        <div class="copy">Pide un Rappi 🧡
+Food, groceries, pharmacy, and much more delivered in minutes. Try the new app.</div>
+        <div class="creative cr-rappi">PIDE UN RAPPI 🧡<small>Food · Groceries · Pharmacy · and more</small></div>
+        <div class="footer">
+          <span><span class="tag adq">App install</span><span class="tag brand">Awareness</span></span>
+          <a class="link" href="https://www.facebook.com/ads/library/?id=1302285038706313" target="_blank">Ver en biblioteca →</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="meta"><span>🟢 Activo · 3 versiones</span><span class="status">desde 6 jun 2026</span></div>
+        <div class="brandrow"><div class="avatar av-rappi">R</div><div class="brandname">Soy Rappi Chile<span>rappi.com · IDs: 1731612161622404 · 1357008746282071</span></div></div>
+        <div class="copy">Haz que esta temporada juegue a tu favor. Conéctate pa' que vengas a sumar $$$
+Tu cuenta pide cancha 🏍️</div>
+        <div class="creative cr-rappi">TU CUENTA PIDE CANCHA 🏍️<small>Reclutamiento de repartidores · Sign Up</small></div>
+        <div class="footer">
+          <span><span class="tag local">Repartidores</span></span>
+          <a class="link" href="https://www.facebook.com/ads/library/?id=1731612161622404" target="_blank">Ver en biblioteca →</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="meta"><span>🟢 Activo</span><span class="status">desde 5 may 2026</span></div>
+        <div class="brandrow"><div class="avatar av-rappi">R</div><div class="brandname">Rappi Chile · Restaurantes<span>rappi.com · ID: 3778551938947381</span></div></div>
+        <div class="copy">¿Buscas hacer crecer todos los días las ventas de tu negocio? Nosotros te damos una mano. 💯
+Rappi Restaurantes</div>
+        <div class="creative cr-rappi">CRECE CON RAPPI 🚀<small>B2B: captación de restaurantes socios</small></div>
+        <div class="footer">
+          <span><span class="tag banco">B2B Restaurantes</span></span>
+          <a class="link" href="https://www.facebook.com/ads/library/?id=3778551938947381" target="_blank">Ver en biblioteca →</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="meta"><span>🟢 Activo</span><span class="status">desde 4 jun 2026</span></div>
+        <div class="brandrow"><div class="avatar av-rappi">R</div><div class="brandname">Rappi Chile · Restaurantes<span>rappi.com · ID: 1746057970081808</span></div></div>
+        <div class="copy">Completa el formulario y empieza a vender en Rappi. Más visibilidad, más pedidos, más clientes.
+Crece con Rappi 🚀</div>
+        <div class="creative cr-rappi">MÁS VISIBILIDAD · MÁS PEDIDOS · MÁS CLIENTES<small>Formulario de registro restaurante</small></div>
+        <div class="footer">
+          <span><span class="tag banco">B2B Restaurantes</span></span>
+          <a class="link" href="https://www.facebook.com/ads/library/?id=1746057970081808" target="_blank">Ver en biblioteca →</a>
+        </div>
+      </div>
+    </div>
+
+    <h3>Google Ads</h3>
+    <div class="callout rappi">
+      <strong>Sin resultados en Chile.</strong> rappi.com no aparece en Google Ads Transparency para región CL. Al igual que UberEats, toda la inversión publicitaria está en Meta. El canal de búsqueda está completamente libre para marcas con canal de delivery propio.
+    </div>
+
+    <div class="learn">
+      <h4>Aprendizajes para Bocus y Cadaqués</h4>
+      <ol>
+        <li><b>Rappi está en modo captación activa de restaurantes:</b> dos anuncios B2B corriendo simultáneamente ("Más visibilidad, más pedidos, más clientes" + "¿Buscas hacer crecer las ventas?"). Este momento es favorable para negociar condiciones de incorporación o mejora de posicionamiento en el catálogo.</li>
+        <li><b>Ecosistema triple en crecimiento:</b> Rappi invierte en consumidores, repartidores y restaurantes en paralelo. Para Bocus/Cadaqués lo relevante es que cuando la base de usuarios crece por la campaña de adquisición, tener el listado optimizado captura ese nuevo tráfico.</li>
+        <li><b>Ninguna plataforma invierte en Google:</b> el segmento delivery completo abandona search. Bocus/Cadaqués pueden capturar clicks de usuarios que buscan directamente "delivery saludable Santiago" o "panadería delivery Vitacura" sin competir con presupuestos de plataformas.</li>
+      </ol>
+    </div>
+
+    <div class="sources">
+      Fuentes: <a href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=CL&q=rappi&search_type=keyword_unordered" target="_blank">Meta Ad Library · Rappi</a> ·
+      <a href="https://adstransparency.google.com/?region=CL&domain=rappi.com" target="_blank">Google Ads Transparency · rappi.com</a>
+    </div>
+
+  </div><!-- /rappi -->
+
+  <!-- ─── PEDIDOSYA ─── -->
+  <div id="plataformas-pedidosya" class="competitor">
+
+    <p class="intro">pedidosya.cl · ~20 anuncios propios activos (de ~490 resultados que mencionan PedidosYa) · 0 Google Ads CL · Campaña agresiva de adquisición: fútbol + cupones + restaurantes socios como gancho de primera compra.</p>
+
+    <h3>Meta Ads activos</h3>
+    <div class="grid">
+      <div class="ad">
+        <div class="meta"><span>🟢 Activo · múltiples versiones</span><span class="status">desde 2-5 jun 2026</span></div>
+        <div class="brandrow"><div class="avatar av-pya">PY</div><div class="brandname">PedidosYa<span>pedidosya.cl · IDs: 1419043813324793 · 2020877258614021 · +4 más</span></div></div>
+        <div class="copy">La verdad es que el fútbol no le cumple los pedidos a todos, PedidosYa si!
+
+Por eso hicimos estas promos por sólo $6.000 con envío y servicio sin costo</div>
+        <div class="creative cr-pya cr-video">SI HAY GOL, HAY CUPÓN ⚽<small>Promos desde $6.000 · envío y servicio sin costo</small></div>
+        <div class="footer">
+          <span><span class="tag promo">Promoción</span><span class="tag brand">Fútbol</span></span>
+          <a class="link" href="https://www.facebook.com/ads/library/?id=1419043813324793" target="_blank">Ver en biblioteca →</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="meta"><span>🟢 Activo</span><span class="status">desde 2 jun 2026</span></div>
+        <div class="brandrow"><div class="avatar av-pya">PY</div><div class="brandname">PedidosYa<span>pedidosya.cl · ID: 1103913829480898</span></div></div>
+        <div class="copy">¡Descarga la app, ingresa el código PREFIEREPEDIR en mis cupones y disfruta de $25.000 de descuento en tu primer pedido! *Válido únicamente para primeros usuarios</div>
+        <div class="creative cr-pya">CÓDIGO PREFIEREPEDIR<small>$25.000 descuento · primer pedido</small></div>
+        <div class="footer">
+          <span><span class="tag adq">Adquisición</span><span class="tag promo">$25K OFF</span></span>
+          <a class="link" href="https://www.facebook.com/ads/library/?id=1103913829480898" target="_blank">Ver en biblioteca →</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="meta"><span>🟢 Activo · 3 versiones</span><span class="status">desde 13 may 2026</span></div>
+        <div class="brandrow"><div class="avatar av-pya">PY</div><div class="brandname">PedidosYa<span>pedidosya.cl · ID: 818822457972770</span></div></div>
+        <div class="copy">Pide con Envío Sin Costo solo por PedidosYa en tu primera compra 🛵</div>
+        <div class="creative cr-pya">ENVÍO SIN COSTO<small>Primera compra · descarga la app</small></div>
+        <div class="footer">
+          <span><span class="tag adq">App install</span><span class="tag promo">1ra compra</span></span>
+          <a class="link" href="https://www.facebook.com/ads/library/?id=818822457972770" target="_blank">Ver en biblioteca →</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="meta"><span>🟢 Activo · influencer</span><span class="status">desde 4-5 jun 2026</span></div>
+        <div class="brandrow"><div class="avatar av-pya">PY</div><div class="brandname">PedidosYa con claudiomichaux<span>pedidosya.cl · IDs: 901319622969388 · 26956803573992322</span></div></div>
+        <div class="copy">Nunca había apoyado a tantos equipos que ni conozco. Los cupones de PedidosYa tienen la culpa 🫡📲</div>
+        <div class="creative cr-pya cr-video">INFLUENCER FÚTBOL 🏆<small>@claudiomichaux · cupones PedidosYa</small></div>
+        <div class="footer">
+          <span><span class="tag brand">Influencer</span><span class="tag promo">Cupones</span></span>
+          <a class="link" href="https://www.facebook.com/ads/library/?id=901319622969388" target="_blank">Ver en biblioteca →</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="meta"><span>🟢 Activo · 2 versiones</span><span class="status">desde 13 may 2026</span></div>
+        <div class="brandrow"><div class="avatar av-pya">PY</div><div class="brandname">PedidosYa<span>pedidosya.cl · ID: 1288547512907510</span></div></div>
+        <div class="copy">Hoy es un gran día para pedir en KFC: Bucket 8 Strips por solo $ 5.990 😱. Pide con Envío Sin Costo solo por PedidosYa en tu primera compra 🛵</div>
+        <div class="creative cr-pya">PARTNER RESTAURANT<small>KFC Bucket 8 Strips $5.990 · Envío sin costo</small></div>
+        <div class="footer">
+          <span><span class="tag promo">Partner deal</span><span class="tag adq">1ra compra</span></span>
+          <a class="link" href="https://www.facebook.com/ads/library/?id=1288547512907510" target="_blank">Ver en biblioteca →</a>
+        </div>
+      </div>
+    </div>
+
+    <h3>Google Ads</h3>
+    <div class="callout pya">
+      <strong>Sin resultados en Chile.</strong> pedidosya.cl no aparece en Google Ads Transparency para región CL. Al igual que UberEats y Rappi, PedidosYa concentra toda la inversión en Meta. El canal de búsqueda sigue abierto para marcas con canal de delivery propio.
+    </div>
+
+    <div class="learn">
+      <h4>Aprendizajes para Bocus y Cadaqués</h4>
+      <ol>
+        <li><b>Restaurantes socios como creative hero:</b> PedidosYa usa a KFC, McDonald's y Under Pizza como protagonistas de anuncios. Si Bocus o Cadaqués logran ser parte de esas campañas partner, obtienen visibilidad pagada por la plataforma. El criterio suele ser volumen de pedidos y buena calificación.</li>
+        <li><b>Cupones de primera compra como estándar del mercado:</b> PREFIEREPEDIR ($25.000 OFF) y MEJORPEDIR (20% OFF) muestran que PedidosYa subsidia agresivamente la primera orden. Los nuevos usuarios que descarguen por esas promos llegarán a Bocus/Cadaqués si están bien listados y con fotos atractivas.</li>
+        <li><b>Campaña fútbol = picos de volumen:</b> "si hay gol, hay cupón" genera demanda en días de partido. Tener stock asegurado y tiempos de respuesta rápidos en esas fechas puede convertir usuarios nuevos en recurrentes.</li>
+        <li><b>Formato partner deal replicable:</b> precio ancla de producto + envío gratis + primer pedido es el combo más repetido (KFC $5.990, Big Mac $1.743). Bocus podría negociar un deal similar con un plato estrella de precio comunicable.</li>
+      </ol>
+    </div>
+
+    <div class="sources">
+      Fuentes: <a href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=CL&q=pedidosya&search_type=keyword_unordered" target="_blank">Meta Ad Library · PedidosYa</a> ·
+      <a href="https://adstransparency.google.com/?region=CL&domain=pedidosya.cl" target="_blank">Google Ads Transparency · pedidosya.cl</a>
+    </div>
+
+  </div><!-- /pedidosya -->
+
+  <!-- Resumen comparativo Plataformas -->
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin:40px 0 16px;">
+    <h4 style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:14px;">Resumen plataformas de delivery</h4>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;font-size:13px;">
+      <div><strong>UberEats</strong><br><span style="color:var(--muted);">~99 Meta · 0 Google · Partner restaurants en creatividades · Uber One subscription upsell</span></div>
+      <div><strong>Rappi</strong><br><span style="color:var(--muted);">~15 Meta propios · 0 Google · 3 frentes: consumer + repartidores + B2B restaurantes</span></div>
+      <div><strong>PedidosYa</strong><br><span style="color:var(--muted);">~20 Meta · 0 Google · Campaña fútbol + cupones ($25K OFF 1ra compra) + partner restaurants</span></div>
+    </div>
+  </div>
+
+</div><!-- /section plataformas -->
 
 <footer>
   Inteligencia publicitaria · Bocus &amp; Cadaqués · <span id="footer-fecha">2026-06-12</span> · Barrido semanal cada miércoles. Generado por Cowork (Claude Code / Fable 5).
@@ -629,25 +1138,20 @@ Pide para cuando tú necesites en nuestra App o delivery.comidaslapunta.cl</div>
 
 <script>
   function showBrand(brand, btn) {
-    // Hide all brand sections
     document.querySelectorAll('.brand-section').forEach(s => s.classList.remove('visible'));
-    // Show target
     document.getElementById('section-' + brand).classList.add('visible');
-    // Update nav buttons
-    document.querySelectorAll('.brand-btn').forEach(b => b.classList.remove('active-b','active-c'));
-    btn.classList.add(brand === 'bocus' ? 'active-b' : 'active-c');
+    document.querySelectorAll('.brand-btn').forEach(b => b.classList.remove('active-b','active-c','active-p'));
+    if (brand === 'bocus') btn.classList.add('active-b');
+    else if (brand === 'cadaques') btn.classList.add('active-c');
+    else btn.classList.add('active-p');
   }
 
   function showComp(brand, comp, btn, color) {
     const section = document.getElementById('section-' + brand);
-    // Hide all competitor panels within this brand
     section.querySelectorAll('.competitor').forEach(c => c.classList.remove('visible'));
-    // Show target
     document.getElementById(brand + '-' + comp).classList.add('visible');
-    // Update comp buttons
     section.querySelectorAll('.comp-btn').forEach(b => {
-      b.classList.remove('active');
-      b.classList.remove('teal', 'amber');
+      b.classList.remove('active', 'teal', 'amber', 'rose', 'olive', 'ue', 'rappi', 'pya');
     });
     btn.classList.add('active');
     if (color) btn.classList.add(color);
