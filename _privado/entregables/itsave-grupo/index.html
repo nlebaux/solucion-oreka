@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ItSave NLB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f6f8;
+      --surface: #ffffff;
+      --ink: #172033;
+      --muted: #687387;
+      --line: #e3e7ee;
+      --pos: #15803d;
+      --neg: #be123c;
+      --warn: #b45309;
+      --shadow: 0 1px 2px rgba(23,32,51,.05), 0 12px 28px rgba(23,32,51,.07);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: Inter, system-ui, sans-serif; font-size: 14px; line-height: 1.45; }
+    header { background: #111827; color: #fff; padding: 22px 28px; }
+    .top { max-width: 1480px; margin: 0 auto; display: flex; justify-content: space-between; gap: 20px; align-items: center; }
+    h1 { margin: 0; font-size: 24px; letter-spacing: 0; }
+    .subtitle { margin: 4px 0 0; color: rgba(255,255,255,.68); }
+    .confidential { border: 1px solid rgba(255,255,255,.24); border-radius: 8px; padding: 8px 10px; color: rgba(255,255,255,.8); font-size: 12px; text-align: right; }
+    main { max-width: 1480px; margin: 0 auto; padding: 24px 28px 48px; }
+    .summary-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; margin-bottom: 18px; }
+    .summary-card, .panel, .chart-card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow); }
+    .summary-card { border-top: 4px solid var(--entity); padding: 16px; min-width: 0; }
+    .card-head { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+    .card-head h3 { margin: 0; font-size: 14px; }
+    .card-head p { margin: 5px 0 0; display: flex; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: 11px; }
+    .trend { width: 30px; height: 30px; border-radius: 999px; display: grid; place-items: center; font-weight: 800; background: #f1f5f9; }
+    .trend.up, .up { color: var(--pos); }
+    .trend.down, .down { color: var(--neg); }
+    .trend.flat, .flat { color: var(--muted); }
+    dl { margin: 14px 0 0; display: grid; gap: 10px; }
+    dl div { display: flex; justify-content: space-between; gap: 12px; }
+    dt { color: var(--muted); }
+    dd { margin: 0; font-weight: 800; font-variant-numeric: tabular-nums; }
+    .card-note { margin: 12px 0 0; color: var(--muted); font-size: 11px; }
+    .pos { color: var(--pos); }
+    .neg { color: var(--neg); }
+    .layout { display: grid; grid-template-columns: 1.15fr .85fr; gap: 18px; align-items: start; }
+    .panel { padding: 18px; margin-bottom: 18px; }
+    .section-head { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; margin-bottom: 14px; }
+    h2 { margin: 0; font-size: 16px; }
+    .section-head p { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
+    .mini-totals { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 14px; }
+    .mini-totals div { border: 1px solid var(--line); border-radius: 8px; padding: 10px; }
+    .mini-totals span { display: block; color: var(--muted); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .mini-totals strong { display: block; margin-top: 3px; font-size: 13px; }
+    .table-wrap { overflow: auto; max-height: 460px; }
+    .table-wrap.compact { max-height: none; }
+    table { border-collapse: collapse; width: 100%; min-width: 760px; }
+    th { color: var(--muted); font-size: 11px; font-weight: 700; text-align: left; text-transform: uppercase; border-bottom: 2px solid var(--line); padding: 9px 10px; }
+    td { border-bottom: 1px solid var(--line); padding: 9px 10px; vertical-align: top; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .entity-dot { display: inline-block; width: 9px; height: 9px; border-radius: 99px; margin-right: 8px; }
+    .empty { color: var(--muted); text-align: center; padding: 24px; }
+    .charts { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 18px; }
+    .chart-card { padding: 18px; }
+    .chart-card h3 { margin: 0 0 14px; font-size: 14px; }
+    .bar-grid { display: grid; grid-template-columns: repeat(12, minmax(42px, 1fr)); gap: 10px; align-items: end; min-height: 190px; }
+    .bar-month { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 0; }
+    .bars { height: 150px; display: flex; align-items: end; gap: 4px; border-bottom: 1px solid var(--line); padding: 0 3px; width: 100%; justify-content: center; }
+    .bar { display: block; width: 11px; border-radius: 5px 5px 0 0; min-height: 3px; }
+    .bar.expense { background: #e11d48; opacity: .82; }
+    .bar-month small { color: var(--muted); font-size: 10px; white-space: nowrap; }
+    .legend { display: flex; gap: 14px; margin: 0 0 14px; color: var(--muted); font-size: 12px; }
+    .legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+    .legend .li::before { background: #111827; }
+    .legend .le::before { background: #e11d48; }
+    @media (max-width: 1200px) {
+      .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .layout { grid-template-columns: 1fr; }
+      .mini-totals { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 760px) {
+      header { padding: 18px; }
+      main { padding: 18px; }
+      .top { flex-direction: column; align-items: flex-start; }
+      .confidential { text-align: left; }
+      .summary-grid { grid-template-columns: 1fr; }
+      .bar-grid { overflow-x: auto; }
+    }
+  </style>
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <script src="../../auth.js"></script>
+<style id="oreka-private-shell-style">
+  .oreka-private-shell {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    background: rgba(14, 13, 11, 0.92);
+    color: #eedacf;
+    border-bottom: 1px solid rgba(231, 123, 50, 0.22);
+    backdrop-filter: blur(10px);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .oreka-private-shell a {
+    color: #eedacf;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .oreka-private-shell a:hover {
+    color: #ffffff;
+  }
+
+  .oreka-private-shell .divider {
+    width: 1px;
+    height: 14px;
+    background: rgba(238, 218, 207, 0.24);
+  }
+
+  .oreka-private-shell .title {
+    margin-left: auto;
+    color: rgba(238, 218, 207, 0.82);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="oreka-private-shell">
+  <a href="/privado/">Privado</a>
+  <span class="divider"></span>
+  <a href="/privado/entregables/">Entregables</a>
+  <span class="title">ItSave NLB (finanzas grupo)</span>
+</div>
+
+  <header>
+    <div class="top">
+      <div>
+        <h1>ItSave NLB</h1>
+        <p class="subtitle">Panel financiero interno generado el 2026-06-12</p>
+      </div>
+      <div class="confidential">uso interno, area privada<br>acceso protegido por Oreka</div>
+    </div>
+  </header>
+  <main>
+    <section class="summary-grid">
+      
+      <article class="summary-card" style="--entity:#f59e0b">
+        <div class="card-head">
+          <div>
+            <h3>Solución Horeca SpA</h3>
+            <p><span>77.094.165-2</span><span>Jun 2026</span></p>
+          </div>
+          <span class="trend up">↑</span>
+        </div>
+        <dl>
+          <div><dt>Ingresos</dt><dd class="pos">$84.198.779</dd></div>
+          <div><dt>Egresos</dt><dd class="neg">$45.098.253</dd></div>
+          <div><dt>Neto</dt><dd class="up">$39.100.526</dd></div>
+        </dl>
+        <p class="card-note">Tendencia vs mes anterior: sube ($98.691.377)</p>
+      </article>
+    
+      <article class="summary-card" style="--entity:#2563eb">
+        <div class="card-head">
+          <div>
+            <h3>Inversiones NLB SpA</h3>
+            <p><span>77.389.331-4</span><span>May 2026</span></p>
+          </div>
+          <span class="trend up">↑</span>
+        </div>
+        <dl>
+          <div><dt>Ingresos</dt><dd class="pos">$1.132.935</dd></div>
+          <div><dt>Egresos</dt><dd class="neg">$15.476.744</dd></div>
+          <div><dt>Neto</dt><dd class="up">-$14.343.809</dd></div>
+        </dl>
+        <p class="card-note">Tendencia vs mes anterior: sube ($5.435.986)</p>
+      </article>
+    
+      <article class="summary-card" style="--entity:#ef6a2b">
+        <div class="card-head">
+          <div>
+            <h3>Inversiones Cadaqués SpA</h3>
+            <p><span>77.427.765-K</span><span>May 2026</span></p>
+          </div>
+          <span class="trend down">↓</span>
+        </div>
+        <dl>
+          <div><dt>Ingresos</dt><dd class="pos">$46.085.613</dd></div>
+          <div><dt>Egresos</dt><dd class="neg">$45.516.694</dd></div>
+          <div><dt>Neto</dt><dd class="down">$568.919</dd></div>
+        </dl>
+        <p class="card-note">Tendencia vs mes anterior: baja (-$3.470.725)</p>
+      </article>
+    
+      <article class="summary-card" style="--entity:#0f6e56">
+        <div class="card-head">
+          <div>
+            <h3>Solución Oreka Ltda</h3>
+            <p><span>RUT pendiente</span><span>Abr 2026</span></p>
+          </div>
+          <span class="trend up">↑</span>
+        </div>
+        <dl>
+          <div><dt>Ingresos</dt><dd class="pos">$15.468.042</dd></div>
+          <div><dt>Egresos</dt><dd class="neg">$7.942.497</dd></div>
+          <div><dt>Neto</dt><dd class="up">$7.525.545</dd></div>
+        </dl>
+        <p class="card-note">Tendencia vs mes anterior: sube ($8.114.205)</p>
+      </article>
+    
+      
+      <article class="summary-card" style="--entity:#111827">
+        <div class="card-head">
+          <div>
+            <h3>Consolidado grupo NLB</h3>
+            <p><span>RUT pendiente</span><span>Jun 2026</span></p>
+          </div>
+          <span class="trend up">↑</span>
+        </div>
+        <dl>
+          <div><dt>Ingresos</dt><dd class="pos">$84.198.779</dd></div>
+          <div><dt>Egresos</dt><dd class="neg">$45.098.253</dd></div>
+          <div><dt>Neto</dt><dd class="up">$39.100.526</dd></div>
+        </dl>
+        <p class="card-note">Tendencia vs mes anterior: sube ($112.466.267)</p>
+      </article>
+    
+    </section>
+    <div class="layout">
+      <div>
+        
+      <section class="panel">
+        <div class="section-head">
+          <div>
+            <h2>Obligaciones proximas</h2>
+            <p>Ordenadas por dia de pago del mes en curso.</p>
+          </div>
+        </div>
+        <div class="mini-totals"><div><span>Solución Horeca SpA</span><strong>$60.470.000</strong></div><div><span>Inversiones NLB SpA</span><strong>$0</strong></div><div><span>Inversiones Cadaqués SpA</span><strong>$10.094.898</strong></div><div><span>Solución Oreka Ltda</span><strong>$0</strong></div></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Entidad</th><th>Dia</th><th>Nombre</th><th>Tipo</th><th>Periodicidad</th><th>Monto</th></tr></thead>
+            <tbody>
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>05</td>
+              <td>Arriendo San Sebastian 2806 (Inmobiliaria Don Luis)</td>
+              <td>arriendo</td>
+              <td>mensual</td>
+              <td class="num">$3.000.000</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>05</td>
+              <td>Credito Banco de Chile op 82077427765K002521</td>
+              <td>credito</td>
+              <td>mensual</td>
+              <td class="num">$1.517.820</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>05</td>
+              <td>Credito BancoEstado 65M op 00037811124</td>
+              <td>credito</td>
+              <td>mensual</td>
+              <td class="num">$1.423.795</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>07</td>
+              <td>Pago proveedores importacion From Europe</td>
+              <td>proveedor</td>
+              <td>mensual</td>
+              <td class="num">$20.000.000</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>15</td>
+              <td>Credito BancoEstado 50M op 00035019375</td>
+              <td>credito</td>
+              <td>mensual</td>
+              <td class="num">$1.153.283</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>20</td>
+              <td>IVA F29 mensual</td>
+              <td>impuesto</td>
+              <td>mensual</td>
+              <td class="num">$3.000.000</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>20</td>
+              <td>IVA F29 mensual</td>
+              <td>impuesto</td>
+              <td>mensual</td>
+              <td class="num">$2.400.000</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>30</td>
+              <td>Remuneraciones equipo</td>
+              <td>sueldo</td>
+              <td>mensual</td>
+              <td class="num">$38.070.000</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    
+        
+      <section class="panel">
+        <div class="section-head">
+          <div>
+            <h2>Pendiente de respaldo</h2>
+            <p>Movimientos que requieren comprobante o confirmacion.</p>
+          </div>
+        </div>
+        <div class="mini-totals"><div><span>Solución Horeca SpA</span><strong>$162.277.425</strong></div><div><span>Inversiones NLB SpA</span><strong>$0</strong></div><div><span>Inversiones Cadaqués SpA</span><strong>$79.544.835</strong></div><div><span>Solución Oreka Ltda</span><strong>$0</strong></div></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Entidad</th><th>Fecha</th><th>Concepto</th><th>Monto</th><th>Notas</th></tr></thead>
+            <tbody>
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2026-05-29</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$529.711</td>
+              <td>Pendiente: confirmar con Louis que fue (lista enviada)</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2026-05-29</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$62.999</td>
+              <td>Pendiente: confirmar con Louis que fue (lista enviada)</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2026-05-29</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$45.528</td>
+              <td>Pendiente: confirmar sueldo Nicolas, IVA o prestamo - ver Q4/Q5</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2026-05-29</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$19.931</td>
+              <td>Pendiente: confirmar con Louis que fue (lista enviada)</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-05-22</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$2.411.860</td>
+              <td>Posible IVA - pendiente confirmar monto exacto</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-05-22</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$560.621</td>
+              <td>Posible IVA - pendiente confirmar monto exacto</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2026-05-20</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$3.132.162</td>
+              <td>Pendiente: confirmar sueldo Nicolas, IVA o prestamo - ver Q4/Q5</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-05-19</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$1.198.265</td>
+              <td>Posible IVA - pendiente confirmar monto exacto</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-05-19</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$40.000</td>
+              <td>Pendiente: confirmar si es rendicion, IVA o prestamo 2025</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2026-05-15</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$62.798</td>
+              <td>Pendiente: confirmar sueldo Nicolas, IVA o prestamo - ver Q4/Q5</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-05-05</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$13.325.313</td>
+              <td>Pago mesas - confirmado por Nicolas</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-05-04</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$4.500.000</td>
+              <td>Monto inusual para sueldo - Nicolas debe revisar que es</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-05-04</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$2.475.000</td>
+              <td>Sueldo/honorario inicio de mes - confirmado</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-04-27</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$4.429.493</td>
+              <td>Pendiente: confirmar si es rendicion, IVA o prestamo 2025</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-04-24</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$4.205.112</td>
+              <td>Pendiente: confirmar si es rendicion, IVA o prestamo 2025</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2026-04-21</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$3.370.712</td>
+              <td>Pendiente: confirmar sueldo Nicolas, IVA o prestamo - ver Q4/Q5</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-04-20</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$2.271.050</td>
+              <td>Posible IVA - pendiente confirmar monto exacto</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-04-20</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$770.636</td>
+              <td>Pago insumos - confirmado por Nicolas</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-04-20</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$639.030</td>
+              <td>Posible IVA - pendiente confirmar monto exacto</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-04-16</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$3.120.180</td>
+              <td>Pendiente: confirmar si es rendicion, IVA o prestamo 2025</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-04-16</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$131.733</td>
+              <td>Pendiente: confirmar si es rendicion, IVA o prestamo 2025</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-04-15</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$5.000.000</td>
+              <td>Pendiente: confirmar si es rendicion, IVA o prestamo 2025</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2026-04-09</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$87.613</td>
+              <td>Pendiente: confirmar con Louis que fue (lista enviada)</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-04-07</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$4.117.700</td>
+              <td>Pendiente: confirmar si es rendicion, IVA o prestamo 2025</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2026-04-06</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$2.836.276</td>
+              <td>Pendiente: confirmar sueldo Nicolas, IVA o prestamo - ver Q4/Q5</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-04-02</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$1.785.000</td>
+              <td>Pendiente: confirmar si es rendicion, IVA o prestamo 2025</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2026-03-31</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$644.301</td>
+              <td>Pendiente: confirmar con Louis que fue (lista enviada)</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-03-20</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$1.484.489</td>
+              <td>Posible IVA - pendiente confirmar monto exacto</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2026-03-17</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$160.362</td>
+              <td>Pendiente: confirmar sueldo Nicolas, IVA o prestamo - ver Q4/Q5</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-03-13</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$1.913.512</td>
+              <td>Pendiente: confirmar si es rendicion, IVA o prestamo 2025</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-03-12</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$1.077.626</td>
+              <td>Pago insumos - confirmado por Nicolas</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-03-09</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$2.036.151</td>
+              <td>Pendiente: confirmar si es rendicion, IVA o prestamo 2025</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-03-04</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$2.123.068</td>
+              <td>Pendiente: confirmar si es rendicion, IVA o prestamo 2025</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-03-02</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$2.800.000</td>
+              <td>Sueldo/honorario inicio de mes - confirmado</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2026-02-25</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$752.969</td>
+              <td>Pendiente: confirmar con Louis que fue (lista enviada)</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2026-02-23</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$1.719.356</td>
+              <td>Pendiente: confirmar sueldo Nicolas, IVA o prestamo - ver Q4/Q5</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2026-02-23</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$1.719.356</td>
+              <td>Pendiente: confirmar sueldo Nicolas, IVA o prestamo - ver Q4/Q5</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-02-20</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$2.499.267</td>
+              <td>Posible IVA - pendiente confirmar monto exacto</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-02-19</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$533.958</td>
+              <td>Pago insumos - confirmado por Nicolas</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-01-30</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$1.523.043</td>
+              <td>Pago insumos - confirmado por Nicolas</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2026-01-23</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$5.000.000</td>
+              <td>Pendiente: confirmar sueldo Nicolas, IVA o prestamo - ver Q4/Q5</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2026-01-23</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$1.843.847</td>
+              <td>Pendiente: confirmar sueldo Nicolas, IVA o prestamo - ver Q4/Q5</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2026-01-21</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$18.330</td>
+              <td>Pendiente: confirmar con Louis que fue (lista enviada)</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2026-01-20</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$2.169.613</td>
+              <td>Posible IVA - pendiente confirmar monto exacto</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2026-01-12</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$141.310</td>
+              <td>Pendiente: confirmar con Louis que fue (lista enviada)</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2025-12-30</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$452.960</td>
+              <td>Pago insumos - confirmado por Nicolas</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2025-12-30</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$383.903</td>
+              <td>Pendiente: confirmar sueldo Nicolas, IVA o prestamo - ver Q4/Q5</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2025-12-29</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$1.933.032</td>
+              <td>Pago insumos - confirmado por Nicolas</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2025-12-29</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$899.118</td>
+              <td>Pendiente: confirmar sueldo Nicolas, IVA o prestamo - ver Q4/Q5</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2025-12-29</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$704.741</td>
+              <td>Pendiente: confirmar con Louis que fue (lista enviada)</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2025-12-26</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$3.240.413</td>
+              <td>Pendiente: confirmar sueldo Nicolas, IVA o prestamo - ver Q4/Q5</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2025-12-19</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$2.400.000</td>
+              <td>Posible IVA - pendiente confirmar monto exacto</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2025-12-19</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$3.240.413</td>
+              <td>Pendiente: confirmar sueldo Nicolas, IVA o prestamo - ver Q4/Q5</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2025-12-17</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$1.533.598</td>
+              <td>Pago insumos - confirmado por Nicolas</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2025-12-17</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$293.499</td>
+              <td>Pago insumos - confirmado por Nicolas</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2025-12-17</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$500.000</td>
+              <td>Pendiente: confirmar con Louis que fue (lista enviada)</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2025-12-11</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$299.618</td>
+              <td>Pago insumos - confirmado por Nicolas</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2025-12-10</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$548.891</td>
+              <td>Pendiente: confirmar si es rendicion, IVA o prestamo 2025</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2025-12-10</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$516.718</td>
+              <td>Pendiente: confirmar si es rendicion, IVA o prestamo 2025</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2025-12-10</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$459.774</td>
+              <td>Pendiente: confirmar si es rendicion, IVA o prestamo 2025</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2025-12-10</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$276.903</td>
+              <td>Pendiente: confirmar si es rendicion, IVA o prestamo 2025</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2025-12-09</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$1.888.467</td>
+              <td>Pago insumos - confirmado por Nicolas</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2025-12-09</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$817.620</td>
+              <td>Pago insumos - confirmado por Nicolas</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2025-12-01</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$2.487.500</td>
+              <td>Sueldo/honorario inicio de mes - confirmado</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2025-12-01</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$1.523.333</td>
+              <td>Sueldo/honorario inicio de mes - confirmado</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2025-12-01</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$932.929</td>
+              <td>Pendiente: confirmar con Louis que fue (lista enviada)</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2025-11-26</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$1.140.000</td>
+              <td>Pago insumos - confirmado por Nicolas</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2025-11-24</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$697.216</td>
+              <td>Pago insumos - confirmado por Nicolas</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2025-11-24</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$246.107</td>
+              <td>Pago insumos - confirmado por Nicolas</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2025-11-20</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$3.504.338</td>
+              <td>Pendiente: confirmar sueldo Nicolas, IVA o prestamo - ver Q4/Q5</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2025-11-20</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$158.653</td>
+              <td>Pendiente: confirmar con Louis que fue (lista enviada)</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2025-11-18</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$1.240.134</td>
+              <td>Pago insumos - confirmado por Nicolas</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2025-11-17</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$280.957</td>
+              <td>Pendiente: confirmar si es rendicion, IVA o prestamo 2025</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2025-11-17</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$500.000</td>
+              <td>Pendiente: confirmar con Louis que fue (lista enviada)</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2025-11-14</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$618.852</td>
+              <td>Pago insumos - confirmado por Nicolas</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2025-11-12</td>
+              <td>Trabajador: Nicolas Le Baux</td>
+              <td class="num">$1.469.316</td>
+              <td>Pendiente: confirmar sueldo Nicolas, IVA o prestamo - ver Q4/Q5</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2025-11-10</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$2.664.369</td>
+              <td>Pago insumos - confirmado por Nicolas</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2025-11-04</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$500.000</td>
+              <td>Pendiente: confirmar con Louis que fue (lista enviada)</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#ef6a2b"></span>Inversiones Cadaqués SpA</td>
+              <td>2025-11-04</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$500.000</td>
+              <td>Pendiente: confirmar con Louis que fue (lista enviada)</td>
+            </tr>
+            
+            <tr>
+              <td><span class="entity-dot" style="background:#f59e0b"></span>Solución Horeca SpA</td>
+              <td>2025-11-03</td>
+              <td>Trabajador: Louis Le Baux</td>
+              <td class="num">$1.719.500</td>
+              <td>Sueldo/honorario inicio de mes - confirmado</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    
+      </div>
+      <div>
+        
+      <section class="panel">
+        <div class="section-head">
+          <div>
+            <h2>Vista consolidada del grupo</h2>
+            <p>Ingresos, egresos y resultado neto de las 4 entidades.</p>
+          </div>
+        </div>
+        <div class="table-wrap compact">
+          <table>
+            <thead><tr><th>Mes</th><th>Ingresos</th><th>Egresos</th><th>Resultado neto</th></tr></thead>
+            <tbody>
+            <tr>
+              <td>Jul 2025</td>
+              <td class="num pos">$81.755.514</td>
+              <td class="num neg">$104.145.645</td>
+              <td class="num neg">-$22.390.131</td>
+            </tr>
+            
+            <tr>
+              <td>Ago 2025</td>
+              <td class="num pos">$76.549.006</td>
+              <td class="num neg">$92.159.672</td>
+              <td class="num neg">-$15.610.666</td>
+            </tr>
+            
+            <tr>
+              <td>Sep 2025</td>
+              <td class="num pos">$153.994.896</td>
+              <td class="num neg">$165.497.952</td>
+              <td class="num neg">-$11.503.056</td>
+            </tr>
+            
+            <tr>
+              <td>Oct 2025</td>
+              <td class="num pos">$100.800.977</td>
+              <td class="num neg">$129.756.113</td>
+              <td class="num neg">-$28.955.136</td>
+            </tr>
+            
+            <tr>
+              <td>Nov 2025</td>
+              <td class="num pos">$259.164.160</td>
+              <td class="num neg">$226.983.457</td>
+              <td class="num pos">$32.180.703</td>
+            </tr>
+            
+            <tr>
+              <td>Dic 2025</td>
+              <td class="num pos">$163.197.800</td>
+              <td class="num neg">$274.647.508</td>
+              <td class="num neg">-$111.449.708</td>
+            </tr>
+            
+            <tr>
+              <td>Ene 2026</td>
+              <td class="num pos">$126.541.775</td>
+              <td class="num neg">$159.301.864</td>
+              <td class="num neg">-$32.760.089</td>
+            </tr>
+            
+            <tr>
+              <td>Feb 2026</td>
+              <td class="num pos">$123.032.464</td>
+              <td class="num neg">$158.841.767</td>
+              <td class="num neg">-$35.809.303</td>
+            </tr>
+            
+            <tr>
+              <td>Mar 2026</td>
+              <td class="num pos">$134.928.993</td>
+              <td class="num neg">$171.170.399</td>
+              <td class="num neg">-$36.241.406</td>
+            </tr>
+            
+            <tr>
+              <td>Abr 2026</td>
+              <td class="num pos">$165.347.780</td>
+              <td class="num neg">$229.631.772</td>
+              <td class="num neg">-$64.283.992</td>
+            </tr>
+            
+            <tr>
+              <td>May 2026</td>
+              <td class="num pos">$190.089.541</td>
+              <td class="num neg">$263.455.282</td>
+              <td class="num neg">-$73.365.741</td>
+            </tr>
+            
+            <tr>
+              <td>Jun 2026</td>
+              <td class="num pos">$84.198.779</td>
+              <td class="num neg">$45.098.253</td>
+              <td class="num pos">$39.100.526</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    
+      </div>
+    </div>
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <h2>Tendencia 12 meses</h2>
+          <p>Barras por mes: ingresos en color de entidad, egresos en rojo.</p>
+        </div>
+      </div>
+      <div class="legend"><span class="li">Ingresos</span><span class="le">Egresos</span></div>
+      <div class="charts">
+        
+      <article class="chart-card">
+        <h3>Solución Horeca SpA</h3>
+        <div class="bar-grid">
+            <div class="bar-month">
+              <div class="bars" title="Jul 2025: ingresos $45.668.332, egresos $64.984.156">
+                <span class="bar income" style="height:32px;background:#f59e0b"></span>
+                <span class="bar expense" style="height:45px"></span>
+              </div>
+              <small>Jul 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Ago 2025: ingresos $39.251.492, egresos $49.879.924">
+                <span class="bar income" style="height:27px;background:#f59e0b"></span>
+                <span class="bar expense" style="height:34px"></span>
+              </div>
+              <small>Ago 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Sep 2025: ingresos $112.978.020, egresos $100.720.396">
+                <span class="bar income" style="height:78px;background:#f59e0b"></span>
+                <span class="bar expense" style="height:70px"></span>
+              </div>
+              <small>Sep 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Oct 2025: ingresos $62.130.133, egresos $85.843.971">
+                <span class="bar income" style="height:43px;background:#f59e0b"></span>
+                <span class="bar expense" style="height:59px"></span>
+              </div>
+              <small>Oct 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Nov 2025: ingresos $191.467.084, egresos $136.889.165">
+                <span class="bar income" style="height:132px;background:#f59e0b"></span>
+                <span class="bar expense" style="height:95px"></span>
+              </div>
+              <small>Nov 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Dic 2025: ingresos $112.800.974, egresos $175.862.535">
+                <span class="bar income" style="height:78px;background:#f59e0b"></span>
+                <span class="bar expense" style="height:122px"></span>
+              </div>
+              <small>Dic 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Ene 2026: ingresos $79.950.646, egresos $95.281.345">
+                <span class="bar income" style="height:55px;background:#f59e0b"></span>
+                <span class="bar expense" style="height:66px"></span>
+              </div>
+              <small>Ene 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Feb 2026: ingresos $85.058.750, egresos $94.141.583">
+                <span class="bar income" style="height:59px;background:#f59e0b"></span>
+                <span class="bar expense" style="height:65px"></span>
+              </div>
+              <small>Feb 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Mar 2026: ingresos $87.871.277, egresos $112.479.655">
+                <span class="bar income" style="height:61px;background:#f59e0b"></span>
+                <span class="bar expense" style="height:78px"></span>
+              </div>
+              <small>Mar 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Abr 2026: ingresos $102.876.570, egresos $158.945.956">
+                <span class="bar income" style="height:71px;background:#f59e0b"></span>
+                <span class="bar expense" style="height:110px"></span>
+              </div>
+              <small>Abr 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="May 2026: ingresos $142.870.993, egresos $202.461.844">
+                <span class="bar income" style="height:99px;background:#f59e0b"></span>
+                <span class="bar expense" style="height:140px"></span>
+              </div>
+              <small>May 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Jun 2026: ingresos $84.198.779, egresos $45.098.253">
+                <span class="bar income" style="height:58px;background:#f59e0b"></span>
+                <span class="bar expense" style="height:31px"></span>
+              </div>
+              <small>Jun 2026</small>
+            </div>
+            </div>
+      </article>
+    
+      <article class="chart-card">
+        <h3>Inversiones NLB SpA</h3>
+        <div class="bar-grid">
+            <div class="bar-month">
+              <div class="bars" title="Jul 2025: ingresos $0, egresos $10.315.822">
+                <span class="bar income" style="height:3px;background:#2563eb"></span>
+                <span class="bar expense" style="height:67px"></span>
+              </div>
+              <small>Jul 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Ago 2025: ingresos $241, egresos $11.525.281">
+                <span class="bar income" style="height:3px;background:#2563eb"></span>
+                <span class="bar expense" style="height:75px"></span>
+              </div>
+              <small>Ago 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Sep 2025: ingresos $0, egresos $12.792.384">
+                <span class="bar income" style="height:3px;background:#2563eb"></span>
+                <span class="bar expense" style="height:83px"></span>
+              </div>
+              <small>Sep 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Oct 2025: ingresos $0, egresos $10.153.626">
+                <span class="bar income" style="height:3px;background:#2563eb"></span>
+                <span class="bar expense" style="height:66px"></span>
+              </div>
+              <small>Oct 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Nov 2025: ingresos $153.342, egresos $14.508.890">
+                <span class="bar income" style="height:3px;background:#2563eb"></span>
+                <span class="bar expense" style="height:94px"></span>
+              </div>
+              <small>Nov 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Dic 2025: ingresos $0, egresos $20.459.060">
+                <span class="bar income" style="height:3px;background:#2563eb"></span>
+                <span class="bar expense" style="height:133px"></span>
+              </div>
+              <small>Dic 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Ene 2026: ingresos $1.236.154, egresos $18.435.941">
+                <span class="bar income" style="height:8px;background:#2563eb"></span>
+                <span class="bar expense" style="height:120px"></span>
+              </div>
+              <small>Ene 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Feb 2026: ingresos $0, egresos $21.556.957">
+                <span class="bar income" style="height:3px;background:#2563eb"></span>
+                <span class="bar expense" style="height:140px"></span>
+              </div>
+              <small>Feb 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Mar 2026: ingresos $448, egresos $10.888.119">
+                <span class="bar income" style="height:3px;background:#2563eb"></span>
+                <span class="bar expense" style="height:71px"></span>
+              </div>
+              <small>Mar 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Abr 2026: ingresos $529.646, egresos $20.309.441">
+                <span class="bar income" style="height:3px;background:#2563eb"></span>
+                <span class="bar expense" style="height:132px"></span>
+              </div>
+              <small>Abr 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="May 2026: ingresos $1.132.935, egresos $15.476.744">
+                <span class="bar income" style="height:7px;background:#2563eb"></span>
+                <span class="bar expense" style="height:101px"></span>
+              </div>
+              <small>May 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Jun 2026: ingresos $0, egresos $0">
+                <span class="bar income" style="height:3px;background:#2563eb"></span>
+                <span class="bar expense" style="height:3px"></span>
+              </div>
+              <small>Jun 2026</small>
+            </div>
+            </div>
+      </article>
+    
+      <article class="chart-card">
+        <h3>Inversiones Cadaqués SpA</h3>
+        <div class="bar-grid">
+            <div class="bar-month">
+              <div class="bars" title="Jul 2025: ingresos $36.087.182, egresos $28.845.667">
+                <span class="bar income" style="height:65px;background:#ef6a2b"></span>
+                <span class="bar expense" style="height:52px"></span>
+              </div>
+              <small>Jul 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Ago 2025: ingresos $37.297.273, egresos $30.754.467">
+                <span class="bar income" style="height:67px;background:#ef6a2b"></span>
+                <span class="bar expense" style="height:55px"></span>
+              </div>
+              <small>Ago 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Sep 2025: ingresos $41.016.876, egresos $51.985.172">
+                <span class="bar income" style="height:73px;background:#ef6a2b"></span>
+                <span class="bar expense" style="height:93px"></span>
+              </div>
+              <small>Sep 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Oct 2025: ingresos $38.670.844, egresos $33.758.516">
+                <span class="bar income" style="height:69px;background:#ef6a2b"></span>
+                <span class="bar expense" style="height:60px"></span>
+              </div>
+              <small>Oct 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Nov 2025: ingresos $67.543.734, egresos $75.585.402">
+                <span class="bar income" style="height:121px;background:#ef6a2b"></span>
+                <span class="bar expense" style="height:135px"></span>
+              </div>
+              <small>Nov 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Dic 2025: ingresos $50.396.826, egresos $78.325.913">
+                <span class="bar income" style="height:90px;background:#ef6a2b"></span>
+                <span class="bar expense" style="height:140px"></span>
+              </div>
+              <small>Dic 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Ene 2026: ingresos $40.293.841, egresos $43.500.236">
+                <span class="bar income" style="height:72px;background:#ef6a2b"></span>
+                <span class="bar expense" style="height:78px"></span>
+              </div>
+              <small>Ene 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Feb 2026: ingresos $31.973.714, egresos $34.539.860">
+                <span class="bar income" style="height:57px;background:#ef6a2b"></span>
+                <span class="bar expense" style="height:62px"></span>
+              </div>
+              <small>Feb 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Mar 2026: ingresos $40.741.282, egresos $40.897.979">
+                <span class="bar income" style="height:73px;background:#ef6a2b"></span>
+                <span class="bar expense" style="height:73px"></span>
+              </div>
+              <small>Mar 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Abr 2026: ingresos $46.473.522, egresos $42.433.878">
+                <span class="bar income" style="height:83px;background:#ef6a2b"></span>
+                <span class="bar expense" style="height:76px"></span>
+              </div>
+              <small>Abr 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="May 2026: ingresos $46.085.613, egresos $45.516.694">
+                <span class="bar income" style="height:82px;background:#ef6a2b"></span>
+                <span class="bar expense" style="height:81px"></span>
+              </div>
+              <small>May 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Jun 2026: ingresos $0, egresos $0">
+                <span class="bar income" style="height:3px;background:#ef6a2b"></span>
+                <span class="bar expense" style="height:3px"></span>
+              </div>
+              <small>Jun 2026</small>
+            </div>
+            </div>
+      </article>
+    
+      <article class="chart-card">
+        <h3>Solución Oreka Ltda</h3>
+        <div class="bar-grid">
+            <div class="bar-month">
+              <div class="bars" title="Jul 2025: ingresos $0, egresos $0">
+                <span class="bar income" style="height:3px;background:#0f6e56"></span>
+                <span class="bar expense" style="height:3px"></span>
+              </div>
+              <small>Jul 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Ago 2025: ingresos $0, egresos $0">
+                <span class="bar income" style="height:3px;background:#0f6e56"></span>
+                <span class="bar expense" style="height:3px"></span>
+              </div>
+              <small>Ago 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Sep 2025: ingresos $0, egresos $0">
+                <span class="bar income" style="height:3px;background:#0f6e56"></span>
+                <span class="bar expense" style="height:3px"></span>
+              </div>
+              <small>Sep 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Oct 2025: ingresos $0, egresos $0">
+                <span class="bar income" style="height:3px;background:#0f6e56"></span>
+                <span class="bar expense" style="height:3px"></span>
+              </div>
+              <small>Oct 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Nov 2025: ingresos $0, egresos $0">
+                <span class="bar income" style="height:3px;background:#0f6e56"></span>
+                <span class="bar expense" style="height:3px"></span>
+              </div>
+              <small>Nov 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Dic 2025: ingresos $0, egresos $0">
+                <span class="bar income" style="height:3px;background:#0f6e56"></span>
+                <span class="bar expense" style="height:3px"></span>
+              </div>
+              <small>Dic 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Ene 2026: ingresos $5.061.134, egresos $2.084.342">
+                <span class="bar income" style="height:46px;background:#0f6e56"></span>
+                <span class="bar expense" style="height:19px"></span>
+              </div>
+              <small>Ene 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Feb 2026: ingresos $6.000.000, egresos $8.603.367">
+                <span class="bar income" style="height:54px;background:#0f6e56"></span>
+                <span class="bar expense" style="height:78px"></span>
+              </div>
+              <small>Feb 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Mar 2026: ingresos $6.315.986, egresos $6.904.646">
+                <span class="bar income" style="height:57px;background:#0f6e56"></span>
+                <span class="bar expense" style="height:62px"></span>
+              </div>
+              <small>Mar 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Abr 2026: ingresos $15.468.042, egresos $7.942.497">
+                <span class="bar income" style="height:140px;background:#0f6e56"></span>
+                <span class="bar expense" style="height:72px"></span>
+              </div>
+              <small>Abr 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="May 2026: ingresos $0, egresos $0">
+                <span class="bar income" style="height:3px;background:#0f6e56"></span>
+                <span class="bar expense" style="height:3px"></span>
+              </div>
+              <small>May 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Jun 2026: ingresos $0, egresos $0">
+                <span class="bar income" style="height:3px;background:#0f6e56"></span>
+                <span class="bar expense" style="height:3px"></span>
+              </div>
+              <small>Jun 2026</small>
+            </div>
+            </div>
+      </article>
+    
+      <article class="chart-card">
+        <h3>Consolidado grupo</h3>
+        <div class="bar-grid">
+            <div class="bar-month">
+              <div class="bars" title="Jul 2025: ingresos $81.755.514, egresos $104.145.645">
+                <span class="bar income" style="height:42px;background:#111827"></span>
+                <span class="bar expense" style="height:53px"></span>
+              </div>
+              <small>Jul 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Ago 2025: ingresos $76.549.006, egresos $92.159.672">
+                <span class="bar income" style="height:39px;background:#111827"></span>
+                <span class="bar expense" style="height:47px"></span>
+              </div>
+              <small>Ago 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Sep 2025: ingresos $153.994.896, egresos $165.497.952">
+                <span class="bar income" style="height:78px;background:#111827"></span>
+                <span class="bar expense" style="height:84px"></span>
+              </div>
+              <small>Sep 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Oct 2025: ingresos $100.800.977, egresos $129.756.113">
+                <span class="bar income" style="height:51px;background:#111827"></span>
+                <span class="bar expense" style="height:66px"></span>
+              </div>
+              <small>Oct 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Nov 2025: ingresos $259.164.160, egresos $226.983.457">
+                <span class="bar income" style="height:132px;background:#111827"></span>
+                <span class="bar expense" style="height:116px"></span>
+              </div>
+              <small>Nov 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Dic 2025: ingresos $163.197.800, egresos $274.647.508">
+                <span class="bar income" style="height:83px;background:#111827"></span>
+                <span class="bar expense" style="height:140px"></span>
+              </div>
+              <small>Dic 2025</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Ene 2026: ingresos $126.541.775, egresos $159.301.864">
+                <span class="bar income" style="height:65px;background:#111827"></span>
+                <span class="bar expense" style="height:81px"></span>
+              </div>
+              <small>Ene 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Feb 2026: ingresos $123.032.464, egresos $158.841.767">
+                <span class="bar income" style="height:63px;background:#111827"></span>
+                <span class="bar expense" style="height:81px"></span>
+              </div>
+              <small>Feb 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Mar 2026: ingresos $134.928.993, egresos $171.170.399">
+                <span class="bar income" style="height:69px;background:#111827"></span>
+                <span class="bar expense" style="height:87px"></span>
+              </div>
+              <small>Mar 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Abr 2026: ingresos $165.347.780, egresos $229.631.772">
+                <span class="bar income" style="height:84px;background:#111827"></span>
+                <span class="bar expense" style="height:117px"></span>
+              </div>
+              <small>Abr 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="May 2026: ingresos $190.089.541, egresos $263.455.282">
+                <span class="bar income" style="height:97px;background:#111827"></span>
+                <span class="bar expense" style="height:134px"></span>
+              </div>
+              <small>May 2026</small>
+            </div>
+            
+            <div class="bar-month">
+              <div class="bars" title="Jun 2026: ingresos $84.198.779, egresos $45.098.253">
+                <span class="bar income" style="height:43px;background:#111827"></span>
+                <span class="bar expense" style="height:23px"></span>
+              </div>
+              <small>Jun 2026</small>
+            </div>
+            </div>
+      </article>
+    
+      </div>
+    </section>
+  </main>
+  <script type="application/json" id="itsave-data">{"generated": "2026-06-12", "months": ["2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06"], "summaries": {"horeca": {"last_month": "2026-06", "prev_month": "2026-05", "income": 84198779, "expense": 45098253, "net": 39100526, "trend": 98691377, "trend_label": "sube"}, "nlb-spa": {"last_month": "2026-05", "prev_month": "2026-04", "income": 1132935, "expense": 15476744, "net": -14343809, "trend": 5435986, "trend_label": "sube"}, "cadaques": {"last_month": "2026-05", "prev_month": "2026-04", "income": 46085613, "expense": 45516694, "net": 568919, "trend": -3470725, "trend_label": "baja"}, "oreka": {"last_month": "2026-04", "prev_month": "2026-03", "income": 15468042, "expense": 7942497, "net": 7525545, "trend": 8114205, "trend_label": "sube"}}, "monthly": {"horeca": {"2025-01": {"ingresos": 32094941, "egresos": 37424396}, "2025-02": {"ingresos": 28213154, "egresos": 29075067}, "2025-03": {"ingresos": 48028370, "egresos": 46580522}, "2025-04": {"ingresos": 31868640, "egresos": 28647588}, "2025-05": {"ingresos": 49835222, "egresos": 36501159}, "2025-06": {"ingresos": 54242825, "egresos": 71477020}, "2025-07": {"ingresos": 45668332, "egresos": 64984156}, "2025-08": {"ingresos": 39251492, "egresos": 49879924}, "2025-09": {"ingresos": 112978020, "egresos": 100720396}, "2025-10": {"ingresos": 62130133, "egresos": 85843971}, "2025-11": {"ingresos": 191467084, "egresos": 136889165}, "2025-12": {"ingresos": 112800974, "egresos": 175862535}, "2026-01": {"ingresos": 79950646, "egresos": 95281345}, "2026-02": {"ingresos": 85058750, "egresos": 94141583}, "2026-03": {"ingresos": 87871277, "egresos": 112479655}, "2026-04": {"ingresos": 102876570, "egresos": 158945956}, "2026-05": {"ingresos": 142870993, "egresos": 202461844}, "2026-06": {"ingresos": 84198779, "egresos": 45098253}}, "nlb-spa": {"2025-06": {"ingresos": 0, "egresos": 5124401}, "2025-07": {"ingresos": 0, "egresos": 10315822}, "2025-08": {"ingresos": 241, "egresos": 11525281}, "2025-09": {"ingresos": 0, "egresos": 12792384}, "2025-10": {"ingresos": 0, "egresos": 10153626}, "2025-11": {"ingresos": 153342, "egresos": 14508890}, "2025-12": {"ingresos": 0, "egresos": 20459060}, "2026-01": {"ingresos": 1236154, "egresos": 18435941}, "2026-02": {"ingresos": 0, "egresos": 21556957}, "2026-03": {"ingresos": 448, "egresos": 10888119}, "2026-04": {"ingresos": 529646, "egresos": 20309441}, "2026-05": {"ingresos": 1132935, "egresos": 15476744}}, "cadaques": {"2024-05": {"ingresos": 369430, "egresos": 369430}, "2025-04": {"ingresos": 27942725, "egresos": 15966970}, "2025-05": {"ingresos": 27330782, "egresos": 27309333}, "2025-06": {"ingresos": 28104988, "egresos": 31167015}, "2025-07": {"ingresos": 36087182, "egresos": 28845667}, "2025-08": {"ingresos": 37297273, "egresos": 30754467}, "2025-09": {"ingresos": 41016876, "egresos": 51985172}, "2025-10": {"ingresos": 38670844, "egresos": 33758516}, "2025-11": {"ingresos": 67543734, "egresos": 75585402}, "2025-12": {"ingresos": 50396826, "egresos": 78325913}, "2026-01": {"ingresos": 40293841, "egresos": 43500236}, "2026-02": {"ingresos": 31973714, "egresos": 34539860}, "2026-03": {"ingresos": 40741282, "egresos": 40897979}, "2026-04": {"ingresos": 46473522, "egresos": 42433878}, "2026-05": {"ingresos": 46085613, "egresos": 45516694}}, "oreka": {"2026-01": {"ingresos": 5061134, "egresos": 2084342}, "2026-02": {"ingresos": 6000000, "egresos": 8603367}, "2026-03": {"ingresos": 6315986, "egresos": 6904646}, "2026-04": {"ingresos": 15468042, "egresos": 7942497}}}, "combined": {"2025-01": {"ingresos": 32094941, "egresos": 37424396}, "2025-02": {"ingresos": 28213154, "egresos": 29075067}, "2025-03": {"ingresos": 48028370, "egresos": 46580522}, "2025-04": {"ingresos": 59811365, "egresos": 44614558}, "2025-05": {"ingresos": 77166004, "egresos": 63810492}, "2025-06": {"ingresos": 82347813, "egresos": 107768436}, "2025-07": {"ingresos": 81755514, "egresos": 104145645}, "2025-08": {"ingresos": 76549006, "egresos": 92159672}, "2025-09": {"ingresos": 153994896, "egresos": 165497952}, "2025-10": {"ingresos": 100800977, "egresos": 129756113}, "2025-11": {"ingresos": 259164160, "egresos": 226983457}, "2025-12": {"ingresos": 163197800, "egresos": 274647508}, "2026-01": {"ingresos": 126541775, "egresos": 159301864}, "2026-02": {"ingresos": 123032464, "egresos": 158841767}, "2026-03": {"ingresos": 134928993, "egresos": 171170399}, "2026-04": {"ingresos": 165347780, "egresos": 229631772}, "2026-05": {"ingresos": 190089541, "egresos": 263455282}, "2026-06": {"ingresos": 84198779, "egresos": 45098253}, "2024-05": {"ingresos": 369430, "egresos": 369430}}, "commitment_totals": {"horeca": 60470000, "nlb-spa": 0, "cadaques": 10094898, "oreka": 0}, "pending_totals": {"horeca": 162277425, "nlb-spa": 0, "cadaques": 79544835, "oreka": 0}}</script>
+</body>
+</html>
