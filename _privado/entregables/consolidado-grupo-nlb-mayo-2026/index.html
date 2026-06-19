@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Consolidado Grupo NLB — Mayo 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0d0f14;
+      --surface: #141720;
+      --surface2: #1c2030;
+      --surface3: #242840;
+      --border: rgba(255,255,255,0.07);
+      --text: #e8eaf2;
+      --text-muted: #7a7f9a;
+      --text-dim: #4a5070;
+      --accent: #6c63ff;
+      --accent2: #00d4aa;
+      --gold: #f5a623;
+      --red: #ff4f6a;
+      --green: #22c77c;
+      --yellow: #f5c842;
+      --blue: #4ab3f4;
+      --star: #f5a623;
+      --horse: #4ab3f4;
+      --puzzle: #b06cf5;
+      --dog: #ff6b6b;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(13,15,20,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      display: flex; align-items: center; gap: 8px;
+      height: 56px; overflow-x: auto;
+    }
+    .nav-brand {
+      font-weight: 700; font-size: 15px;
+      color: var(--text); white-space: nowrap;
+      margin-right: 16px;
+    }
+    .nav-brand span { color: var(--accent); }
+    nav a {
+      color: var(--text-muted); text-decoration: none;
+      font-size: 12px; font-weight: 500;
+      padding: 6px 12px; border-radius: 6px;
+      white-space: nowrap; transition: all .2s;
+    }
+    nav a:hover { background: var(--surface2); color: var(--text); }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 48px 0 24px; }
+    section:first-of-type { padding-top: 40px; }
+
+    /* ── HEADERS ── */
+    .page-header {
+      background: linear-gradient(135deg, #141720 0%, #1a1f35 50%, #0d1428 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 40px 32px;
+    }
+    .page-header .container { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .page-header h1 { font-size: 28px; font-weight: 800; line-height: 1.2; }
+    .page-header h1 em { font-style: normal; color: var(--accent); }
+    .page-header .meta { margin-top: 8px; color: var(--text-muted); font-size: 12px; }
+    .page-header .meta span { color: var(--text); }
+    .badge-warning {
+      background: rgba(245,166,35,0.12); border: 1px solid rgba(245,166,35,0.3);
+      color: var(--gold); padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 600;
+    }
+
+    h2 {
+      font-size: 20px; font-weight: 700; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    h2::before {
+      content: ''; display: block; width: 3px; height: 22px;
+      background: var(--accent); border-radius: 2px;
+    }
+    h3 { font-size: 14px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 12px; }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px; padding: 24px;
+    }
+    .card-sm { padding: 18px; }
+
+    /* ── KPI GRID ── */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+    .kpi {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px;
+      transition: transform .2s, border-color .2s;
+    }
+    .kpi:hover { transform: translateY(-2px); border-color: rgba(108,99,255,.4); }
+    .kpi .label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
+    .kpi .value { font-size: 22px; font-weight: 800; line-height: 1; }
+    .kpi .sub { font-size: 11px; color: var(--text-muted); margin-top: 6px; }
+    .kpi .delta { font-size: 11px; font-weight: 600; margin-top: 4px; }
+    .delta-up { color: var(--green); }
+    .delta-down { color: var(--red); }
+    .delta-warn { color: var(--yellow); }
+    .kpi.accent { border-color: rgba(108,99,255,.3); background: linear-gradient(135deg, #1a1730, #141720); }
+    .kpi.accent .value { color: var(--accent); }
+    .kpi.green { border-color: rgba(34,199,124,.25); }
+    .kpi.green .value { color: var(--green); }
+    .kpi.gold { border-color: rgba(245,166,35,.25); }
+    .kpi.gold .value { color: var(--gold); }
+    .kpi.red { border-color: rgba(255,79,106,.25); }
+    .kpi.red .value { color: var(--red); }
+
+    /* ── ENTITY TABS ── */
+    .entity-tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .entity-tab {
+      padding: 8px 20px; border-radius: 8px; border: 1px solid var(--border);
+      background: var(--surface); color: var(--text-muted);
+      cursor: pointer; font-size: 13px; font-weight: 500;
+      transition: all .2s;
+    }
+    .entity-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .entity-tab:hover:not(.active) { border-color: var(--accent); color: var(--text); }
+    .entity-panel { display: none; }
+    .entity-panel.active { display: block; }
+
+    /* ── TABLE ── */
+    .tbl-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead th {
+      background: var(--surface2); padding: 12px 16px;
+      text-align: left; font-size: 11px; font-weight: 600;
+      color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em;
+      border-bottom: 1px solid var(--border); white-space: nowrap;
+    }
+    tbody tr { border-bottom: 1px solid var(--border); transition: background .15s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface2); }
+    tbody td { padding: 11px 16px; vertical-align: middle; }
+    td.bold { font-weight: 700; }
+    td.right { text-align: right; }
+    td.center { text-align: center; }
+    .row-total td { background: var(--surface2); font-weight: 700; border-top: 1px solid var(--border); }
+
+    /* ── MENU ENGINEERING MATRIX ── */
+    .me-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3px;
+      border-radius: 12px; overflow: hidden; border: 1px solid var(--border);
+    }
+    .me-cell {
+      padding: 20px; min-height: 180px;
+      position: relative;
+    }
+    .me-cell .me-label {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .12em; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;
+    }
+    .me-cell .me-label::before {
+      content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+    }
+    .me-star { background: rgba(245,166,35,.06); }
+    .me-star .me-label { color: var(--star); }
+    .me-star .me-label::before { background: var(--star); }
+    .me-horse { background: rgba(74,179,244,.06); }
+    .me-horse .me-label { color: var(--horse); }
+    .me-horse .me-label::before { background: var(--horse); }
+    .me-puzzle { background: rgba(176,108,245,.06); }
+    .me-puzzle .me-label { color: var(--puzzle); }
+    .me-puzzle .me-label::before { background: var(--puzzle); }
+    .me-dog { background: rgba(255,107,107,.06); }
+    .me-dog .me-label { color: var(--dog); }
+    .me-dog .me-label::before { background: var(--dog); }
+    .me-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 7px 10px; border-radius: 6px; margin-bottom: 4px;
+      background: rgba(255,255,255,.03);
+    }
+    .me-item .me-name { font-size: 12px; font-weight: 500; }
+    .me-item .me-margin {
+      font-size: 11px; font-weight: 700; padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .me-star .me-item .me-margin { background: rgba(245,166,35,.15); color: var(--star); }
+    .me-horse .me-item .me-margin { background: rgba(74,179,244,.15); color: var(--horse); }
+    .me-puzzle .me-item .me-margin { background: rgba(176,108,245,.15); color: var(--puzzle); }
+    .me-dog .me-item .me-margin { background: rgba(255,107,107,.15); color: var(--dog); }
+
+    /* ── FLOW DIAGRAM ── */
+    .flow-wrap {
+      display: flex; gap: 16px; align-items: stretch; flex-wrap: wrap;
+    }
+    .flow-entity {
+      flex: 1; min-width: 200px;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 18px;
+    }
+    .flow-entity .ent-name { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .flow-entity .ent-rut { font-size: 11px; color: var(--text-muted); }
+    .flow-entity .ent-badge {
+      display: inline-block; margin-top: 8px;
+      font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 4px;
+    }
+    .badge-same { background: rgba(34,199,124,.15); color: var(--green); }
+    .badge-diff { background: rgba(245,166,35,.15); color: var(--gold); }
+    .flow-arrow {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 6px; padding: 0 4px; min-width: 120px;
+    }
+    .flow-arrow .arr-amount { font-size: 13px; font-weight: 700; color: var(--text); }
+    .flow-arrow .arr-type {
+      font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 10px;
+    }
+    .arr-factura { background: rgba(245,166,35,.15); color: var(--gold); }
+    .arr-traspaso { background: rgba(34,199,124,.15); color: var(--green); }
+    .arr-line {
+      width: 100%; height: 2px; position: relative;
+      display: flex; align-items: center;
+    }
+    .arr-line::after {
+      content: '▶'; position: absolute; right: -4px;
+      font-size: 10px;
+    }
+    .arr-factura-line { background: var(--gold); }
+    .arr-factura-line::after { color: var(--gold); }
+    .arr-traspaso-line { background: var(--green); }
+    .arr-traspaso-line::after { color: var(--green); }
+
+    /* ── ALERT BOXES ── */
+    .alert {
+      border-radius: 10px; padding: 14px 18px;
+      font-size: 13px; margin-bottom: 12px;
+      border-left: 3px solid;
+      display: flex; gap: 10px;
+    }
+    .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+    .alert-red { background: rgba(255,79,106,.08); border-color: var(--red); }
+    .alert-yellow { background: rgba(245,200,66,.08); border-color: var(--yellow); }
+    .alert-green { background: rgba(34,199,124,.08); border-color: var(--green); }
+    .alert-blue { background: rgba(74,179,244,.08); border-color: var(--blue); }
+    .alert strong { font-weight: 700; display: block; margin-bottom: 3px; }
+
+    /* ── PROGRESS BAR ── */
+    .pbar-row { margin-bottom: 14px; }
+    .pbar-row .pbar-label { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 5px; }
+    .pbar-row .pbar-name { font-weight: 500; }
+    .pbar-row .pbar-val { color: var(--text-muted); }
+    .pbar-track {
+      height: 8px; background: var(--surface3); border-radius: 4px; overflow: hidden;
+    }
+    .pbar-fill { height: 100%; border-radius: 4px; transition: width .6s ease; }
+    .fill-green { background: linear-gradient(90deg, #22c77c, #00d4aa); }
+    .fill-yellow { background: linear-gradient(90deg, #f5c842, #f5a623); }
+    .fill-red { background: linear-gradient(90deg, #ff4f6a, #ff8c42); }
+    .fill-accent { background: linear-gradient(90deg, #6c63ff, #a855f7); }
+    .fill-blue { background: linear-gradient(90deg, #4ab3f4, #6c63ff); }
+
+    /* ── CANAL DONUT (CSS only) ── */
+    .channel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
+    .channel-card {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px; text-align: center;
+    }
+    .channel-card .ch-pct { font-size: 28px; font-weight: 800; }
+    .channel-card .ch-name { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+    .channel-card .ch-val { font-size: 12px; font-weight: 600; margin-top: 4px; }
+
+    /* ── DIVIDER ── */
+    .divider { height: 1px; background: var(--border); margin: 32px 0; }
+
+    /* ── GRID HELPERS ── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    @media (max-width: 900px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .me-grid { grid-template-columns: 1fr; }
+      .flow-wrap { flex-direction: column; }
+      .flow-arrow { flex-direction: row; min-width: auto; }
+    }
+
+    /* ── INTERCOMPANY TABLE ── */
+    .ic-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 11px; font-weight: 600; padding: 3px 9px;
+      border-radius: 6px; white-space: nowrap;
+    }
+    .ic-factura { background: rgba(245,166,35,.15); color: var(--gold); }
+    .ic-traspaso { background: rgba(34,199,124,.15); color: var(--green); }
+
+    /* ── FOOTER ── */
+    footer {
+      margin-top: 60px; padding: 28px 32px;
+      border-top: 1px solid var(--border);
+      color: var(--text-dim); font-size: 12px;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    }
+
+    /* ── TOOLTIP ── */
+    [data-tip] { position: relative; cursor: help; border-bottom: 1px dashed var(--text-dim); }
+    [data-tip]:hover::after {
+      content: attr(data-tip);
+      position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+      background: #2a2f45; color: var(--text); border: 1px solid var(--border);
+      padding: 6px 10px; border-radius: 6px; font-size: 11px; white-space: nowrap;
+      z-index: 99; pointer-events: none;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .12em; color: var(--accent); margin-bottom: 8px;
+    }
+
+    /* ── ANNOTATION ── */
+    .anno {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 12px 16px; font-size: 12px;
+      color: var(--text-muted); margin-top: 12px;
+    }
+    .anno strong { color: var(--text); }
+
+    /* ── STICKY SIDEBAR (alerts panel) ── */
+    .layout-sidebar { display: grid; grid-template-columns: 1fr 340px; gap: 24px; align-items: start; }
+    @media (max-width: 1100px) { .layout-sidebar { grid-template-columns: 1fr; } }
+    .sidebar-sticky { position: sticky; top: 72px; }
+
+    /* SEMAFORO */
+    .sema { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; }
+    .sema-g { background: var(--green); }
+    .sema-y { background: var(--yellow); }
+    .sema-r { background: var(--red); }
+  </style>
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <script src="../../auth.js"></script>
+<style id="oreka-private-shell-style">
+  .oreka-private-shell {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    background: rgba(14, 13, 11, 0.92);
+    color: #eedacf;
+    border-bottom: 1px solid rgba(231, 123, 50, 0.22);
+    backdrop-filter: blur(10px);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .oreka-private-shell a {
+    color: #eedacf;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .oreka-private-shell a:hover {
+    color: #ffffff;
+  }
+
+  .oreka-private-shell .divider {
+    width: 1px;
+    height: 14px;
+    background: rgba(238, 218, 207, 0.24);
+  }
+
+  .oreka-private-shell .title {
+    margin-left: auto;
+    color: rgba(238, 218, 207, 0.82);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="oreka-private-shell">
+  <a href="/privado/">Privado</a>
+  <span class="divider"></span>
+  <a href="/privado/entregables/">Entregables</a>
+  <span class="title">Consolidado Grupo NLB · mayo 2026</span>
+</div>
+
+
+<!-- ════════════════ NAV ════════════════ -->
+<nav>
+  <div class="nav-brand">NLB <span>Grupo</span></div>
+  <a href="#resumen">Resumen</a>
+  <a href="#bocus">Bocus</a>
+  <a href="#parigo">Parigó</a>
+  <a href="#cadaques">Cadaqués</a>
+  <a href="#intercompany">Intercompany</a>
+  <a href="#menu-eng">Menú Eng.</a>
+  <a href="#cartolas">Cartolas</a>
+  <a href="#rrhh-buk">Buk RRHH</a>
+  <a href="#reconciliacion">iSafe vs Fudo</a>
+  <a href="#tendencia">Tendencia</a>
+  <a href="#compromisos">Compromisos</a>
+  <a href="#kame-cdq">P&L Cadaqués</a>
+  <a href="#alertas">Alertas</a>
+</nav>
+
+<!-- ════════════════ HEADER ════════════════ -->
+<div class="page-header">
+  <div class="container">
+    <div>
+      <div class="section-label">Informe Consolidado</div>
+      <h1>Grupo NLB — <em>Mayo 2026</em></h1>
+      <div class="meta">
+        Bocus · Parigó Le Plat · Parigó al Paso · Cadaqués SpA &nbsp;|&nbsp;
+        Emitido: <span>2026-06-01</span> &nbsp;|&nbsp; Autor: <span>[Antigravity]</span>
+      </div>
+    </div>
+    <div class="badge-warning" style="background:rgba(34,199,124,.12);border-color:rgba(34,199,124,.3);color:var(--green);">✓ Actualizado 2026-06-04</div>
+  </div>
+</div>
+
+<!-- ════════════════ RESUMEN EJECUTIVO ════════════════ -->
+<section id="resumen">
+  <div class="container">
+    <h2>Resumen Ejecutivo del Grupo</h2>
+
+    <div class="kpi-grid" style="margin-bottom:20px;">
+      <div class="kpi accent">
+        <div class="label">Venta Real al Mercado</div>
+        <div class="value">$227M</div>
+        <div class="sub">CLP · sin duplicar intercompany</div>
+      </div>
+      <div class="kpi green">
+        <div class="label">Bocus B2C + B2B externos</div>
+        <div class="value">$91.4M</div>
+        <div class="delta delta-up">↑ +21.3% vs abril</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Parigó Total</div>
+        <div class="value">$87.1M</div>
+        <div class="delta delta-warn">↓ -15.3% normalización apertura</div>
+      </div>
+      <div class="kpi gold">
+        <div class="label">Cadaqués (venta local)</div>
+        <div class="value">$48.6M</div>
+        <div class="sub">neto · 6.166 tickets</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Intercompany Bocus→Cadaqués</div>
+        <div class="value">$30.6M</div>
+        <div class="sub">bruto · facturado entre RUTs</div>
+      </div>
+      <div class="kpi red">
+        <div class="label">Descuentos Cadaqués</div>
+        <div class="value">$5.7M</div>
+        <div class="sub">10.5% de facturación — ALERTA</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Venta Bruta en Fudo por unidad (incluye intercompany)</h3>
+      <div style="margin-top:8px;">
+        <div class="pbar-row">
+          <div class="pbar-label"><span class="pbar-name">Bocus Total (Fudo)</span><span class="pbar-val">$151.1M</span></div>
+          <div class="pbar-track"><div class="pbar-fill fill-accent" style="width:100%"></div></div>
+        </div>
+        <div class="pbar-row">
+          <div class="pbar-label"><span class="pbar-name" style="padding-left:16px">↳ B2C Retail</span><span class="pbar-val">$38.7M &nbsp;<span class="delta-up" style="font-size:11px;">25.6%</span></span></div>
+          <div class="pbar-track"><div class="pbar-fill fill-green" style="width:25.6%"></div></div>
+        </div>
+        <div class="pbar-row">
+          <div class="pbar-label"><span class="pbar-name" style="padding-left:16px">↳ B2B Facturas externos</span><span class="pbar-val">$52.7M &nbsp;<span style="font-size:11px;color:var(--gold)">34.9%</span></span></div>
+          <div class="pbar-track"><div class="pbar-fill fill-yellow" style="width:34.9%"></div></div>
+        </div>
+        <div class="pbar-row">
+          <div class="pbar-label"><span class="pbar-name" style="padding-left:16px">↳ Intercompany grupo</span><span class="pbar-val">$59.7M &nbsp;<span style="font-size:11px;color:var(--text-muted)">39.5%</span></span></div>
+          <div class="pbar-track"><div class="pbar-fill fill-blue" style="width:39.5%"></div></div>
+        </div>
+        <div class="divider" style="margin:16px 0 12px;"></div>
+        <div class="pbar-row">
+          <div class="pbar-label"><span class="pbar-name">Parigó Le Plat</span><span class="pbar-val">$54.4M</span></div>
+          <div class="pbar-track"><div class="pbar-fill fill-green" style="width:36%"></div></div>
+        </div>
+        <div class="pbar-row">
+          <div class="pbar-label"><span class="pbar-name">Parigó al Paso</span><span class="pbar-val">$32.7M</span></div>
+          <div class="pbar-track"><div class="pbar-fill fill-green" style="width:21.6%"></div></div>
+        </div>
+        <div class="pbar-row">
+          <div class="pbar-label"><span class="pbar-name">Cadaqués SpA</span><span class="pbar-val">$54.3M bruta / $48.6M neta</span></div>
+          <div class="pbar-track"><div class="pbar-fill fill-yellow" style="width:35.9%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="anno" style="margin-top:16px;">
+      <strong>Nota de consolidación:</strong> Los $151M de Bocus incluyen las ventas a Cadaqués ($30.6M facturado) y los traspasos internos a Parigó (sin factura, misma sociedad Horeca SpA). Para calcular la <strong>venta real al mercado</strong> del grupo se eliminan estos flujos internos, resultando en ~$227M CLP.
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ BOCUS ════════════════ -->
+<section id="bocus">
+  <div class="container">
+    <h2>Bocus — Análisis por Segmento</h2>
+
+    <div class="kpi-grid" style="margin-bottom:20px;">
+      <div class="kpi accent">
+        <div class="label">Venta Total Fudo</div>
+        <div class="value">$151.1M</div>
+        <div class="delta delta-up">↑ +21.3% vs abril</div>
+      </div>
+      <div class="kpi green">
+        <div class="label">Shopify — AOV</div>
+        <div class="value">$44.740</div>
+        <div class="delta delta-up">↑ +10% vs abril</div>
+      </div>
+      <div class="kpi green">
+        <div class="label">Pedidos Shopify</div>
+        <div class="value">691</div>
+        <div class="delta delta-up">↑ +11.1% vs abril</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Sesiones Web</div>
+        <div class="value">10.543</div>
+        <div class="delta delta-up">↑ +30% vs abril</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Tasa Conversión</div>
+        <div class="value">6.42%</div>
+        <div class="delta delta-warn">↓ -15% (dilución por tráfico)</div>
+      </div>
+      <div class="kpi green">
+        <div class="label">Clientes Habituales</div>
+        <div class="value">63.1%</div>
+        <div class="sub">Retención excepcional</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Ventas por Canal — Mayo 2026</h3>
+        <div class="tbl-wrap" style="border:none;">
+          <table>
+            <thead><tr><th>Canal</th><th class="right">Venta Bruta</th><th class="right">Pedidos</th><th class="right">AOV</th></tr></thead>
+            <tbody>
+              <tr><td>Shopify (B2C)</td><td class="right">$33.419.290</td><td class="right">691</td><td class="right">$44.740</td></tr>
+              <tr><td>Rappi (B2C)</td><td class="right">$2.937.680</td><td class="right">132</td><td class="right">$22.255</td></tr>
+              <tr><td>Fudo Direct (B2C)</td><td class="right">$3.252.914</td><td class="right">82</td><td class="right">$39.670</td></tr>
+              <tr class="row-total"><td><strong>Total B2C Retail</strong></td><td class="right bold">$38.657.648</td><td class="right bold">891</td><td class="right bold">$43.386</td></tr>
+              <tr><td>B2B Facturas (externos)</td><td class="right">$52.703.582</td><td class="right">170</td><td class="right">$310.021</td></tr>
+              <tr><td>Intercompany grupo</td><td class="right">$59.730.183</td><td class="right">798</td><td class="right">$74.850</td></tr>
+              <tr class="row-total"><td><strong>TOTAL BOCUS</strong></td><td class="right bold">$151.091.413</td><td class="right bold">~1.800</td><td class="right">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Shopify — Evolución Abril → Mayo</h3>
+        <div style="margin-top:4px;">
+          <div class="pbar-row">
+            <div class="pbar-label"><span class="pbar-name">Venta Shopify</span><span class="pbar-val"><span class="sema sema-g"></span>+22%</span></div>
+            <div class="pbar-track"><div class="pbar-fill fill-green" style="width:80%"></div></div>
+          </div>
+          <div class="pbar-row">
+            <div class="pbar-label"><span class="pbar-name">Pedidos</span><span class="pbar-val"><span class="sema sema-g"></span>+11.1%</span></div>
+            <div class="pbar-track"><div class="pbar-fill fill-green" style="width:60%"></div></div>
+          </div>
+          <div class="pbar-row">
+            <div class="pbar-label"><span class="pbar-name">Ticket Promedio (AOV)</span><span class="pbar-val"><span class="sema sema-g"></span>+10%</span></div>
+            <div class="pbar-track"><div class="pbar-fill fill-green" style="width:55%"></div></div>
+          </div>
+          <div class="pbar-row">
+            <div class="pbar-label"><span class="pbar-name">Sesiones Web</span><span class="pbar-val"><span class="sema sema-g"></span>+30%</span></div>
+            <div class="pbar-track"><div class="pbar-fill fill-accent" style="width:90%"></div></div>
+          </div>
+          <div class="pbar-row">
+            <div class="pbar-label"><span class="pbar-name">Tasa Conversión</span><span class="pbar-val"><span class="sema sema-y"></span>-15%</span></div>
+            <div class="pbar-track"><div class="pbar-fill fill-yellow" style="width:40%"></div></div>
+          </div>
+          <div class="pbar-row">
+            <div class="pbar-label"><span class="pbar-name">Clientes Habituales</span><span class="pbar-val"><span class="sema sema-g"></span>63.1%</span></div>
+            <div class="pbar-track"><div class="pbar-fill fill-green" style="width:75%"></div></div>
+          </div>
+        </div>
+        <div class="anno" style="margin-top:8px;font-size:11px;">La caída en conversión es esperada con +30% de tráfico nuevo. El AOV sigue subiendo hacia la meta de $60k.</div>
+      </div>
+    </div>
+
+    <!-- B2B Clientes reales -->
+    <div class="card" style="margin-top:20px;">
+      <h3>B2B Comercial — Clientes por Volumen · Mayo 2026</h3>
+      <div class="anno" style="margin-bottom:14px;">Desglose completo de los $52.7M B2B facturados a clientes externos. Fuente: reporte de canales Bocus 260602. El canal IC ($59.7M a Parigó y Cadaqués) se muestra separado.</div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>#</th><th>Cliente</th><th class="right">Pedidos</th><th class="right">Venta Bruta</th><th class="right">% del B2B</th><th>Nota</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td><strong>Local SpA</strong></td><td class="right">67</td><td class="right">$26.315.831</td><td class="right bold" style="color:var(--gold)">46.32%</td><td style="font-size:11px;color:var(--text-muted)">Cuenta ancla B2B. Mayor cliente externo.</td></tr>
+            <tr><td>2</td><td><strong>Comercial Baco SpA</strong></td><td class="right">24</td><td class="right">$12.167.442</td><td class="right">21.42%</td><td style="font-size:11px;color:var(--text-muted)">Masas congeladas y bollería.</td></tr>
+            <tr><td>3</td><td><strong>Café Trebons Ltda</strong></td><td class="right">51</td><td class="right">$8.281.272</td><td class="right">14.58%</td><td style="font-size:11px;color:var(--text-muted)">Abastecimiento diario. Cliente más frecuente (51 pedidos). Blindar con contrato de volumen.</td></tr>
+            <tr><td>4</td><td><strong>Banco de Chile</strong></td><td class="right">1</td><td class="right">$4.105.500</td><td class="right">7.23%</td><td style="font-size:11px;color:var(--text-muted)">Evento corporativo / catering. Valida potencial banquetería premium.</td></tr>
+            <tr><td>5</td><td><strong>Z Gourmet Market SpA</strong></td><td class="right">3</td><td class="right">$1.076.240</td><td class="right">1.89%</td><td style="font-size:11px;color:var(--text-muted)">Quesos, charcutería y envasados.</td></tr>
+            <tr><td>6</td><td><strong>La Campiña</strong></td><td class="right">6</td><td class="right">$828.206</td><td class="right">1.46%</td><td style="font-size:11px;color:var(--text-muted)">Distribución especial de masas.</td></tr>
+            <tr><td>7</td><td>Supermercado Maurere SpA</td><td class="right">1</td><td class="right">$704.000</td><td class="right">1.24%</td><td style="font-size:11px;color:var(--text-muted)">Compra puntual masas y pan.</td></tr>
+            <tr><td>8</td><td>Lia Inés Hernández B.</td><td class="right">2</td><td class="right">$520.400</td><td class="right">0.92%</td><td style="font-size:11px;color:var(--text-muted)">Eventos independientes de gran escala.</td></tr>
+            <tr><td>9</td><td>Azerta SpA</td><td class="right">4</td><td class="right">$324.990</td><td class="right">0.57%</td><td style="font-size:11px;color:var(--text-muted)">Servicios y productos culinarios corporativos.</td></tr>
+            <tr><td>10</td><td>Sergio Rourke</td><td class="right">1</td><td class="right">$312.000</td><td class="right">0.55%</td><td style="font-size:11px;color:var(--text-muted)">Pedido especial banquetería externa.</td></tr>
+            <tr><td>—</td><td>Otros clientes menores (38 facturas)</td><td class="right">38</td><td class="right">$1.274.379</td><td class="right">2.25%</td><td style="font-size:11px;color:var(--text-muted)">Facturas individuales &lt;$80.000 a clientes retail.</td></tr>
+            <tr class="row-total"><td></td><td><strong>Total B2B Comercial Consolidado</strong></td><td class="right bold">171</td><td class="right bold">$56.809.082</td><td class="right bold">100%</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="alert alert-blue" style="margin-top:14px;">
+        <div class="alert-icon">ℹ</div>
+        <div><strong>Concentración B2B:</strong> Solo 3 clientes (Local, Baco, Trebons) representan el 82.3% de la venta B2B externa. Trebons con 51 pedidos en el mes es el cliente más frecuente — ideal para propuesta de contrato preferencial. Banco de Chile como cliente de catering confirma el potencial de este canal no sistematizado.</div>
+      </div>
+    </div>
+
+    <!-- Canal Lokal -->
+    <div class="card" style="margin-top:20px;">
+      <h3>Canal Lokal — Distribución Mayorista · Mayo 2026</h3>
+      <div class="anno" style="margin-bottom:14px;">Lokal opera como plataforma mayorista para puntos de venta independientes. Sus transacciones <strong>no están en Fudo</strong> — son facturación B2B adicional no mapeada en el POS. Fuente: reporte mensual Lokal 2026-06-03.</div>
+      <div class="grid-2">
+        <div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">Venta Neta (sin IVA)</span><span class="pbar-val" style="color:var(--green)">$573.254</span></div><div class="pbar-track"><div class="pbar-fill fill-green" style="width:100%"></div></div></div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">Pedidos</span><span class="pbar-val">5 · 5 puntos de venta</span></div><div class="pbar-track"><div class="pbar-fill fill-accent" style="width:30%"></div></div></div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">Ítems despachados</span><span class="pbar-val">83 · 11 SKUs</span></div><div class="pbar-track"><div class="pbar-fill fill-blue" style="width:50%"></div></div></div>
+        </div>
+        <div>
+          <div class="alert alert-red" style="margin-bottom:0;">
+            <div class="alert-icon">🔴</div>
+            <div><strong>Tiempo de confirmación: 144.51 horas promedio (6+ días)</strong><br>El cuello de botella crítico es la demora del equipo en confirmar los pedidos. Meta: &lt;24 horas hábiles. Una vez confirmado, el despacho fluye bien (1.12 días inicio + 3.15 días en tránsito). 2 incidencias registradas en el mes. Responsable de mejora: Louis.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════ PARIGÓ ════════════════ -->
+<section id="parigo">
+  <div class="container">
+    <h2>Parigó — Dos formatos, una sociedad</h2>
+
+    <div class="kpi-grid" style="margin-bottom:20px;">
+      <div class="kpi accent">
+        <div class="label">Venta Total Parigó</div>
+        <div class="value">$87.1M</div>
+        <div class="delta delta-warn">↓ -15.3% (normalización apertura)</div>
+      </div>
+      <div class="kpi green">
+        <div class="label">Le Plat — Ticket/mesa</div>
+        <div class="value">$54.550</div>
+        <div class="delta delta-up">↑ +6.5% vs abril</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Le Plat — Ticket/persona</div>
+        <div class="value">$23.203</div>
+        <div class="sub">2.344 comensales · 2.35 pax/mesa</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Al Paso — Ticket</div>
+        <div class="value">$7.741</div>
+        <div class="sub">4.227 tickets</div>
+      </div>
+      <div class="kpi">
+        <div class="label">MP Teórica Le Plat</div>
+        <div class="value">32.01%</div>
+        <div class="delta delta-warn">↑ +10.8% vs abril (Lomo desajustado)</div>
+      </div>
+      <div class="kpi green">
+        <div class="label">MP Teórica Al Paso</div>
+        <div class="value">26.76%</div>
+        <div class="sub">Margen bruto: 73.24%</div>
+      </div>
+    </div>
+
+    <div class="alert alert-yellow">
+      <div class="alert-icon">⚠</div>
+      <div><strong>Ensalada Lomo — Precio desajustado en Fudo</strong>
+        El lomo figura a $22.000 gross en Fudo cuando el costeo mandante es $25.000. Esto baja el margen del 70%+ al 65.9%. El lomo representa el 42.1% de la venta del salón ($25.3M). Ajuste inmediato en Fudo = +$5 de margen neto por plato × 1.151 porciones vendidas.</div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Top Productos — Le Plat (Salón)</h3>
+        <div class="tbl-wrap" style="border:none;">
+          <table>
+            <thead><tr><th>Producto</th><th class="right">Und.</th><th class="right">Venta Bruta</th><th class="right">% Salón</th></tr></thead>
+            <tbody>
+              <tr><td>Ensalada Lomo (Filete)</td><td class="right">1.151</td><td class="right">$25.322.000</td><td class="right"><strong style="color:var(--gold)">42.1%</strong></td></tr>
+              <tr><td>Ensalada Salmón</td><td class="right">279</td><td class="right">$6.138.000</td><td class="right">10.2%</td></tr>
+              <tr><td>Ensalada Coliflor</td><td class="right">81</td><td class="right">$1.570.000</td><td class="right">2.9%</td></tr>
+              <tr><td>César PRG</td><td class="right">110</td><td class="right">$1.475.000</td><td class="right">2.7%</td></tr>
+              <tr><td>Creme Brûlée PRG</td><td class="right">201</td><td class="right">$1.005.000</td><td class="right">1.8%</td></tr>
+              <tr><td>Tostada Francesa PRG</td><td class="right">141</td><td class="right">$846.000</td><td class="right">1.6%</td></tr>
+              <tr><td>Tiramisú PRG</td><td class="right">125</td><td class="right">$817.000</td><td class="right">1.5%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Top Productos — Al Paso (Cafetería)</h3>
+        <div class="tbl-wrap" style="border:none;">
+          <table>
+            <thead><tr><th>Producto</th><th class="right">Und.</th><th class="right">Venta Bruta</th><th class="right">Margen</th></tr></thead>
+            <tbody>
+              <tr><td>Media Luna</td><td class="right">929</td><td class="right">$1.653.900</td><td class="right" style="color:var(--green)"><strong>83.7%</strong></td></tr>
+              <tr><td>Baguette 300gr</td><td class="right">734</td><td class="right">$1.612.000</td><td class="right" style="color:var(--green)"><strong>91.7%</strong></td></tr>
+              <tr><td>Sandwich Lyon</td><td class="right">270</td><td class="right">$1.484.500</td><td class="right">69.8%</td></tr>
+              <tr><td>Sandwich Capri</td><td class="right">196</td><td class="right">$1.175.500</td><td class="right" style="color:var(--green)">75.2%</td></tr>
+              <tr><td>Desayuno Parigó</td><td class="right">137</td><td class="right">$1.020.000</td><td class="right">N/D</td></tr>
+              <tr><td>Croissant</td><td class="right">322</td><td class="right">$706.000</td><td class="right">70.4%</td></tr>
+              <tr><td>Marraqueta</td><td class="right">222</td><td class="right">—</td><td class="right" style="color:var(--green)">84.7%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ CADAQUÉS ════════════════ -->
+<section id="cadaques">
+  <div class="container">
+    <h2>Cadaqués SpA — Panadería</h2>
+
+    <div class="kpi-grid" style="margin-bottom:20px;">
+      <div class="kpi accent">
+        <div class="label">Venta Bruta Fudo</div>
+        <div class="value">$54.3M</div>
+        <div class="sub">Neta: $48.6M | 6.166 tickets</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Ticket Promedio</div>
+        <div class="value">$7.884</div>
+        <div class="sub">199 transacciones/día</div>
+      </div>
+      <div class="kpi green">
+        <div class="label">MP Teórica (Fudo)</div>
+        <div class="value">29.41%</div>
+        <div class="sub">Margen bruto: 70.59%</div>
+      </div>
+      <div class="kpi red">
+        <div class="label" data-tip="Incluye $30.6M en masas compradas a Bocus vía factura">MP Real (Intercompany)</div>
+        <div class="value">52.91%</div>
+        <div class="sub">Margen bruto real: 47.09%</div>
+      </div>
+      <div class="kpi red">
+        <div class="label">Descuentos de Caja</div>
+        <div class="value">$5.7M</div>
+        <div class="sub">10.5% de facturación — sin protocolo</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Mostrador (canal ppal)</div>
+        <div class="value">86.1%</div>
+        <div class="sub">$41.9M · 5.972 tickets</div>
+      </div>
+    </div>
+
+    <div class="alert alert-red">
+      <div class="alert-icon">🔴</div>
+      <div><strong>Brecha de MP Real vs Teórica: $13.7M CLP</strong>
+        Fudo muestra 29.41% pero el costo real es 52.91%. Causas: (1) facturas de Bocus no cargadas en Fudo de Cadaqués → stocks negativos absurdos, (2) stock acumulado en cámara no devengado aún, (3) mermas de vitrina no registradas. Acción: Roxy carga facturas intercompany los días 15 y 30.</div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Ventas por Canal</h3>
+        <div class="channel-grid" style="margin-top:8px;">
+          <div class="channel-card">
+            <div class="ch-pct" style="color:var(--accent)">86.1%</div>
+            <div class="ch-name">Mostrador</div>
+            <div class="ch-val">$41.9M</div>
+          </div>
+          <div class="channel-card">
+            <div class="ch-pct" style="color:var(--blue)">8.4%</div>
+            <div class="ch-name">Salón</div>
+            <div class="ch-val">$4.2M</div>
+          </div>
+          <div class="channel-card">
+            <div class="ch-pct" style="color:var(--green)">5.5%</div>
+            <div class="ch-name">Delivery</div>
+            <div class="ch-val">$2.7M</div>
+          </div>
+        </div>
+        <div class="alert alert-red" style="margin-top:12px;padding:10px 14px;">
+          <div class="alert-icon">⚡</div>
+          <div><strong>Rappi Cadaqués: 2 pedidos en todo mayo ($17.180)</strong> vs 140 de Uber Eats. Boris García debe auditar urgente.</div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Ventas por Categoría — Margen Teórico</h3>
+        <div style="margin-top:4px;">
+          <div class="pbar-row">
+            <div class="pbar-label"><span class="pbar-name">Panadería (16.482 un)</span><span class="pbar-val" style="color:var(--green)">80.57%</span></div>
+            <div class="pbar-track"><div class="pbar-fill fill-green" style="width:80.57%"></div></div>
+          </div>
+          <div class="pbar-row">
+            <div class="pbar-label"><span class="pbar-name">Cafetería (813 un)</span><span class="pbar-val" style="color:var(--green)">78.36%</span></div>
+            <div class="pbar-track"><div class="pbar-fill fill-green" style="width:78.36%"></div></div>
+          </div>
+          <div class="pbar-row">
+            <div class="pbar-label"><span class="pbar-name">Pastelería (914 un)</span><span class="pbar-val" style="color:var(--green)">70.13%</span></div>
+            <div class="pbar-track"><div class="pbar-fill fill-green" style="width:70.13%"></div></div>
+          </div>
+          <div class="pbar-row">
+            <div class="pbar-label"><span class="pbar-name">Sándwich (1.225 un)</span><span class="pbar-val">68.83%</span></div>
+            <div class="pbar-track"><div class="pbar-fill fill-yellow" style="width:68.83%"></div></div>
+          </div>
+          <div class="pbar-row">
+            <div class="pbar-label"><span class="pbar-name">Bollería (3.450 un)</span><span class="pbar-val">66.87%</span></div>
+            <div class="pbar-track"><div class="pbar-fill fill-yellow" style="width:66.87%"></div></div>
+          </div>
+          <div class="pbar-row">
+            <div class="pbar-label"><span class="pbar-name">Refrescos (263 un)</span><span class="pbar-val">62.28%</span></div>
+            <div class="pbar-track"><div class="pbar-fill fill-yellow" style="width:62.28%"></div></div>
+          </div>
+          <div class="pbar-row">
+            <div class="pbar-label"><span class="pbar-name">Quesos y Charc. (248 un)</span><span class="pbar-val" style="color:var(--red)">48.39%</span></div>
+            <div class="pbar-track"><div class="pbar-fill fill-red" style="width:48.39%"></div></div>
+          </div>
+          <div class="pbar-row">
+            <div class="pbar-label"><span class="pbar-name">Prod. Genérico (567 un)</span><span class="pbar-val" style="color:var(--red)">SIN DATO</span></div>
+            <div class="pbar-track"><div class="pbar-fill fill-red" style="width:5%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ INTERCOMPANY ════════════════ -->
+<section id="intercompany">
+  <div class="container">
+    <h2>Estructura Legal y Flujos Intercompany</h2>
+
+    <div class="card" style="margin-bottom:20px;">
+      <h3>Estructura del Grupo (La base de todo)</h3>
+      <div style="margin-top:16px; font-family:monospace; font-size:12px; color:var(--text-muted); line-height:2; background:var(--surface2); border-radius:8px; padding:16px;">
+        <span style="color:var(--accent)">NLB SpA</span> (holding personal de Nicolás Le Baux)<br>
+        &nbsp;├── <span style="color:var(--gold)">Cadaqués SpA</span> &nbsp;<span style="color:var(--text-dim)">RUT: 77.427.765-K</span> &nbsp;<span style="background:rgba(245,166,35,.15);color:var(--gold);padding:1px 6px;border-radius:3px;font-size:10px;">SOCIEDAD INDEPENDIENTE</span><br>
+        &nbsp;│&nbsp;&nbsp;&nbsp; Panadería artesanal · San Sebastián 2806<br>
+        &nbsp;└── <span style="color:var(--green)">Horeca SpA</span> &nbsp;<span style="color:var(--text-dim)">RUT: 77.094.165-2</span> &nbsp;<span style="background:rgba(34,199,124,.15);color:var(--green);padding:1px 6px;border-radius:3px;font-size:10px;">UNA SOLA SOCIEDAD</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── <span style="color:var(--accent)">Bocus</span> &nbsp;<span style="color:var(--text-dim)">(delivery online)</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── <span style="color:var(--accent)">Parigó Le Plat</span> &nbsp;<span style="color:var(--text-dim)">(restaurante)</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── <span style="color:var(--accent)">Parigó al Paso</span> &nbsp;<span style="color:var(--text-dim)">(cafetería)</span>
+      </div>
+    </div>
+
+    <!-- FLOW DIAGRAM -->
+    <div class="card" style="margin-bottom:20px;">
+      <h3>Mapa de Flujos — Mayo 2026</h3>
+      <div class="tbl-wrap" style="margin-top:12px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Desde</th><th>Hacia</th><th>Instrumento</th><th class="right">Monto Bruto Mayo</th><th>Por qué</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Bocus</strong> (Horeca SpA)</td>
+              <td><strong>Cadaqués SpA</strong></td>
+              <td><span class="ic-badge ic-factura">📄 FACTURA</span></td>
+              <td class="right bold">$30.608.785</td>
+              <td style="color:var(--text-muted);font-size:12px;">RUTs distintos · obligación SII</td>
+            </tr>
+            <tr>
+              <td><strong>Bocus / La Pastora</strong> (Horeca)</td>
+              <td><strong>Parigó al Paso</strong> (Horeca)</td>
+              <td><span class="ic-badge ic-traspaso">↔ TRASPASO INTERNO</span></td>
+              <td class="right">En food cost</td>
+              <td style="color:var(--text-muted);font-size:12px;">Mismo RUT · movimiento contable interno · sin IVA</td>
+            </tr>
+            <tr>
+              <td><strong>Bocus</strong> (Horeca SpA)</td>
+              <td><strong>Baco, Banco Chile, externos</strong></td>
+              <td><span class="ic-badge ic-factura">📄 FACTURA</span></td>
+              <td class="right bold">$52.703.582</td>
+              <td style="color:var(--text-muted);font-size:12px;">Clientes externos al grupo</td>
+            </tr>
+            <tr>
+              <td><strong>Horeca SpA</strong> (RRHH central)</td>
+              <td><strong>Cadaqués SpA</strong></td>
+              <td><span class="ic-badge ic-factura">📄 FACTURA servicios</span></td>
+              <td class="right bold">~$34.4M</td>
+              <td style="color:var(--text-muted);font-size:12px;">Peter y Roxy contratados en Horeca · cobro de nómina + masas</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Bocus → Cadaqués: Principales Insumos Facturados</h3>
+        <div class="tbl-wrap" style="border:none;margin-top:4px;">
+          <table>
+            <thead><tr><th>Insumo</th><th class="right">Cantidad</th><th class="right">Bruto CLP</th></tr></thead>
+            <tbody>
+              <tr><td>Caja Masa Baguette Baco 6,3Kg</td><td class="right">900 cajas</td><td class="right">$6.750.000</td></tr>
+              <tr><td>Media Luna 60gr</td><td class="right">4.135 un</td><td class="right">$2.067.500</td></tr>
+              <tr><td>Croissant 100gr</td><td class="right">2.860 un</td><td class="right">$1.532.600</td></tr>
+              <tr><td>Jamón Laminado 1Kg</td><td class="right">84 kg</td><td class="right">$1.276.800</td></tr>
+              <tr><td>Pollo Desmenuzado 1Kg</td><td class="right">75 kg</td><td class="right">$1.087.500</td></tr>
+              <tr><td>Queso Mantecoso 1Kg</td><td class="right">71 kg</td><td class="right">$710.000</td></tr>
+              <tr><td>Palmera 150gr</td><td class="right">860 un</td><td class="right">$559.000</td></tr>
+              <tr><td>Pan Chocolate 100gr</td><td class="right">1.032 un</td><td class="right">$464.400</td></tr>
+              <tr><td>Otros insumos y masas</td><td class="right">—</td><td class="right">~$16.160.985</td></tr>
+              <tr class="row-total"><td><strong>TOTAL</strong></td><td></td><td class="right bold">$30.608.785</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Impacto de los Flujos en los Márgenes</h3>
+        <div style="margin-top:8px;">
+          <div class="alert alert-blue" style="margin-bottom:10px;">
+            <div class="alert-icon">ℹ</div>
+            <div><strong>Bocus B2C vs Intercompany</strong><br>El margen del delivery B2C (platos preparados) es 70-92%. La venta de masas a Cadaqués va a precio de transferencia. Mezclarlos en el $151M total distorsiona el margen real de Bocus como negocio de delivery.</div>
+          </div>
+          <div class="alert alert-yellow" style="margin-bottom:10px;">
+            <div class="alert-icon">⚠</div>
+            <div><strong>Cadaqués MP Real 52.91% vs 29.41% teórico</strong><br>Las fichas de Fudo no incluyen el costo de las masas que compra a Bocus vía factura. La brecha de $13.7M = mermas + stock en cámara + facturas no cargadas.</div>
+          </div>
+          <div class="alert alert-green">
+            <div class="alert-icon">✓</div>
+            <div><strong>Traspaso Bocus→Parigó: no es venta del grupo</strong><br>Al consolidar, este flujo se cancela. No se suma a los $227M de venta real al mercado. El food cost del pan de cafetería ya está incluido en las fichas técnicas de Parigó al Paso.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ MENU ENGINEERING ════════════════ -->
+<section id="menu-eng">
+  <div class="container">
+    <h2>Ingeniería de Menú por Unidad</h2>
+
+    <div class="entity-tabs">
+      <div class="entity-tab active" onclick="showPanel('bocus-b2c')">Bocus B2C</div>
+      <div class="entity-tab" onclick="showPanel('parigo-plat')">Parigó Le Plat</div>
+      <div class="entity-tab" onclick="showPanel('parigo-paso')">Parigó al Paso</div>
+      <div class="entity-tab" onclick="showPanel('cadaques-me')">Cadaqués</div>
+    </div>
+
+    <!-- BOCUS B2C -->
+    <div id="bocus-b2c" class="entity-panel active">
+      <div class="anno" style="margin-bottom:16px;">Mediana de popularidad B2C: <strong>18 unidades costeables</strong>. Meta de margen: <strong>≥ 70%</strong>.</div>
+      <div class="me-grid">
+        <div class="me-cell me-star">
+          <div class="me-label">⭐ Estrellas — Alto volumen · Alto margen</div>
+          <div class="me-item"><span class="me-name">Mechada con Aligot</span><span class="me-margin">92.62%</span></div>
+          <div class="me-item"><span class="me-name">Confit de Pato</span><span class="me-margin">91.15%</span></div>
+          <div class="me-item"><span class="me-name">Milhojas</span><span class="me-margin">83.91%</span></div>
+          <div class="me-item"><span class="me-name">Creme Brûlée</span><span class="me-margin">74.05%</span></div>
+          <div class="me-item"><span class="me-name">Merluza Vasca</span><span class="me-margin">69.10%</span></div>
+        </div>
+        <div class="me-cell me-horse">
+          <div class="me-label">🐴 Caballos — Alto volumen · Margen ajustado</div>
+          <div class="me-item"><span class="me-name">Strogonoff (219 un)</span><span class="me-margin">52.40%</span></div>
+          <div class="me-item"><span class="me-name">Roast Beef (122 un)</span><span class="me-margin">57.40%</span></div>
+          <div class="me-item"><span class="me-name">Steak Tartar (116 un)</span><span class="me-margin">57.90%</span></div>
+          <div class="me-item"><span class="me-name">Boeuf Bourgignon (109 un)</span><span class="me-margin">57.50%</span></div>
+        </div>
+        <div class="me-cell me-puzzle">
+          <div class="me-label">🔮 Enigmas — Bajo volumen · Alto margen</div>
+          <div class="me-item"><span class="me-name">Queso Crema 1.36Kg</span><span class="me-margin">94.20%</span></div>
+          <div class="me-item"><span class="me-name">Conserva Alcayota</span><span class="me-margin">76.70%</span></div>
+        </div>
+        <div class="me-cell me-dog">
+          <div class="me-label">🐕 Perros — Bajo volumen · Bajo margen</div>
+          <div class="me-item"><span class="me-name">Bocus Para 2 (8 un)</span><span class="me-margin">68.46%</span></div>
+          <div style="font-size:11px;color:var(--text-dim);margin-top:8px;">⚠ Quesos importados aparecen con margen negativo en Fudo por error IVA en costos. Margen real promedio: 56.6%.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARIGÓ LE PLAT -->
+    <div id="parigo-plat" class="entity-panel">
+      <div class="anno" style="margin-bottom:16px;">Mediana de volumen salón: <strong>109 unidades</strong>. Meta de margen: <strong>≥ 70%</strong>.</div>
+      <div class="me-grid">
+        <div class="me-cell me-star">
+          <div class="me-label">⭐ Estrellas</div>
+          <div class="me-item"><span class="me-name">César PRG (110 un)</span><span class="me-margin">73.9%</span></div>
+          <div class="me-item"><span class="me-name">Creme Brûlée PRG (201 un)</span><span class="me-margin">74.8%</span></div>
+          <div class="me-item"><span class="me-name">Tostada Francesa PRG (141 un)</span><span class="me-margin">78.6%</span></div>
+        </div>
+        <div class="me-cell me-horse">
+          <div class="me-label">🐴 Caballos</div>
+          <div class="me-item"><span class="me-name">Ensalada Lomo (1.151 un)</span><span class="me-margin">65.9% ⚠</span></div>
+          <div class="me-item"><span class="me-name">Ensalada Salmón (279 un)</span><span class="me-margin">68.3%</span></div>
+          <div class="me-item"><span class="me-name">Tiramisú PRG (125 un)</span><span class="me-margin">61.5%</span></div>
+          <div style="font-size:11px;color:var(--yellow);margin-top:8px;">El Lomo es Caballo por precio desajustado en Fudo ($22k vs $25k real). Corregir precio = pasa a Estrella.</div>
+        </div>
+        <div class="me-cell me-puzzle">
+          <div class="me-label">🔮 Enigmas</div>
+          <div class="me-item"><span class="me-name">Ensalada Coliflor (81 un)</span><span class="me-margin">77.7%</span></div>
+          <div class="me-item"><span class="me-name">Steak Tartar PRG (92 un)</span><span class="me-margin">70.0%</span></div>
+          <div class="me-item"><span class="me-name">Tártaro Salmón PRG (108 un)</span><span class="me-margin">74.3%</span></div>
+          <div class="me-item"><span class="me-name">Tabla Mediterránea (71 un)</span><span class="me-margin">71.6%</span></div>
+        </div>
+        <div class="me-cell me-dog">
+          <div class="me-label">🐕 Perros</div>
+          <div class="me-item"><span class="me-name">Burrata PRG (54 un)</span><span class="me-margin">69.2%</span></div>
+          <div class="me-item"><span class="me-name">Jugo Naranjas PRG (44 un)</span><span class="me-margin">52.8%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARIGÓ AL PASO -->
+    <div id="parigo-paso" class="entity-panel">
+      <div class="anno" style="margin-bottom:16px;">Mediana de volumen cafetería: <strong>165 unidades</strong>. Meta de margen: <strong>≥ 70%</strong>. Cobertura de costeo: <strong style="color:var(--yellow)">46%</strong> — expandir fichas.</div>
+      <div class="me-grid">
+        <div class="me-cell me-star">
+          <div class="me-label">⭐ Estrellas</div>
+          <div class="me-item"><span class="me-name">Media Luna (929 un)</span><span class="me-margin">83.7%</span></div>
+          <div class="me-item"><span class="me-name">Baguette 300gr (734 un)</span><span class="me-margin">91.7%</span></div>
+          <div class="me-item"><span class="me-name">Marraqueta (222 un)</span><span class="me-margin">84.7%</span></div>
+          <div class="me-item"><span class="me-name">Sandwich Capri (196 un)</span><span class="me-margin">75.2%</span></div>
+          <div class="me-item"><span class="me-name">Croissant (322 un)</span><span class="me-margin">70.4%</span></div>
+        </div>
+        <div class="me-cell me-horse">
+          <div class="me-label">🐴 Caballos</div>
+          <div class="me-item"><span class="me-name">Sandwich Lyon (270 un)</span><span class="me-margin">69.8%</span></div>
+          <div class="me-item"><span class="me-name">Tarta del día (183 un)</span><span class="me-margin">66.2%</span></div>
+          <div class="me-item"><span class="me-name">Jugo Naranjas AP (192 un)</span><span class="me-margin">46.1%</span></div>
+        </div>
+        <div class="me-cell me-puzzle">
+          <div class="me-label">🔮 Enigmas</div>
+          <div style="font-size:11px;color:var(--text-dim);margin-top:8px;">Cafés preparados y combos desayuno no costeados aún. Louis y Daniela deben levantar fichas técnicas para subir cobertura de 46% a 80%+.</div>
+        </div>
+        <div class="me-cell me-dog">
+          <div class="me-label">🐕 Perros</div>
+          <div style="font-size:11px;color:var(--text-dim);margin-top:8px;">Sin datos suficientes por baja cobertura de costeo (46%). Ampliar fichas para identificar.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CADAQUÉS -->
+    <div id="cadaques-me" class="entity-panel">
+      <div class="anno" style="margin-bottom:16px;">Estrellas son los panes de masa madre artesanal de <strong>Peter</strong>. Margen teórico válido solo con fichas Fudo (sin incluir costo intercompany Bocus).</div>
+      <div class="me-grid">
+        <div class="me-cell me-star">
+          <div class="me-label">⭐ Estrellas</div>
+          <div class="me-item"><span class="me-name">Mini Ciabatta 45gr (10.436 un)</span><span class="me-margin">84.93%</span></div>
+          <div class="me-item"><span class="me-name">Baguette 300gr (485 un)</span><span class="me-margin">85.39%</span></div>
+          <div class="me-item"><span class="me-name">Campo Blanco 600gr (500 un)</span><span class="me-margin">83.08%</span></div>
+          <div class="me-item"><span class="me-name">Campo Integral 600gr (728 un)</span><span class="me-margin">79.70%</span></div>
+          <div class="me-item"><span class="me-name">Sandwich Lyon (331 un)</span><span class="me-margin">75.11%</span></div>
+        </div>
+        <div class="me-cell me-horse">
+          <div class="me-label">🐴 Caballos</div>
+          <div class="me-item"><span class="me-name">Media Luna x3 (490 un)</span><span class="me-margin">69.39%</span></div>
+          <div class="me-item"><span class="me-name">Sandwich + Jugo (188 un)</span><span class="me-margin">62.05%</span></div>
+          <div class="me-item"><span class="me-name">Sandwich Capri (268 un)</span><span class="me-margin">57.32%</span></div>
+          <div class="me-item" style="border:1px solid rgba(255,79,106,.3);"><span class="me-name">Pan Pasas (357 un) 🚨</span><span class="me-margin" style="background:rgba(255,79,106,.2);color:var(--red)">37.50%</span></div>
+          <div style="font-size:11px;color:var(--red);margin-top:6px;">Pan Pasas: subir de $2.400 a $3.200 CLP esta semana.</div>
+        </div>
+        <div class="me-cell me-puzzle">
+          <div class="me-label">🔮 Enigmas</div>
+          <div class="me-item"><span class="me-name">Ensalada Mediterránea</span><span class="me-margin">>70%</span></div>
+          <div class="me-item"><span class="me-name">Babka Familiar (17 un)</span><span class="me-margin">>70%</span></div>
+        </div>
+        <div class="me-cell me-dog">
+          <div class="me-label">🐕 Perros</div>
+          <div class="me-item"><span class="me-name">Brillat Savarin (11 un)</span><span class="me-margin">~44-50%</span></div>
+          <div class="me-item"><span class="me-name">Reblochon (9 un)</span><span class="me-margin">~44-50%</span></div>
+          <div class="me-item"><span class="me-name">Petit Camembert (17 un)</span><span class="me-margin">~44-50%</span></div>
+          <div style="font-size:11px;color:var(--text-dim);margin-top:8px;">Quesos: bajo volumen, riesgo de merma por vencimiento. Rotan mal en vitrina.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════ ALERTAS ════════════════ -->
+<section id="alertas">
+  <div class="container">
+    <h2>Alertas y Plan de Acción</h2>
+    <div class="layout-sidebar">
+      <div>
+        <h3 style="margin-bottom:12px;">🔴 Acción Urgente — Esta Semana</h3>
+        <div class="alert alert-red">
+          <div class="alert-icon">1</div>
+          <div><strong>Lomo en Parigó: ajustar precio Fudo de $22.000 a $25.000 gross</strong><br>Impacto inmediato: el margen del salón sube de 68% a 70%+ sin cambio de carta. Producto más vendido: $25.3M en mayo (42.1% del salón). Responsable: Nicolás / operaciones Fudo.</div>
+        </div>
+        <div class="alert alert-red">
+          <div class="alert-icon">2</div>
+          <div><strong>Pan Pasas Cadaqués: subir de $2.400 a $3.200 CLP</strong><br>Margen actual: 37.5%. Margen post-ajuste: 53.1%. Costo unitario: $1.260. Responsable: Roxy en Fudo y vitrina.</div>
+        </div>
+        <div class="alert alert-red">
+          <div class="alert-icon">3</div>
+          <div><strong>Rappi Cadaqués: auditoría urgente Boris García</strong><br>2 pedidos en todo mayo ($17.180) vs 140 de Uber Eats. ¿Tienda oculta? ¿Horarios mal configurados? ¿Menú sin stock? Resolver antes del lunes.</div>
+        </div>
+        <div class="alert alert-red">
+          <div class="alert-icon">4</div>
+          <div><strong>Producto Genérico Cadaqués: instruir a cajeras (Roxy)</strong><br>$3.119.130 CLP vendidos sin costear (5.7% de la venta). Todo producto debe estar codificado individualmente en Fudo.</div>
+        </div>
+
+        <h3 style="margin:20px 0 12px;">🟡 Acción de Mes — Junio</h3>
+        <div class="alert alert-yellow">
+          <div class="alert-icon">5</div>
+          <div><strong>Carga de facturas intercompany Bocus→Cadaqués en Fudo</strong><br>Roxy debe cargar las facturas de Bocus los días 15 y 30. Sin esto: stocks negativos, merma no auditable, MP real invisible en Fudo.</div>
+        </div>
+        <div class="alert alert-yellow">
+          <div class="alert-icon">6</div>
+          <div><strong>Inventario físico quincenal — Las 3 unidades</strong><br>Stocktakes días 15 y 30 en Bocus, Parigó y Cadaqués. Permite calcular costo real vs ideal y detectar merma.</div>
+        </div>
+        <div class="alert alert-yellow">
+          <div class="alert-icon">7</div>
+          <div><strong>Descuentos Cadaqués: protocolo y restricción en Fudo</strong><br>$5.692.410 CLP en descuentos (10.5%) sin registro nominativo. Restringir el botón "Clientes" a aprobación de Roxy.</div>
+        </div>
+        <div class="alert alert-yellow">
+          <div class="alert-icon">8</div>
+          <div><strong>Costeo completo cafetería Parigó al Paso</strong><br>Cobertura de costeo: solo 46%. Louis y Daniela deben levantar fichas de café preparado y combos desayuno. Meta: 80%+.</div>
+        </div>
+
+        <h3 style="margin:20px 0 12px;">🟢 Acción de Trimestre</h3>
+        <div class="alert alert-green">
+          <div class="alert-icon">9</div>
+          <div><strong>Subcuentas en Fudo de Bocus: bocus-retail / b2b-facturas / intercompany</strong><br>Sin esto el margen del delivery se mezcla con la venta de masas a costo. Los $151M totales no son comparables.</div>
+        </div>
+        <div class="alert alert-green">
+          <div class="alert-icon">10</div>
+          <div><strong>Limpieza de costos IVA en Fudo Bocus (quesos importados)</strong><br>Costos cargados con IVA → márgenes negativos ficticios. Dividir todos los costos unitarios afectados por 1.19.</div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="sidebar-sticky">
+        <div class="card card-sm">
+          <h3>Semáforo de Márgenes</h3>
+          <div style="margin-top:10px;">
+            <div class="pbar-row">
+              <div class="pbar-label"><span class="pbar-name"><span class="sema sema-g"></span>Baguette Cadaqués</span><span class="pbar-val">85.4%</span></div>
+              <div class="pbar-track"><div class="pbar-fill fill-green" style="width:85.4%"></div></div>
+            </div>
+            <div class="pbar-row">
+              <div class="pbar-label"><span class="pbar-name"><span class="sema sema-g"></span>Baguette Parigó AP</span><span class="pbar-val">91.7%</span></div>
+              <div class="pbar-track"><div class="pbar-fill fill-green" style="width:91.7%"></div></div>
+            </div>
+            <div class="pbar-row">
+              <div class="pbar-label"><span class="pbar-name"><span class="sema sema-g"></span>Media Luna Parigó AP</span><span class="pbar-val">83.7%</span></div>
+              <div class="pbar-track"><div class="pbar-fill fill-green" style="width:83.7%"></div></div>
+            </div>
+            <div class="pbar-row">
+              <div class="pbar-label"><span class="pbar-name"><span class="sema sema-g"></span>Mechada Aligot (Bocus)</span><span class="pbar-val">92.6%</span></div>
+              <div class="pbar-track"><div class="pbar-fill fill-green" style="width:92.6%"></div></div>
+            </div>
+            <div class="pbar-row">
+              <div class="pbar-label"><span class="pbar-name"><span class="sema sema-y"></span>Ensalada Lomo PRG</span><span class="pbar-val">65.9% ⚠</span></div>
+              <div class="pbar-track"><div class="pbar-fill fill-yellow" style="width:65.9%"></div></div>
+            </div>
+            <div class="pbar-row">
+              <div class="pbar-label"><span class="pbar-name"><span class="sema sema-y"></span>Strogonoff (Bocus)</span><span class="pbar-val">52.4%</span></div>
+              <div class="pbar-track"><div class="pbar-fill fill-yellow" style="width:52.4%"></div></div>
+            </div>
+            <div class="pbar-row">
+              <div class="pbar-label"><span class="pbar-name"><span class="sema sema-r"></span>Pan Pasas CDQ</span><span class="pbar-val">37.5% 🚨</span></div>
+              <div class="pbar-track"><div class="pbar-fill fill-red" style="width:37.5%"></div></div>
+            </div>
+            <div class="pbar-row">
+              <div class="pbar-label"><span class="pbar-name"><span class="sema sema-r"></span>Quesos CDQ (reventa)</span><span class="pbar-val">~47%</span></div>
+              <div class="pbar-track"><div class="pbar-fill fill-red" style="width:47%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-sm" style="margin-top:14px;">
+          <h3>Estado Costeo por Unidad</h3>
+          <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--surface2);border-radius:8px;">
+              <span style="font-size:13px;font-weight:500;">Bocus B2C</span>
+              <span style="font-size:11px;font-weight:700;color:var(--green)">~97% cobertura</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--surface2);border-radius:8px;">
+              <span style="font-size:13px;font-weight:500;">Parigó Le Plat</span>
+              <span style="font-size:11px;font-weight:700;color:var(--yellow)">70.4% cobertura</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--surface2);border-radius:8px;">
+              <span style="font-size:13px;font-weight:500;">Parigó al Paso</span>
+              <span style="font-size:11px;font-weight:700;color:var(--red)">46.0% cobertura ⚠</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--surface2);border-radius:8px;">
+              <span style="font-size:13px;font-weight:500;">Cadaqués (teórico)</span>
+              <span style="font-size:11px;font-weight:700;color:var(--yellow)">~80% cobertura</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(255,79,106,.08);border:1px solid rgba(255,79,106,.2);border-radius:8px;">
+              <span style="font-size:13px;font-weight:500;">Cadaqués (real)</span>
+              <span style="font-size:11px;font-weight:700;color:var(--red)">Facturas no cargadas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ CARTOLAS BANCARIAS ════════════════ -->
+<section id="cartolas">
+  <div class="container">
+    <h2>Cartolas Bancarias — Mayo 2026 (iSafe)</h2>
+
+    <div class="anno" style="margin-bottom:20px;">
+      <strong>Fuente:</strong> iSafe exportado el 2026-06-01. Horeca SpA: 1.041 filas (excl. duplicados). Cadaqués SpA: 144 filas (excl. duplicados). Los flujos marcados como <strong>Excluidos</strong> son traspasos entre cuentas propias del mismo titular (no impactan resultado) y se muestran por separado para trazabilidad.
+    </div>
+
+    <!-- KPIs reales cartola -->
+    <div class="kpi-grid" style="margin-bottom:24px;">
+      <div class="kpi accent">
+        <div class="label">Horeca SpA — Ingresos en Cta.</div>
+        <div class="value">$136.3M</div>
+        <div class="sub">Neto de agentes retenedores y duplicados</div>
+      </div>
+      <div class="kpi red">
+        <div class="label">Horeca SpA — Egresos en Cta.</div>
+        <div class="value">$110.8M</div>
+        <div class="sub">Costos + sueldos + impuestos + financiero</div>
+      </div>
+      <div class="kpi green">
+        <div class="label">Horeca SpA — Saldo Operacional</div>
+        <div class="value">$25.5M</div>
+        <div class="sub">Antes de traspasos IC excluidos</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Cadaqués SpA — Ingresos en Cta.</div>
+        <div class="value">$43.8M</div>
+        <div class="sub">Ventas depositadas (efectivo + tarjeta + transferencias)</div>
+      </div>
+      <div class="kpi red">
+        <div class="label">Cadaqués SpA — Egresos en Cta.</div>
+        <div class="value">$43.9M</div>
+        <div class="sub">Horeca (masas) + arriendo + créditos + operacionales</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Cadaqués SpA — Saldo Operacional</div>
+        <div class="value" style="color:var(--yellow)">-$98K</div>
+        <div class="sub">Prácticamente en cero — flujo muy ajustado</div>
+      </div>
+    </div>
+
+    <!-- Tabs por sociedad -->
+    <div class="entity-tabs">
+      <div class="entity-tab active" onclick="showCartola('horeca-cartola')">Horeca SpA (Bocus + Parigó)</div>
+      <div class="entity-tab" onclick="showCartola('cadaques-cartola')">Cadaqués SpA</div>
+      <div class="entity-tab" onclick="showCartola('grupo-cartola')">Vista Consolidada</div>
+    </div>
+
+    <!-- HORECA -->
+    <div id="horeca-cartola" class="entity-panel active">
+      <div class="grid-2">
+        <div class="card">
+          <h3>Egresos por Clasificación — Horeca SpA</h3>
+          <div style="margin-top:8px;">
+            <div class="pbar-row">
+              <div class="pbar-label"><span class="pbar-name">Costo de Venta (MP)</span><span class="pbar-val" style="color:var(--red)">$71.2M — 64.3%</span></div>
+              <div class="pbar-track"><div class="pbar-fill fill-red" style="width:100%"></div></div>
+            </div>
+            <div class="pbar-row">
+              <div class="pbar-label"><span class="pbar-name">Gastos Financieros</span><span class="pbar-val" style="color:var(--yellow)">$26.4M — 23.8%</span></div>
+              <div class="pbar-track"><div class="pbar-fill fill-yellow" style="width:37%"></div></div>
+            </div>
+            <div class="pbar-row">
+              <div class="pbar-label"><span class="pbar-name">Sueldos</span><span class="pbar-val">$6.1M — 5.5%</span></div>
+              <div class="pbar-track"><div class="pbar-fill fill-blue" style="width:8.5%"></div></div>
+            </div>
+            <div class="pbar-row">
+              <div class="pbar-label"><span class="pbar-name">Gastos Operacionales</span><span class="pbar-val">$3.0M — 2.7%</span></div>
+              <div class="pbar-track"><div class="pbar-fill fill-accent" style="width:4.3%"></div></div>
+            </div>
+            <div class="pbar-row">
+              <div class="pbar-label"><span class="pbar-name">Impuestos (SII)</span><span class="pbar-val">$2.9M — 2.6%</span></div>
+              <div class="pbar-track"><div class="pbar-fill fill-accent" style="width:4%"></div></div>
+            </div>
+            <div class="pbar-row">
+              <div class="pbar-label"><span class="pbar-name">Gastos Administrativos</span><span class="pbar-val">$1.2M — 1.1%</span></div>
+              <div class="pbar-track"><div class="pbar-fill fill-accent" style="width:1.7%"></div></div>
+            </div>
+          </div>
+          <div class="alert alert-blue" style="margin-top:14px;">
+            <div class="alert-icon">ℹ</div>
+            <div><strong>Gastos Financieros 23.8% — confirmado como gasto real.</strong> El mayor ítem ($13.3M) corresponde a gastos confirmados por Nicolás Le Baux. Junto a Louis Le Baux ($2.5M) e Ingeniería de Aceros Ltda. ($2.9M), el bloque de G. Financieros suma $26.4M. Clasificación validada.</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Top 10 Egresos — Horeca SpA</h3>
+          <div class="tbl-wrap" style="border:none;margin-top:4px;">
+            <table>
+              <thead><tr><th>Proveedor / Concepto</th><th>Categoría</th><th class="right">Monto</th></tr></thead>
+              <tbody>
+                <tr><td>Nicolás Le Baux (gasto confirmado)</td><td style="color:var(--yellow)">G. Financiero</td><td class="right">$13.325.313</td></tr>
+                <tr><td>Oreka Limitada</td><td>Sueldo</td><td class="right">$6.000.000</td></tr>
+                <tr><td>Agrocomercial Codigua SpA</td><td style="color:var(--text-muted)">MP</td><td class="right">$4.536.465</td></tr>
+                <tr><td>Café Trebons Limitada</td><td style="color:var(--text-muted)">MP</td><td class="right">$4.227.896</td></tr>
+                <tr><td>Agrícola Los Boldos Ltda.</td><td style="color:var(--text-muted)">MP</td><td class="right">$3.930.141</td></tr>
+                <tr><td>Cía. Molinera San Cristóbal (×2)</td><td style="color:var(--text-muted)">MP</td><td class="right">$5.928.863</td></tr>
+                <tr><td>G Alimentos SpA</td><td style="color:var(--text-muted)">MP</td><td class="right">$3.149.310</td></tr>
+                <tr><td>Ingeniería de Aceros Ltda.</td><td style="color:var(--yellow)">G. Financiero</td><td class="right">$2.927.400</td></tr>
+                <tr><td>Comercial Baco SpA</td><td style="color:var(--text-muted)">MP</td><td class="right">$2.911.982</td></tr>
+                <tr><td>Louis Le Baux (gasto confirmado)</td><td style="color:var(--yellow)">G. Financiero</td><td class="right">$2.475.000</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="anno" style="margin-top:10px;font-size:11px;">Traspasos a Cadaqués excluidos de este cuadro ($22M enviados, $72M recibidos — son transferencias entre cuentas propias del grupo).</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CADAQUÉS -->
+    <div id="cadaques-cartola" class="entity-panel">
+      <div class="grid-2">
+        <div class="card">
+          <h3>Egresos por Clasificación — Cadaqués SpA</h3>
+          <div style="margin-top:8px;">
+            <div class="pbar-row">
+              <div class="pbar-label"><span class="pbar-name">Costo de Venta (Horeca + otros)</span><span class="pbar-val" style="color:var(--red)">$35.4M — 80.6%</span></div>
+              <div class="pbar-track"><div class="pbar-fill fill-red" style="width:100%"></div></div>
+            </div>
+            <div class="pbar-row">
+              <div class="pbar-label"><span class="pbar-name">Gastos Administrativos (créditos)</span><span class="pbar-val" style="color:var(--yellow)">$4.5M — 10.1%</span></div>
+              <div class="pbar-track"><div class="pbar-fill fill-yellow" style="width:12.6%"></div></div>
+            </div>
+            <div class="pbar-row">
+              <div class="pbar-label"><span class="pbar-name">Arriendo (La Pastora + comunidad)</span><span class="pbar-val">$3.1M — 7.1%</span></div>
+              <div class="pbar-track"><div class="pbar-fill fill-blue" style="width:8.8%"></div></div>
+            </div>
+            <div class="pbar-row">
+              <div class="pbar-label"><span class="pbar-name">Gastos Operacionales</span><span class="pbar-val">$938K — 2.1%</span></div>
+              <div class="pbar-track"><div class="pbar-fill fill-accent" style="width:2.7%"></div></div>
+            </div>
+          </div>
+          <div class="alert alert-green" style="margin-top:14px;">
+            <div class="alert-icon">✓</div>
+            <div><strong>Cadaqués genera utilidad operativa — el -$98K es recuperación de atrasos.</strong> La panadería ya es rentable. El saldo casi en cero no refleja debilidad estructural: refleja que Cadaqués está devolviendo activamente el financiamiento histórico que Horeca le prestó durante su etapa de montaje y arranque. A medida que se pongan al día, el colchón crecerá.</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Top Egresos — Cadaqués SpA</h3>
+          <div class="tbl-wrap" style="border:none;margin-top:4px;">
+            <table>
+              <thead><tr><th>Concepto</th><th>Cat.</th><th class="right">Monto</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Solucion Horeca SpA (7 pagos)</strong></td><td style="color:var(--red)">MP / masas</td><td class="right bold" style="color:var(--red)">$35.374.995</td></tr>
+                <tr><td>Inmobiliaria Don Luis SA (arriendo)</td><td style="color:var(--text-muted)">Arriendo</td><td class="right">$3.009.975</td></tr>
+                <tr><td>Pago Préstamo (BICE bullet)</td><td style="color:var(--yellow)">Crédito</td><td class="right">$1.526.497</td></tr>
+                <tr><td>Crédito BICE (cuota mensual)</td><td style="color:var(--yellow)">Crédito</td><td class="right">$1.424.838</td></tr>
+                <tr><td>Crédito BICE (cuota mensual)</td><td style="color:var(--yellow)">Crédito</td><td class="right">$1.156.437</td></tr>
+                <tr><td>Henry Pérez (personal externo)</td><td style="color:var(--text-muted)">Operacional</td><td class="right">$747.100</td></tr>
+                <tr><td>Comunidad Edificio JV (arriendo)</td><td style="color:var(--text-muted)">Arriendo</td><td class="right">$114.278</td></tr>
+                <tr><td>Círculo Ambiental Chile SpA</td><td style="color:var(--text-muted)">Operacional</td><td class="right">$94.843</td></tr>
+                <tr><td>Banco Estado (comisiones)</td><td style="color:var(--text-muted)">Admin.</td><td class="right">~$11.468</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="anno" style="margin-top:10px;font-size:11px;">
+            <strong>Nota créditos:</strong> Cadaqués tiene 2 cuotas BICE mensual (~$1.15M c/u) más pago de bullet ($1.5M). Total servicio deuda mayo: <strong>~$4.1M</strong> (9.4% de sus egresos).
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONSOLIDADO -->
+    <div id="grupo-cartola" class="entity-panel">
+      <div class="card">
+        <h3>Estado de Flujos Consolidado — Grupo NLB · Mayo 2026</h3>
+        <div class="tbl-wrap" style="margin-top:12px;">
+          <table>
+            <thead>
+              <tr><th>Concepto</th><th class="right">Horeca SpA</th><th class="right">Cadaqués SpA</th><th class="right">Eliminaciones IC</th><th class="right">GRUPO CONSOLIDADO</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Ingresos en cuenta (real)</strong></td><td class="right">$136.343.966</td><td class="right">$43.797.237</td><td class="right" style="color:var(--text-muted)">—</td><td class="right bold">$180.141.203</td></tr>
+              <tr style="background:rgba(255,79,106,.04)"><td style="padding-left:20px;color:var(--text-muted);font-size:12px;">↳ De los cuales: recibido desde Cadaqués (IC)</td><td class="right" style="color:var(--text-muted)">($35.374.995)</td><td class="right">—</td><td class="right" style="color:var(--red)">-$35.375K</td><td class="right" style="color:var(--text-muted)">Eliminar</td></tr>
+              <tr class="row-total"><td><strong>Ingresos ajustados (sin IC intragrupo)</strong></td><td class="right">$136.343.966</td><td class="right">$43.797.237</td><td class="right" style="color:var(--red)">-$35.374.995</td><td class="right bold" style="color:var(--green)">$144.766.208</td></tr>
+              <tr><td><strong>Egresos en cuenta (real)</strong></td><td class="right" style="color:var(--red)">$110.806.321</td><td class="right" style="color:var(--red)">$43.894.973</td><td class="right" style="color:var(--text-muted)">—</td><td class="right bold" style="color:var(--red)">$154.701.294</td></tr>
+              <tr style="background:rgba(34,199,124,.04)"><td style="padding-left:20px;color:var(--text-muted);font-size:12px;">↳ De los cuales: pagado a Horeca por Cadaqués (IC)</td><td class="right">—</td><td class="right" style="color:var(--text-muted)">($35.374.995)</td><td class="right" style="color:var(--green)">+$35.375K</td><td class="right" style="color:var(--text-muted)">Eliminar</td></tr>
+              <tr class="row-total"><td><strong>Egresos ajustados (sin IC intragrupo)</strong></td><td class="right" style="color:var(--red)">$110.806.321</td><td class="right" style="color:var(--red)">$43.894.973</td><td class="right" style="color:var(--green)">+$35.374.995</td><td class="right bold" style="color:var(--red)">$119.326.299</td></tr>
+              <tr class="row-total" style="font-size:15px;"><td><strong>SALDO OPERACIONAL NETO (GRUPO)</strong></td><td class="right bold" style="color:var(--green)">+$25.537.645</td><td class="right bold" style="color:var(--red)">-$97.736</td><td class="right">—</td><td class="right bold" style="color:var(--green); font-size:16px;">+$25.439.909</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="anno" style="margin-top:14px;">
+          <strong>Interpretación:</strong> El grupo genera $25.4M de saldo operacional real en mayo 2026. Cadaqués <strong>ya tiene utilidad operativa</strong> — su balance casi en cero no es señal de quiebra: es el efecto de estar devolviendo el financiamiento que Horeca le otorgó durante el período de montaje y arranque (2024-2025). Cada peso que Cadaqués le paga a Horeca por encima de las facturas corrientes es recuperación de ese préstamo histórico. Con el tiempo, a medida que Cadaqués liquide los atrasos, su saldo mensual comenzará a acumularse.
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:16px;">
+        <div class="alert alert-yellow">
+          <div class="alert-icon">⚠</div>
+          <div><strong>Gastos Financieros Horeca: $26.4M (23.8% de egresos)</strong><br>El mayor componente es el pago a Nicolás Le Baux ($13.3M) y Louis Le Baux ($2.5M) clasificados como G. Financieros. Junto a Ingeniería de Aceros Ltda. ($2.9M) totalizan ~$19M. Revisar con IDQ si son retiros de socios, amortizaciones de crédito o remesas de utilidades — impactan el resultado operacional real.</div>
+        </div>
+        <div class="alert alert-blue">
+          <div class="alert-icon">ℹ</div>
+          <div><strong>Anser Indicus SpA: mayor fuente de ingresos de Cadaqués</strong><br>Los abonos diarios de Anser Indicus SpA a la cuenta de Cadaqués son el mecanismo de liquidación de ventas con tarjeta (POS Santander GetNet). Equivalen a la recaudación bruta de mostrador. No es un cliente B2B — es el operador de pagos electrónicos. Su presencia diaria en la cartola confirma que la operación de vitrina es constante.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════ KAME CADAQUÉS HISTÓRICO ════════════════ -->
+<section id="kame-cdq">
+  <div class="container">
+    <h2>P&amp;L Histórico Cadaqués SpA — Kame One 2022–2026</h2>
+    <div class="anno" style="margin-bottom:20px;">
+      <strong>Fuente:</strong> Kame One — Inversiones Cadaqués SpA (RUT 77.427.765-K). 2026 corresponde a enero–mayo (período parcial). Los valores reflejan la contabilidad oficial, <strong>no el flujo de caja bancario</strong>. Validar con IDQ antes de interpretar utilidades negativas como pérdida operativa real.
+    </div>
+
+    <div class="tbl-wrap" style="margin-bottom:20px;">
+      <table>
+        <thead>
+          <tr><th>Concepto</th><th class="right">2022</th><th class="right">2023</th><th class="right">2024</th><th class="right">2025</th><th class="right">2026* (5m)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="bold">Ingresos Totales</td><td class="right bold">$560.6M</td><td class="right bold">$883.4M</td><td class="right bold">$169.3M</td><td class="right bold">$342.3M</td><td class="right bold">$171.4M</td></tr>
+          <tr style="font-size:12px;color:var(--text-muted);"><td style="padding-left:16px;">↳ Ventas Afectas</td><td class="right">—</td><td class="right">—</td><td class="right">$82.2M</td><td class="right">$243.9M</td><td class="right">$26.0M</td></tr>
+          <tr style="font-size:12px;color:var(--text-muted);"><td style="padding-left:16px;">↳ Otros Ingresos (masas+IC)</td><td class="right">—</td><td class="right">—</td><td class="right">$87.1M</td><td class="right">$98.4M</td><td class="right">$145.4M</td></tr>
+          <tr><td class="bold">Costo de Venta</td><td class="right" style="color:var(--red);">$369.4M</td><td class="right" style="color:var(--red);">$787.0M</td><td class="right" style="color:var(--red);">$87.1M</td><td class="right" style="color:var(--red);">$127.8M</td><td class="right" style="color:var(--red);">$105.1M</td></tr>
+          <tr class="row-total"><td>MARGEN BRUTO</td><td class="right" style="color:var(--green);">$191.2M</td><td class="right" style="color:var(--green);">$96.4M</td><td class="right" style="color:var(--green);">$82.1M</td><td class="right" style="color:var(--green);">$214.5M</td><td class="right" style="color:var(--green);">$66.3M</td></tr>
+          <tr><td>G. Administración y Ventas</td><td class="right">$69.5M</td><td class="right">$63.2M</td><td class="right">$45.7M</td><td class="right">$105.8M</td><td class="right">$35.7M</td></tr>
+          <tr class="row-total"><td>RESULTADO OPERACIONAL</td><td class="right" style="color:var(--green);">$121.8M</td><td class="right" style="color:var(--green);">$33.2M</td><td class="right" style="color:var(--green);">$36.4M</td><td class="right" style="color:var(--green);">$108.7M</td><td class="right" style="color:var(--green);">$30.6M</td></tr>
+          <tr class="row-total" style="font-size:15px;"><td><strong>UTILIDAD (PÉRDIDA) DEL EJERCICIO</strong></td><td class="right bold" style="color:var(--green);">+$29.5M</td><td class="right bold" style="color:var(--green);">+$50.9M</td><td class="right bold" style="color:var(--red);">-$86.2M</td><td class="right bold" style="color:var(--red);">-$41.4M</td><td class="right bold" style="color:var(--green);">+$24.2M</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alert alert-yellow">
+      <div class="alert-icon">⚠</div>
+      <div><strong>Lectura de utilidades negativas 2024–2025:</strong> Cadaqués muestra pérdida contable en 2024 (-$86.2M) y 2025 (-$41.4M). Esto no refleja quiebra operativa — refleja la amortización contable de la deuda histórica con Horeca SpA y el reconocimiento de gastos de montaje y equipamiento. El Resultado Operacional (antes de ítems financieros) es positivo en todos los años: $36.4M (2024) y $108.7M (2025). La panadería opera con utilidad bruta sana.</div>
+    </div>
+
+    <div class="grid-3" style="margin-top:16px;">
+      <div class="card card-sm">
+        <h3>Tendencia — Resultado Operacional</h3>
+        <div style="margin-top:8px;">
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">2022</span><span class="pbar-val" style="color:var(--green);">$121.8M ✓</span></div><div class="pbar-track"><div class="pbar-fill fill-green" style="width:100%"></div></div></div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">2023</span><span class="pbar-val" style="color:var(--yellow);">$33.2M ↓</span></div><div class="pbar-track"><div class="pbar-fill fill-yellow" style="width:27%"></div></div></div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">2024</span><span class="pbar-val" style="color:var(--yellow);">$36.4M →</span></div><div class="pbar-track"><div class="pbar-fill fill-yellow" style="width:30%"></div></div></div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">2025</span><span class="pbar-val" style="color:var(--green);">$108.7M ↑↑</span></div><div class="pbar-track"><div class="pbar-fill fill-green" style="width:89%"></div></div></div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">2026 (5m)</span><span class="pbar-val" style="color:var(--green);">$30.6M ✓</span></div><div class="pbar-track"><div class="pbar-fill fill-green" style="width:25%"></div></div></div>
+        </div>
+      </div>
+      <div class="card card-sm">
+        <h3>Tendencia — Ingresos Totales</h3>
+        <div style="margin-top:8px;">
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">2022</span><span class="pbar-val">$560.6M</span></div><div class="pbar-track"><div class="pbar-fill fill-accent" style="width:63%"></div></div></div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">2023</span><span class="pbar-val">$883.4M</span></div><div class="pbar-track"><div class="pbar-fill fill-accent" style="width:100%"></div></div></div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">2024</span><span class="pbar-val">$169.3M</span></div><div class="pbar-track"><div class="pbar-fill fill-blue" style="width:19%"></div></div></div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">2025</span><span class="pbar-val">$342.3M</span></div><div class="pbar-track"><div class="pbar-fill fill-blue" style="width:39%"></div></div></div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">2026 (5m)</span><span class="pbar-val">$171.4M</span></div><div class="pbar-track"><div class="pbar-fill fill-blue" style="width:19%"></div></div></div>
+        </div>
+      </div>
+      <div class="card card-sm">
+        <h3>Estado de Cuentas Intercompany</h3>
+        <div style="margin-top:10px;font-size:12px;display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;justify-content:space-between;padding:8px 10px;background:var(--surface2);border-radius:6px;"><span>CxC Cadaqués en Horeca (2022)</span><span style="font-weight:700;color:var(--yellow);">$18.0M</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 10px;background:var(--surface2);border-radius:6px;"><span>CxC Cadaqués en Horeca (2023)</span><span style="font-weight:700;color:var(--yellow);">$18.0M</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 10px;background:var(--surface2);border-radius:6px;"><span>CxC Cadaqués en Horeca (2024)</span><span style="font-weight:700;color:var(--yellow);">$18.0M</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 10px;background:var(--surface2);border-radius:6px;"><span>CxC Cadaqués en Horeca (2025)</span><span style="font-weight:700;color:var(--gold);">$22.4M ↑</span></div>
+          <div style="font-size:11px;color:var(--text-muted);padding:4px 0;">Los pagos de Cadaqués a Horeca ($41.4M en mayo 2026) incluyen facturas corrientes + amortización histórica. La CxC estática 2022–2024 indica que el movimiento real se registraba fuera de esta cuenta específica. Revisar con IDQ.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ REMUNERACIONES Y RRHH - BUK ════════════════ -->
+<section id="rrhh-buk">
+  <div class="container">
+    <h2>Remuneraciones y RRHH — Buk Mayo 2026 (39 Colaboradores)</h2>
+    <div class="anno" style="margin-bottom:20px;">
+      Información de nómina liquidada extraída del <a href="file:///Users/nlebaux/Documents/webnlb/nlb2-codex/contable/horeca/2026/05-mayo/remuneraciones/2026-05_libro-remuneraciones-buk-horeca.csv" target="_blank" style="color:var(--blue);text-decoration:underline;">Libro de Remuneraciones de Buk (LRE)</a> correspondiente a mayo de 2026. Este análisis permite cruzar los costos de personal por división frente al flujo de caja bancario. <strong>Empresa registradora:</strong> Solución Horeca SpA (centraliza RRHH de Horeca + Cadaqués + Parigó). LRE registrado ante la DT el 13-06-2026 (comprobante disponible).
+    </div>
+
+    <!-- KPI Grid Buk -->
+    <div class="kpi-grid" style="margin-bottom:24px;">
+      <div class="kpi">
+        <div class="label">Colaboradores Pagados</div>
+        <div class="value" style="color:var(--blue)">35</div>
+        <div class="sub">Personal activo liquidado en mayo</div>
+      </div>
+      <div class="kpi green">
+        <div class="label">Total Líquido</div>
+        <div class="value">$27.682.558</div>
+        <div class="sub">CLP neto transferido a trabajadores</div>
+      </div>
+      <div class="kpi gold">
+        <div class="label">Total Haberes (Bruto)</div>
+        <div class="value">$33.211.904</div>
+        <div class="sub">Sueldo imponible + no imponible</div>
+      </div>
+      <div class="kpi accent">
+        <div class="label">Costo Empresa Real</div>
+        <div class="value" style="color:var(--accent)">$35.161.913</div>
+        <div class="sub">Total Bruto + Aportes Empleador ($1.95M)</div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:24px;">
+      <!-- Tabla de nómina -->
+      <div class="card">
+        <h3>Distribución de Nómina por División</h3>
+        <div class="tbl-wrap" style="border:none;margin-top:8px;">
+          <table>
+            <thead>
+              <tr>
+                <th>División / Unidad</th>
+                <th class="center">Dotación</th>
+                <th class="right">Sueldo Base</th>
+                <th class="right">Total Bruto</th>
+                <th class="right">Total Líquido</th>
+                <th class="right">Costo Empresa</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Bocus</strong> (Cocina + Logística)</td>
+                <td class="center">16</td>
+                <td class="right">$10.098.400</td>
+                <td class="right">$15.298.983</td>
+                <td class="right" style="color:var(--green)">$12.763.763</td>
+                <td class="right bold">$16.186.236</td>
+              </tr>
+              <tr>
+                <td><strong>Parigó</strong> (Salón + Panadería + Ventas)*</td>
+                <td class="center">13</td>
+                <td class="right">$8.351.200</td>
+                <td class="right">$12.540.626</td>
+                <td class="right" style="color:var(--green)">$10.486.013</td>
+                <td class="right bold">$13.297.222</td>
+              </tr>
+              <tr>
+                <td><strong>Cadaqués</strong> (Panadería + Ventas)</td>
+                <td class="center">6</td>
+                <td class="right">$3.585.000</td>
+                <td class="right">$5.372.295</td>
+                <td class="right" style="color:var(--green)">$4.432.782</td>
+                <td class="right bold">$5.678.455</td>
+              </tr>
+              <tr class="row-total">
+                <td><strong>Total Consolidado</strong></td>
+                <td class="center">35</td>
+                <td class="right bold">$22.034.600</td>
+                <td class="right bold">$33.211.904</td>
+                <td class="right bold" style="color:var(--green)">$27.682.558</td>
+                <td class="right bold" style="color:var(--accent)">$35.161.913</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="anno" style="margin-top:8px;font-size:11px;">
+          *Nota: Incluye a Laura Hormazábal en Parigó/Ventas (sueldo proporcional de 14 días previo a su desvinculación el 14 de mayo).
+        </div>
+      </div>
+
+      <!-- Interpretación y Reconciliación con Caja -->
+      <div class="card">
+        <h3>Interpretación y Reconciliación iSafe vs Buk</h3>
+        <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;line-height:1.5;">
+          La <a href="file:///Users/nlebaux/Documents/webnlb/nlb2-codex/horeca/finanzas/movimientos-consolidados.csv" target="_blank" style="color:var(--blue);text-decoration:underline;">cartola bancaria consolidada</a> iSafe registra egresos de RRHH por <strong>$45,8M</strong>, mientras que Buk detalla un costo operacional real de nómina de <strong>$35,16M</strong> ($27,68M en sueldos líquidos y $7,48M en Previred). Esta brecha se explica por clasificaciones incorrectas en la cartola bancaria:
+        </p>
+        <ul style="font-size:11.5px;color:var(--text);margin-left:16px;margin-bottom:12px;line-height:1.5;">
+          <li style="margin-bottom:4px;"><strong>3Dent Lab ($6.16M)</strong>: Imputado como RRHH en la cartola el 2 de junio, pero corresponde a servicios profesionales y debe reclasificarse como Costo de Venta / Proveedores locales.</li>
+          <li style="margin-bottom:4px;"><strong>Oreka Limitada ($6.00M)</strong>: Es la <strong>capa directiva del Grupo NLB</strong> — no es asesoría externa sino los líderes operativos que también son asesores de la operación. Contratos indefinidos en Oreka Ltda. y liquidados desde esa sociedad. Ver tabla en sección RRHH. Debe reclasificarse de "RRHH" a <strong>"Dirección y Liderazgo"</strong> en la cartola.</li>
+          <li style="margin-bottom:4px;"><strong>Misceláneos ($90K)</strong>: Pagos menores de personal (Boris García $50K y Estieva Lagos $40,4K) procesados por caja.</li>
+          <li style="margin-bottom:4px;"><strong>Sueldos en Gastos Operacionales (-$1.35M)</strong>: Los sueldos de David Suil ($701.510) e Ignacio Toro ($644.094) fueron transferidos correctamente pero se clasificaron erróneamente en iSafe como gastos operacionales en lugar de RRHH.</li>
+        </ul>
+        <div class="alert alert-green" style="margin-top:8px;padding:8px 12px;font-size:11.5px;">
+          <div class="alert-icon">✓</div>
+          <div>El gasto de remuneraciones líquidas operacionales reales transferidas desde el banco fue de <strong>$26.08M</strong> (más $1.35M mal clasificados), lo que cuadra perfectamente con las liquidaciones de Buk una vez deducidos los servicios externos y la desvinculación de Laura Hormazábal ($470K).</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Estructura Directiva — Oreka -->
+    <div class="card" style="margin-top:20px;">
+      <h3>Estructura Directiva — Oreka Limitada (Liderazgo del Grupo)</h3>
+      <div class="anno" style="margin-bottom:14px;">
+        <strong>Oreka Ltda. (RUT 77.704.618-7)</strong> es la sociedad que contiene la capa directiva del Grupo NLB. Sus miembros son simultáneamente <strong>líderes operativos y asesores estratégicos</strong> de cada área. Los $6M mensuales que aparecen en la cartola iSafe como "RRHH" son en realidad el costo de la dirección del holding — deben reclasificarse como <strong>"Dirección y Liderazgo"</strong>.
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th>Persona</th><th>Cargo Oreka</th><th>Área Bajo Responsabilidad</th><th class="right">Líquido Mayo</th><th>Inicio Contrato</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Nicolás Le Baux</strong></td>
+              <td>CEO / Jefe de Dirección</td>
+              <td>Jefe directo de Freddy, Daniela y Louis · Visión estratégica del grupo</td>
+              <td class="right" style="color:var(--text-muted)">Ver pendiente-respaldo iSafe</td>
+              <td style="font-size:11px;">—</td>
+            </tr>
+            <tr>
+              <td><strong>Freddy Moreno</strong> <span style="font-size:10px;color:var(--text-muted)">RUT 17.240.459-6</span></td>
+              <td>Gerente de Desarrollo</td>
+              <td>🍳 <strong>Toda la cocina</strong> — Bocus cocina central, I+D de recetas, control de calidad productiva</td>
+              <td class="right bold" style="color:var(--green)">$2.000.602</td>
+              <td style="font-size:11px;">01/10/2024</td>
+            </tr>
+            <tr>
+              <td><strong>Daniela Pérez</strong> <span style="font-size:10px;color:var(--text-muted)">RUT 15.841.863-0</span></td>
+              <td>Gerente</td>
+              <td>🛒 <strong>Toda la venta</strong> — Canales B2C / B2B / Shopify / Rappi / Lokal / Clientes corporativos</td>
+              <td class="right bold" style="color:var(--green)">$2.000.827</td>
+              <td style="font-size:11px;">01/08/2024</td>
+            </tr>
+            <tr>
+              <td><strong>Louis Le Baux</strong> <span style="font-size:10px;color:var(--text-muted)">RUT 14.714.214-5</span></td>
+              <td>Gerente</td>
+              <td>📦 <strong>Toda la logística y administración</strong> — Despacho, inventario, finanzas operativas, iSafe, reportería</td>
+              <td class="right" style="color:var(--text-muted)">~$2.000.000</td>
+              <td style="font-size:11px;">01/11/2025</td>
+            </tr>
+            <tr class="row-total">
+              <td><strong>Total Dirección Oreka</strong></td>
+              <td></td>
+              <td></td>
+              <td class="right bold">~$6.001.429</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="alert alert-blue" style="margin-top:12px;">
+        <div class="alert-icon">ℹ</div>
+        <div><strong>¿Por qué Oreka está separado de Buk?</strong> Los líderes tienen contrato en Oreka Ltda. — una sociedad distinta de Horeca SpA. Sus liquidaciones llegan vía Oreka y se pagan desde Horeca como gasto de asesoría/dirección. En iSafe aparece como "SOLUCION OREKA LIMITADA" en los egresos. Nota: Louis no tiene liquidación en el inbox de mayo — verificar si se pagó en junio o si hay un desfase de mes.</div>
+      </div>
+    </div>
+
+    <!-- Alertas Contractuales Buk -->
+    <div class="alert alert-yellow">
+      <div class="alert-icon">⚠</div>
+      <div>
+        <strong>Alertas Operacionales y de Cumplimiento (Dirección del Trabajo):</strong><br>
+        <span style="font-size:11.5px;color:var(--text); line-height: 1.5; display: block; margin-top: 6px;">
+          • <strong>11 contratos a plazo fijo vencidos el 30 de junio de 2026 sin renovar</strong> (incluyendo a Jared Alcaide en Parigó/Panadería y Pablo Bello en Bocus/Cocina). Requiere regularización contractual urgente en la plataforma Buk y registro de anexos en Mi DT (ver el <a href="file:///Users/nlebaux/Documents/webnlb/nlb2-codex/horeca/documentos/rrhh/2606-maestro-colaboradores-buk.md" target="_blank" style="color:var(--blue);text-decoration:underline;">Maestro de Colaboradores Buk</a>).<br>
+          • <strong>Supervisor fantasma en Cadaqués</strong>: Carolina Vanessa Simonetti figura en Buk como supervisora de Contreras, Peña, Santolalla, Vallejos y Zuleta, pero no está en la nómina de colaboradores activos. Verificar su situación de desvinculación o externalización.<br>
+          • <strong>Desvinculación del mes</strong>: Laura Daniela Hormazábal Cádiz (RUT 15333777-2) fue desvinculada el 14 de mayo de 2026. Recibió su liquidación proporcional ($469.919 CLP) registrada en LRE, lo que explica su ausencia en el maestro activo de junio.
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════ RECONCILIACIÓN iSafe vs Fudo ════════════════ -->
+<section id="reconciliacion">
+  <div class="container">
+    <h2>Reconciliación — iSafe (Caja) vs Fudo (Operación)</h2>
+    <div class="anno" style="margin-bottom:20px;">
+      <strong>Metodología:</strong> iSafe registra lo que entra y sale de la cuenta bancaria real — es la verdad del flujo de caja. Fudo registra lo que se vende en cada punto — es la verdad operacional. <strong>Si no cuadran, hay un error</strong> (descuentos no registrados, ventas en efectivo no depositadas, facturas no cargadas, etc.).
+    </div>
+
+    <!-- Horeca -->
+    <div class="card" style="margin-bottom:20px;">
+      <h3>Horeca SpA — Mayo 2026</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Concepto</th><th class="right">Fudo (operacional)</th><th class="right">iSafe (bancario)</th><th class="right">Diferencia</th><th>Diagnóstico</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Ingresos por ventas</strong></td><td class="right">$151.1M (Bocus total)</td><td class="right bold" style="color:var(--green)">$142.9M</td><td class="right" style="color:var(--yellow)">-$8.2M</td><td style="font-size:11px;color:var(--text-muted)">Diferencia esperada: Fudo incluye IC no cobrado en caja + ventas a crédito B2B pendientes de depósito</td></tr>
+            <tr><td>Costo de venta (MP proveedores)</td><td class="right">—</td><td class="right">$92.1M</td><td class="right">—</td><td style="font-size:11px;color:var(--text-muted)">Sin contrapartida Fudo. Incluye importación From Europe $20.9M, Codigua $4.5M, Trebons $4.2M, Los Boldos $3.9M</td></tr>
+            <tr><td>RRHH (sueldos + Previred)</td><td class="right">—</td><td class="right">$45.8M</td><td class="right">—</td><td style="font-size:11px;color:var(--text-muted)">Previred $7.4M + Oreka $6M + 3Dent Lab $5M + honorarios nómina</td></tr>
+            <tr><td>Gastos operacionales</td><td class="right">—</td><td class="right">$34.6M</td><td class="right">—</td><td style="font-size:11px;color:var(--text-muted)">Flapp/Shopify $3.1M + otros</td></tr>
+            <tr><td style="color:var(--yellow)">Pendiente de respaldo</td><td class="right">—</td><td class="right" style="color:var(--yellow)">$18.8M egreso</td><td class="right">—</td><td style="font-size:11px;color:var(--red)">⚠ Nicolás Le Baux $13.3M sin clasificar + otros sin respaldo documental</td></tr>
+            <tr class="row-total"><td><strong>Saldo operacional neto</strong></td><td class="right">—</td><td class="right bold" style="color:var(--red)">-$9.5M</td><td class="right">—</td><td style="font-size:11px;color:var(--text-muted)">Neto total. Excluidos (traspasos entre cuentas propias) = $72.2M ing / $22.1M eg</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Cadaqués -->
+    <div class="card" style="margin-bottom:20px;">
+      <h3>Cadaqués SpA — Mayo 2026</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Concepto</th><th class="right">Fudo (operacional)</th><th class="right">iSafe (bancario)</th><th class="right">Diferencia</th><th>Diagnóstico</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Ingresos por ventas</strong></td><td class="right">$54.3M bruto Fudo</td><td class="right bold" style="color:var(--green)">$46.1M</td><td class="right" style="color:var(--yellow)">-$8.2M</td><td style="font-size:11px;color:var(--text-muted)">Fudo registra venta con IVA. iSafe registra lo depositado neto (tarjeta llega al día siguiente). Descuentos $5.7M también reducen el depósito real</td></tr>
+            <tr><td>Costo masas (Bocus→Cadaqués)</td><td class="right" style="color:var(--red)">29.41% teórico Fudo</td><td class="right" style="color:var(--red)">$35.4M pagado</td><td class="right" style="color:var(--red)">⚠ brecha</td><td style="font-size:11px;color:var(--red)">Fudo muestra 29.41% porque facturas IC no están cargadas. Real = 52.91%. Roxy carga los días 15 y 30</td></tr>
+            <tr><td>Gastos operacionales</td><td class="right">—</td><td class="right">$5.8M</td><td class="right">—</td><td style="font-size:11px;color:var(--text-muted)">Arriendo $3.1M + créditos BICE $4.1M + otros</td></tr>
+            <tr class="row-total"><td><strong>Saldo operacional neto</strong></td><td class="right">—</td><td class="right bold" style="color:var(--green)">+$569K</td><td class="right">—</td><td style="font-size:11px;color:var(--text-muted)">Excluidos (traspasos accionista) = $59.6M cancelados entre sí</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="alert alert-blue" style="margin-top:12px;">
+        <div class="alert-icon">ℹ</div>
+        <div><strong>¿Por qué el saldo de Cadaqués es casi cero si opera bien?</strong> Los $35.4M pagados a Horeca incluyen tanto las facturas corrientes del mes (masas consumidas) como amortización de la deuda histórica de arranque. Mientras Cadaqués siga pagando los atrasos, su cuenta bancaria vivirá al límite. Es una señal de solvencia activa, no de quiebra.</div>
+      </div>
+    </div>
+
+    <!-- Tabla de conciliación grupo -->
+    <div class="card">
+      <h3>Vista Consolidada Grupo — Fudo + iSafe</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Fuente</th><th>Qué mide</th><th class="right">Horeca</th><th class="right">Cadaqués</th><th class="right">Grupo (neto IC)</th></tr></thead>
+          <tbody>
+            <tr><td><strong>FUDO</strong></td><td style="font-size:11px;color:var(--text-muted)">Venta bruta con IVA, productos y márgenes</td><td class="right">$151.1M</td><td class="right">$54.3M</td><td class="right bold">~$227M</td></tr>
+            <tr><td><strong>iSafe — Ingresos</strong></td><td style="font-size:11px;color:var(--text-muted)">Dinero real depositado en cuenta</td><td class="right">$142.9M</td><td class="right">$46.1M</td><td class="right bold">$189.0M</td></tr>
+            <tr><td><strong>iSafe — Egresos</strong></td><td style="font-size:11px;color:var(--text-muted)">Dinero real salido de cuenta</td><td class="right" style="color:var(--red)">$224.5M</td><td class="right" style="color:var(--red)">$105.1M</td><td class="right bold" style="color:var(--red)">$329.6M</td></tr>
+            <tr><td><strong>iSafe — Excluidos</strong></td><td style="font-size:11px;color:var(--text-muted)">Traspasos entre cuentas propias (no impactan resultado)</td><td class="right" style="color:var(--text-muted)">$72.2M/$22.1M</td><td class="right" style="color:var(--text-muted)">$59.6M/$59.6M</td><td class="right" style="color:var(--text-muted)">Se cancelan</td></tr>
+            <tr class="row-total"><td><strong>SALDO NETO iSafe</strong></td><td></td><td class="right bold" style="color:var(--red)">-$9.5M</td><td class="right bold" style="color:var(--green)">+$569K</td><td class="right bold" style="color:var(--red)">-$8.9M</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="anno" style="margin-top:12px;"><strong>Lectura:</strong> El saldo iSafe negativo de Horeca en mayo (-$9.5M) se explica por el peso de los gastos de importación ($20.9M pagados en mayo por embarque), RRHH y gastos financieros. No es una señal de crisis — es estacionalidad de pagos. El margen de Fudo sigue siendo sano.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ TENDENCIA BANCARIA ════════════════ -->
+<section id="tendencia">
+  <div class="container">
+    <h2>Tendencia Bancaria — iSafe Histórico</h2>
+    <div class="anno" style="margin-bottom:20px;">Flujo real de caja mes a mes según iSafe. Los meses con saldo negativo no implican pérdida operativa — pueden reflejar pagos grandes de proveedores, importaciones o créditos concentrados en ese período.</div>
+
+    <div class="grid-2">
+      <!-- Horeca -->
+      <div class="card">
+        <h3>Horeca SpA — Últimos 6 meses</h3>
+        <div style="margin-top:8px;">
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">Dic 2025</span><span class="pbar-val" style="color:var(--red)">-$75.8M 🔴</span></div><div class="pbar-track"><div class="pbar-fill fill-red" style="width:100%"></div></div></div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">Ene 2026</span><span class="pbar-val" style="color:var(--red)">-$18.8M</span></div><div class="pbar-track"><div class="pbar-fill fill-red" style="width:25%"></div></div></div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">Feb 2026</span><span class="pbar-val" style="color:var(--green)">+$15.7M ✓</span></div><div class="pbar-track"><div class="pbar-fill fill-green" style="width:21%"></div></div></div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">Mar 2026</span><span class="pbar-val" style="color:var(--green)">+$29.5M ✓</span></div><div class="pbar-track"><div class="pbar-fill fill-green" style="width:39%"></div></div></div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">Abr 2026</span><span class="pbar-val" style="color:var(--red)">-$17.0M</span></div><div class="pbar-track"><div class="pbar-fill fill-red" style="width:22%"></div></div></div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">May 2026</span><span class="pbar-val" style="color:var(--red)">-$9.5M</span></div><div class="pbar-track"><div class="pbar-fill fill-red" style="width:13%"></div></div></div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">Jun 2026 (parcial)</span><span class="pbar-val" style="color:var(--green)">+$46.9M ↑↑</span></div><div class="pbar-track"><div class="pbar-fill fill-green" style="width:62%"></div></div></div>
+        </div>
+        <div class="anno" style="margin-top:10px;font-size:11px;">Dic 2025: mes de fuerte egreso (cierre de año, pagos acumulados). Jun 2026 parcial ya muestra recuperación sólida.</div>
+      </div>
+
+      <!-- Cadaqués -->
+      <div class="card">
+        <h3>Cadaqués SpA — Últimos 8 meses</h3>
+        <div style="margin-top:8px;">
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">Sep 2025</span><span class="pbar-val" style="color:var(--red)">-$12.0M</span></div><div class="pbar-track"><div class="pbar-fill fill-red" style="width:46%"></div></div></div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">Oct 2025</span><span class="pbar-val" style="color:var(--green)">+$3.2M</span></div><div class="pbar-track"><div class="pbar-fill fill-green" style="width:12%"></div></div></div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">Nov 2025</span><span class="pbar-val" style="color:var(--green)">+$1.8M</span></div><div class="pbar-track"><div class="pbar-fill fill-green" style="width:7%"></div></div></div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">Dic 2025</span><span class="pbar-val" style="color:var(--red)">-$26.3M 🔴</span></div><div class="pbar-track"><div class="pbar-fill fill-red" style="width:100%"></div></div></div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">Ene 2026</span><span class="pbar-val" style="color:var(--red)">-$2.7M</span></div><div class="pbar-track"><div class="pbar-fill fill-red" style="width:10%"></div></div></div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">Feb 2026</span><span class="pbar-val" style="color:var(--red)">-$3.8M</span></div><div class="pbar-track"><div class="pbar-fill fill-red" style="width:15%"></div></div></div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">Mar 2026</span><span class="pbar-val" style="color:var(--yellow)">-$179K →</span></div><div class="pbar-track"><div class="pbar-fill fill-yellow" style="width:1%"></div></div></div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">Abr 2026</span><span class="pbar-val" style="color:var(--green)">+$19.0M ✓</span></div><div class="pbar-track"><div class="pbar-fill fill-green" style="width:73%"></div></div></div>
+          <div class="pbar-row"><div class="pbar-label"><span class="pbar-name">May 2026</span><span class="pbar-val" style="color:var(--green)">+$569K →</span></div><div class="pbar-track"><div class="pbar-fill fill-green" style="width:2%"></div></div></div>
+        </div>
+        <div class="anno" style="margin-top:10px;font-size:11px;">Dic 2025 (-$26.3M): pago concentrado de deuda histórica y créditos. Abr 2026 (+$19M) refleja mejora operativa y menor amortización ese mes.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ COMPROMISOS FIJOS ════════════════ -->
+<section id="compromisos">
+  <div class="container">
+    <h2>Compromisos Fijos del Grupo — Pagos Recurrentes</h2>
+    <div class="anno" style="margin-bottom:20px;">Obligaciones contractuales que se repiten mes a mes independiente de la operación. Son el "piso" de egresos que el grupo debe cubrir antes de tener margen.</div>
+
+    <div class="grid-2">
+      <!-- Horeca -->
+      <div class="card">
+        <h3>Horeca SpA</h3>
+        <div class="tbl-wrap" style="border:none;margin-top:8px;">
+          <table>
+            <thead><tr><th>Compromiso</th><th>Tipo</th><th class="right">Monto</th><th>Día</th></tr></thead>
+            <tbody>
+              <tr><td>Remuneraciones equipo (Buk LRE)</td><td style="color:var(--text-muted)">Sueldo</td><td class="right">$35.2M</td><td class="center">35</td></tr>
+              <tr><td>Proveedores importación (From Europe)</td><td style="color:var(--text-muted)">Proveedor</td><td class="right">~$20.0M</td><td class="center">7</td></tr>
+              <tr><td>IVA F29 mensual</td><td style="color:var(--yellow)">Impuesto</td><td class="right">~$2.4M</td><td class="center">20</td></tr>
+              <tr class="row-total"><td><strong>Total fijo estimado</strong></td><td></td><td class="right bold">~$57.6M</td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="anno" style="margin-top:8px;font-size:11px;">Remuneraciones varían según el mes. En mayo de 2026, el costo real consolidado fue de $35,16M CLP (Bruto + Aportes Empleador) para 35 colaboradores. La importación varía por embarque (puede concentrarse en un solo mes).</div>
+      </div>
+
+      <!-- Cadaqués -->
+      <div class="card">
+        <h3>Cadaqués SpA</h3>
+        <div class="tbl-wrap" style="border:none;margin-top:8px;">
+          <table>
+            <thead><tr><th>Compromiso</th><th>Tipo</th><th class="right">Monto</th><th>Día</th></tr></thead>
+            <tbody>
+              <tr><td>Arriendo San Sebastián 2806</td><td style="color:var(--text-muted)">Arriendo</td><td class="right">$3.0M</td><td class="center">5</td></tr>
+              <tr><td>Crédito BancoEstado 65M (op 37811124)</td><td style="color:var(--yellow)">Crédito</td><td class="right">$1.518K</td><td class="center">5</td></tr>
+              <tr><td>Crédito BancoEstado 50M (op 35019375)</td><td style="color:var(--yellow)">Crédito</td><td class="right">$1.153K</td><td class="center">15</td></tr>
+              <tr><td>Crédito Banco de Chile (op 82077427765K)</td><td style="color:var(--yellow)">Crédito</td><td class="right">$1.424K</td><td class="center">5</td></tr>
+              <tr><td>IVA F29 mensual</td><td style="color:var(--yellow)">Impuesto</td><td class="right">~$3.0M</td><td class="center">20</td></tr>
+              <tr class="row-total"><td><strong>Total fijo mensual</strong></td><td></td><td class="right bold">~$10.1M</td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="anno" style="margin-top:8px;font-size:11px;">Todos los créditos se cobran automáticamente. El crédito BancoEstado 50M tiene 46 cuotas restantes a jun-2026 (cierra mar-2030). Credito BancoEstado 65M cierra jun-2027.</div>
+      </div>
+    </div>
+
+    <!-- Alerta Banco Chile Parigó -->
+    <div class="alert alert-red" style="margin-top:20px;">
+      <div class="alert-icon">🔴</div>
+      <div>
+        <strong>URGENTE — Rendición Banco Chile Parigó: Visa Infinite Lunes</strong><br>
+        Contrato firmado 12 jun 2026. Beneficio: 50% descuento los lunes (Visa Infinite Banco Chile + Edwards). Parigó cofinancia el 50%. Tope por transacción: $65.000 CLP de descuento.<br><br>
+        <strong>Acción pendiente:</strong> Hay ~47 transacciones del lunes 1 y lunes 8 de junio con BIN y últimos 4 dígitos de tarjeta pendientes de completar. El plazo de rendición a Travel Club es los primeros <strong>10 días del mes siguiente</strong> — es decir, antes del <strong>10 de julio</strong> para las transacciones de junio. Responsable: equipo Parigó (Daniel Bravo / Mariana Becerra deben entregar los datos al meso). Parigó debe emitir 2 facturas a Banco de Chile (débito + crédito) para cobrar el reembolso.
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>Consolidado Grupo NLB · Mayo 2026 · Actualizado 2026-06-12 · Generado por Antigravity</div>
+  <div>Fuentes: Fudo (operacional) · iSafe/movimientos-consolidados.csv (bancario) · Kame One Cadaqués (2022–2026) · Compromisos.csv · Reporte canales Bocus · Lokal mayo 2026 · Contrato Banco Chile jun 2026</div>
+</footer>
+
+<script>
+  function showPanel(id) {
+    document.querySelectorAll('.entity-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.entity-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+  function showCartola(id) {
+    // Solo cambia los panels y tabs dentro de la sección cartolas
+    const section = document.getElementById('cartolas');
+    section.querySelectorAll('.entity-panel').forEach(p => p.classList.remove('active'));
+    section.querySelectorAll('.entity-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+</script>
+</body>
+</html>

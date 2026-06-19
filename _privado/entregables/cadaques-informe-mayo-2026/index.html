@@ -1,0 +1,2361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe de Ventas Mayo 2026 - Cadaqués</title>
+    <!-- Google Fonts: Outfit (Display) & Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Modern CSS Custom Properties / Design System tailored for Cadaqués (Warm Olive Green & Golden Crust) */
+        :root {
+            --bg-base: #0a0e17;
+            --bg-surface: #131a29;
+            --bg-surface-elevated: #1b243b;
+            --border-color: #232e48;
+            
+            --primary: #c5a880; /* Golden Wheat / Crust */
+            --primary-glow: rgba(197, 168, 128, 0.15);
+            --accent-green: #588157; /* Polera Verde corporativa */
+            --accent-green-glow: rgba(88, 129, 87, 0.15);
+            --accent-teal: #0AD8B4; /* Vibrant Teal */
+            --accent-rose: #FF4A70; /* Deep Rose */
+            --accent-violet: #8B5CF6; /* Violet */
+            
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.15);
+            --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.25);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+            
+            --font-display: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(197, 168, 128, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(88, 129, 87, 0.04) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        /* Layout Structure */
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Navigation */
+        aside.sidebar {
+            width: 280px;
+            background-color: var(--bg-surface);
+            border-right: 1px solid var(--border-color);
+            padding: 2.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            z-index: 10;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 3rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-green), var(--primary));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(88, 129, 87, 0.3);
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: #fff;
+        }
+
+        .logo-text h1 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-text p {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: -2px;
+        }
+
+        nav.nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex-grow: 1;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.85rem 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            color: var(--text-primary);
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .nav-item.active {
+            color: #ffffff;
+            background-color: var(--accent-green-glow);
+            border-color: rgba(88, 129, 87, 0.25);
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        /* Main Content */
+        main.main-content {
+            margin-left: 280px;
+            flex-grow: 1;
+            padding: 2.5rem 3rem;
+            max-width: 1200px;
+        }
+
+        header.top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+        }
+
+        .header-title h2 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .header-title p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .status-pill {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: rgba(88, 129, 87, 0.1);
+            border: 1px solid rgba(88, 129, 87, 0.2);
+            color: var(--primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--primary);
+        }
+
+        /* Tab Panels */
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Metrics Cards Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .metric-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(197, 168, 128, 0.4);
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-green), var(--primary));
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .metric-value {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .metric-subtext {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: auto;
+        }
+
+        /* Layout Columns */
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 1.7fr 1.3fr;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        @media (max-width: 968px) {
+            .dashboard-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .content-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.75rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header {
+            margin-bottom: 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Brand split list style */
+        .brand-split-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 968px) {
+            .brand-split-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .brand-box {
+            background-color: var(--bg-surface-elevated);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .brand-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-title {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .brand-pill {
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .brand-pill.mostrador { background-color: rgba(197, 168, 128, 0.15); color: var(--primary); }
+        .brand-pill.salon { background-color: rgba(139, 92, 246, 0.15); color: var(--accent-violet); }
+        .brand-pill.delivery { background-color: rgba(10, 216, 180, 0.15); color: var(--accent-teal); }
+
+        .brand-metric-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            padding-bottom: 0.4rem;
+        }
+
+        .brand-metric-value {
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        /* SVG Graph Styling */
+        .vector-graph-box {
+            background-color: #04060b;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .graph-wrapper {
+            position: relative;
+            width: 100%;
+            height: 380px;
+            border-left: 2px solid var(--text-muted);
+            border-bottom: 2px solid var(--text-muted);
+            margin: 1.5rem 0;
+            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.01);
+        }
+
+        .quadrant-bg {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0.85;
+            pointer-events: none;
+            padding: 1rem;
+            box-sizing: border-box;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        .quad-top-left {
+            top: 0; left: 0;
+            background-color: rgba(139, 92, 246, 0.015);
+            border-right: 1px dashed rgba(255, 255, 255, 0.05);
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+            color: var(--accent-violet);
+        }
+
+        .quad-top-right {
+            top: 0; left: 50%;
+            background-color: rgba(10, 216, 180, 0.015);
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+            color: var(--accent-teal);
+        }
+
+        .quad-bottom-left {
+            top: 50%; left: 0;
+            background-color: rgba(255, 74, 112, 0.015);
+            border-right: 1px dashed rgba(255, 255, 255, 0.05);
+            color: var(--accent-rose);
+        }
+
+        .quad-bottom-right {
+            top: 50%; left: 50%;
+            background-color: rgba(197, 168, 128, 0.015);
+            color: var(--primary);
+        }
+
+        .scatter-container {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: auto;
+        }
+
+        .scatter-dot {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            transform: translate(-50%, 50%);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scatter-dot::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background-color: #ffffff;
+            border-radius: 50%;
+        }
+
+        /* Dot active / hover styles */
+        .scatter-dot.dot-star { background-color: var(--accent-teal); box-shadow: 0 0 10px rgba(10, 216, 180, 0.4); }
+        .scatter-dot.dot-horse { background-color: var(--primary); box-shadow: 0 0 10px rgba(197, 168, 128, 0.4); }
+        .scatter-dot.dot-puzzle { background-color: var(--accent-violet); box-shadow: 0 0 10px rgba(139, 92, 246, 0.4); }
+        .scatter-dot.dot-dog { background-color: var(--accent-rose); box-shadow: 0 0 10px rgba(255, 74, 112, 0.4); }
+
+        .scatter-dot:hover {
+            transform: translate(-50%, 50%) scale(1.6);
+            z-index: 100;
+        }
+
+        /* Tooltip style */
+        .scatter-dot::before {
+            content: attr(data-name);
+            position: absolute;
+            bottom: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--bg-surface-elevated);
+            color: #ffffff;
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-family: var(--font-body);
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.15s ease;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            z-index: 200;
+        }
+
+        .scatter-dot:hover::before {
+            opacity: 1;
+        }
+
+        /* Tables */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table.premium-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            text-align: left;
+        }
+
+        table.premium-table th, table.premium-table td {
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        table.premium-table th {
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        table.premium-table tr:hover td {
+            background-color: rgba(255, 255, 255, 0.01);
+        }
+
+        .num-col { text-align: right; font-family: monospace; }
+        
+        .table-badge {
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .table-badge.b2c { background-color: rgba(10, 216, 180, 0.15); color: var(--accent-teal); }
+        .table-badge.b2b { background-color: rgba(197, 168, 128, 0.15); color: var(--primary); }
+
+        .table-delta-positive { color: var(--accent-teal); font-weight: 600; }
+        .table-delta-negative { color: var(--accent-rose); font-weight: 600; }
+
+        /* Action Cards list */
+        .action-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .action-item-card {
+            background-color: var(--bg-surface-elevated);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .action-number {
+            width: 36px;
+            height: 36px;
+            background-color: rgba(88, 129, 87, 0.15);
+            border: 1px solid rgba(88, 129, 87, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .action-details {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .action-details h4 {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .action-columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .action-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .action-col-block {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            font-size: 0.8rem;
+        }
+
+        .action-col-block .block-title {
+            text-transform: uppercase;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .action-col-block .block-text {
+            color: var(--text-secondary);
+        }
+
+        .action-col-block.causa { border-left: 2px solid var(--accent-rose); padding-left: 0.5rem; }
+        .action-col-block.impacto { border-left: 2px solid var(--accent-violet); padding-left: 0.5rem; }
+        .action-col-block.accion { border-left: 2px solid var(--accent-green); padding-left: 0.5rem; }
+
+        .split-explanation {
+            background-color: rgba(255, 255, 255, 0.02);
+            border-left: 3px solid var(--primary);
+            padding: 0.75rem 1rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+        }
+
+        .matrix-quadrant {
+            background-color: var(--bg-surface-elevated);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .quadrant-title {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .quadrant-desc {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .quadrant-products {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .quadrant-product-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+            padding-bottom: 0.25rem;
+        }
+    </style>
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <script src="../../auth.js"></script>
+<style id="oreka-private-shell-style">
+  .oreka-private-shell {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    background: rgba(14, 13, 11, 0.92);
+    color: #eedacf;
+    border-bottom: 1px solid rgba(231, 123, 50, 0.22);
+    backdrop-filter: blur(10px);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .oreka-private-shell a {
+    color: #eedacf;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .oreka-private-shell a:hover {
+    color: #ffffff;
+  }
+
+  .oreka-private-shell .divider {
+    width: 1px;
+    height: 14px;
+    background: rgba(238, 218, 207, 0.24);
+  }
+
+  .oreka-private-shell .title {
+    margin-left: auto;
+    color: rgba(238, 218, 207, 0.82);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="oreka-private-shell">
+  <a href="/privado/">Privado</a>
+  <span class="divider"></span>
+  <a href="/privado/entregables/">Entregables</a>
+  <span class="title">Cadaques · informe mayo 2026</span>
+</div>
+
+
+    <div class="container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <a href="#" class="logo-area">
+                <div class="logo-icon">C</div>
+                <div class="logo-text">
+                    <h1>Cadaqués</h1>
+                    <p>Panadería Artesanal</p>
+                </div>
+            </a>
+            
+            <nav class="nav-menu">
+                <div class="nav-item active" onclick="switchTab('tab-overview', this)">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right:8px"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                    Resumen Ejecutivo
+                </div>
+                <div class="nav-item" onclick="switchTab('tab-split', this)">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right:8px"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z"></path></svg>
+                    Análisis de Canales
+                </div>
+                <div class="nav-item" onclick="switchTab('tab-matrix', this)">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right:8px"><path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                    Ingeniería de Menú
+                </div>
+                <div class="nav-item" onclick="switchTab('tab-products', this)">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right:8px"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                    Categorías y Mix
+                </div>
+                <div class="nav-item nav-item-costs" onclick="switchTab('tab-costs', this)">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right:8px"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    Análisis de Costos
+                </div>
+                <div class="nav-item" onclick="switchTab('tab-ubereats', this)">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right:8px"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    Auditoría Uber Eats
+                </div>
+                <div class="nav-item" onclick="switchTab('tab-strategy', this)">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right:8px"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    Plan de Acción
+                </div>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div>Marca: Noverica - Oreka</div>
+                <div>Fase 9 - Operaciones 2026</div>
+                <div>Emisión: 2026-06-01</div>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-title">
+                    <h2>Mayo 2026 - Informe de Gestión Comercial y Costeo Real</h2>
+                    <p>INVERSIONES CADAQUÉS SPA (RUT: 77.427.765-K) - San Sebastián 2806, Las Condes</p>
+                </div>
+                <div class="system-status">
+                    <div class="status-pill">
+                        <div class="status-dot"></div>
+                        <span>Operación Activa</span>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- TAB: OVERVIEW (RESUMEN EJECUTIVO) -->
+            <div id="tab-overview" class="tab-panel active">
+                
+                <!-- Metrics Grid -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="metric-label">Venta Neta Fudo</span>
+                        <span class="metric-value">$48.609.714</span>
+                        <span class="metric-subtext">CLP Neta (IVA deducido)</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">Materia Prima Teórica</span>
+                        <span class="metric-value">29,41%</span>
+                        <span class="metric-subtext">Margen Teórico: 70,59%</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">Materia Prima REAL (Intercompany)</span>
+                        <span class="metric-value" style="color: var(--accent-rose)">52,91%</span>
+                        <span class="metric-subtext">Basado en Invocación Bocus</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">Total Transacciones</span>
+                        <span class="metric-value">6.166</span>
+                        <span class="metric-subtext">Ticket Promedio: $7.884 CLP</span>
+                    </div>
+                </div>
+                
+                <div class="dashboard-layout">
+                    <!-- Column 1: Core Analysis -->
+                    <div class="left-column">
+                        <div class="content-card">
+                            <div class="card-header">
+                                <h3>Tesis de Rendimiento y Nueva Estructura</h3>
+                            </div>
+                            <p style="font-size: 0.95rem; line-height: 1.7; color: var(--text-primary); margin-bottom: 1rem;">
+                                Mayo consolida un desempeño comercial excelente para <strong>Cadaqués SpA</strong> bajo la nueva dirección compartida de <strong>Roxy</strong> (liderando ventas y mostrador) y <strong>Peter</strong> (liderando producción e inocuidad culinaria), superando con creces la meta de flujo de caja del plan de recuperación financiera implementado tras las pérdidas de enero. La panadería tracciona con fuerza en su mostrador presencial ($41.8M CLP).
+                            </p>
+                            <p style="font-size: 0.95rem; line-height: 1.7; color: var(--text-primary); margin-bottom: 1rem;">
+                                <strong>La gran revelación del mes proviene del costeo real cruzado</strong>. Al auditar las ventas reales de la base Fudo de <strong>Bocus</strong> bajo el cliente <em>Inversiones Cadaques Spa</em>, logramos rastrear con exactitud las facturas y traspasos de masas, bollería e insumos intercompany despachados desde la cocina central. Horeca/Bocus facturó a Cadaqués un total bruto de <strong>$30.608.785 CLP</strong> (<strong>$25.721.668 CLP netos</strong>).
+                            </p>
+                            <p style="font-size: 0.95rem; line-height: 1.7; color: var(--text-primary); margin-bottom: 1.5rem;">
+                                Esto sitúa la <strong>Materia Prima Real de Cadaqués en un 52,91% consolidado</strong> sobre sus ventas netas ($48.6M CLP). La diferencia de 23,50% frente a la materia prima teórica (29,41%) se fundamenta en traspasos de stock acumulados no consumidos, mermas reales de vitrina no registradas en el sistema Fudo de Cadaqués y el precio de transferencia intercompany acordado.
+                            </p>
+                            
+                            <div class="card-header" style="margin-top: 1.5rem;">
+                                <h3>Auditoría de Personal (Buk - Junio 2026)</h3>
+                            </div>
+                            <p style="font-size: 0.95rem; line-height: 1.7; color: var(--text-primary); margin-bottom: 1rem;">
+                                Cadaqués SpA opera con una estructura laboral sumamente eficiente de <strong>7 colaboradores activos</strong> asignados a mostrador y producción. El costo consolidado de planilla mensual asciende a <strong>$4.175.000 CLP (Sueldos Base)</strong> y <strong>$4.966.467 CLP (Líquidos)</strong>, representando únicamente un <strong>10.2%</strong> de las ventas netas del local ($48.6M CLP).
+                            </p>
+                            <p style="font-size: 0.95rem; line-height: 1.7; color: var(--text-primary); margin-bottom: 0;">
+                                <em>Nota: El desglose detallado de remuneraciones por división (Bocus, Parigó, Cadaqués), las alertas de vencimiento contractuales (caso Peter Rojas) y las regularizaciones de supervisores en Buk se detallan en la pestaña dedicada de <a href="#" onclick="switchTab('tab-costs', document.querySelector('.nav-item-costs')); return false;" style="color: var(--primary); text-decoration: underline; font-weight: 500;">Análisis de Costos</a>.</em>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Column 2: Highlights -->
+                    <div class="right-column">
+                        <div class="content-card" style="height: 100%;">
+                            <div class="card-header">
+                                <h3>Hitos y Datos Clave</h3>
+                            </div>
+                            <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem; font-size: 0.85rem; color: var(--text-secondary);">
+                                <li style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;">
+                                    <strong style="color: #ffffff; display: block; font-size: 0.9rem;">👥 Liderazgo Roxy y Peter</strong>
+                                    Se formaliza la salida de Carolina y el establecimiento del liderazgo de <strong>Roxy Contreras</strong> en mostrador/caja y de <strong>Peter Rojas</strong> en el taller de panadería.
+                                </li>
+                                <li style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;">
+                                    <strong style="color: #ffffff; display: block; font-size: 0.9rem;">⚠️ Alertas de Personal (Buk)</strong>
+                                    Contrato de plazo fijo del co-líder <strong>Peter Rojas</strong> vence el 30 de junio de 2026. Además, se registra a Carolina Simonetti (no activa) como supervisora del personal de Cadaqués en Buk.
+                                </li>
+                                <li style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;">
+                                    <strong style="color: #ffffff; display: block; font-size: 0.9rem;">🥖 Insumo Intercompany Mayoritario</strong>
+                                    El traspaso más grande de Bocus fue la <strong>Caja Masa Baguette Baco 6,3Kg</strong> (900 cajas por un total bruto de $6.750.000 CLP), garantizando el horneado continuo del baguette estrella de Cadaqués.
+                                </li>
+                                <li>
+                                    <strong style="color: #ffffff; display: block; font-size: 0.9rem;">🚲 Ineficiencia en Rappi</strong>
+                                    Mientras Uber Eats facturó $2,64M CLP en 140 pedidos delivery, <strong>Rappi generó sólo 2 pedidos ($17.180 CLP)</strong>, demostrando nula tracción digital a cargo de Boris García.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONSOLIDACIÓN DE UTILIDAD Y FLUJO NETO -->
+                <div class="content-card" style="margin-top: 1.5rem;">
+                    <div class="card-header">
+                        <h3>Resultado Financiero y Conciliación de Utilidad (Mayo 2026)</h3>
+                    </div>
+                    <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-primary); margin-bottom: 1.25rem;">
+                        Para auditar de forma rigurosa la rentabilidad de Cadaqués SpA, es fundamental diferenciar el flujo de caja bancario de la utilidad neta operacional comercial:
+                    </p>
+                    
+                    <div class="brand-split-grid" style="grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem;">
+                        <div class="brand-box" style="border-left: 4px solid var(--accent-teal);">
+                            <span class="brand-title" style="color: var(--accent-teal); font-size: 1.05rem; font-weight: 700;">💸 Flujo Neto de Caja Bancaria</span>
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #ffffff; margin: 0.5rem 0;">$60.197.817 CLP</div>
+                            <p style="font-size: 0.78rem; color: var(--text-secondary); line-height: 1.5;">
+                                <strong>Ingresos Banco:</strong> $105.714.511 CLP<br>
+                                <strong>Egresos Banco:</strong> $45.516.694 CLP<br>
+                                <span style="color: var(--text-muted); font-size: 0.72rem;">*Nota: El 90% corresponde a traspasos de cuentas del holding, aportes de socios y cobranzas B2B.</span>
+                            </p>
+                        </div>
+                        
+                        <div class="brand-box" style="border-left: 4px solid var(--primary);">
+                            <span class="brand-title" style="color: var(--primary); font-size: 1.05rem; font-weight: 700;">🏪 Resultado Operacional Local</span>
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #ffffff; margin: 0.5rem 0;">$3.093.020 CLP</div>
+                            <p style="font-size: 0.78rem; color: var(--text-secondary); line-height: 1.5;">
+                                <strong>Venta Neta Fudo (con IVA):</strong> $48.609.714 CLP<br>
+                                <strong>Egresos Operacionales:</strong> $45.516.694 CLP<br>
+                                <span style="color: var(--text-muted); font-size: 0.72rem;">*Representa la ganancia líquida real generada de forma autónoma por la venta de productos en mostrador.</span>
+                            </p>
+                        </div>
+                        
+                        <div class="brand-box" style="border-left: 4px solid var(--accent-green);">
+                            <span class="brand-title" style="color: var(--accent-green); font-size: 1.05rem; font-weight: 700;">🧀 Margen de Contribución Real</span>
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #ffffff; margin: 0.5rem 0;">$22.888.046 CLP</div>
+                            <p style="font-size: 0.78rem; color: var(--text-secondary); line-height: 1.5;">
+                                <strong>Venta Fudo (sin IVA):</strong> $40.848.499 CLP<br>
+                                <strong>Materia Prima Real (Bocus):</strong> $25.721.668 CLP<br>
+                                <span style="color: var(--text-muted); font-size: 0.72rem;">*Muestra un 47,09% de margen neto real de contribución, absorbiendo todas las mermas no registradas.</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PASIVOS FINANCIEROS Y DEUDAS BANCARIAS -->
+                <div class="content-card" style="margin-top: 1.5rem;">
+                    <div class="card-header">
+                        <h3>Pasivos Financieros y Deudas Bancarias de Cadaqués SpA</h3>
+                        <span style="font-size: 0.75rem; color: var(--text-muted)">Estado de Deuda Vigente al 1 de Junio de 2026 (Actualizable por Cartolas Bancarias)</span>
+                    </div>
+                    <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-primary); margin-bottom: 1.25rem;">
+                        Inversiones Cadaqués SpA mantiene tres créditos vigentes con instituciones financieras, cuyos pagos mensuales se descuentan automáticamente de sus respectivas cuentas corrientes y se amortizan según el siguiente calendario:
+                    </p>
+                    
+                    <div class="table-responsive">
+                        <table class="premium-table">
+                            <thead>
+                                <tr>
+                                    <th>Institución y Operación</th>
+                                    <th>Tipo de Crédito</th>
+                                    <th class="num-col">Capital Restante</th>
+                                    <th class="num-col">Interés Restante</th>
+                                    <th class="num-col">Total por Pagar</th>
+                                    <th class="num-col">Próxima Cuota</th>
+                                    <th>Vencimiento Próximo</th>
+                                    <th>Estado / Avance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Banco Estado (Op. 00035019375)</strong></td>
+                                    <td>FOGAPE Chile Apoya 50M</td>
+                                    <td class="num-col">$41.206.346</td>
+                                    <td class="num-col">$11.844.666</td>
+                                    <td class="num-col" style="font-weight: 600;">$53.051.012</td>
+                                    <td class="num-col">$1.153.283</td>
+                                    <td>2026-06-15</td>
+                                    <td>Cuotas pagadas: 26 de 72</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Banco Estado (Op. 00037811124)</strong></td>
+                                    <td>Pequeña Empresa FOGAPE 65M</td>
+                                    <td class="num-col">$47.219.890</td>
+                                    <td class="num-col">$9.296.705</td>
+                                    <td class="num-col" style="font-weight: 600;">$56.951.827*</td>
+                                    <td class="num-col">$1.423.795</td>
+                                    <td>2026-06-05</td>
+                                    <td>Cuotas pagadas: 20 de 60</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Banco de Chile (Op. 82077427765K002521)</strong></td>
+                                    <td>Comercial Reciente 20M</td>
+                                    <td class="num-col">$18.805.448</td>
+                                    <td class="num-col">$926.212</td>
+                                    <td class="num-col" style="font-weight: 600;">$19.731.660</td>
+                                    <td class="num-col">$1.517.820</td>
+                                    <td>2026-06-05</td>
+                                    <td>Cuotas pagadas: 1 de 14</td>
+                                </tr>
+                                <tr style="background-color: rgba(255, 255, 255, 0.02); font-weight: bold;">
+                                    <td><strong>TOTAL CONSOLIDADO</strong></td>
+                                    <td>-</td>
+                                    <td class="num-col" style="color: var(--primary);">$107.231.684</td>
+                                    <td class="num-col">$22.067.583</td>
+                                    <td class="num-col" style="color: var(--primary);">$129.734.500</td>
+                                    <td class="num-col">-</td>
+                                    <td>-</td>
+                                    <td>99 cuotas pendientes</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.75rem; line-height: 1.4;">
+                        *Nota: El monto total del crédito Banco Estado 65M incluye comisiones de garantía restantes de $435.233 CLP.
+                        <br>
+                        <strong>Trazabilidad:</strong> El devengo y pago de estas obligaciones financieras se descuenta de forma mensual en las cartolas de las cuentas del Banco de Chile y Banco Estado, restándose del pasivo exigible de la sociedad en su balance.
+                        <br>
+                        <strong>Estado de Cobertura (2026-06-04):</strong> Fondos para cuotas con vencimiento del 2026-06-05 ya provisionados. Para Banco Estado ($1.423.795 CLP), se transfirieron $1.500.000 CLP. Para Banco de Chile ($1.517.820 CLP), el dinero queda en la cuenta de origen para cobro automático mañana.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- TAB: CANALES -->
+            <div id="tab-split" class="tab-panel">
+                
+                <div class="brand-split-grid">
+                    <div class="brand-box">
+                        <div class="brand-header-row">
+                            <span class="brand-title">Mostrador (Físico)</span>
+                            <span class="brand-pill mostrador">86.1% Venta</span>
+                        </div>
+                        <div class="brand-metric-row">
+                            <span>Venta Bruta (con IVA)</span>
+                            <span class="brand-metric-value">$41.850.540 CLP</span>
+                        </div>
+                        <div class="brand-metric-row">
+                            <span>Tickets Emitidos</span>
+                            <span class="brand-metric-value">5.972</span>
+                        </div>
+                        <div class="brand-metric-row">
+                            <span>Ticket Promedio</span>
+                            <span class="brand-metric-value">$7.008 CLP</span>
+                        </div>
+                        <div class="brand-metric-row">
+                            <span>Líder a Cargo</span>
+                            <span class="brand-metric-value" style="color: var(--accent-teal)">Roxy Contreras</span>
+                        </div>
+                    </div>
+                    
+                    <div class="brand-box">
+                        <div class="brand-header-row">
+                            <span class="brand-title">Salón (Local)</span>
+                            <span class="brand-pill salon">8.4% Venta</span>
+                        </div>
+                        <div class="brand-metric-row">
+                            <span>Venta Bruta (con IVA)</span>
+                            <span class="brand-metric-value">$4.247.394 CLP</span>
+                        </div>
+                        <div class="brand-metric-row">
+                            <span>Comensales Registrados</span>
+                            <span class="brand-metric-value">54</span>
+                        </div>
+                        <div class="brand-metric-row">
+                            <span>Ticket Promedio Salón</span>
+                            <span class="brand-metric-value" style="color: var(--accent-violet)">$78.655 CLP</span>
+                        </div>
+                        <div class="brand-metric-row">
+                            <span>Uso Promedio</span>
+                            <span class="brand-metric-value">Consumo de Mesa Largo</span>
+                        </div>
+                    </div>
+                    
+                    <div class="brand-box">
+                        <div class="brand-header-row">
+                            <span class="brand-title">Delivery (Marketplaces)</span>
+                            <span class="brand-pill delivery">5.5% Venta</span>
+                        </div>
+                        <div class="brand-metric-row">
+                            <span>Venta Bruta (con IVA)</span>
+                            <span class="brand-metric-value">$2.658.680 CLP</span>
+                        </div>
+                        <div class="brand-metric-row">
+                            <span>Pedidos Totales</span>
+                            <span class="brand-metric-value">143</span>
+                        </div>
+                        <div class="brand-metric-row">
+                            <span>Ticket Promedio Delivery</span>
+                            <span class="brand-metric-value" style="color: var(--accent-teal)">$18.592 CLP</span>
+                        </div>
+                        <div class="brand-metric-row">
+                            <span>Dominio Uber Eats</span>
+                            <span class="brand-metric-value" style="color: var(--accent-teal)">99,35%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-layout">
+                    <!-- Left: Daily Analysis -->
+                    <div class="left-column">
+                        <div class="content-card">
+                            <div class="card-header">
+                                <h3>Evolución y Dinámica Comercial Diaria</h3>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="premium-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Día de la Semana</th>
+                                            <th class="num-col">Transacciones</th>
+                                            <th class="num-col">Venta Consolidada (CLP)</th>
+                                            <th class="num-col">Ticket Promedio</th>
+                                            <th>Diagnóstico de Roxy</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Lunes</strong></td>
+                                            <td class="num-col">983</td>
+                                            <td class="num-col">$7.682.891</td>
+                                            <td class="num-col">$7.816</td>
+                                            <td><span class="table-badge b2c" style="background-color: rgba(10, 216, 180, 0.1)">Estable regular</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Martes</strong></td>
+                                            <td class="num-col">999</td>
+                                            <td class="num-col">$7.474.648</td>
+                                            <td class="num-col">$7.482</td>
+                                            <td><span class="table-badge b2c" style="background-color: rgba(10, 216, 180, 0.1)">Tráfico normal</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Miércoles</strong></td>
+                                            <td class="num-col" style="color: var(--accent-teal); font-weight: bold;">1.106</td>
+                                            <td class="num-col">$7.689.680</td>
+                                            <td class="num-col">$6.953</td>
+                                            <td><span class="table-badge b2c" style="background-color: var(--accent-green-glow); color: var(--primary)">Máxima transaccionalidad</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Jueves</strong></td>
+                                            <td class="num-col">946</td>
+                                            <td class="num-col">$6.792.280</td>
+                                            <td class="num-col">$7.180</td>
+                                            <td><span class="table-badge b2c" style="background-color: rgba(255, 74, 112, 0.1); color: var(--accent-rose)">Baja semanal</span></td>
+                                        </tr>
+                                        <tr style="background-color: rgba(88, 129, 87, 0.05);">
+                                            <td><strong>Viernes</strong></td>
+                                            <td class="num-col">1.087</td>
+                                            <td class="num-col" style="color: var(--primary); font-weight: bold;">$8.651.575</td>
+                                            <td class="num-col">$7.959</td>
+                                            <td><span class="table-badge b2b" style="background-color: var(--primary-glow)">Pico de ventas semanal</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Sábado</strong></td>
+                                            <td class="num-col">559</td>
+                                            <td class="num-col">$5.819.770</td>
+                                            <td class="num-col" style="color: var(--accent-teal); font-weight: bold;">$10.411</td>
+                                            <td><span class="table-badge b2c" style="background-color: var(--accent-green-glow); color: var(--primary)">Consumo premium familiar</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Domingo</strong></td>
+                                            <td class="num-col">486</td>
+                                            <td class="num-col">$4.645.770</td>
+                                            <td class="num-col" style="color: var(--accent-teal); font-weight: bold;">$9.559</td>
+                                            <td><span class="table-badge b2c" style="background-color: var(--accent-green-glow); color: var(--primary)">Tracción tarde / onces</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right: Hour Analysis -->
+                    <div class="right-column">
+                        <div class="content-card" style="height: 100%;">
+                            <div class="card-header">
+                                <h3>Picos de Venta por Hora</h3>
+                            </div>
+                            <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.85rem; color: var(--text-secondary);">
+                                <li style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
+                                    <span><strong>9:00 - 11:00 AM</strong> (Pico de Facturación)</span>
+                                    <span style="color: var(--primary); font-weight: 600;">$9,19M CLP (1.084 tickets)</span>
+                                </li>
+                                <li style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
+                                    <span><strong>1:00 - 3:00 PM</strong> (Pico Transaccional / Almuerzo)</span>
+                                    <span style="color: var(--accent-teal); font-weight: 600;">$9,18M CLP (1.236 tickets)</span>
+                                </li>
+                                <li style="display: flex; justify-content: space-between;">
+                                    <span><strong>4:00 - 6:00 PM</strong> (Tarde / Once)</span>
+                                    <span style="color: #ffffff;">$7,06M CLP (850 tickets)</span>
+                                </li>
+                            </ul>
+                            <div class="split-explanation" style="margin-top: 1rem; font-size: 0.75rem;">
+                                <strong>Acción en Producción (Peter):</strong> Coordinar el horneado de baguettes frescas para estar listas en vitrina a las <strong>9:00 AM</strong> y <strong>1:00 PM</strong>. Esto facilitará a Roxy el upselling directo en mostrador del pan caliente.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- TAB: MATRIX (INGENIERIA DE MENU) -->
+            <div id="tab-matrix" class="tab-panel">
+                
+                <div class="vector-graph-box">
+                    <div class="card-header">
+                        <h3>Matriz de Ingeniería de Menú (Menu Engineering)</h3>
+                        <span style="font-size: 0.75rem; color: var(--text-muted)">Universo Costeado de Productos (Mayo 2026)</span>
+                    </div>
+                    
+                    <div class="graph-wrapper">
+                        <div class="quadrant-bg quad-top-left">ENIGMAS<br><span style="font-size:0.6rem; font-weight:normal; opacity:0.8;">Bajo Vol, Alto Margen</span></div>
+                        <div class="quadrant-bg quad-top-right">ESTRELLAS<br><span style="font-size:0.6rem; font-weight:normal; opacity:0.8;">Alto Vol, Alto Margen</span></div>
+                        <div class="quadrant-bg quad-bottom-left">PERROS<br><span style="font-size:0.6rem; font-weight:normal; opacity:0.8;">Bajo Vol, Bajo Margen</span></div>
+                        <div class="quadrant-bg quad-bottom-right">CABALLOS DE BATALLA<br><span style="font-size:0.6rem; font-weight:normal; opacity:0.8;">Alto Vol, Bajo Margen</span></div>
+                        
+                        <div class="scatter-container">
+                            <!-- STARS -->
+                            <div class="scatter-dot dot-star" style="left: 90%; bottom: 85%;" data-name="Baguette 300gr (Vol: 485, Margen: 85.4%)"></div>
+                            <div class="scatter-dot dot-star" style="left: 95%; bottom: 82%;" data-name="Mini Ciabatta (Vol: 10436, Margen: 84.9%)"></div>
+                            <div class="scatter-dot dot-star" style="left: 88%; bottom: 83%;" data-name="Campo Integral (Vol: 728, Margen: 79.7%)"></div>
+                            <div class="scatter-dot dot-star" style="left: 85%; bottom: 81%;" data-name="Campo Blanco (Vol: 500, Margen: 83.1%)"></div>
+                            <div class="scatter-dot dot-star" style="left: 80%; bottom: 75%;" data-name="Sandwich Lyon (Vol: 331, Margen: 75.1%)"></div>
+                            <div class="scatter-dot dot-star" style="left: 78%; bottom: 82%;" data-name="Baguette x 2 (Vol: 392, Margen: 83.5%)"></div>
+                            <div class="scatter-dot dot-star" style="left: 75%; bottom: 81%;" data-name="Marraqueta (Vol: 1252, Margen: 82.1%)"></div>
+                            <div class="scatter-dot dot-star" style="left: 72%; bottom: 76%;" data-name="Pan Chocolate (Vol: 614, Margen: 81.3%)"></div>
+                            
+                            <!-- HORSES -->
+                            <div class="scatter-dot dot-horse" style="left: 85%; bottom: 48%;" data-name="Media Luna x 3 (Vol: 490, Margen: 69.4%)"></div>
+                            <div class="scatter-dot dot-horse" style="left: 80%; bottom: 35%;" data-name="Sandwich Capri (Vol: 268, Margen: 57.3%)"></div>
+                            <div class="scatter-dot dot-horse" style="left: 75%; bottom: 40%;" data-name="Sandwich + Jugo (Vol: 188, Margen: 62.0%)"></div>
+                            <div class="scatter-dot dot-horse" style="left: 70%; bottom: 48%;" data-name="Sandwich Balear (Vol: 170, Margen: 68.9%)"></div>
+                            <div class="scatter-dot dot-horse" style="left: 65%; bottom: 15%;" data-name="Pan Pasas (Vol: 357, Margen: 37.5%)"></div>
+                            <div class="scatter-dot dot-horse" style="left: 60%; bottom: 42%;" data-name="Croissant Aplati (Vol: 224, Margen: 61.9%)"></div>
+                            
+                            <!-- PUZZLES -->
+                            <div class="scatter-dot dot-puzzle" style="left: 30%; bottom: 78%;" data-name="Babka Familiar (Vol: 17, Margen: 78.6%)"></div>
+                            <div class="scatter-dot dot-puzzle" style="left: 25%; bottom: 85%;" data-name="Chocolate 220ml (Vol: 22, Margen: 85.4%)"></div>
+                            
+                            <!-- DOGS -->
+                            <div class="scatter-dot dot-dog" style="left: 35%; bottom: 10%;" data-name="Promo Ro Re (Vol: 16, Margen: 30.1%)"></div>
+                            <div class="scatter-dot dot-dog" style="left: 30%; bottom: 5%;" data-name="Tabla Charcuteria (Vol: 16, Margen: 0%)"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="brand-split-grid" style="grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+                    <div class="matrix-quadrant">
+                        <span class="quadrant-title" style="color: var(--accent-teal)">⭐ Estrellas (Alto Margen y Tracción)</span>
+                        <span class="quadrant-desc">Alto volumen y margen superior al 70%. Son el núcleo de ganancias de Cadaqués.</span>
+                        <ul class="quadrant-products">
+                            <li class="quadrant-product-item"><span><strong>Baguette 300gr</strong> (Vol: 485)</span> <span style="color: var(--accent-teal)">85,39% Margen</span></li>
+                            <li class="quadrant-product-item"><span><strong>Mini Ciabatta 45gr</strong> (Vol: 10.436)</span> <span style="color: var(--accent-teal)">84,93% Margen</span></li>
+                            <li class="quadrant-product-item"><span><strong>Baguette x 2</strong> (Vol: 392)</span> <span style="color: var(--accent-teal)">83,50% Margen</span></li>
+                            <li class="quadrant-product-item"><span><strong>Campo Blanco 600gr</strong> (Vol: 500)</span> <span style="color: var(--accent-teal)">83,08% Margen</span></li>
+                            <li class="quadrant-product-item"><span><strong>Marraqueta</strong> (Vol: 1.252)</span> <span style="color: var(--accent-teal)">82,10% Margen</span></li>
+                            <li class="quadrant-product-item"><span><strong>Pan Chocolate</strong> (Vol: 614)</span> <span style="color: var(--accent-teal)">81,30% Margen</span></li>
+                            <li class="quadrant-product-item"><span><strong>Campo Integral 600gr</strong> (Vol: 728)</span> <span style="color: var(--accent-teal)">79,70% Margen</span></li>
+                            <li class="quadrant-product-item"><span><strong>Sandwich Lyon</strong> (Vol: 331)</span> <span style="color: var(--accent-teal)">75,11% Margen</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="matrix-quadrant">
+                        <span class="quadrant-title" style="color: var(--primary)">🐴 Caballos de Batalla (Volumen Alto, Margen Ajustado)</span>
+                        <span class="quadrant-desc">Alto volumen (Heavy) pero margen inferior al 70%. Insumos caros o precios desajustados.</span>
+                        <ul class="quadrant-products">
+                            <li class="quadrant-product-item"><span><strong>Media Luna x 3</strong> (Vol: 490)</span> <span style="color: var(--primary)">69,39% Margen</span></li>
+                            <li class="quadrant-product-item"><span><strong>Sandwich Balear</strong> (Vol: 170)</span> <span style="color: var(--primary)">68,90% Margen</span></li>
+                            <li class="quadrant-product-item"><span><strong>Sandwich + Jugo</strong> (Vol: 188)</span> <span style="color: var(--primary)">62,05% Margen</span></li>
+                            <li class="quadrant-product-item"><span><strong>Croissant Aplati</strong> (Vol: 224)</span> <span style="color: var(--primary)">61,90% Margen</span></li>
+                            <li class="quadrant-product-item"><span><strong>Sandwich Capri</strong> (Vol: 268)</span> <span style="color: var(--primary)">57,32% Margen</span></li>
+                            <li class="quadrant-product-item"><span><strong>Pan Pasas (Alerta Crítica)</strong> (Vol: 357)</span> <span style="color: var(--accent-rose); font-weight: bold;">37,50% Margen</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="matrix-quadrant">
+                        <span class="quadrant-title" style="color: var(--accent-violet)">🔮 Enigmas (Alto Margen, Bajo Volumen)</span>
+                        <span class="quadrant-desc">Rentables pero de baja rotación en el mostrador. Promocionar para aumentar volumen.</span>
+                        <ul class="quadrant-products">
+                            <li class="quadrant-product-item"><span><strong>Chocolate 220ml</strong> (Vol: 22)</span> <span style="color: var(--accent-violet)">85,40% Margen</span></li>
+                            <li class="quadrant-product-item"><span><strong>Babka Familiar</strong> (Vol: 17)</span> <span style="color: var(--accent-violet)">78,60% Margen</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="matrix-quadrant">
+                        <span class="quadrant-title" style="color: var(--accent-rose)">🐕 Perros (Bajo Volumen y Margen)</span>
+                        <span class="quadrant-desc">Bajo volumen y margen inferior al 70%. Evaluar continuidad o reformular.</span>
+                        <ul class="quadrant-products">
+                            <li class="quadrant-product-item"><span><strong>Promo Ro Re</strong> (Vol: 16)</span> <span style="color: var(--accent-rose)">30,10% Margen</span></li>
+                            <li class="quadrant-product-item"><span><strong>Tabla Charcuteria</strong> (Vol: 16)</span> <span style="color: var(--accent-rose)">0,00% Margen</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- TAB: PRODUCTS -->
+            <div id="tab-products" class="tab-panel">
+                
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Mix de Ventas por Categoría - Mayo 2026</h3>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="premium-table">
+                            <thead>
+                                <tr>
+                                    <th>Categoría de Fudo</th>
+                                    <th class="num-col">Cantidad Vendida</th>
+                                    <th class="num-col">Venta Bruta (CLP)</th>
+                                    <th class="num-col">Venta Neta (CLP)</th>
+                                    <th class="num-col">MP Teórica %</th>
+                                    <th class="num-col">Margen Bruto %</th>
+                                    <th>Diagnóstico Operativo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Panadería</strong></td>
+                                    <td class="num-col">16.482</td>
+                                    <td class="num-col">$16.405.064</td>
+                                    <td class="num-col">$13.785.768</td>
+                                    <td class="num-col" style="color: var(--accent-teal);">19,43%</td>
+                                    <td class="num-col" style="color: var(--accent-teal); font-weight: bold;">80,57%</td>
+                                    <td><span class="table-badge b2c" style="background-color: var(--accent-green-glow); color: var(--primary)">Excelente (Pan de Peter)</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Bollería</strong></td>
+                                    <td class="num-col">3.450</td>
+                                    <td class="num-col">$7.917.430</td>
+                                    <td class="num-col">$6.653.303</td>
+                                    <td class="num-col">33,13%</td>
+                                    <td class="num-col">66,87%</td>
+                                    <td><span class="table-badge b2c" style="background-color: rgba(197, 168, 128, 0.1)">Saludable</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Pastelería</strong></td>
+                                    <td class="num-col">914</td>
+                                    <td class="num-col">$3.046.100</td>
+                                    <td class="num-col">$2.559.748</td>
+                                    <td class="num-col">29,87%</td>
+                                    <td class="num-col">70,13%</td>
+                                    <td><span class="table-badge b2c" style="background-color: rgba(197, 168, 128, 0.1)">Muy saludable</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Sandwich</strong></td>
+                                    <td class="num-col">1.225</td>
+                                    <td class="num-col">$6.915.000</td>
+                                    <td class="num-col">$5.810.924</td>
+                                    <td class="num-col">31,17%</td>
+                                    <td class="num-col">68,83%</td>
+                                    <td><span class="table-badge b2c" style="background-color: rgba(197, 168, 128, 0.1)">Rentable</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Promociones</strong></td>
+                                    <td class="num-col">1.787</td>
+                                    <td class="num-col">$10.472.900</td>
+                                    <td class="num-col">$8.800.756</td>
+                                    <td class="num-col">32,94%</td>
+                                    <td class="num-col">67,06%</td>
+                                    <td><span class="table-badge b2c" style="background-color: rgba(197, 168, 128, 0.1)">Volumen Alto</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Quesos y Charcutería</strong></td>
+                                    <td class="num-col">248</td>
+                                    <td class="num-col">$2.935.900</td>
+                                    <td class="num-col" style="color: var(--accent-rose);">$2.467.143</td>
+                                    <td class="num-col" style="color: var(--accent-rose); font-weight: bold;">51,61%</td>
+                                    <td class="num-col">48,39%</td>
+                                    <td><span class="table-badge b2c" style="background-color: rgba(255, 74, 112, 0.1); color: var(--accent-rose)">Reventa (Revisar costes)</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Cafetería</strong></td>
+                                    <td class="num-col">813</td>
+                                    <td class="num-col">$2.014.600</td>
+                                    <td class="num-col">$1.692.941</td>
+                                    <td class="num-col" style="color: var(--accent-teal);">21,64%</td>
+                                    <td class="num-col" style="color: var(--accent-teal); font-weight: bold;">78,36%</td>
+                                    <td><span class="table-badge b2c" style="background-color: var(--accent-green-glow); color: var(--primary)">Altamente rentable</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Inactivos</strong></td>
+                                    <td class="num-col">567</td>
+                                    <td class="num-col">$3.128.130</td>
+                                    <td class="num-col">$2.628.681</td>
+                                    <td class="num-col" style="color: var(--accent-rose);">0,00%</td>
+                                    <td class="num-col" style="color: var(--accent-rose); font-weight: bold;">Brecha 0%</td>
+                                    <td><span class="table-badge b2c" style="background-color: rgba(255, 74, 112, 0.15); color: var(--accent-rose)">Producto Genérico (Alerta)</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+            
+            <!-- TAB: COSTS (ANÁLISIS DE COSTOS Y PERSONAL) -->
+            <div id="tab-costs" class="tab-panel">
+                
+                <!-- 1. AUDITORÍA DE PERSONAL (BUK) -->
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Auditoría de Personal (Buk - Junio 2026)</h3>
+                    </div>
+                    <p style="font-size: 0.95rem; line-height: 1.7; color: var(--text-primary); margin-bottom: 1rem;">
+                        El análisis del maestro de colaboradores de <strong>Buk (bocus.buk.cl)</strong> revela que Solución Horeca SpA centraliza la administración de 7 trabajadores activos asignados a Cadaqués (Daniela Abarca, Patricia Agudelo, Roxana Contreras, Juan Diego Peña, Manuel Santolalla, Matías Vallejos y José Zuleta), representando una planilla de <strong>$4.175.000 CLP mensuales (Sueldos Base)</strong> y de <strong>$4.966.467 CLP (Líquidos)</strong>. Esta estructura representa un <strong>8.6% de la venta neta del local (en sueldos base)</strong> o un <strong>10.2% en base a líquidos</strong>, lo que demuestra una operación laboral eficiente.
+                    </p>
+                    
+                    <!-- Buk Cost Table -->
+                    <div class="table-responsive" style="margin: 1.25rem 0; border: 1px solid var(--border-color); border-radius: 8px;">
+                        <table class="premium-table" style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+                            <thead>
+                                <tr style="background-color: var(--bg-surface-elevated); border-bottom: 1px solid var(--border-color);">
+                                    <th style="padding: 8px; text-align: left; color: #ffffff;">División / Empresa</th>
+                                    <th style="padding: 8px; text-align: center; color: #ffffff;">Colaboradores</th>
+                                    <th style="padding: 8px; text-align: right; color: #ffffff;">Sueldos Base (CLP)</th>
+                                    <th style="padding: 8px; text-align: right; color: #ffffff;">Líquido Estimado (CLP)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 8px; text-align: left;"><strong>Bocus</strong> (Retail B2C + Logística)</td>
+                                    <td style="padding: 8px; text-align: center;">22</td>
+                                    <td style="padding: 8px; text-align: right; font-weight: 600;">$11.916.000</td>
+                                    <td style="padding: 8px; text-align: right; color: var(--primary); font-weight: 600;">$14.327.240</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 8px; text-align: left;"><strong>Parigó</strong> (Salón Le Plat + Masas)</td>
+                                    <td style="padding: 8px; text-align: center;">12</td>
+                                    <td style="padding: 8px; text-align: right; font-weight: 600;">$8.442.000</td>
+                                    <td style="padding: 8px; text-align: right; color: var(--primary); font-weight: 600;">$9.731.687</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 8px; text-align: left;"><strong>Cadaqués</strong> (Ventas + Panadería)</td>
+                                    <td style="padding: 8px; text-align: center;">7</td>
+                                    <td style="padding: 8px; text-align: right; font-weight: 600;">$4.175.000</td>
+                                    <td style="padding: 8px; text-align: right; color: var(--primary); font-weight: 600;">$4.966.467</td>
+                                </tr>
+                                <tr style="background-color: rgba(197, 168, 128, 0.05); font-weight: 700;">
+                                    <td style="padding: 8px; text-align: left; color: #ffffff;"><strong>Total Solución Horeca SpA</strong></td>
+                                    <td style="padding: 8px; text-align: center; color: #ffffff;"><strong>39</strong></td>
+                                    <td style="padding: 8px; text-align: right; color: #ffffff;"><strong>$24.533.000</strong></td>
+                                    <td style="padding: 8px; text-align: right; color: #ffffff;"><strong>$29.025.394</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p style="font-size: 0.95rem; line-height: 1.7; color: var(--text-primary); margin-bottom: 1rem;">
+                        <strong>Discrepancias críticas en supervisión de Buk:</strong> Roxana Contreras y los cuatro panaderos siguen registrados bajo la supervisión de <strong>Carolina Vanessa Simonetti</strong> (desvinculada, no figura en la nómina activa).
+                        <br>
+                        <em>Acción Requerida:</em> Se debe actualizar en Buk el supervisor de ventas a <strong>Roxana Contreras</strong>, y el de panadería a <strong>Peter Rojas</strong>.
+                    </p>
+                    <p style="font-size: 0.95rem; line-height: 1.7; color: var(--text-primary); margin-bottom: 0;">
+                        <strong>Situación de Peter Rojas (Co-Líder de Panadería):</strong> Peter Rojas figura registrado en la división <em>Parigó / Panadería</em> como <em>Panadero</em> con un sueldo bruto de <strong>$880.000 CLP</strong>, pero su contrato a plazo fijo <strong>vence el 30 de junio de 2026</strong>.
+                        <br>
+                        <em>Acción Requerida:</em> Dada su relevancia en la dirección técnica del taller de producción de Cadaqués, se debe renovar o pasar a contrato indefinido a la brevedad, actualizando sus datos para reflejar su responsabilidad real intercompany.
+                    </p>
+                </div>
+
+                <!-- 1B. ANÁLISIS ESPECÍFICO: TRABAJADORES CADAQUÉS VS VENTAS Y RENTABILIDAD -->
+                <div class="content-card" style="margin-top: 1.5rem;">
+                    <div class="card-header">
+                        <h3>Análisis de Dotación Propia de Cadaqués vs. Ventas y Rentabilidad</h3>
+                        <span style="font-size: 0.8rem; background: var(--accent-green-glow); color: var(--primary); padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700;">Eficiencia Laboral</span>
+                    </div>
+                    <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-primary); margin-bottom: 1rem;">
+                        A continuación se desglosa el costo individual y consolidado de los <strong>7 colaboradores directos</strong> de Cadaqués SpA (nómina de Horeca centralizada administrativamente) y su relación con la venta neta mensual de <strong>$48.609.714 CLP</strong> y la rentabilidad de la empresa:
+                    </p>
+
+                    <div class="table-responsive" style="margin: 1rem 0; border: 1px solid var(--border-color); border-radius: 8px;">
+                        <table class="premium-table" style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+                            <thead>
+                                <tr style="background-color: var(--bg-surface-elevated); border-bottom: 1px solid var(--border-color);">
+                                    <th style="padding: 8px; text-align: left; color: #ffffff;">Colaborador</th>
+                                    <th style="padding: 8px; text-align: left; color: #ffffff;">Cargo</th>
+                                    <th style="padding: 8px; text-align: left; color: #ffffff;">Área / Rol</th>
+                                    <th style="padding: 8px; text-align: right; color: #ffffff;">Sueldo Base (CLP)</th>
+                                    <th style="padding: 8px; text-align: right; color: #ffffff;">Líquido Estimado (CLP)</th>
+                                    <th style="padding: 8px; text-align: right; color: #ffffff;">% s/ Venta Neta</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td>Roxana Contreras</td>
+                                    <td>Jefa de Local / Ventas</td>
+                                    <td>Líder Comercial Mostrador</td>
+                                    <td class="num-col">$650.000</td>
+                                    <td class="num-col">$891.614</td>
+                                    <td class="num-col" style="font-weight: 600;">1,83%</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td>Daniela Abarca</td>
+                                    <td>Asistente de Local</td>
+                                    <td>Atención Mostrador B2C</td>
+                                    <td class="num-col">$590.000</td>
+                                    <td class="num-col">$703.570</td>
+                                    <td class="num-col" style="font-weight: 600;">1,45%</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td>José Matías Zuleta</td>
+                                    <td>Asistente de Local</td>
+                                    <td>Atención Mostrador B2C</td>
+                                    <td class="num-col">$650.000</td>
+                                    <td class="num-col">$771.994</td>
+                                    <td class="num-col" style="font-weight: 600;">1,59%</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td>Maria Patricia Agudelo</td>
+                                    <td>Asistente de Local (Part-time)</td>
+                                    <td>Soporte Turnos Mostrador</td>
+                                    <td class="num-col">$303.000</td>
+                                    <td class="num-col">$364.509</td>
+                                    <td class="num-col" style="font-weight: 600;">0,75%</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td>Juan Diego Peña</td>
+                                    <td>Maestro Panadero</td>
+                                    <td>Taller de Producción Masas</td>
+                                    <td class="num-col">$700.000</td>
+                                    <td class="num-col">$811.305</td>
+                                    <td class="num-col" style="font-weight: 600;">1,67%</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td>Manuel Santolalla</td>
+                                    <td>Panadero</td>
+                                    <td>Taller de Producción Masas</td>
+                                    <td class="num-col">$640.000</td>
+                                    <td class="num-col">$691.721</td>
+                                    <td class="num-col" style="font-weight: 600;">1,42%</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td>Matías Vallejos</td>
+                                    <td>Maestro Panadero</td>
+                                    <td>Taller de Producción Masas</td>
+                                    <td class="num-col">$642.000</td>
+                                    <td class="num-col">$731.754</td>
+                                    <td class="num-col" style="font-weight: 600;">1,51%</td>
+                                </tr>
+                                <tr style="background-color: rgba(88, 129, 87, 0.05); font-weight: 700; border-bottom: 2px solid var(--border-color);">
+                                    <td colspan="3">NÓMINA DIRECTA CADAQUÉS (7 Colaboradores)</td>
+                                    <td class="num-col">$4.175.000</td>
+                                    <td class="num-col">$4.966.467</td>
+                                    <td class="num-col" style="color: var(--accent-teal);">10,22%</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-secondary); font-style: italic;">
+                                    <td>Peter Rojas*</td>
+                                    <td>Líder de Producción (Parigó)</td>
+                                    <td>Dirección Técnica de Taller</td>
+                                    <td class="num-col">$880.000</td>
+                                    <td class="num-col">$1.014.604</td>
+                                    <td class="num-col">2,09%</td>
+                                </tr>
+                                <tr style="background-color: rgba(197, 168, 128, 0.08); font-weight: 700;">
+                                    <td colspan="3">NÓMINA TOTAL OPERATIVA (Con Peter Rojas)</td>
+                                    <td class="num-col">$5.055.000</td>
+                                    <td class="num-col">$5.981.071</td>
+                                    <td class="num-col" style="color: var(--primary);">12,30%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <span style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: -0.5rem; margin-bottom: 1.5rem;">
+                        *Nota: Peter Rojas se encuentra registrado contractualmente bajo la división Parigó / Panadería en Buk, pero ejerce funciones a tiempo completo como líder técnico del taller en local de Cadaqués.
+                    </span>
+
+                    <h4 style="font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; color: #ffffff; margin-bottom: 0.5rem;">Cruce de Nómina vs. Ventas y Rentabilidad (Mayo 2026)</h4>
+                    <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-primary); margin-bottom: 1rem;">
+                        Mapeando el costo de nómina contra la estructura real de ingresos e insumos de la panadería, observamos la alta productividad y su impacto en el margen neto:
+                    </p>
+
+                    <div class="brand-split-grid" style="grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <div class="brand-box" style="border-left: 3px solid var(--primary);">
+                            <span class="brand-title" style="color: var(--primary); font-size: 0.85rem;">📊 Relación Personal / Ventas</span>
+                            <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; margin-top: 0.25rem;">
+                                • <strong>Nómina CDQ Directa:</strong> 10,22% de la venta neta.<br>
+                                • <strong>Nómina Operativa Total:</strong> 12,30% de la venta neta.<br>
+                                <span style="color: var(--accent-teal); font-weight: 600;">*Referencia de industria:*</span> Un costo laboral (labor cost) del <strong>10% al 12%</strong> es extraordinario para el rubro (donde la media saludable es de 25% a 30%), confirmando la alta productividad de la dotación actual.
+                            </p>
+                        </div>
+                        <div class="brand-box" style="border-left: 3px solid var(--accent-green);">
+                            <span class="brand-title" style="color: var(--accent-green); font-size: 0.85rem;">🏪 Absorción s/ Margen Real</span>
+                            <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; margin-top: 0.25rem;">
+                                • <strong>Margen Contribución Real:</strong> $22.888.046 CLP.<br>
+                                • <strong>Nómina CDQ Directa:</strong> Consume el 21,7% del margen real.<br>
+                                • <strong>Nómina Operativa Total:</strong> Consume el 26,1% del margen real.<br>
+                                Esto significa que el margen comercial generado por Cadaqués absorbe holgadamente el costo laboral propio, dejando más de un 73% del margen libre para cubrir costos fijos.
+                            </p>
+                        </div>
+                        <div class="brand-box" style="border-left: 3px solid var(--accent-teal);">
+                            <span class="brand-title" style="color: var(--accent-teal); font-size: 0.85rem;">💰 Flujo Neto Operacional Libre</span>
+                            <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; margin-top: 0.25rem;">
+                                • <strong>Flujo Neto (CDQ Directa):</strong> **$17.921.579 CLP**.<br>
+                                • <strong>Flujo Neto (Operativa Total):</strong> **$16.906.975 CLP**.<br>
+                                Este flujo de caja libre neto remanente es el que permite cubrir la cuota de arriendo del local ($3,0M CLP) y las amortizaciones de deudas de los créditos Fogape y Banco de Chile ($4,1M CLP), garantizando el flujo de caja positivo neto mensual de la panadería.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1C. PRODUCTIVIDAD Y CONTROL DE RRHH EN OPERACIÓN, VENTA Y MARGEN -->
+                <div class="content-card" style="margin-top: 1.5rem;">
+                    <div class="card-header">
+                        <h3>Análisis de Productividad de RRHH: Operación, Venta y Margen</h3>
+                        <span style="font-size: 0.8rem; background: var(--primary-glow); color: var(--primary); padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700;">Auditoría de Retorno (ROI)</span>
+                    </div>
+                    <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-primary); margin-bottom: 1.25rem;">
+                        Evaluación del rendimiento del capital humano de la panadería. Se contrasta el costo salarial contra la dinámica operativa y los resultados financieros comerciales del mes:
+                    </p>
+
+                    <div class="brand-split-grid" style="grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.5rem;">
+                        <!-- Columna Venta (FOH) -->
+                        <div class="brand-box" style="border-left: 4px solid var(--accent-teal);">
+                            <span class="brand-title" style="color: var(--accent-teal); font-size: 1.05rem; font-weight: 700;">🛍️ RRHH en la VENTA (Front of House)</span>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-top: 0.5rem;">
+                                • <strong>Equipo FOH:</strong> 4 colaboradoras (R. Contreras, D. Abarca, P. Agudelo [Part-time], J. Zuleta). Equivalente a 3,5 jornadas completas (FTE).<br>
+                                • <strong>Costo Líquido FOH:</strong> $2.731.687 CLP (5,62% de la venta neta).<br>
+                                • <strong>Venta Presencial y Salón Asistida:</strong> $46.097.934 CLP.<br>
+                                • <strong>Venta Neta por Empleado FOH:</strong> **$13.170.838 CLP/FTE** al mes.<br>
+                                • <strong>Ticket Promedio FOH:</strong> $7.008 CLP (Mostrador) / $78.655 CLP (Salón).
+                            </p>
+                            <div class="split-explanation" style="margin-top: auto; font-size: 0.78rem; border-left-color: var(--accent-teal);">
+                                <strong>Diagnóstico:</strong> Alta eficiencia comercial en la atención del mostrador. La fuerza de venta directa opera de manera extremadamente ligera, representando solo el 5,62% de la facturación comercial de la panadería.
+                            </div>
+                        </div>
+
+                        <!-- Columna Operación (BOH) -->
+                        <div class="brand-box" style="border-left: 4px solid var(--primary);">
+                            <span class="brand-title" style="color: var(--primary); font-size: 1.05rem; font-weight: 700;">🥖 RRHH en la OPERACIÓN (Back of House)</span>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-top: 0.5rem;">
+                                • <strong>Equipo BOH:</strong> 4 panaderos (J. Peña, M. Santolalla, M. Vallejos, más P. Rojas liderando). Equivalente a 4,0 jornadas completas (FTE).<br>
+                                • <strong>Costo Líquido BOH:</strong> $3.249.384 CLP (6,68% de la venta neta consolidada).<br>
+                                • <strong>Venta de Productos de Taller:</strong> $26.249.995 CLP (Panadería, Bollería y Sandwich horneados/preparados localmente).<br>
+                                • <strong>Producción Neta por Empleado BOH:</strong> **$6.562.498 CLP/FTE** al mes.<br>
+                                • <strong>Rendimiento Físico Promedio:</strong> **211 unidades horneadas/panadero al día** (21.157 unidades consolidadas al mes).
+                            </p>
+                            <div class="split-explanation" style="margin-top: auto; font-size: 0.78rem; border-left-color: var(--primary);">
+                                <strong>Diagnóstico:</strong> Modelo operativo optimizado gracias a la recepción de masas congeladas/intercompany desde la cocina central (suministro intercompany de Horeca), lo que permite a los panaderos locales actuar como horneadores/ensambladores eficientes, minimizando el labor cost de producción.
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 style="font-family: var(--font-display); font-size: 1.1rem; color: #ffffff; margin-bottom: 0.75rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Indicadores Financieros de Retorno y Cobertura (ROI de RRHH)</h4>
+                    
+                    <div class="table-responsive" style="margin-bottom: 1.25rem;">
+                        <table class="premium-table" style="font-size: 0.85rem; width: 100%;">
+                            <thead>
+                                <tr style="background-color: var(--bg-surface-elevated);">
+                                    <th>Indicador Financiero</th>
+                                    <th>Fórmula de Análisis</th>
+                                    <th class="num-col">Resultado (CLP)</th>
+                                    <th>Interpretación Estratégica</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Retorno de Inversión Salarial (ROI Ventas)</strong></td>
+                                    <td>Ventas Netas ($48.6M) / Costo Nómina ($5.98M)</td>
+                                    <td class="num-col" style="font-weight: bold; color: var(--accent-teal);">8,13x</td>
+                                    <td>Por cada $1 CLP invertido en remuneraciones líquidas (incluyendo a Peter), se generan **$8,13 CLP** en ingresos netos de venta.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ROI sobre Margen Real de Contribución</strong></td>
+                                    <td>Margen Real ($22.8M) / Costo Nómina ($5.98M)</td>
+                                    <td class="num-col" style="font-weight: bold; color: var(--accent-teal);">3,83x</td>
+                                    <td>Por cada $1 CLP invertido en sueldos líquidos, el personal produce **$3,83 CLP** en margen comercial real de contribución (libre de materia prima).</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Punto de Equilibrio de Nómina (Breakeven)</strong></td>
+                                    <td>Costo Nómina ($5.98M) / Margen Real % (47,09%)</td>
+                                    <td class="num-col" style="font-weight: bold; color: var(--accent-rose);">$12.701.361</td>
+                                    <td>Venta neta mensual mínima requerida sólo para solventar la nómina operativa. Venta real actual supera este umbral en **3,8x**.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Ratio de Absorción Laboral consolidada</strong></td>
+                                    <td>Costo Nómina ($5.98M) / Margen Real ($22.8M)</td>
+                                    <td class="num-col" style="font-weight: bold;">26,1%</td>
+                                    <td>Porcentaje del margen neto comercial que se destina al pago de planilla. Deja un **73,9%** de margen libre para costos fijos, deudas y utilidad.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Análisis de Costeo Real e Intercompany (Bocus / Cadaqués)</h3>
+                    </div>
+                    <p style="font-size: 0.95rem; line-height: 1.7; color: var(--text-primary); margin-bottom: 1.25rem;">
+                        Al cruzar los registros de compras e intercompany reales facturados en el Fudo de <strong>Bocus</strong> bajo el cliente <strong>Inversiones Cadaques Spa</strong>, determinamos el volumen real de traspasos de insumos en mayo de 2026:
+                    </p>
+                    
+                    <div class="table-responsive" style="margin-bottom: 1.5rem;">
+                        <table class="premium-table">
+                            <thead>
+                                <tr>
+                                    <th>Categoría Bocus</th>
+                                    <th>Insumo / Producto Transferido</th>
+                                    <th class="num-col">Cantidad Recibida</th>
+                                    <th class="num-col">Total Bruto Facturado Bocus (CLP)</th>
+                                    <th class="num-col">Costo de Producción Teórico (CLP)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Producción</strong></td>
+                                    <td>Caja Masa Baguette Baco 6,3Kg</td>
+                                    <td class="num-col">900,00 cajas</td>
+                                    <td class="num-col" style="font-weight: 600;">$6.750.000</td>
+                                    <td class="num-col">$0</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Congelados</strong></td>
+                                    <td>Media Luna 60gr</td>
+                                    <td class="num-col">4.135,00 unidades</td>
+                                    <td class="num-col" style="font-weight: 600;">$2.067.500</td>
+                                    <td class="num-col">$2.059.207</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Congelados</strong></td>
+                                    <td>Croissant 100gr</td>
+                                    <td class="num-col">2.860,00 unidades</td>
+                                    <td class="num-col" style="font-weight: 600;">$1.532.600</td>
+                                    <td class="num-col">$1.568.610</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Producción</strong></td>
+                                    <td>Jamon Laminado 1Kg</td>
+                                    <td class="num-col">84,00 kg</td>
+                                    <td class="num-col" style="font-weight: 600;">$1.276.800</td>
+                                    <td class="num-col">$1.254.498</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Producción</strong></td>
+                                    <td>Pollo Desmenuzado Cocido 1Kg</td>
+                                    <td class="num-col">75,00 kg</td>
+                                    <td class="num-col" style="font-weight: 600;">$1.087.500</td>
+                                    <td class="num-col">$0</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Producción</strong></td>
+                                    <td>Queso Mantecoso Laminado 1Kg</td>
+                                    <td class="num-col">71,00 kg</td>
+                                    <td class="num-col" style="font-weight: 600;">$710.000</td>
+                                    <td class="num-col">$2.450</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Congelados</strong></td>
+                                    <td>Palmera 150gr</td>
+                                    <td class="num-col">860,00 unidades</td>
+                                    <td class="num-col" style="font-weight: 600;">$559.000</td>
+                                    <td class="num-col">$554.821</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Congelados</strong></td>
+                                    <td>Pan Chocolate 100gr</td>
+                                    <td class="num-col">1.032,00 unidades</td>
+                                    <td class="num-col" style="font-weight: 600;">$464.400</td>
+                                    <td class="num-col">$463.554</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="brand-split-grid" style="grid-template-columns: 1fr 1fr;">
+                        <div class="brand-box" style="border-left: 4px solid var(--accent-rose);">
+                            <span class="brand-title" style="color: var(--accent-rose)">📊 Realidad Financiera Intercompany</span>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">
+                                • **Facturación Total Bruta:** **$30.608.785 CLP** de Bocus a Cadaqués.<br>
+                                • **Traspaso Neto (Sin IVA):** **$25.721.668 CLP**.<br>
+                                • **Materia Prima Real %:** **52,91%** consolidada sobre ventas netas de Cadaqués ($48.6M CLP).<br>
+                                • **Explicación del Gap:** La brecha con la MP teórica (29,41%) indica aumento de existencias en el local de Cadaqués, mermas de mostrador y precios de transferencia intercompany superiores al costo unitario base de Horeca.
+                            </p>
+                        </div>
+                        
+                        <div class="brand-box" style="border-left: 4px solid var(--accent-green);">
+                            <span class="brand-title" style="color: var(--accent-green)">🔍 Brecha de Existencias en Fudo</span>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">
+                                Dado que no se cargan las facturas en Fudo, persisten los **stocks negativos irreales** (Media Luna en -5.277, Pan Chocolate en -1.398).
+                                <br><br>
+                                Al ingresar de forma quincenal estas facturas e intercompany reales en Fudo, la base de datos reflejará la existencia física correcta.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. AUDITORÍA DE COSTOS DE QUESOS (SII / FUDO DE CADAQUÉS) -->
+                <div class="content-card" style="margin-top: 1.5rem;">
+                    <div class="card-header">
+                        <h3>Auditoría de Costos de Quesos (SII / Fudo de Cadaqués)</h3>
+                        <span style="font-size: 0.8rem; background: rgba(255, 74, 112, 0.1); color: var(--accent-rose); padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700;">Control de Desviación de Margen</span>
+                    </div>
+                    <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 1.25rem;">
+                        Detalle analítico del costo unitario de adquisición de materia prima para la categoría de quesos importados y locales en el Fudo de Cadaqués SpA. Se identifican distorsiones críticas de precio y productos pendientes de costeo activo (fugas de información):
+                    </p>
+                    
+                    <div class="table-responsive" style="margin-bottom: 1rem;">
+                        <table class="premium-table" style="font-size: 0.82rem;">
+                            <thead>
+                                <tr>
+                                    <th>Producto (Queso)</th>
+                                    <th class="num-col">Costo Materia Prima (Fudo)</th>
+                                    <th class="num-col">Precio de Venta Mostrador (con IVA)</th>
+                                    <th class="num-col">Margen Bruto (%)</th>
+                                    <th>Diagnóstico Operativo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Comte</strong></td>
+                                    <td class="num-col" style="color: var(--accent-rose); font-weight: 600;">$6.913 <span style="font-size:0.7rem; color:var(--text-muted); font-weight:normal;">(Corregido)</span></td>
+                                    <td class="num-col">$15.000</td>
+                                    <td class="num-col" style="color: var(--accent-teal); font-weight: bold;">53,9%</td>
+                                    <td>✅ <strong>Costo Corregido.</strong> Se regulariza el valor a $6.913 CLP (costo nacionalizado de Bocus $6.584 + 5% margen) en lugar del precio de venta neto de $12.605 CLP cargado por error en Fudo. Margen real corregido al 53,9%.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Callaqui Cabra</strong></td>
+                                    <td class="num-col">$2.244</td>
+                                    <td class="num-col">$8.500</td>
+                                    <td class="num-col" style="color: var(--accent-teal); font-weight: bold;">73,6%</td>
+                                    <td><span class="table-badge b2c" style="background-color: var(--accent-green-glow); color: var(--primary)">Estrella (Alto Margen)</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Roquefort</strong></td>
+                                    <td class="num-col">$4.948</td>
+                                    <td class="num-col">$14.500</td>
+                                    <td class="num-col" style="color: var(--accent-teal); font-weight: bold;">65,9%</td>
+                                    <td><span class="table-badge b2c" style="background-color: var(--accent-green-glow); color: var(--primary)">Muy Rentable</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Cabrifin</strong></td>
+                                    <td class="num-col">$6.630</td>
+                                    <td class="num-col">$19.000</td>
+                                    <td class="num-col" style="color: var(--accent-teal); font-weight: bold;">65,1%</td>
+                                    <td><span class="table-badge b2c" style="background-color: var(--accent-green-glow); color: var(--primary)">Muy Rentable</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Emmental</strong></td>
+                                    <td class="num-col">$3.588</td>
+                                    <td class="num-col">$10.200</td>
+                                    <td class="num-col" style="font-weight: bold;">64,8%</td>
+                                    <td><span class="table-badge b2c" style="background-color: rgba(197, 168, 128, 0.1)">Saludable</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Cabra Maduro</strong></td>
+                                    <td class="num-col">$2.365</td>
+                                    <td class="num-col">$6.500</td>
+                                    <td class="num-col" style="font-weight: bold;">63,6%</td>
+                                    <td><span class="table-badge b2c" style="background-color: rgba(197, 168, 128, 0.1)">Saludable</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Brie</strong></td>
+                                    <td class="num-col">$3.885</td>
+                                    <td class="num-col">$10.500</td>
+                                    <td class="num-col" style="font-weight: bold;">63,0%</td>
+                                    <td><span class="table-badge b2c" style="background-color: rgba(197, 168, 128, 0.1)">Saludable</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Grana Padano</strong></td>
+                                    <td class="num-col">$4.638</td>
+                                    <td class="num-col">$12.000</td>
+                                    <td class="num-col" style="font-weight: bold;">61,3%</td>
+                                    <td><span class="table-badge b2c" style="background-color: rgba(197, 168, 128, 0.1)">Saludable</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Beaufort 100gr</strong></td>
+                                    <td class="num-col">$5.882</td>
+                                    <td class="num-col">$13.900</td>
+                                    <td class="num-col" style="font-weight: bold;">57,7%</td>
+                                    <td><span class="table-badge b2c" style="background-color: rgba(197, 168, 128, 0.1)">Equilibrado</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Cremeux 200gr</strong></td>
+                                    <td class="num-col">$8.182</td>
+                                    <td class="num-col">$18.800</td>
+                                    <td class="num-col" style="font-weight: bold;">56,5%</td>
+                                    <td><span class="table-badge b2c" style="background-color: rgba(197, 168, 128, 0.1)">Equilibrado</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Petit Basque 1/4</strong></td>
+                                    <td class="num-col">$4.248</td>
+                                    <td class="num-col">$9.500</td>
+                                    <td class="num-col" style="font-weight: bold;">55,3%</td>
+                                    <td><span class="table-badge b2c" style="background-color: rgba(197, 168, 128, 0.1)">Equilibrado</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Reblochon</strong></td>
+                                    <td class="num-col">$6.802</td>
+                                    <td class="num-col">$15.000</td>
+                                    <td class="num-col" style="font-weight: bold;">54,7%</td>
+                                    <td><span class="table-badge b2c" style="background-color: rgba(197, 168, 128, 0.1)">Equilibrado</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Brillat Savarin</strong></td>
+                                    <td class="num-col">$8.367</td>
+                                    <td class="num-col">$18.000</td>
+                                    <td class="num-col" style="font-weight: bold;">53,5%</td>
+                                    <td><span class="table-badge b2c" style="background-color: rgba(197, 168, 128, 0.1)">Equilibrado</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Petit Camembert</strong></td>
+                                    <td class="num-col">$5.807</td>
+                                    <td class="num-col">$12.500</td>
+                                    <td class="num-col" style="font-weight: bold;">53,5%</td>
+                                    <td><span class="table-badge b2c" style="background-color: rgba(197, 168, 128, 0.1)">Equilibrado</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Chabichou</strong></td>
+                                    <td class="num-col">$6.596</td>
+                                    <td class="num-col">$13.000</td>
+                                    <td class="num-col" style="color: var(--primary);">49,3%</td>
+                                    <td><span class="table-badge b2c" style="background-color: rgba(197, 168, 128, 0.1)">Ajustable. Se aconseja subir precio a $14.500 CLP.</span></td>
+                                </tr>
+                                <tr style="background-color: rgba(255, 255, 255, 0.01);">
+                                    <td><strong>Quesos sin Costo Activo (Fuga)</strong></td>
+                                    <td class="num-col" style="color: var(--accent-rose);">$0 / NaN</td>
+                                    <td class="num-col">Varios</td>
+                                    <td class="num-col" style="color: var(--accent-rose); font-weight: bold;">---</td>
+                                    <td>⚠️ <strong>Falta costeo en Fudo:</strong> Cremeux de Bourgogne ($30k), Soumaitrain ($24k), Epoisses ($19.5k), Coeur de Bray ($15.5k), Bourgogne Trufee ($11.3k), Abondance ($4.7k), Bleu ($4.5k).</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- TAB: UBER EATS (AUDITORIA DIGITAL) -->
+            <div id="tab-ubereats" class="tab-panel">
+                <!-- Metrics Grid -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="metric-label">Facturación Uber Eats</span>
+                        <span class="metric-value">$3.329.150</span>
+                        <span class="metric-subtext">CLP Bruto (+108% vs Abril)</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">Pedidos Completados</span>
+                        <span class="metric-value">140</span>
+                        <span class="metric-subtext">Pedidos en Mayo (+137% vs Abril)</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">Ticket Promedio Uber</span>
+                        <span class="metric-value" style="color: var(--accent-teal)">$23.780</span>
+                        <span class="metric-subtext">3.4x vs Mostrador Físico ($7.008)</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">Margen Real Consolidado</span>
+                        <span class="metric-value" style="color: var(--accent-green)">68,2%</span>
+                        <span class="metric-subtext">$1.421.509 CLP de utilidad neta</span>
+                    </div>
+                </div>
+
+                <div class="dashboard-layout">
+                    <!-- Column 1: Financial, operational quality and contract details -->
+                    <div class="left-column">
+                        <div class="content-card">
+                            <div class="card-header">
+                                <h3>Consolidación Económica del Canal (Mayo 2026)</h3>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="premium-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Concepto de Flujo</th>
+                                            <th class="num-col">Monto (CLP)</th>
+                                            <th class="num-col">% sobre Bruto</th>
+                                            <th>Descripción / Destino</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Venta Bruta Uber Eats</strong></td>
+                                            <td class="num-col"><strong>$3.329.150</strong></td>
+                                            <td class="num-col">100.0%</td>
+                                            <td>Total facturado a clientes en la aplicacion</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Comisión Uber (18% mas IVA)</td>
+                                            <td class="num-col" style="color: var(--accent-rose)">-$713.094</td>
+                                            <td class="num-col">-21.4%</td>
+                                            <td>Monto de comisiones retenido por la plataforma</td>
+                                        </tr>
+                                        <tr style="background-color: rgba(255, 255, 255, 0.02);">
+                                            <td><strong>Transferencia Bancaria Bruta</strong></td>
+                                            <td class="num-col"><strong>$2.616.056</strong></td>
+                                            <td class="num-col">78.6%</td>
+                                            <td>Ingreso real en la cuenta bancaria de Cadaques</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Impuesto IVA de las Ventas (19%)</td>
+                                            <td class="num-col" style="color: var(--accent-rose)">-$531.547</td>
+                                            <td class="num-col">-16.0%</td>
+                                            <td>Impuesto fiscal a declarar por las ventas</td>
+                                        </tr>
+                                        <tr style="background-color: rgba(197, 168, 128, 0.05);">
+                                            <td><strong>Ingreso Neto Líquido Local</strong></td>
+                                            <td class="num-col" style="color: var(--primary)"><strong>$2.084.509</strong></td>
+                                            <td class="num-col">62.6%</td>
+                                            <td>Venta liquida despues de comisiones e IVA</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Costo Materia Prima Real (Insumos Bocus)</td>
+                                            <td class="num-col" style="color: var(--accent-rose)">-$663.000</td>
+                                            <td class="num-col">-19.9%</td>
+                                            <td>Costo real intercompany de masas e insumos despachados</td>
+                                        </tr>
+                                        <tr style="background-color: rgba(88, 129, 87, 0.1);">
+                                            <td><strong>Margen de Contribución Real</strong></td>
+                                            <td class="num-col" style="color: var(--accent-teal)"><strong>$1.421.509</strong></td>
+                                            <td class="num-col"><strong>68.2%</strong></td>
+                                            <td><strong>Utilidad operacional liquida que le queda al local</strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- CALIDAD OPERATIVA E INCIDENCIAS CARD -->
+                        <div class="content-card" style="margin-top: 1.5rem;">
+                            <div class="card-header">
+                                <h3>Calidad Operativa e Incidencias (Fugas por Reembolso)</h3>
+                                <span style="font-size: 0.8rem; background: rgba(197, 168, 128, 0.15); color: var(--primary); padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700;">Score: 4.7 / 5.0 ★</span>
+                            </div>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
+                                Durante mayo se registró una tasa de error de pedidos de <strong>2.0%</strong> (mejorando un 14% respecto al mes anterior). A pesar del buen desempeño general, las fallas de empaque generaron <strong>$8.089 CLP en costos de reembolso</strong> asumidos en su totalidad por el local.
+                            </p>
+                            
+                            <h4 style="font-family: var(--font-display); font-size: 0.9rem; color: #ffffff; margin-bottom: 0.5rem; font-weight: 600;">Desglose de Incidencias Operativas:</h4>
+                            
+                            <div style="display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 1rem;">
+                                <div style="background-color: rgba(255, 255, 255, 0.01); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.75rem;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                        <span style="font-size: 0.8rem; font-weight: 600; color: var(--accent-rose);">Tabla Charcutería</span>
+                                        <span style="font-size: 0.8rem; font-weight: 700; color: #ffffff;">50% de las Fugas</span>
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.05); height: 6px; border-radius: 3px; overflow: hidden; margin-bottom: 0.4rem;">
+                                        <div style="background: var(--accent-rose); width: 50%; height: 100%;"></div>
+                                    </div>
+                                    <span style="font-size: 0.72rem; color: var(--text-muted);">Causa: Envío de artículo incorrecto en el pedido embalado.</span>
+                                </div>
+
+                                <div style="background-color: rgba(255, 255, 255, 0.01); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.75rem;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                        <span style="font-size: 0.8rem; font-weight: 600; color: var(--accent-violet);">Pan de Campo Integral</span>
+                                        <span style="font-size: 0.8rem; font-weight: 700; color: #ffffff;">25% de las Fugas</span>
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.05); height: 6px; border-radius: 3px; overflow: hidden; margin-bottom: 0.4rem;">
+                                        <div style="background: var(--accent-violet); width: 25%; height: 100%;"></div>
+                                    </div>
+                                    <span style="font-size: 0.72rem; color: var(--text-muted);">Causa: Omisión o artículo faltante en el paquete despachado.</span>
+                                </div>
+
+                                <div style="background-color: rgba(255, 255, 255, 0.01); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.75rem;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                        <span style="font-size: 0.8rem; font-weight: 600; color: var(--accent-violet);">Pan de Molde Especial</span>
+                                        <span style="font-size: 0.8rem; font-weight: 700; color: #ffffff;">25% de las Fugas</span>
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.05); height: 6px; border-radius: 3px; overflow: hidden; margin-bottom: 0.4rem;">
+                                        <div style="background: var(--accent-violet); width: 25%; height: 100%;"></div>
+                                    </div>
+                                    <span style="font-size: 0.72rem; color: var(--text-muted);">Causa: Omisión o artículo faltante en el paquete despachado.</span>
+                                </div>
+                            </div>
+                            
+                            <div class="split-explanation" style="margin-top: 0.5rem; font-size: 0.75rem; border-left-color: var(--accent-teal); background-color: rgba(10, 216, 180, 0.02);">
+                                <strong>Acción Correctiva Roxy Contreras:</strong> Implementar desde el 2 de junio un sistema de check-list físico obligatorio pegado en cada bolsa de Uber. La cajera de turno debe firmar la revisión de la Tabla Charcutería y panes especiales antes de entregar el pedido al motorista.
+                            </div>
+                        </div>
+
+                        <!-- CONTRACT DETAILS CARD -->
+                        <div class="content-card" style="margin-top: 1.5rem;">
+                            <div class="card-header">
+                                <h3>Marco Contractual de la Alianza (26-03-2026)</h3>
+                            </div>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 0.75rem;">
+                                Alianza de comercialización digital firmada de forma electrónica vía DocuSign por Inversiones Cadaqués SpA (RUT 77.427.765-K), representada por Nicolás Le Baux.
+                            </p>
+                            <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.8rem; color: var(--text-secondary);">
+                                <li style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.4rem;">
+                                    <span>Comisión Delivery (Reparto por Socios Uber)</span>
+                                    <span style="color: #ffffff; font-weight: 600;">18% mas IVA</span>
+                                </li>
+                                <li style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.4rem;">
+                                    <span>Comisión Opción para Llevar (Pickup)</span>
+                                    <span style="color: #ffffff; font-weight: 600;">18% mas IVA</span>
+                                </li>
+                                <li style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.4rem;">
+                                    <span>Costo de Activación de Sucursal</span>
+                                    <span style="color: var(--accent-teal); font-weight: 600;">$0 CLP (Bonificado contractual)</span>
+                                </li>
+                                <li style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.4rem;">
+                                    <span>Liquidación de Fondos</span>
+                                    <span style="color: #ffffff; font-weight: 600;">Semanal consolidado vía transferencia</span>
+                                </li>
+                                <li style="display: flex; justify-content: space-between;">
+                                    <span>ID de Transacción del Contrato</span>
+                                    <span style="color: var(--text-muted); font-size: 0.72rem;">DocuSign ID: D403FBF1-3BD4-4136-AB77-80AA735B8DFD</span>
+                                </li>
+                            </ul>
+                            <div class="split-explanation" style="margin-top: 1rem; font-size: 0.75rem; border-left-color: var(--primary); background-color: rgba(197, 168, 128, 0.02);">
+                                <strong>Acceso al Documento:</strong> El contrato completo con sus anexos tributarios y legales está archivado en formato digital en la ruta <a href="file:///Users/nlebaux/Documents/webnlb/nlb2-codex/cadaques/documentos/acuerdo_ubereats_cadaques_26-03-2026.pdf" target="_blank" style="color: var(--primary); text-decoration: underline;">acuerdo_ubereats_cadaques_26-03-2026.pdf</a> para revisión de Luis y Nicolás.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Price contrasts, system variances and action plans -->
+                    <div class="right-column">
+                        <div class="content-card">
+                            <div class="card-header">
+                                <h3>Estrategia de Precios (Mostrador vs Uber Eats)</h3>
+                            </div>
+                            <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
+                                Para absorber de forma íntegra la comisión del 18% mas IVA del marketplace, se aplica un recargo estratégico (mark-up) del 15% al 30.5% en la aplicación, blindando el margen del local.
+                            </p>
+                            <div class="table-responsive">
+                                <table class="premium-table" style="font-size: 0.8rem;">
+                                    <thead>
+                                        <tr>
+                                            <th>Producto</th>
+                                            <th class="num-col">App (Uber)</th>
+                                            <th class="num-col">Mostrador (Fudo)</th>
+                                            <th class="num-col">Recargo %</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Baguette 300gr</td>
+                                            <td class="num-col">$2.850</td>
+                                            <td class="num-col">$2.200</td>
+                                            <td class="num-col" style="color: var(--accent-teal)">+29.5%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Media Luna Unidad</td>
+                                            <td class="num-col">$2.350</td>
+                                            <td class="num-col">$1.800</td>
+                                            <td class="num-col" style="color: var(--accent-teal)">+30.5%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sandwich Lyon 25cm</td>
+                                            <td class="num-col">$7.150</td>
+                                            <td class="num-col">$5.500</td>
+                                            <td class="num-col" style="color: var(--accent-teal)">+30.0%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Croissant Pistacho</td>
+                                            <td class="num-col">$4.500</td>
+                                            <td class="num-col">$3.900</td>
+                                            <td class="num-col" style="color: var(--primary)">+15.3%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="split-explanation" style="margin-top: 1rem; font-size: 0.72rem; border-left-color: var(--accent-rose); background-color: rgba(255, 74, 112, 0.02);">
+                                <strong>Alerta Croissant Pistacho:</strong> Al tener solo un 15.3% de recargo en Uber, la comisión absorbe parte del margen real. Se recomienda subir el precio en la aplicación a <strong>$4.990 CLP</strong> para alinearlo al 28% de recargo estándar.
+                            </div>
+                            <div class="split-explanation" style="margin-top: 0.75rem; font-size: 0.72rem;">
+                                <strong>Créditos Publicitarios Restantes:</strong> Quedan <strong>$29.586 CLP</strong> en créditos de Uber Ads que expiran impostergablemente el <strong>18 de julio de 2026</strong>. Deben ser consumidos en campañas activas antes de esa fecha.
+                            </div>
+                        </div>
+
+                        <!-- SYSTEM VARIANCE CARD -->
+                        <div class="content-card" style="margin-top: 1.5rem;">
+                            <div class="card-header">
+                                <h3>Contraste Analítico: ¿Por qué no coincide Fudo y Uber?</h3>
+                            </div>
+                            <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0.75rem;">
+                                Existe una discrepancia nominal de <strong>+$687.650 CLP</strong> entre la venta bruta oficial reportada por el portal de Uber Eats ($3.329.150 CLP) y la registrada en el sistema de caja Fudo para este canal ($2.641.500 CLP), a pesar de que ambos sistemas coinciden exactamente en <strong>140 pedidos</strong> en mayo.
+                            </p>
+                            <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0.75rem;">
+                                Este descalce de información se fundamenta técnicamente en tres factores operativos de los sistemas:
+                            </p>
+                            <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.78rem; color: var(--text-secondary); padding-left: 0;">
+                                <li style="border-left: 2px solid var(--accent-rose); padding-left: 0.5rem; margin-bottom: 0.4rem;">
+                                    <strong style="color: #ffffff;">1. Recargo de Precios (Mark-up):</strong> Los productos se venden con recargo en Uber, pero Fudo en ocasiones registra los pedidos al precio base de mostrador físico de Cadaqués en lugar de registrar el precio real inflado de la aplicación.
+                                </li>
+                                <li style="border-left: 2px solid var(--accent-violet); padding-left: 0.5rem; margin-bottom: 0.4rem;">
+                                    <strong style="color: #ffffff;">2. Descuentos y Promociones:</strong> El portal de Uber reporta la venta bruta inicial pagada por el cliente antes de descuentos, mientras que Fudo registra el valor neto real restando comisiones de pago o promociones automáticas de la integración.
+                                </li>
+                                <li style="border-left: 2px solid var(--accent-teal); padding-left: 0.5rem;">
+                                    <strong style="color: #ffffff;">3. Costos de Envío y Propinas:</strong> La facturación bruta de Uber Eats incluye el costo del despacho (delivery fee) cobrado al cliente y las propinas destinadas a los repartidores. Fudo de Cadaqués excluye estos ítems del total facturado del local al no ser ingresos de productos propios.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- DIGITAL ACTION PLAN CARD -->
+                        <div class="content-card" style="margin-top: 1.5rem;">
+                            <div class="card-header">
+                                <h3>Plan de Acción y Recomendaciones Digitales</h3>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 0.8rem; font-size: 0.8rem;">
+                                <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.6rem;">
+                                    <h4 style="color: var(--primary); margin-bottom: 0.2rem; font-size: 0.85rem; font-weight: 600;">1. Auditoría diaria de despacho (Roxy Contreras)</h4>
+                                    <p style="color: var(--text-secondary); font-size: 0.75rem; line-height: 1.5;">
+                                        Establecer el check-list de empaque para Tabla Charcutería y panes especiales para erradicar las incidencias operativas y los $8.089 CLP en reembolsos.
+                                    </p>
+                                </div>
+                                <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.6rem;">
+                                    <h4 style="color: var(--accent-teal); margin-bottom: 0.2rem; font-size: 0.85rem; font-weight: 600;">2. Activación de Campañas de Ads (Boris García)</h4>
+                                    <p style="color: var(--text-secondary); font-size: 0.75rem; line-height: 1.5;">
+                                        Programar anuncios patrocinados en la aplicación para consumir los $29.586 CLP de créditos promocionales antes del vencimiento fatal del 18 de julio.
+                                    </p>
+                                </div>
+                                <div>
+                                    <h4 style="color: var(--accent-violet); margin-bottom: 0.2rem; font-size: 0.85rem; font-weight: 600;">3. Sesión de Fotos y Conversión de Menú</h4>
+                                    <p style="color: var(--text-secondary); font-size: 0.75rem; line-height: 1.5;">
+                                        Optimizar de forma visual el menú digital con imágenes profesionales de bollería y sándwiches para elevar la conversión del 11% al rango proyectado del 15% al 18% (llegando a facturar entre $6.0M y $8.0M CLP mensuales).
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- TAB: STRATEGY (PLAN DE ACCION) -->
+            <div id="tab-strategy" class="tab-panel">
+                
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Plan de Acción Prioritario - Liderazgo Roxy y Peter</h3>
+                    </div>
+                    
+                    <div class="action-list">
+                        <!-- Action Item 1 -->
+                        <div class="action-item-card">
+                            <div class="action-number">1</div>
+                            <div class="action-details">
+                                <h4>Regularización de "Producto Genérico" (Roxy Contreras)</h4>
+                                <div class="action-columns">
+                                    <div class="action-col-block causa">
+                                        <span class="block-title">Causa</span>
+                                        <span class="block-text">Cajeras seleccionan "Producto Genérico" en mostrador por rapidez en vez de marcar el producto correcto.</span>
+                                    </div>
+                                    <div class="action-col-block impacto">
+                                        <span class="block-title">Impacto</span>
+                                        <span class="block-text">$3.119.130 CLP vendidos sin costear (5,7% de la venta de productos), distorsionando el mix de Fudo.</span>
+                                    </div>
+                                    <div class="action-col-block accion">
+                                        <span class="block-title">Acción de Roxy</span>
+                                        <span class="block-text">Capacitar a las cajeras para marcar el pan o bollería específico y deshabilitar este comodín en caja.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Action Item 2 -->
+                        <div class="action-item-card">
+                            <div class="action-number">2</div>
+                            <div class="action-details">
+                                <h4>Ajuste de Receta y Precio en "Pan Pasas" (Peter Rojas / Receta)</h4>
+                                <div class="action-columns">
+                                    <div class="action-col-block causa">
+                                        <span class="block-title">Causa</span>
+                                        <span class="block-text">El costo unitario es de $1.260 CLP contra un precio de venta gross de $2.400 CLP en mostrador.</span>
+                                    </div>
+                                    <div class="action-col-block impacto">
+                                        <span class="block-title">Impacto</span>
+                                        <span class="block-text">Materia prima teórica de 62,5% (margen de apenas 37,50%), inaceptable para panadería propia.</span>
+                                    </div>
+                                    <div class="action-col-block accion">
+                                        <span class="block-title">Acción de Peter</span>
+                                        <span class="block-text">Revisar gramajes de pasas e insumos, y subir de forma inmediata el precio gross al público a <strong>$3.200 CLP</strong>.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Action Item 3 -->
+                        <div class="action-item-card">
+                            <div class="action-number">3</div>
+                            <div class="action-details">
+                                <h4>Ingesta Quincenal de Facturas Intercompany (Roxy / Contable)</h4>
+                                <div class="action-columns">
+                                    <div class="action-col-block causa">
+                                        <span class="block-title">Causa</span>
+                                        <span class="block-text">Falta de carga sistemática en Fudo de las facturas de Bocus ($30.6M CLP facturados en mayo).</span>
+                                    </div>
+                                    <div class="action-col-block impacto">
+                                        <span class="block-title">Impacto</span>
+                                        <span class="block-text">Stocks negativos irreales en el sistema. Imposibilidad de medir mermas reales en mostrador.</span>
+                                    </div>
+                                    <div class="action-col-block accion">
+                                        <span class="block-title">Acción Recomendada</span>
+                                        <span class="block-text">Roxy debe delegar la carga sistemática de facturas e ingresos intercompany los días 15 y 30 en Fudo.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Action Item 4 -->
+                        <div class="action-item-card">
+                            <div class="action-number">4</div>
+                            <div class="action-details">
+                                <h4>Diagnóstico Técnico de Rappi (Boris García / Canales)</h4>
+                                <div class="action-columns">
+                                    <div class="action-col-block causa">
+                                        <span class="block-title">Causa</span>
+                                        <span class="block-text">Nula visibilidad comercial en Rappi (apenas 2 pedidos por $17.180 CLP en todo el mes de mayo).</span>
+                                    </div>
+                                    <div class="action-col-block impacto">
+                                        <span class="block-title">Impacto</span>
+                                        <span class="block-text">Subutilización crítica de una plataforma ya contratada y firmada con 0% de comisión preferencial de lanzamiento.</span>
+                                    </div>
+                                    <div class="action-col-block accion">
+                                        <span class="block-title">Acción de Boris</span>
+                                        <span class="block-text">Revisar de forma urgente la integración de FUDO y el estado de la tienda en el panel de Rappi.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Action Item 5 -->
+                        <div class="action-item-card">
+                            <div class="action-number">5</div>
+                            <div class="action-details">
+                                <h4>Corrección de Costos en Fudo - Error Comté (Luis / Sistemas)</h4>
+                                <div class="action-columns">
+                                    <div class="action-col-block causa">
+                                        <span class="block-title">Causa</span>
+                                        <span class="block-text">Se registró en Fudo de Cadaqués un costo de $12.605 CLP (que es el PVP neto) en lugar del valor de traspaso intercompany de $6.913 CLP con IVA.</span>
+                                    </div>
+                                    <div class="action-col-block impacto">
+                                        <span class="block-title">Impacto</span>
+                                        <span class="block-text">Bocus generó un sobre-margen artificial del 47,8% (o 56,1% neto) en el traspaso intercompany, reduciendo el margen del local al 16,0%.</span>
+                                    </div>
+                                    <div class="action-col-block accion">
+                                        <span class="block-title">Acción de Luis</span>
+                                        <span class="block-text">Corregir el costo de adquisición del Comté en Fudo a <strong>$6.913 CLP</strong> (costo nacionalizado de Bocus $6.584 + 5% margen) en la próxima reunión de equipo.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </main>
+    </div>
+
+    <!-- Vanilla Javascript to switch tabs -->
+    <script>
+        function switchTab(tabId, element) {
+            const panels = document.querySelectorAll('.tab-panel');
+            panels.forEach(p => p.classList.remove('active'));
+            
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            element.classList.add('active');
+        }
+    </script>
+</body>
+</html>
