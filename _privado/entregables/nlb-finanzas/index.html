@@ -81,6 +81,32 @@
     .drawer td { border-bottom: 1px solid #eef0f7; padding: 7px 8px; vertical-align: top; }
     .drawer td.m { font-weight: 700; text-align: right; white-space: nowrap; }
     .drawer .dtot { background: #faf9ff; border-radius: 10px; font-weight: 700; margin-bottom: 14px; padding: 12px 14px; }
+    .drawer tr.movrow { cursor: pointer; }
+    .drawer tr.movrow:hover td { background: #6c5ce71a; }
+    .drawer tr.movrow td:first-child { position: relative; padding-left: 20px; }
+    .drawer tr.movrow td:first-child::before { content: "\25b8"; color: #a0a6bc; left: 6px; position: absolute; transition: transform .15s; }
+    .drawer tr.movrow.open td:first-child::before { transform: rotate(90deg); }
+    .drawer tr.detailrow { display: none; }
+    .drawer tr.detailrow.open { display: table-row; }
+    .drawer tr.detailrow td { background: #fafbff; border-bottom: 1px solid #e7e9f2; padding: 10px 16px; }
+    .ddetail { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px 18px; font-size: 12px; }
+    .ddetail .dlbl { color: #7a8099; font-weight: 600; text-transform: uppercase; font-size: 10px; letter-spacing: .05em; }
+    .ddetail .dval { color: #1e2235; word-break: break-word; }
+
+    /* Calendario visual */
+    .calnav { align-items: center; display: flex; gap: 10px; justify-content: space-between; margin-bottom: 14px; }
+    .calnav .navbtn { background: #fff; border: 1px solid #d4d8e6; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 700; padding: 7px 14px; }
+    .calnav .navbtn:hover { background: #f0f1f8; }
+    .calnav .calmonth { font-size: 15px; font-weight: 800; text-transform: capitalize; }
+    .calgrid { display: grid; gap: 6px; grid-template-columns: repeat(7, 1fr); }
+    .calgrid .calhead { color: #7a8099; font-size: 10px; font-weight: 700; letter-spacing: .06em; padding: 4px 2px; text-align: center; text-transform: uppercase; }
+    .calcell { background: #fff; border: 1px solid #e7e9f2; border-radius: 10px; min-height: 84px; padding: 6px; }
+    .calcell.empty { background: transparent; border: 0; }
+    .calcell.today { border-color: #6c5ce7; box-shadow: 0 0 0 2px #6c5ce71f; }
+    .calcell .daynum { color: #7a8099; font-size: 11px; font-weight: 700; }
+    .calcell .calitem { background: #fee2e2; border-radius: 5px; color: #991b1b; cursor: default; font-size: 10px; margin-top: 3px; padding: 2px 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .calcell .calitem.est { background: #fef3c7; color: #92400e; }
+    .calcell .calitem.alerta { background: #ede9fe; color: #5b21b6; }
 
     /* Movimientos */
     .mcards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 16px; }
@@ -166,7 +192,7 @@
       <div class="logo">N</div>
       <div>
         <div class="apptitle">NLB Finanzas</div>
-        <div class="appsub">Generado 2026-06-14 | Fuentes: ItSave + Banco de Chile + BICE + Mercado Pago</div>
+        <div class="appsub">Generado 2026-06-20 | Fuentes: ItSave + Banco de Chile + BICE + Mercado Pago</div>
       </div>
     </div>
     <div class="nav">
@@ -191,6 +217,7 @@
       <h3 id="drillTitle"></h3>
       <div class="dsub" id="drillSub"></div>
       <div class="dtot" id="drillTot"></div>
+      <p class="dsub" style="margin-bottom:8px">Click en un movimiento para ver el detalle completo.</p>
       <table>
         <thead><tr><th>Fecha</th><th>Concepto</th><th>Fuente</th><th style="text-align:right">Monto</th></tr></thead>
         <tbody id="drillRows"></tbody>
@@ -242,6 +269,15 @@
       <div class="card">
         <h2>Calendario de compromisos</h2>
         <p class="h2sub">Creditos, arriendos, sueldos e impuestos con fecha de pago. Pilar del flujo de caja proyectado. Fuente: finanzas/compromisos.csv de cada entidad.</p>
+        <div class="calnav">
+          <button class="navbtn" id="calPrev" type="button">&larr;</button>
+          <div class="calmonth" id="calMonthLabel"></div>
+          <button class="navbtn" id="calNext" type="button">&rarr;</button>
+        </div>
+        <div class="calgrid" id="calGrid"></div>
+      </div>
+      <div class="card">
+        <h2>Detalle de compromisos del mes</h2>
         <table class="eerr">
           <thead><tr><th>Dia</th><th>Compromiso</th><th>Tipo</th><th class="num">Monto mensual</th><th>Vigencia</th><th>Notas</th></tr></thead>
           <tbody id="calRows"></tbody>
@@ -321,15 +357,38 @@
       document.getElementById("drillSub").textContent = `${d.label} | ${periodo} | ${rows.length} movimientos`;
       const tot = rows.reduce((s, r) => s + (r.i > 0 ? r.i : -r.e), 0);
       document.getElementById("drillTot").textContent = "Total: " + fmt(tot);
-      document.getElementById("drillRows").innerHTML = rows.map(r => {
+      document.getElementById("drillRows").innerHTML = rows.map((r, idx) => {
         const monto = r.i > 0 ? r.i : -r.e;
-        return `<tr>
+        const id = `dd-${idx}`;
+        return `<tr class="movrow" data-target="${id}">
           <td style="white-space:nowrap;color:#7a8099">${esc(r.f)}</td>
           <td>${esc(r.c)}</td>
           <td style="color:#a0a6bc;font-size:11px">${esc(r.s)}</td>
           <td class="m ${monto >= 0 ? "pos" : "neg"}">${fmt(monto)}</td>
+        </tr>
+        <tr class="detailrow" id="${id}">
+          <td colspan="4">
+            <div class="ddetail">
+              <div><div class="dlbl">Categoria</div><div class="dval"><span class="badge ${badge(r.k)}">${esc(CAT_LABEL[r.k] || r.k)}</span></div></div>
+              <div><div class="dlbl">Mes imputado</div><div class="dval">${esc(r.m)}</div></div>
+              <div><div class="dlbl">Fecha movimiento</div><div class="dval">${esc(r.f)}</div></div>
+              <div><div class="dlbl">Fuente</div><div class="dval">${esc(r.s)}</div></div>
+              <div><div class="dlbl">Ingreso</div><div class="dval pos">${r.i ? fmt(r.i) : "-"}</div></div>
+              <div><div class="dlbl">Egreso</div><div class="dval neg">${r.e ? "-" + fmt(r.e).slice(1) : "-"}</div></div>
+              <div style="grid-column:1/-1"><div class="dlbl">Concepto completo</div><div class="dval">${esc(r.c)}</div></div>
+              <div style="grid-column:1/-1"><div class="dlbl">Notas</div><div class="dval">${esc(r.n) || "Sin notas."}</div></div>
+              <div style="grid-column:1/-1"><div class="dlbl">Huella (identificador unico)</div><div class="dval" style="font-family:monospace;font-size:11px">${esc(r.h)}</div></div>
+            </div>
+          </td>
         </tr>`;
       }).join("") || `<tr><td colspan="4" style="color:#7a8099;padding:20px">Sin movimientos en este periodo.</td></tr>`;
+      document.getElementById("drillRows").querySelectorAll("tr.movrow").forEach(tr => {
+        tr.addEventListener("click", () => {
+          const detail = document.getElementById(tr.dataset.target);
+          tr.classList.toggle("open");
+          detail.classList.toggle("open");
+        });
+      });
       document.getElementById("drillBg").classList.add("open");
     }
 
@@ -364,6 +423,42 @@
       return true;
     }
 
+    let calOffset = 0;
+    const MES_NOMBRES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+    const DIA_NOMBRES = ["Lun","Mar","Mie","Jue","Vie","Sab","Dom"];
+
+    function monthKey(year, month) { return `${year}-${String(month + 1).padStart(2, "0")}`; }
+
+    function renderCalGrid() {
+      const d = DATA[entity];
+      const hoy = new Date();
+      const base = new Date(hoy.getFullYear(), hoy.getMonth() + calOffset, 1);
+      const year = base.getFullYear(), month = base.getMonth();
+      const mk = monthKey(year, month);
+      document.getElementById("calMonthLabel").textContent = `${MES_NOMBRES[month]} ${year}`;
+
+      const activosMes = d.compromisos.filter(c => vigente(c, mk));
+      const porDia = {};
+      activosMes.forEach(c => { (porDia[c.dia] = porDia[c.dia] || []).push(c); });
+
+      const firstDow = (new Date(year, month, 1).getDay() + 6) % 7; // lunes=0
+      const totalDias = new Date(year, month + 1, 0).getDate();
+      const esHoy = day => day === hoy.getDate() && month === hoy.getMonth() && year === hoy.getFullYear();
+
+      let cells = DIA_NOMBRES.map(n => `<div class="calhead">${n}</div>`).join("");
+      for (let i = 0; i < firstDow; i++) cells += `<div class="calcell empty"></div>`;
+      for (let day = 1; day <= totalDias; day++) {
+        const items = porDia[day] || [];
+        const itemsHtml = items.map(c => {
+          const cls = c.tipo === "alerta" ? "alerta" : (c.notas.includes("ESTIMADO") ? "est" : "");
+          const txt = c.tipo === "alerta" ? c.nombre.slice(0, 26) : `${c.nombre.slice(0, 18)} ${fmt(c.monto)}`;
+          return `<div class="calitem ${cls}" title="${esc(c.nombre)}: ${esc(c.notas)}">${esc(txt)}</div>`;
+        }).join("");
+        cells += `<div class="calcell ${esHoy(day) ? "today" : ""}"><div class="daynum">${day}</div>${itemsHtml}</div>`;
+      }
+      document.getElementById("calGrid").innerHTML = cells;
+    }
+
     function renderCal() {
       const d = DATA[entity];
       const comps = [...d.compromisos].sort((a, b) => a.dia - b.dia);
@@ -391,6 +486,9 @@
           <td style="color:#7a8099;font-size:12px;max-width:340px">${esc(c.notas)}</td>
         </tr>`;
       }).join("");
+
+      calOffset = 0;
+      renderCalGrid();
 
       const meses = mesesFuturos(6);
       document.getElementById("calProyHead").innerHTML =
@@ -508,6 +606,8 @@
     document.getElementById("catFilter").addEventListener("change", applyFilter);
     document.getElementById("srcFilter").addEventListener("change", applyFilter);
     document.getElementById("tipoFilter").addEventListener("change", applyFilter);
+    document.getElementById("calPrev").addEventListener("click", () => { calOffset--; renderCalGrid(); });
+    document.getElementById("calNext").addEventListener("click", () => { calOffset++; renderCalGrid(); });
 
     renderFlujo(); renderMonths(); renderMovs(); renderCal();
   </script>
