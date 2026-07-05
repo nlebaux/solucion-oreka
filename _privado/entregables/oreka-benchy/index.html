@@ -170,6 +170,20 @@
   .sources{font-size:12.5px;color:var(--muted);margin-top:16px;}
   .sources a{color:var(--gads);}
 
+  /* ── Executive summary / weekly changes ── */
+  .exec{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:36px;}
+  .exec h2{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:14px;}
+  .exec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;}
+  .chg{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font-size:12.5px;line-height:1.45;}
+  .chg .dir{font-size:15px;font-weight:700;flex-shrink:0;line-height:1.2;}
+  .chg.up .dir{color:#1d7d44;}
+  .chg.down .dir{color:#b3261e;}
+  .chg.flat .dir{color:var(--muted);}
+  .chg b{font-weight:600;display:block;}
+  .chg span{color:var(--muted);}
+  .exec .takeaway{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:13px;}
+  .exec .takeaway strong{font-weight:600;}
+
   /* ── Footer ── */
   footer{margin-top:60px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);text-align:center;}
 </style>
@@ -186,12 +200,26 @@
         <button class="brand-btn" onclick="showBrand('cadaques',this)">Cadaqués</button>
         <button class="brand-btn" onclick="showBrand('plataformas',this)">Plataformas</button>
       </div>
-      <span class="update">Actualizado: <strong id="fecha-update">2026-07-01</strong> · Próximo miércoles: 2026-07-08</span>
+      <span class="update">Actualizado: <strong id="fecha-update">2026-07-05</strong> · Próximo miércoles: 2026-07-08</span>
     </div>
   </div>
 </div>
 
 <div class="wrap">
+
+<!-- ── RESUMEN EJECUTIVO · CAMBIOS DE LA SEMANA ── -->
+<div class="exec">
+  <h2>Cambios de la semana · barrido 2026-07-05</h2>
+  <div class="exec-grid">
+    <div class="chg up"><span class="dir">▲</span><div><b>Fork relanzó toda su parrilla</b><span>De 1 → ~19 ads entre 1-3 jul. Era un reset de campaña, no un retiro: volvieron 30COMPRA1, Café $1.000, Menú Invierno $8.490, Gnocchi Vodka, Pastel de papas y Santander viernes 40%. Cencosud martes aún no reaparece.</span></div></div>
+    <div class="chg up"><span class="dir">▲</span><div><b>Niu Sushi abre en Mall Curicó</b><span>Mall Curicó pauta la apertura próxima de Niu (3 jul). Expansión a regiones + campaña #FrescuraSagrada y Ebi Crispy siguen corriendo (~32 ads).</span></div></div>
+    <div class="chg down"><span class="dir">▼</span><div><b>Crudo: 2ª semana sin pauta</b><span>0 anuncios activos por segunda semana consecutiva. Confirmado: pausa total de inversión, no un ajuste puntual.</span></div></div>
+    <div class="chg down"><span class="dir">▼</span><div><b>La Popular volvió a 0</b><span>El ad de ExpoCafé terminó. Siguen sin pauta propia — el evento (24-26 jul, Espacio Riesco) sigue vigente como señal.</span></div></div>
+    <div class="chg flat"><span class="dir">=</span><div><b>Subway mantiene sus ~14 ads</b><span>Misma parrilla desde el 12 jun: 3 recetas Signature + Sub del Día $3.100 + Filetitos $2.500. Tercera semana ininterrumpida en Meta.</span></div></div>
+    <div class="chg flat"><span class="dir">=</span><div><b>PedidosYa refresca fútbol con caras nuevas</b><span>Campaña "si hay gol, hay cupón" relanzada el 1 jul con Tezanos Pinto, Juvenal Olmos y Nico Peric. PREFIEREPEDIR $25K OFF sigue activo.</span></div></div>
+  </div>
+  <div class="takeaway"><strong>Lectura para Bocus/Cadaqués:</strong> el reset de Fork confirma que su parrilla de ~19-32 ads es estructural, no experimental — es el benchmark a igualar. Con Crudo y La Popular apagados, Bocus y Cadaqués tienen dos competidores directos fuera del canal pago. Google sigue vacío para todos menos Fork y Subway.</div>
+</div>
 
 <!-- ══════════════════════════════════════════
      BOCUS
@@ -204,16 +232,16 @@
   </div>
 
   <div class="metrics">
-    <div class="metric"><div class="label">Fork · Meta activos</div><div class="value">1</div><div class="note">reset campaña 1 jul 2026</div></div>
+    <div class="metric"><div class="label">Fork · Meta activos</div><div class="value">~19</div><div class="note">parrilla relanzada 1-3 jul</div></div>
     <div class="metric"><div class="label">Fork · Google</div><div class="value">46</div><div class="note">search, shopping, video, local</div></div>
     <div class="metric"><div class="label">La Punta · Meta activos</div><div class="value">~7</div><div class="note">estables · cayó Día del Padre</div></div>
     <div class="metric"><div class="label">La Punta · Google</div><div class="value">0</div><div class="note">sin presencia visible</div></div>
-    <div class="metric"><div class="label">Crudo · Meta activos</div><div class="value">0</div><div class="note">pararon pauta jul 2026</div></div>
+    <div class="metric"><div class="label">Crudo · Meta activos</div><div class="value">0</div><div class="note">2ª semana sin pauta</div></div>
     <div class="metric"><div class="label">Crudo · Google</div><div class="value">0</div><div class="note">sin presencia visible</div></div>
     <div class="metric"><div class="label">Fork · Instagram</div><div class="value">165k</div><div class="note">@forkchile</div></div>
     <div class="metric"><div class="label">La Punta · Instagram</div><div class="value">31k</div><div class="note">@comidaslapunta.cl</div></div>
     <div class="metric"><div class="label">Crudo · Instagram</div><div class="value">80k</div><div class="note">@crudosincensura</div></div>
-    <div class="metric"><div class="label">Niu Sushi · Meta activos</div><div class="value">~29</div><div class="note">#FrescuraSagrada + Ebi Crispy · $17.900</div></div>
+    <div class="metric"><div class="label">Niu Sushi · Meta activos</div><div class="value">~32</div><div class="note">+apertura Mall Curicó jul 2026</div></div>
     <div class="metric"><div class="label">Niu Sushi · Google</div><div class="value">0</div><div class="note">sin presencia visible</div></div>
   </div>
 
@@ -228,22 +256,72 @@
   <!-- ─── FORK ─── -->
   <div id="bocus-fork" class="competitor visible">
 
-    <p class="intro">Better Food SpA · forkchile.cl · 1 anuncio Meta activo (reinicio de campaña 1 jul 2026), 46 Google Ads, 165 mil seguidores Instagram.</p>
+    <p class="intro">Better Food SpA · forkchile.cl · ~19 anuncios Meta activos (parrilla completa relanzada entre 1-3 jul 2026), 46 Google Ads, 165 mil seguidores Instagram.</p>
 
     <div class="callout purple" style="margin-bottom:20px;">
-      <strong>Señal importante:</strong> Fork pasó de ~32 anuncios activos a solo 1 entre el 17 jun y el 1 jul 2026. El único ad activo arrancó hoy con <100 impresiones. Parecen haber reseteado toda su estructura de campaña — posiblemente reorganizando cuentas publicitarias o lanzando una nueva arquitectura. Momento de observar si reactivan con nueva creative o se mantienen lean.
+      <strong>Reset confirmado:</strong> el vaciamiento de la semana pasada (32 → 1 ad) fue una reestructuración de campaña, no un retiro. Entre el 1 y 3 jul Fork relanzó ~19 anuncios con la misma parrilla estratégica bajo IDs nuevos: adquisición (30COMPRA1), alianza bancaria (Santander viernes), estacional (Menú Invierno), lanzamientos (Gnocchi, Pastel de papas) y tráfico a tienda (Café $1.000). <strong>Cencosud martes 35% aún no reaparece</strong> — posible fin de esa alianza, a confirmar la próxima semana.
     </div>
 
-    <h3>Meta Ads activos (1 anuncio · reinicio hoy)</h3>
+    <h3>Meta Ads activos (~19 anuncios · relanzados 1-3 jul)</h3>
     <div class="grid">
 
       <div class="ad">
-        <div class="meta"><span class="status">● Activo desde 1 jul 2026 · 2 h</span><span><span class="tag adq">adquisición</span></span></div>
-        <div class="brandrow"><div class="avatar av-fork">F</div><div class="brandname">Fork<span>Publicidad · Facebook, Instagram, Messenger · ID: 1512677439779497</span></div></div>
+        <div class="meta"><span class="status">● Activo desde 1 jul 2026</span><span><span class="tag adq">adquisición</span></span></div>
+        <div class="brandrow"><div class="avatar av-fork">F</div><div class="brandname">Fork<span>Publicidad · IDs: 1512677439779497 · 1033245429606237 · 2230774174326453</span></div></div>
         <div class="copy">Utiliza el código <strong>30COMPRA1</strong> y obtén un 30% de descuento en tu primera compra 😍
 30COMPRA1 a través de nuestra página forkchile.cl</div>
-        <div class="creative cr-dark">30COMPRA1 · 30% primera compra<small>Único ad activo · &lt;100 impresiones · recién lanzado</small></div>
+        <div class="creative cr-dark">30COMPRA1 · 30% primera compra<small>Always-on · 3+ versiones relanzadas</small></div>
         <div class="footer"><span class="cta">Shop Now</span><a class="link" href="https://www.facebook.com/ads/library/?id=1512677439779497" target="_blank">ID 1512677439779497 ↗</a></div>
+      </div>
+
+      <div class="ad">
+        <div class="meta"><span class="status">● Activo desde 3 jul 2026</span><span><span class="tag banco">banco · viernes</span></span></div>
+        <div class="brandrow"><div class="avatar av-fork">F</div><div class="brandname">Fork<span>Publicidad · IDs: 959765040455244 · 1809306543370921 · 1730411598155893</span></div></div>
+        <div class="copy">¡Encontraste la alianza más sabrosa! 😍
+Fork y Santander se unieron ⭐
+<strong>Viernes 40% OFF</strong> en productos Fork, usando los primeros 6 dígitos de tu Tarjeta Santander como código.</div>
+        <div class="creative cr-warm">Viernes 40% OFF Santander<small>Alianza bancaria · día fijo · relanzada 3 jul</small></div>
+        <div class="footer"><span class="cta">Order Now</span><a class="link" href="https://www.facebook.com/ads/library/?id=959765040455244" target="_blank">ID 959765040455244 ↗</a></div>
+      </div>
+
+      <div class="ad">
+        <div class="meta"><span class="status">● Activo desde 1 jul 2026</span><span><span class="tag promo">estacional · invierno</span></span></div>
+        <div class="brandrow"><div class="avatar av-fork">F</div><div class="brandname">Fork<span>Publicidad · IDs: 1959662911381213 · 1030417042694656 · +4 más</span></div></div>
+        <div class="copy">Olvídate del frío (y de cocinar) con el Menú Invierno de Fork 😍
+Empanada o quiche individual + crema 350 g + bebida 220 ml.
+<strong>$8.490</strong> en tiendas o forkchile.cl</div>
+        <div class="creative cr-dark cr-video">Menú Invierno $8.490<small>Combo cerrado estacional · 6 versiones activas</small></div>
+        <div class="footer"><span class="cta">Realizar pedido</span><a class="link" href="https://www.facebook.com/ads/library/?id=1959662911381213" target="_blank">ID 1959662911381213 ↗</a></div>
+      </div>
+
+      <div class="ad">
+        <div class="meta"><span class="status">● Activo desde 1 jul 2026</span><span><span class="tag producto">lanzamiento</span></span></div>
+        <div class="brandrow"><div class="avatar av-fork">F</div><div class="brandname">Fork<span>Publicidad · IDs: 1341327990756777 · 27682342761396223 · +1 más</span></div></div>
+        <div class="copy">¿Aburrido de comer siempre lo mismo?
+El chef de Fork lo hizo otra vez 😏
+Gnocchi artesanal de papa en salsa cremosa de tomate y vodka, con stracciatella y parmesano.</div>
+        <div class="creative cr-warm cr-video">Gnocchi a la Vodka<small>Nuevo plato individual · listo en 2 minutos</small></div>
+        <div class="footer"><span class="cta">Order Now</span><a class="link" href="https://www.facebook.com/ads/library/?id=1341327990756777" target="_blank">ID 1341327990756777 ↗</a></div>
+      </div>
+
+      <div class="ad">
+        <div class="meta"><span class="status">● Activo desde 1 jul 2026</span><span><span class="tag producto">producto · familia</span></span></div>
+        <div class="brandrow"><div class="avatar av-fork">F</div><div class="brandname">Fork<span>Publicidad · IDs: 1303524728434630 · 1710980506903646</span></div></div>
+        <div class="copy">Nuevo plato familiar: Pastel de papas 😍
+Capas de puré suave, pino de carne y cobertura de queso que se funde en tu horno.</div>
+        <div class="creative cr-warm cr-video">Pastel de Papas Familiar<small>4 porciones · listo en minutos</small></div>
+        <div class="footer"><span class="cta">Order Now</span><a class="link" href="https://www.facebook.com/ads/library/?id=1303524728434630" target="_blank">ID 1303524728434630 ↗</a></div>
+      </div>
+
+      <div class="ad">
+        <div class="meta"><span class="status">● Activo desde 2 jul 2026</span><span><span class="tag local">tienda física</span></span></div>
+        <div class="brandrow"><div class="avatar av-fork">F</div><div class="brandname">Fork<span>Publicidad · ID: 1950270749010487</span></div></div>
+        <div class="copy">¡Café a $1.000! ☕💥
+📅 Lunes a viernes | 15:00 a 18:00 hrs.
+Americano, Espresso Doble o Chocolate Caliente.
+¡Solo en tiendas Fork!</div>
+        <div class="creative cr-dark cr-video">Café a MIL ☕<small>Happy hour · L–V 15–18 h · tráfico a tienda</small></div>
+        <div class="footer"><span class="cta">Ver más</span><a class="link" href="https://www.facebook.com/ads/library/?id=1950270749010487" target="_blank">ID 1950270749010487 ↗</a></div>
       </div>
 
     </div><!-- /grid Meta Fork -->
@@ -421,7 +499,7 @@ Pide para cuando tú necesites en nuestra App o delivery.comidaslapunta.cl</div>
     <p class="intro">crudosincensura.cl · Primer delivery de crudo de Chile desde 2013 · tartar, ceviche, carpaccio, tiradito · 3 locales (Providencia, MUT Tobalaba) · 80k seguidores Instagram.</p>
 
     <div class="callout rose" style="margin-bottom:20px;">
-      <strong>Hallazgo:</strong> 0 anuncios Meta activos al 1 jul 2026. Pararon toda la pauta — bajaron las campañas de Mundial 2026 y "Desmintiendo Mitos" que corrían en jun. Con 80k seguidores, siguen siendo la marca de mayor audiencia orgánica que menos invierte en pauta del grupo. Canal de búsqueda completamente libre.
+      <strong>Hallazgo:</strong> 0 anuncios Meta activos por segunda semana consecutiva (barridos 1 jul y 5 jul). La pausa de pauta está confirmada como decisión sostenida, no un ajuste puntual. Con 80k seguidores, siguen siendo la marca de mayor audiencia orgánica que menos invierte en pauta del grupo. Canal pago completamente libre.
     </div>
 
     <h3>Meta Ads activos</h3>
@@ -460,7 +538,7 @@ Pide para cuando tú necesites en nuestra App o delivery.comidaslapunta.cl</div>
   <!-- ─── NIU SUSHI ─── -->
   <div id="bocus-niu" class="competitor">
 
-    <p class="intro">niusushi.cl · ~29 anuncios Meta activos en Chile · 0 Google Ads CL · La operación publicitaria Meta más intensa del grupo: nueva campaña de branding #FrescuraSagrada (22 jun), lanzamiento Ebi Crispy (app exclusivo, 29 jun), subida de precio #NiuParaTodos $16.900→$17.900.</p>
+    <p class="intro">niusushi.cl · ~32 anuncios Meta activos en Chile · 0 Google Ads CL · La operación publicitaria Meta más intensa del grupo: branding #FrescuraSagrada, lanzamiento Ebi Crispy (app exclusivo), #NiuParaTodos a $17.900, y ahora expansión física: apertura próxima en Mall Curicó (jul 2026).</p>
 
     <h3>Meta Ads activos</h3>
     <div class="grid">
@@ -585,6 +663,19 @@ Ebi Crispy ya está en Niu, pruébalo en exclusiva a través de la APP Niu 😉�
       </div>
 
       <div class="ad">
+        <div class="meta"><span>🟢 Activo · collab apertura</span><span class="status">desde 3 jul 2026</span></div>
+        <div class="brandrow"><div class="avatar av-niu">N</div><div class="brandname">Mall Curicó · con Niu Sushi<span>mallcurico.cl · ID: 843116815345874</span></div></div>
+        <div class="copy">Spoiler Alert: El panorama perfecto en el mall está a punto de ponerse MUCHO más rico. 😉
+
+Falta muy poco para que @niusushi abra sus puertas en Mall Curicó. Tus rolls favoritos, en tu ciudad favorita. 🍱🍣</div>
+        <div class="creative cr-niu cr-video">PRÓXIMA APERTURA · MALL CURICÓ<small>Expansión a regiones · pauta del mall · jul 2026</small></div>
+        <div class="footer">
+          <span><span class="tag geo">Expansión</span><span class="tag brand">Collab</span></span>
+          <a class="link" href="https://www.facebook.com/ads/library/?id=843116815345874" target="_blank">Ver en biblioteca →</a>
+        </div>
+      </div>
+
+      <div class="ad">
         <div class="meta"><span>🟢 Activo · nuevo precio</span><span class="status">desde 1 jul 2026</span></div>
         <div class="brandrow"><div class="avatar av-niu">N</div><div class="brandname">Niu Sushi Bar &amp; Delivery<span>niusushi.cl · IDs: 4528071337439057 · 2027752364770506</span></div></div>
         <div class="copy">Más sabor por menos lucas, solo te lo da Niu Sushi 🤫 #NiuParaTodos
@@ -636,10 +727,10 @@ Descubre los de hoy pidiendo online en niusushi.cl o por la APP Niu 📲</div>
   <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin:40px 0 16px;">
     <h4 style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:14px;">Resumen competidores Bocus</h4>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;font-size:13px;">
-      <div><strong>Fork</strong><br><span style="color:var(--muted);">1 Meta (reset 1 jul) · 46 Google · 165k IG · solo 30COMPRA1 activo</span></div>
+      <div><strong>Fork</strong><br><span style="color:var(--muted);">~19 Meta (parrilla relanzada 1-3 jul) · 46 Google · 165k IG · Cencosud martes no volvió</span></div>
       <div><strong>La Punta</strong><br><span style="color:var(--muted);">~7 Meta (2023) · 0 Google · 31k IG · sin novedades</span></div>
-      <div><strong>Crudo Sin Censura</strong><br><span style="color:var(--muted);">0 Meta · 0 Google · 80k IG · pararon toda la pauta</span></div>
-      <div><strong>Niu Sushi</strong><br><span style="color:var(--muted);">~29 Meta · 0 Google · #FrescuraSagrada branding · Ebi Crispy app · $17.900</span></div>
+      <div><strong>Crudo Sin Censura</strong><br><span style="color:var(--muted);">0 Meta (2ª semana) · 0 Google · 80k IG · pausa confirmada</span></div>
+      <div><strong>Niu Sushi</strong><br><span style="color:var(--muted);">~32 Meta · 0 Google · #FrescuraSagrada · Ebi Crispy · abre Mall Curicó</span></div>
     </div>
   </div>
 
@@ -670,7 +761,7 @@ Descubre los de hoy pidiendo online en niusushi.cl o por la APP Niu 📲</div>
   <div class="metrics">
     <div class="metric"><div class="label">Subway CL · Meta propios</div><div class="value">~14</div><div class="note">activos desde 12 jun 2026 🆕</div></div>
     <div class="metric"><div class="label">Subway · Google</div><div class="value">83</div><div class="note">vía agencia La Mediatica SAC</div></div>
-    <div class="metric"><div class="label">La Popular · Meta activos</div><div class="value">1</div><div class="note">ExpoCafé Chile jul 2026 🆕</div></div>
+    <div class="metric"><div class="label">La Popular · Meta activos</div><div class="value">0</div><div class="note">ad ExpoCafé terminó · sin pauta propia</div></div>
     <div class="metric"><div class="label">La Popular · Google</div><div class="value">0</div><div class="note">sin presencia visible</div></div>
     <div class="metric"><div class="label">Subway · Instagram</div><div class="value">131k</div><div class="note">@subwaychile · verificado</div></div>
     <div class="metric"><div class="label">La Popular · Instagram</div><div class="value">147k</div><div class="note">@lapopularpizzaypan · 10k posts</div></div>
@@ -808,10 +899,10 @@ Sabores superiores para un nivel superior.
       <strong>Hallazgo:</strong> La Popular es la marca con más seguidores orgánicos del grupo monitoreado (147k), construidos sin un solo peso en pauta pagada — 0 Meta Ads y 0 Google Ads. Tiene un local en UberEats en San Sebastián, calle de Cadaqués (San Sebastián 2806). Competencia física directa.
     </div>
 
-    <h3>Meta Ads (1 anuncio activo · primer ad histórico)</h3>
+    <h3>Meta Ads (0 activos · el ad de ExpoCafé ya terminó)</h3>
     <div class="grid" style="margin-bottom:16px;">
-      <div class="ad">
-        <div class="meta"><span class="status">● Activo desde 30 jun 2026 · 21 h</span><span><span class="tag brand">evento · ExpoCafé</span></span></div>
+      <div class="ad" style="opacity:.65;">
+        <div class="meta"><span>○ Finalizado (corrió 30 jun - inicios jul)</span><span><span class="tag brand">evento · ExpoCafé</span></span></div>
         <div class="brandrow"><div class="avatar av-popular">LP</div><div class="brandname">Expo café Chile · con La Popular, Pizza y Pan<span>Publicidad · Facebook, Instagram · ID: 942780592148259</span></div></div>
         <div class="copy">@lapopularpizzaypan nació con la convicción de que las mejores conversaciones comienzan alrededor de una mesa. Desde 2016 elaboran panes, pizzas y pastelería con masa madre y fermentación natural.
 
@@ -825,7 +916,7 @@ En ExpoCafé Chile 2026 llegan para demostrar que un buen café siempre encuentr
       </div>
     </div>
     <div class="callout olive">
-      <strong>Nota:</strong> Este ad lo pauta <em>ExpoCafé Chile</em>, no La Popular directamente. La Popular sigue sin pauta propia, pero su participación en el evento es una señal de crecimiento hacia un público más premium/cafetero. Cadaqués podría explorar el mismo evento para exposición de marca.
+      <strong>Nota:</strong> El ad lo pautó <em>ExpoCafé Chile</em>, no La Popular, y ya no está activo (barrido 5 jul). La Popular sigue en 0 pauta propia. El dato vigente es el evento mismo: <strong>ExpoCafé Chile, 24-26 jul 2026, Espacio Riesco</strong> — La Popular estará ahí con medialunas, facturas y pizzas. Cadaqués podría evaluar presencia en la próxima edición para el mismo público premium/cafetero.
     </div>
 
     <h3>Google Ads</h3>
@@ -867,8 +958,8 @@ En ExpoCafé Chile 2026 llegan para demostrar que un buen café siempre encuentr
   <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin:40px 0 16px;">
     <h4 style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:14px;">Resumen competidores Cadaqués</h4>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;font-size:13px;">
-      <div><strong>Subway Chile</strong><br><span style="color:var(--muted);">~14 Meta (reactivados jun) · 83 Google · 131k IG · 3 recetas nuevas + $3.100 + $2.500</span></div>
-      <div><strong>La Popular Pizza y Pan</strong><br><span style="color:var(--muted);">1 Meta (ExpoCafé jul, pauta del evento) · 0 Google · 147k IG · sin pauta propia aún</span></div>
+      <div><strong>Subway Chile</strong><br><span style="color:var(--muted);">~14 Meta (3ª semana estable) · 83 Google · 131k IG · 3 recetas Signature + $3.100 + $2.500</span></div>
+      <div><strong>La Popular Pizza y Pan</strong><br><span style="color:var(--muted);">0 Meta (ad ExpoCafé terminó) · 0 Google · 147k IG · evento 24-26 jul vigente</span></div>
     </div>
   </div>
 
@@ -1063,13 +1154,15 @@ Por eso hicimos estas promos por sólo $6.000 con envío y servicio sin costo</d
         </div>
       </div>
       <div class="ad">
-        <div class="meta"><span>🟢 Activo · influencer</span><span class="status">desde 4-5 jun 2026</span></div>
-        <div class="brandrow"><div class="avatar av-pya">PY</div><div class="brandname">PedidosYa con claudiomichaux<span>pedidosya.cl · IDs: 901319622969388 · 26956803573992322</span></div></div>
-        <div class="copy">Nunca había apoyado a tantos equipos que ni conozco. Los cupones de PedidosYa tienen la culpa 🫡📲</div>
-        <div class="creative cr-pya cr-video">INFLUENCER FÚTBOL 🏆<small>@claudiomichaux · cupones PedidosYa</small></div>
+        <div class="meta"><span>🟢 Activo · influencers renovados</span><span class="status">desde 1 jul 2026</span></div>
+        <div class="brandrow"><div class="avatar av-pya">PY</div><div class="brandname">PedidosYa con Tezanos Pinto · Juvenal Olmos · Nico Peric<span>IDs: 1567534618311100 · 2282340485911160 · 947209178373884</span></div></div>
+        <div class="copy">"Defensivamente, un desastre. Para los cupones, perfecto" (Tezanos Pinto)
+"Este torneo no se juega para empatar. Se juega para goles, cupones y pedidos" (Juvenal Olmos)
+"Como arquero me duele, pero mientras más goles hagan, más cupones aprovecho" (Nico Peric) ⚽🍔</div>
+        <div class="creative cr-pya cr-video">INFLUENCERS FÚTBOL · RELEVO 1 JUL 🏆<small>Comentaristas y ex jugadores reemplazan a @claudiomichaux</small></div>
         <div class="footer">
           <span><span class="tag brand">Influencer</span><span class="tag promo">Cupones</span></span>
-          <a class="link" href="https://www.facebook.com/ads/library/?id=901319622969388" target="_blank">Ver en biblioteca →</a>
+          <a class="link" href="https://www.facebook.com/ads/library/?id=1567534618311100" target="_blank">Ver en biblioteca →</a>
         </div>
       </div>
       <div class="ad">
@@ -1112,14 +1205,14 @@ Por eso hicimos estas promos por sólo $6.000 con envío y servicio sin costo</d
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;font-size:13px;">
       <div><strong>UberEats</strong><br><span style="color:var(--muted);">~99 Meta · 0 Google · Partner restaurants en creatividades · Uber One subscription upsell</span></div>
       <div><strong>Rappi</strong><br><span style="color:var(--muted);">~15 Meta propios · 0 Google · 3 frentes: consumer + repartidores + B2B restaurantes</span></div>
-      <div><strong>PedidosYa</strong><br><span style="color:var(--muted);">~20 Meta · 0 Google · Campaña fútbol + cupones ($25K OFF 1ra compra) + partner restaurants</span></div>
+      <div><strong>PedidosYa</strong><br><span style="color:var(--muted);">~20 Meta · 0 Google · fútbol relanzado 1 jul con Tezanos/Olmos/Peric · $25K OFF 1ra compra</span></div>
     </div>
   </div>
 
 </div><!-- /section plataformas -->
 
 <footer>
-  Inteligencia publicitaria · Bocus &amp; Cadaqués · <span id="footer-fecha">2026-07-01</span> · Barrido semanal cada miércoles. Generado por Cowork (Claude Code / Sonnet 4.6).
+  Inteligencia publicitaria · Bocus &amp; Cadaqués · <span id="footer-fecha">2026-07-05</span> · Barrido semanal cada miércoles. Generado por Cowork (Claude Code).
 </footer>
 
 </div><!-- /wrap -->
