@@ -23,3 +23,8 @@
   [headers.values]
     X-Robots-Tag = "noindex, nofollow, noarchive"
     Cache-Control = "private, no-store, max-age=0"
+
+[[headers]]
+  for = "/_privado/entregables/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
