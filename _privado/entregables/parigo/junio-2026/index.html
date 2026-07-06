@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parigó. Informe de ventas junio 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Archivo+Narrow:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bleu:#1B3A7A; --creme:#ECE3CF; --tiza:#FAF6EC; --or:#C9A35A;
+  --vert:#2F5C3D; --bois:#7A5230; --noir:#1A1614; --rouge:#A12E2A;
+}
+*{margin:0;padding:0;box-sizing:border-box;border-radius:0}
+body{background:var(--tiza);color:var(--noir);font-family:'EB Garamond',serif;font-size:17px;line-height:1.55;display:flex;min-height:100vh}
+/* Sidebar */
+aside{width:230px;background:var(--bleu);color:#fff;padding:40px 0;position:fixed;top:0;bottom:0;display:flex;flex-direction:column}
+.logo{font-family:'DM Serif Display',serif;font-size:34px;text-align:center;letter-spacing:-.01em}
+.logo-sub{font-family:'Archivo Narrow',sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;text-align:center;color:var(--or);margin-top:6px}
+nav{margin-top:48px;display:flex;flex-direction:column}
+nav button{background:none;border:none;color:#fff;opacity:.75;font-family:'Archivo Narrow',sans-serif;font-size:13px;letter-spacing:.08em;text-transform:uppercase;text-align:left;padding:13px 28px;cursor:pointer;border-left:3px solid transparent}
+nav button:hover{opacity:1}
+nav button.active{opacity:1;border-left:3px solid var(--or);background:rgba(255,255,255,.06)}
+.side-foot{margin-top:auto;padding:0 28px;font-family:'Archivo Narrow',sans-serif;font-size:11px;letter-spacing:.05em;opacity:.6;line-height:1.7}
+/* Main */
+main{margin-left:230px;flex:1;padding:48px 56px;max-width:1200px}
+h1{font-family:'DM Serif Display',serif;font-size:40px;color:var(--bleu);letter-spacing:-.01em;line-height:1.15}
+h2{font-family:'DM Serif Display',serif;font-size:26px;color:var(--bleu);margin:40px 0 16px;letter-spacing:-.01em}
+h3{font-family:'Archivo Narrow',sans-serif;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--bois);margin-bottom:8px}
+.sub{font-family:'Archivo Narrow',sans-serif;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--bois);margin-top:8px}
+.tab{display:none}
+.tab.active{display:block}
+/* Alerta */
+.alert{border-left:4px solid var(--rouge);background:var(--creme);padding:16px 20px;margin:28px 0}
+.alert strong{color:var(--rouge);font-family:'Archivo Narrow',sans-serif;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+/* KPI grid */
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0}
+.kpi{background:var(--creme);padding:20px 22px;border-bottom:1px solid var(--bleu)}
+.kpi .label{font-family:'Archivo Narrow',sans-serif;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--bois)}
+.kpi .value{font-family:'DM Serif Display',serif;font-size:30px;color:var(--bleu);margin-top:6px;line-height:1.1}
+.kpi .delta{font-family:'Archivo Narrow',sans-serif;font-size:13px;margin-top:6px;color:var(--vert)}
+.kpi .delta.neg{color:var(--rouge)}
+.kpi .delta.neutral{color:var(--bois)}
+/* Tables */
+table{width:100%;border-collapse:collapse;margin:14px 0;background:var(--creme)}
+th{font-family:'Archivo Narrow',sans-serif;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--bleu);padding:10px 14px;text-align:left;font-weight:600}
+td{padding:9px 14px;border-bottom:1px solid rgba(27,58,122,.15);font-family:'Archivo Narrow',sans-serif;font-size:14.5px}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tr.total td{border-top:1px solid var(--bleu);border-bottom:none;font-weight:600;color:var(--bleu)}
+td .gold{color:var(--bois)}
+/* Charts */
+.chart-block{background:var(--creme);padding:24px;margin:18px 0}
+.hbar-row{display:flex;align-items:center;margin:7px 0}
+.hbar-label{width:90px;font-family:'Archivo Narrow',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--noir)}
+.hbar-track{flex:1;display:flex;height:22px;background:rgba(27,58,122,.07)}
+.hbar-eat{background:var(--bleu);height:100%}
+.hbar-tk{background:var(--or);height:100%}
+.hbar-val{width:110px;text-align:right;font-family:'Archivo Narrow',sans-serif;font-size:13px;font-variant-numeric:tabular-nums;padding-left:10px}
+.legend{display:flex;gap:24px;margin-top:14px;font-family:'Archivo Narrow',sans-serif;font-size:12px;letter-spacing:.05em;text-transform:uppercase}
+.legend span{display:flex;align-items:center;gap:7px}
+.sw{width:14px;height:14px;display:inline-block}
+.daily{display:flex;align-items:flex-end;gap:3px;height:170px;margin-top:18px}
+.daily .bar{flex:1;background:var(--bleu);position:relative}
+.daily .bar.mon{background:var(--or)}
+.daily .bar.closed{background:repeating-linear-gradient(45deg,rgba(27,58,122,.15),rgba(27,58,122,.15) 3px,transparent 3px,transparent 6px);height:100% }
+.daily-x{display:flex;gap:3px;margin-top:6px}
+.daily-x span{flex:1;text-align:center;font-family:'Archivo Narrow',sans-serif;font-size:9.5px;color:var(--bois)}
+/* Two col */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.panel{background:var(--creme);padding:26px}
+.panel .big{font-family:'DM Serif Display',serif;font-size:34px;color:var(--bleu);line-height:1.1}
+.panel ul{list-style:none;margin-top:14px}
+.panel li{padding:6px 0;border-bottom:1px solid rgba(27,58,122,.12);font-family:'Archivo Narrow',sans-serif;font-size:14px;display:flex;justify-content:space-between}
+.panel li span:last-child{font-variant-numeric:tabular-nums;font-weight:600;color:var(--bleu)}
+p.note{font-size:15.5px;color:var(--bois);margin:10px 0;font-style:italic}
+p.body{max-width:76ch;margin:10px 0}
+.hair{border:none;border-top:1px solid var(--bleu);opacity:.35;margin:34px 0}
+/* Cascada */
+.cascade{display:flex;gap:0;align-items:stretch;margin:20px 0;font-family:'Archivo Narrow',sans-serif}
+.cascade div{flex:1;padding:18px;border-right:1px solid var(--tiza);background:var(--creme);text-align:center}
+.cascade .c-label{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--bois)}
+.cascade .c-val{font-family:'DM Serif Display',serif;font-size:24px;color:var(--bleu);margin-top:6px}
+.cascade .final .c-val{color:var(--vert)}
+/* Menu engineering quadrants */
+.quad-board{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin:24px 0;background:var(--bleu)}
+.quad{background:var(--tiza);padding:22px 24px}
+.quad-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--bleu);padding-bottom:10px;margin-bottom:12px}
+.quad-name{font-family:'DM Serif Display',serif;font-size:20px;color:var(--bleu)}
+.quad-stat{font-family:'Archivo Narrow',sans-serif;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--bois)}
+.quad-desc{font-family:'Archivo Narrow',sans-serif;font-size:12.5px;color:var(--bois);margin-bottom:12px;font-style:italic}
+.quad ul{list-style:none}
+.quad li{display:flex;justify-content:space-between;padding:5px 0;font-family:'Archivo Narrow',sans-serif;font-size:14px;border-bottom:1px solid rgba(27,58,122,.1)}
+.quad li span:last-child{font-variant-numeric:tabular-nums;color:var(--bleu);font-weight:600}
+.quad.q-estrella{border-top:4px solid var(--vert)}
+.quad.q-caballo{border-top:4px solid var(--or)}
+.quad.q-enigma{border-top:4px solid var(--bois)}
+.quad.q-perro{border-top:4px solid var(--rouge)}
+@media(max-width:900px){aside{display:none}main{margin-left:0;padding:24px}.kpis{grid-template-columns:1fr 1fr}.cols{grid-template-columns:1fr}.quad-board{grid-template-columns:1fr}}
+</style>
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <script src="../../../auth.js"></script>
+<style id="oreka-private-shell-style">
+  .oreka-private-shell {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    background: rgba(14, 13, 11, 0.92);
+    color: #eedacf;
+    border-bottom: 1px solid rgba(231, 123, 50, 0.22);
+    backdrop-filter: blur(10px);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .oreka-private-shell a {
+    color: #eedacf;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .oreka-private-shell a:hover {
+    color: #ffffff;
+  }
+
+  .oreka-private-shell .divider {
+    width: 1px;
+    height: 14px;
+    background: rgba(238, 218, 207, 0.24);
+  }
+
+  .oreka-private-shell .title {
+    margin-left: auto;
+    color: rgba(238, 218, 207, 0.82);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="oreka-private-shell">
+  <a href="/privado/">Privado</a>
+  <span class="divider"></span>
+  <a href="/privado/entregables/">Entregables</a>
+  <span class="title">Parigo · informe junio 2026</span>
+</div>
+
+<aside>
+  <div class="logo">Parigó</div>
+  <div class="logo-sub">Reyes Lavalle 3310</div>
+  <nav>
+    <button class="active" data-tab="t1">Resumen ejecutivo</button>
+    <button data-tab="t2">Le Plat y Al Paso</button>
+    <button data-tab="t3">Campaña de lunes</button>
+    <button data-tab="t4">Menu Engineering</button>
+    <button data-tab="t5">Productos y fugas</button>
+    <button data-tab="t6">Compras y nómina</button>
+  </nav>
+  <div class="side-foot">
+    Informe mensual de ventas<br>
+    Junio 2026<br>
+    Fuente: API FUDO Parigó<br>
+    Emitido 2026-07-03<br>
+    Borrador para validación
+  </div>
+</aside>
+
+<main>
+
+<!-- ============ TAB 1 ============ -->
+<section id="t1" class="tab active">
+  <h1>Junio 2026. El mes de los lunes.</h1>
+  <p class="sub">Ventas cerradas FUDO, hora local Chile. Comparativo contra mayo 2026.</p>
+
+  <div class="alert">
+    <strong>Pendiente de facturar</strong>
+    <p class="body">Banco de Chile debe reembolsar $5.368.475 por la campaña de lunes (50% del descuento con tope). Aún sin facturar. La nota de cobro 00001 a Travel por $600.000 venció el 16 de junio y sigue impaga.</p>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="label">Venta FUDO cerrada</div><div class="value">$119.736.120</div><div class="delta">+37,5% vs mayo</div></div>
+    <div class="kpi"><div class="label">Venta económica del mes</div><div class="value">$125.104.595</div><div class="delta">incluye $5,37M por cobrar al banco</div></div>
+    <div class="kpi"><div class="label">Tickets</div><div class="value">7.064</div><div class="delta">+35,2% vs mayo</div></div>
+    <div class="kpi"><div class="label">Órdenes por día</div><div class="value">243,6</div><div class="delta">mayo: 168,5</div></div>
+    <div class="kpi"><div class="label">AOV mesa Le Plat</div><div class="value">$54.576</div><div class="delta neutral">estable (mayo $54.550)</div></div>
+    <div class="kpi"><div class="label">Materia prima real</div><div class="value">24,9%</div><div class="delta neutral">mayo: 24,2%</div></div>
+  </div>
+
+  <h2>Tesis del mes</h2>
+  <p class="body">Junio quiebra el techo de Parigó. La venta sube 37,5% sobre mayo y el motor es uno solo: la campaña Visa Infinite de Banco de Chile convirtió el lunes en el mejor día de la semana, con $25,2M facturados y 1.318 tickets. El salón creció 50% con el ticket por mesa intacto. Al Paso movió más volumen que nunca, aunque con ticket menor. El local operó 29 días y cerró el domingo 21.</p>
+
+  <h2>Venta por día de la semana</h2>
+  <div class="chart-block" id="dow-chart"></div>
+
+  <h2>Venta diaria</h2>
+  <div class="chart-block">
+    <div class="daily" id="daily-chart"></div>
+    <div class="daily-x" id="daily-x"></div>
+    <div class="legend">
+      <span><span class="sw" style="background:var(--or)"></span>Lunes de campaña</span>
+      <span><span class="sw" style="background:var(--bleu)"></span>Resto de la semana</span>
+      <span><span class="sw" style="background:repeating-linear-gradient(45deg,rgba(27,58,122,.25),rgba(27,58,122,.25) 3px,transparent 3px,transparent 6px)"></span>Cerrado (dom 21)</span>
+    </div>
+    <p class="note">Mejor día del mes: viernes 12 de junio, $6.768.290.</p>
+  </div>
+
+  <h2>Medios de pago</h2>
+  <table>
+    <tr><th>Medio</th><th class="num">Monto</th><th class="num">Participación</th></tr>
+    <tr><td>FudoPagos Crédito</td><td class="num">$47.624.109</td><td class="num">39,8%</td></tr>
+    <tr><td>FudoPagos</td><td class="num">$37.749.030</td><td class="num">31,5%</td></tr>
+    <tr><td>FudoPagos Débito</td><td class="num">$31.904.809</td><td class="num">26,6%</td></tr>
+    <tr><td>Efectivo</td><td class="num">$1.350.702</td><td class="num">1,1%</td></tr>
+    <tr><td>Cuenta corriente</td><td class="num">$965.040</td><td class="num">0,8%</td></tr>
+    <tr><td>Transferencia</td><td class="num">$155.340</td><td class="num">0,1%</td></tr>
+  </table>
+  <p class="note">El 97,9% de la venta pasa por FudoPagos. El efectivo es residual.</p>
+</section>
+
+<!-- ============ TAB 2 ============ -->
+<section id="t2" class="tab">
+  <h1>Dos formatos, una casa.</h1>
+  <p class="sub">Le Plat (salón, servicio a la mesa) y Parigó al Paso (vitrina y mostrador).</p>
+
+  <div class="cols" style="margin-top:28px">
+    <div class="panel">
+      <h3>Le Plat · 68,1% de la venta</h3>
+      <div class="big">$81.590.450</div>
+      <ul>
+        <li><span>Variación vs mayo ($54,4M)</span><span>+50,0%</span></li>
+        <li><span>Mesas atendidas</span><span>1.495</span></li>
+        <li><span>Comensales</span><span>3.420</span></li>
+        <li><span>Ticket por mesa</span><span>$54.576</span></li>
+        <li><span>Ticket por persona</span><span>$23.857</span></li>
+        <li><span>Personas por mesa</span><span>2,29</span></li>
+        <li><span>MP teórica (cobertura 74%)</span><span>29,9%</span></li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Parigó al Paso · 31,9% de la venta</h3>
+      <div class="big">$38.145.670</div>
+      <ul>
+        <li><span>Variación vs mayo ($32,7M)</span><span>+16,6%</span></li>
+        <li><span>Tickets</span><span>5.569</span></li>
+        <li><span>Variación tickets</span><span>+31,7%</span></li>
+        <li><span>Ticket promedio</span><span>$6.850</span></li>
+        <li><span>Variación AOV (mayo $7.741)</span><span>-11,5%</span></li>
+        <li><span>Único formato abierto los domingos</span><span>$2,1M</span></li>
+        <li><span>MP teórica</span><span>no medible</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Salones de Le Plat</h2>
+  <table>
+    <tr><th>Sala</th><th class="num">Venta</th><th class="num">Mesas</th><th class="num">Ticket por mesa</th></tr>
+    <tr><td>Versailles</td><td class="num">$35.690.100</td><td class="num">586</td><td class="num">$60.905</td></tr>
+    <tr><td>Lavalle</td><td class="num">$21.897.990</td><td class="num">419</td><td class="num">$52.263</td></tr>
+    <tr><td>Louvre</td><td class="num">$5.334.200</td><td class="num">70</td><td class="num">$76.203</td></tr>
+    <tr><td>La Pastora</td><td class="num">$4.931.850</td><td class="num">121</td><td class="num">$40.759</td></tr>
+    <tr><td>Sin sala asignada</td><td class="num">$13.736.310</td><td class="num">299</td><td class="num">$45.941</td></tr>
+    <tr class="total"><td>Total salón</td><td class="num">$81.590.450</td><td class="num">1.495</td><td class="num">$54.576</td></tr>
+  </table>
+  <p class="note">Louvre debuta como el salón de mayor ticket del local: $76.203 por mesa. Un dato para cuidar.</p>
+
+  <h2>Lecturas del mes</h2>
+  <p class="body">El salón creció 50% sin sacrificar ticket. La campaña de lunes trajo mesas nuevas y el resto de la semana no se resintió: jueves y viernes siguen sobre $20M y $22M semanales acumulados. Al Paso ganó tráfico (+31,7% tickets) pero el ticket cayó 11,5%: el mix se movió hacia promociones y bollería de menor valor. Revisar precios y combos es la palanca de julio.</p>
+  <p class="note">Los costos de catálogo de Al Paso en FUDO están mal cargados y la materia prima teórica de ese formato no se puede medir este mes. Queda como tarea de datos.</p>
+</section>
+
+<!-- ============ TAB 3 ============ -->
+<section id="t3" class="tab">
+  <h1>Lunes Visa Infinite.</h1>
+  <p class="sub">Campaña con Banco de Chile. 50% de descuento con tope, los 5 lunes de junio. El banco reembolsa la mitad del descuento.</p>
+
+  <div class="kpis" style="margin-top:28px">
+    <div class="kpi"><div class="label">Facturado en lunes (FUDO)</div><div class="value">$25.210.070</div><div class="delta">21,1% del mes en 1.318 tickets</div></div>
+    <div class="kpi"><div class="label">Descuento entregado (lunes)</div><div class="value">$12.272.830</div><div class="delta neutral">$10.736.950 con tope reconocido</div></div>
+    <div class="kpi"><div class="label">Por facturar al banco</div><div class="value" style="color:var(--rouge)">$5.368.475</div><div class="delta neg">pendiente de emisión</div></div>
+  </div>
+
+  <h2>Consolidado enviado al banco</h2>
+  <table>
+    <tr><th>Lunes</th><th class="num">Transacciones</th><th class="num">Bruto</th><th class="num">Descuento con tope</th><th class="num">50% a facturar</th></tr>
+    <tr><td>Lunes 1 de junio</td><td class="num">42</td><td class="num">$2.696.000</td><td class="num">$1.320.000</td><td class="num">$660.000</td></tr>
+    <tr><td>Lunes 8 de junio</td><td class="num">58</td><td class="num">$4.695.600</td><td class="num">$2.266.050</td><td class="num">$1.133.025</td></tr>
+    <tr><td>Lunes 15 de junio</td><td class="num">69</td><td class="num">$5.739.100</td><td class="num">$2.560.800</td><td class="num">$1.280.400</td></tr>
+    <tr><td>Lunes 22 de junio</td><td class="num">58</td><td class="num">$4.527.000</td><td class="num">$2.143.250</td><td class="num">$1.071.625</td></tr>
+    <tr><td>Lunes 29 de junio</td><td class="num">57</td><td class="num">$5.169.700</td><td class="num">$2.446.850</td><td class="num">$1.223.425</td></tr>
+    <tr class="total"><td>Total junio</td><td class="num">284</td><td class="num">$22.827.400</td><td class="num">$10.736.950</td><td class="num">$5.368.475</td></tr>
+  </table>
+  <p class="note">La venta FUDO ya quedó registrada neta del descuento: los $5.368.475 son ingreso adicional por cobrar. Se factura a Banco de Chile directo (contacto Marcelo González). RUT y condición afecta o exenta por confirmar antes de emitir.</p>
+
+  <h2>Lectura comercial</h2>
+  <p class="body">El lunes pasó de día común a día número uno de la semana. La campaña creció sostenida: de 42 transacciones el primer lunes a un plateau de 57 a 69. El costo real para Parigó es la mitad del descuento con tope, unos $5,4M al mes, a cambio de llenar el salón el día históricamente más flojo del calendario gastronómico y de exponer la marca a la cartera Infinite del banco.</p>
+
+  <hr class="hair">
+
+  <h2>Gift cards Travel</h2>
+  <div class="cols">
+    <div class="panel">
+      <h3>Lote 1 · junio 2026</h3>
+      <ul>
+        <li><span>Códigos entregados</span><span>20</span></li>
+        <li><span>Composición</span><span>10 de $30.000 y 10 de $50.000</span></li>
+        <li><span>Nota de cobro 00001 (exenta)</span><span>$600.000</span></li>
+        <li><span>Estado del pago</span><span>pendiente, venció 16-jun</span></li>
+        <li><span>Canjes en junio</span><span>0 de 20</span></li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Qué mirar</h3>
+      <p class="body" style="font-size:15px">Canal en incubación. Sin canjes todavía en el local. Si Travel no vende el 60% del lote a diciembre, puede pedir restitución del stock. Cobrar la nota de cobro es lo primero.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TAB 4 ============ -->
+<section id="t4" class="tab">
+  <h1>Seis platos hacen el 74% de la casa.</h1>
+  <p class="sub">Matriz de ingeniería de menú, Le Plat (salón). Popularidad = mix de ventas. Rentabilidad = margen unitario sobre costo de catálogo.</p>
+
+  <div class="alert" style="border-left-color:var(--bois)">
+    <strong>Cobertura del análisis</strong>
+    <p class="body">72,4% de la venta costeada del salón (Salmón LePlat y Coliflor LePlat no tienen costo cargado en FUDO este mes y quedan fuera). 78 productos con costo y volumen mínimo analizados sobre 1.817 filetes y el resto de la carta.</p>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="label">Estrella</div><div class="value">74,4%</div><div class="delta neutral">6 platos, alta demanda y buen margen</div></div>
+    <div class="kpi"><div class="label">Caballo de batalla</div><div class="value">16,2%</div><div class="delta neutral">20 ítems, alta demanda, margen ajustado</div></div>
+    <div class="kpi"><div class="label">Enigma + Perro</div><div class="value">9,4%</div><div class="delta neutral">52 ítems de baja rotación</div></div>
+  </div>
+
+  <h2>Matriz de cuadrantes</h2>
+  <div class="quad-board">
+    <div class="quad q-estrella">
+      <div class="quad-head"><span class="quad-name">Estrella</span><span class="quad-stat">74,4% venta · 6 ítems</span></div>
+      <p class="quad-desc">Alta demanda, buen margen. Proteger calidad y disponibilidad, no tocar el precio.</p>
+      <ul>
+        <li><span>Filete LePlat (1.817 uds)</span><span>28,0% costo</span></li>
+        <li><span>Tártaro de Salmón (114)</span><span>30,0% costo</span></li>
+        <li><span>Ensalada César (133)</span><span>26,5% costo</span></li>
+        <li><span>Tabla Mediterránea (97)</span><span>24,5% costo</span></li>
+        <li><span>Burrata (66)</span><span>31,2% costo</span></li>
+        <li><span>Tabla Mixta (47)</span><span>22,9% costo</span></li>
+      </ul>
+    </div>
+    <div class="quad q-caballo">
+      <div class="quad-head"><span class="quad-name">Caballo de batalla</span><span class="quad-stat">16,2% venta · 20 ítems</span></div>
+      <p class="quad-desc">Se piden mucho, dejan menos margen. Candidatos a ajuste de precio o de porción.</p>
+      <ul>
+        <li><span>Crème Brûlée (287)</span><span>20,3% costo</span></li>
+        <li><span>Copa Cabernet (205)</span><span>35,3% costo</span></li>
+        <li><span>Copa Parigó (208)</span><span>23,2% costo</span></li>
+        <li><span>Pisco Sour (133)</span><span>16,9% costo</span></li>
+        <li><span>Agua con Gas (285)</span><span>67,8% costo</span></li>
+        <li><span>RoastBeef (60)</span><span>26,3% costo</span></li>
+      </ul>
+    </div>
+    <div class="quad q-enigma">
+      <div class="quad-head"><span class="quad-name">Enigma</span><span class="quad-stat">4,5% venta · 14 ítems</span></div>
+      <p class="quad-desc">Dejan buen margen pero casi nadie los pide. Empujar con recomendación de garzón.</p>
+      <ul>
+        <li><span>Tabla de Quesos (31)</span><span>25,3% costo</span></li>
+        <li><span>ET Coyam 15 (16)</span><span>43,3% costo</span></li>
+        <li><span>CA Corralillo 24 (15)</span><span>37,0% costo</span></li>
+        <li><span>CA Von Siebenthal 21 (11)</span><span>37,4% costo</span></li>
+        <li><span>Pisco Catedral Peruano (17)</span><span>22,2% costo</span></li>
+      </ul>
+    </div>
+    <div class="quad q-perro">
+      <div class="quad-head"><span class="quad-name">Perro</span><span class="quad-stat">4,9% venta · 38 ítems</span></div>
+      <p class="quad-desc">Cola larga de bajo volumen y bajo margen. Candidatos a salir de carta.</p>
+      <ul>
+        <li><span>Terrine (38)</span><span>24,8% costo</span></li>
+        <li><span>Ramazzotti Spritz (43)</span><span>31,1% costo</span></li>
+        <li><span>Negroni (46)</span><span>16,1% costo</span></li>
+        <li><span>Saint Germain Spritz (30)</span><span>42,5% costo</span></li>
+        <li><span>Gin Tonic (27)</span><span>39,2% costo</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Lectura del mes</h2>
+  <p class="body">El filete solo explica el 35,3% de las unidades costeadas del salón y el 27,96% de costo, el número más sano de la carta. Es la fórmula del plato único funcionando en los números. La cola de Perro tiene 38 referencias, casi todas cócteles y copas pedidas menos de 20 veces al mes: candidatas naturales a simplificar la carta de bar. Un hallazgo aparte: el agua con gas y sin gas cuestan al local 68% y 82% de su precio de venta. Vale la pena revisar esa línea de precios.</p>
+
+  <p class="note">Parigó al Paso queda fuera de esta matriz: los costos de catálogo de ese formato están mal cargados en FUDO (materia prima teórica da 261%, un dato no usable). Se prioriza cargarlos para julio.</p>
+</section>
+
+<!-- ============ TAB 5 (antes t4) ============ -->
+<section id="t5" class="tab">
+  <h1>El filete manda.</h1>
+  <p class="sub">Mix de productos por formato, valores a precio de carta antes de descuentos.</p>
+
+  <h2>Le Plat · top 12</h2>
+  <table>
+    <tr><th>Producto</th><th class="num">Unidades</th><th class="num">Venta</th></tr>
+    <tr><td>Filete LePlat</td><td class="num">1.817</td><td class="num">$45.248.000</td></tr>
+    <tr><td>Salmón LePlat</td><td class="num">381</td><td class="num">$9.498.000</td></tr>
+    <tr><td>Steak Tartar</td><td class="num">164</td><td class="num">$2.132.000</td></tr>
+    <tr><td>Coliflor LePlat</td><td class="num">97</td><td class="num">$1.891.500</td></tr>
+    <tr><td>Tártaro de Salmón</td><td class="num">114</td><td class="num">$1.824.000</td></tr>
+    <tr><td>Ensalada César</td><td class="num">133</td><td class="num">$1.795.500</td></tr>
+    <tr><td>Schop Lager</td><td class="num">264</td><td class="num">$1.584.000</td></tr>
+    <tr><td>Tabla Mediterránea</td><td class="num">97</td><td class="num">$1.552.000</td></tr>
+    <tr><td>Crème Brûlée</td><td class="num">287</td><td class="num">$1.446.000</td></tr>
+    <tr><td>Tiramisú</td><td class="num">192</td><td class="num">$1.316.000</td></tr>
+    <tr><td>Tostada Francesa</td><td class="num">214</td><td class="num">$1.284.000</td></tr>
+    <tr><td>Coca Zero</td><td class="num">423</td><td class="num">$1.269.000</td></tr>
+  </table>
+  <p class="note">1.817 filetes en el mes. El plato único concentra el 32,6% de la venta por ítems de toda la casa. La fórmula funciona.</p>
+
+  <h2>Parigó al Paso · top 12</h2>
+  <table>
+    <tr><th>Producto</th><th class="num">Unidades</th><th class="num">Venta</th></tr>
+    <tr><td>Media Luna</td><td class="num">1.045</td><td class="num">$1.879.700</td></tr>
+    <tr><td>Baguette</td><td class="num">807</td><td class="num">$1.775.200</td></tr>
+    <tr><td>Capuccino</td><td class="num">588</td><td class="num">$1.764.000</td></tr>
+    <tr><td>Sándwich Lyon</td><td class="num">294</td><td class="num">$1.617.000</td></tr>
+    <tr><td>Sándwich Capri</td><td class="num">226</td><td class="num">$1.356.000</td></tr>
+    <tr><td>Latte</td><td class="num">363</td><td class="num">$1.306.800</td></tr>
+    <tr><td>Sándwich Toscano</td><td class="num">164</td><td class="num">$984.000</td></tr>
+    <tr><td>Agua sin gas</td><td class="num">375</td><td class="num">$937.500</td></tr>
+    <tr><td>Rollo de Canela</td><td class="num">383</td><td class="num">$919.200</td></tr>
+    <tr><td>Pan de Chocolate</td><td class="num">379</td><td class="num">$909.600</td></tr>
+    <tr><td>Sándwich Parisino</td><td class="num">165</td><td class="num">$907.500</td></tr>
+    <tr><td>Ensalada César AP</td><td class="num">112</td><td class="num">$896.000</td></tr>
+  </table>
+
+  <h2>Fugas y descuentos</h2>
+  <table>
+    <tr><th>Concepto</th><th class="num">Monto</th><th class="num">Detalle</th></tr>
+    <tr><td>Descuento total del mes</td><td class="num">$18.926.080</td><td class="num">diferencia carta vs cobrado</td></tr>
+    <tr><td>De ellos, lunes Visa Infinite</td><td class="num">$12.272.830</td><td class="num">$5,37M se recuperan del banco</td></tr>
+    <tr><td>Ítems cancelados</td><td class="num">$2.642.400</td><td class="num">496 líneas</td></tr>
+    <tr><td>Ventas canceladas</td><td class="num">$137.000</td><td class="num">6 ventas</td></tr>
+    <tr><td>Consumo marketing</td><td class="num">$558.600</td><td class="num">21 ventas</td></tr>
+  </table>
+</section>
+
+<!-- ============ TAB 6 (antes t5) ============ -->
+<section id="t6" class="tab">
+  <h1>Compras, nómina y lo que sigue.</h1>
+  <p class="sub">Las compras de Parigó no viven en su FUDO: entran como traspasos desde el FUDO de Bocus.</p>
+
+  <h2>Traspasos desde Bocus (materia prima)</h2>
+  <table>
+    <tr><th>Área receptora</th><th class="num">Traspasos</th><th class="num">Monto</th></tr>
+    <tr><td>Cocina Parigó</td><td class="num">131</td><td class="num">$15.192.578</td></tr>
+    <tr><td>Parigó al Paso</td><td class="num">146</td><td class="num">$11.193.623</td></tr>
+    <tr><td>Área Teatro</td><td class="num">22</td><td class="num">$3.453.982</td></tr>
+    <tr class="total"><td>Total junio</td><td class="num">299</td><td class="num">$29.840.183</td></tr>
+  </table>
+  <p class="note">Materia prima real: 24,9% de la venta FUDO (mayo: 24,2%). Compras locales registradas en FUDO Parigó en junio: cero documentos. Confirmar si Bodega Horeca dejó de registrarse.</p>
+
+  <h2>Nómina Parigó · 15 personas (división Buk, costo empresa junio)</h2>
+  <div class="kpis" style="grid-template-columns:repeat(3,1fr);margin-top:6px">
+    <div class="kpi"><div class="label">Costo empresa total</div><div class="value">$15.939.335</div><div class="delta neutral">líquido $12.641.850 + leyes sociales est. $3.297.485</div></div>
+    <div class="kpi"><div class="label">Factor costo empresa</div><div class="value">1,26x</div><div class="delta neutral">sobre el líquido, por persona</div></div>
+    <div class="kpi"><div class="label">Costo empresa por persona</div><div class="value">$1.062.622</div><div class="delta neutral">promedio de las 15</div></div>
+  </div>
+  <table>
+    <tr><th>Área</th><th class="num">Personas</th><th class="num">Líquido junio</th><th class="num">Costo empresa (est.)</th></tr>
+    <tr><td>Salón (Montero, Garron, Cofré, Bravo, Ravani, García, Solorza, Aldunate)</td><td class="num">8</td><td class="num">$7.014.250</td><td class="num">$8.878.159</td></tr>
+    <tr><td>Panadería Parigó (Alcaide, Toledo, Rojas, Ulloa)</td><td class="num">4</td><td class="num">$3.885.904</td><td class="num">$4.873.216</td></tr>
+    <tr><td>Ventas Parigó (Tapia, Oyarce, Ramírez P.)</td><td class="num">3</td><td class="num">$1.741.696</td><td class="num">$2.187.958</td></tr>
+    <tr class="total"><td>Total</td><td class="num">15</td><td class="num">$12.641.850</td><td class="num">$15.939.335</td></tr>
+  </table>
+  <p class="note">Costo empresa = líquido + SIS + seguro de cesantía empleador + mutual + AFP previsión empleador. Junio no tiene declaración Previred propia todavía, así que se estimó aplicando el factor líquido→costo empresa de abril 2026 (1,24x a 1,28x según persona, calculado individuo por individuo desde `2604-libro-remuneraciones-horeca.xlsx` y `2604-aportes-patronales-horeca.xlsx`; a los 4 ingresos nuevos de junio sin dato de abril se les aplicó el promedio 1,2634x). Validar contra la declaración Previred real de junio cuando esté disponible. Ramírez Paula con $122.322 líquido corresponde a mes parcial (finiquito 07-06). Mayo, con otro criterio de asignación de personas, registró $9.263.775 líquido.</p>
+
+  <h2>Aproximación de contribución</h2>
+  <div class="cascade">
+    <div><div class="c-label">Venta económica</div><div class="c-val">$125,1M</div></div>
+    <div><div class="c-label">Materia prima</div><div class="c-val">-$29,8M</div></div>
+    <div><div class="c-label">Nómina costo empresa</div><div class="c-val">-$15,9M</div></div>
+    <div class="final"><div class="c-label">Antes de arriendo y gastos generales</div><div class="c-val">$79,3M</div></div>
+  </div>
+  <p class="note">Aproximación de gestión, no estado de resultados. La nómina ya incluye leyes sociales estimadas.</p>
+
+  <h2>Acciones de julio</h2>
+  <table>
+    <tr><th>#</th><th>Acción</th><th class="num">Impacto</th></tr>
+    <tr><td>1</td><td>Facturar a Banco de Chile el reembolso de la campaña de lunes. Confirmar RUT y condición tributaria.</td><td class="num">$5.368.475</td></tr>
+    <tr><td>2</td><td>Cobrar la nota de cobro 00001 a Travel, vencida desde el 16 de junio.</td><td class="num">$600.000</td></tr>
+    <tr><td>3</td><td>Revisar mix y precios de Al Paso: el ticket cayó 11,5% con más tráfico.</td><td class="num">AOV $6.850</td></tr>
+    <tr><td>4</td><td>Cargar costos correctos a productos Al Paso en FUDO para medir materia prima teórica.</td><td class="num">dato ciego</td></tr>
+    <tr><td>5</td><td>Confirmar registro de compras locales (Bodega Horeca) en FUDO Parigó.</td><td class="num">0 docs en junio</td></tr>
+    <tr><td>6</td><td>Verificar situación contractual de Ramírez Paula en Buk (líquido de mes parcial).</td><td class="num">RRHH</td></tr>
+  </table>
+</section>
+
+</main>
+
+<script>
+// Tabs
+document.querySelectorAll('nav button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    document.getElementById(b.dataset.tab).classList.add('active');
+    window.scrollTo(0,0);
+  });
+});
+const clp = n => '$'+n.toLocaleString('es-CL');
+// Dia de semana (EAT-IN + TAKEAWAY apilado)
+const dow = [
+  ['Lunes',19696050,5514020],['Martes',11859140,6554520],['Miércoles',12209700,5887070],
+  ['Jueves',13599860,7083000],['Viernes',15289400,7401210],['Sábado',8936300,3583250],['Domingo',0,2122600]
+];
+const maxDow = Math.max(...dow.map(d=>d[1]+d[2]));
+document.getElementById('dow-chart').innerHTML = dow.map(d=>{
+  const tot=d[1]+d[2];
+  return `<div class="hbar-row"><div class="hbar-label">${d[0]}</div>
+  <div class="hbar-track"><div class="hbar-eat" style="width:${d[1]/maxDow*100}%"></div><div class="hbar-tk" style="width:${d[2]/maxDow*100}%"></div></div>
+  <div class="hbar-val">${clp(tot)}</div></div>`;
+}).join('') + `<div class="legend"><span><span class="sw" style="background:var(--bleu)"></span>Le Plat</span><span><span class="sw" style="background:var(--or)"></span>Al Paso</span></div>`;
+// Serie diaria
+const daily = [4497900,4428780,4680990,6283480,5917400,3301770,711330,5414750,3011790,4816550,4463140,6768290,3673670,885820,5511730,4085070,5202370,5243990,4957430,4030660,0,5007050,3738130,3396860,4692250,5047490,1513450,525450,4778640,3149890];
+const maxD = Math.max(...daily);
+const mondays = [1,8,15,22,29];
+document.getElementById('daily-chart').innerHTML = daily.map((v,i)=>{
+  const day=i+1;
+  if(day===21) return `<div class="bar closed" title="Domingo 21: cerrado"></div>`;
+  const cls = mondays.includes(day)?'bar mon':'bar';
+  return `<div class="${cls}" style="height:${Math.max(v/maxD*100,1)}%" title="${day} de junio: ${clp(v)}"></div>`;
+}).join('');
+document.getElementById('daily-x').innerHTML = daily.map((v,i)=>`<span>${(i+1)%2?i+1:''}</span>`).join('');
+</script>
+</body>
+</html>

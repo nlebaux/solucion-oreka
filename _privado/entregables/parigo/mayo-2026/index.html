@@ -1,0 +1,1810 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe de Ventas Mayo 2026 - Parigó</title>
+    <!-- Google Fonts: Outfit (Display) & Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Modern CSS Custom Properties / Design System */
+        :root {
+            --bg-base: #060913;
+            --bg-surface: #0f1424;
+            --bg-surface-elevated: #161f36;
+            --border-color: #1e2a47;
+            
+            --primary: #C5A880; /* Royal Gold */
+            --primary-glow: rgba(197, 168, 128, 0.15);
+            --accent-teal: #0AD8B4; /* Vibrant Teal */
+            --accent-rose: #FF4A70; /* Deep Rose */
+            --accent-violet: #8B5CF6; /* Violet */
+            
+            --text-primary: #F3F4F6;
+            --text-secondary: #9CA3AF;
+            --text-muted: #6B7280;
+            
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+            
+            --font-display: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(197, 168, 128, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(10, 216, 180, 0.04) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        /* Layout Structure */
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Navigation */
+        aside.sidebar {
+            width: 280px;
+            background-color: var(--bg-surface);
+            border-right: 1px solid var(--border-color);
+            padding: 2.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            z-index: 10;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 3rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--accent-teal));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(197, 168, 128, 0.2);
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: #fff;
+        }
+
+        .logo-text h1 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-text p {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: -2px;
+        }
+
+        nav.nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex-grow: 1;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.85rem 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            color: var(--text-primary);
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .nav-item.active {
+            color: #ffffff;
+            background-color: var(--primary-glow);
+            border-color: rgba(197, 168, 128, 0.25);
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        /* Main Content */
+        main.main-content {
+            margin-left: 280px;
+            flex-grow: 1;
+            padding: 2.5rem 3rem;
+            max-width: 1200px;
+        }
+
+        header.top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+        }
+
+        .header-title h2 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .header-title p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .status-pill {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: rgba(10, 216, 180, 0.1);
+            border: 1px solid rgba(10, 216, 180, 0.2);
+            color: var(--accent-teal);
+            padding: 0.4rem 0.8rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-teal);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-teal);
+        }
+
+        /* Tab Panels */
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Metrics Cards Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .metric-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(197, 168, 128, 0.4);
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent-teal));
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .metric-value {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .metric-subtext {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: auto;
+        }
+
+        /* Layout Columns */
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 1.7fr 1.3fr;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        @media (max-width: 968px) {
+            .dashboard-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .content-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.75rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header {
+            margin-bottom: 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Brand split list style */
+        .brand-split-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .brand-split-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .brand-box {
+            background-color: var(--bg-surface-elevated);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .brand-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-title {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .brand-pill {
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .brand-pill.le-plat { background-color: rgba(197, 168, 128, 0.15); color: var(--primary); }
+        .brand-pill.al-paso { background-color: rgba(10, 216, 180, 0.15); color: var(--accent-teal); }
+
+        .brand-metric-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            padding-bottom: 0.4rem;
+        }
+
+        .brand-metric-value {
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        /* 2D SVG Graph Scatter Plot CSS */
+        .vector-graph-box {
+            background-color: #04060b;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .graph-wrapper {
+            position: relative;
+            width: 100%;
+            height: 380px;
+            border-left: 2px solid var(--text-muted);
+            border-bottom: 2px solid var(--text-muted);
+            margin: 1.5rem 0;
+            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.01);
+        }
+
+        .quadrant-bg {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0.85;
+            pointer-events: none;
+            padding: 1rem;
+            box-sizing: border-box;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        .quad-top-left {
+            top: 0; left: 0;
+            background-color: rgba(139, 92, 246, 0.015);
+            border-right: 1px dashed rgba(255, 255, 255, 0.05);
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+            color: var(--accent-violet);
+        }
+
+        .quad-top-right {
+            top: 0; left: 50%;
+            background-color: rgba(10, 216, 180, 0.015);
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+            color: var(--accent-teal);
+        }
+
+        .quad-bottom-left {
+            top: 50%; left: 0;
+            background-color: rgba(255, 74, 112, 0.015);
+            border-right: 1px dashed rgba(255, 255, 255, 0.05);
+            color: var(--accent-rose);
+        }
+
+        .quad-bottom-right {
+            top: 50%; left: 50%;
+            background-color: rgba(197, 168, 128, 0.015);
+            color: var(--primary);
+        }
+
+        .scatter-container {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: auto;
+        }
+
+        .scatter-dot {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            transform: translate(-50%, 50%);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scatter-dot::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background-color: #ffffff;
+            border-radius: 50%;
+        }
+
+        /* Dot active / hover styles */
+        .scatter-dot.dot-star { background-color: var(--accent-teal); box-shadow: 0 0 10px rgba(10, 216, 180, 0.4); }
+        .scatter-dot.dot-horse { background-color: var(--primary); box-shadow: 0 0 10px rgba(197, 168, 128, 0.4); }
+        .scatter-dot.dot-puzzle { background-color: var(--accent-violet); box-shadow: 0 0 10px rgba(139, 92, 246, 0.4); }
+        .scatter-dot.dot-dog { background-color: var(--accent-rose); box-shadow: 0 0 10px rgba(255, 74, 112, 0.4); }
+
+        .scatter-dot:hover {
+            transform: translate(-50%, 50%) scale(1.6);
+            z-index: 100;
+        }
+
+        /* Tooltip style */
+        .scatter-dot::before {
+            content: attr(data-name);
+            position: absolute;
+            bottom: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--bg-surface-elevated);
+            color: #ffffff;
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-family: var(--font-body);
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.15s ease;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            z-index: 200;
+        }
+
+        .scatter-dot:hover::before {
+            opacity: 1;
+        }
+
+        /* Interactive Filter Tabs */
+        .filter-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            background-color: var(--bg-surface-elevated);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.75rem 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-input {
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 0.4rem 0.8rem;
+            color: #ffffff;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            width: 250px;
+            outline: none;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .filter-btn {
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover {
+            color: var(--text-primary);
+            background-color: rgba(255, 255, 255, 0.06);
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary-glow);
+            border-color: var(--primary);
+            color: #ffffff;
+        }
+
+        /* Tables */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table.premium-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            text-align: left;
+        }
+
+        table.premium-table th, table.premium-table td {
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        table.premium-table th {
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        table.premium-table tr:hover td {
+            background-color: rgba(255, 255, 255, 0.01);
+        }
+
+        .num-col { text-align: right; font-family: monospace; }
+        
+        .table-badge {
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .table-badge.b2c { background-color: rgba(10, 216, 180, 0.15); color: var(--accent-teal); }
+        .table-badge.b2b { background-color: rgba(197, 168, 128, 0.15); color: var(--primary); }
+
+        .table-delta-positive { color: var(--accent-teal); font-weight: 600; }
+        .table-delta-negative { color: var(--accent-rose); font-weight: 600; }
+
+        /* Action Cards list */
+        .action-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .action-item-card {
+            background-color: var(--bg-surface-elevated);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .action-number {
+            width: 36px;
+            height: 36px;
+            background-color: rgba(197, 168, 128, 0.15);
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .action-details {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .action-details h4 {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .action-columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .action-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .action-col-block {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            font-size: 0.8rem;
+        }
+
+        .action-col-block .block-title {
+            text-transform: uppercase;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .action-col-block .block-text {
+            color: var(--text-secondary);
+        }
+
+        .action-col-block.causa { border-left: 2px solid var(--accent-rose); padding-left: 0.5rem; }
+        .action-col-block.impacto { border-left: 2px solid var(--accent-violet); padding-left: 0.5rem; }
+        .action-col-block.accion { border-left: 2px solid var(--accent-teal); padding-left: 0.5rem; }
+
+        .split-explanation {
+            background-color: rgba(255, 255, 255, 0.02);
+            border-left: 3px solid var(--primary);
+            padding: 0.75rem 1rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+        }
+
+        .matrix-quadrant {
+            background-color: var(--bg-surface-elevated);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .quadrant-title {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .quadrant-desc {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .quadrant-products {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .quadrant-product-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+            padding-bottom: 0.25rem;
+        }
+    </style>
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <script src="../../../auth.js"></script>
+<style id="oreka-private-shell-style">
+  .oreka-private-shell {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    background: rgba(14, 13, 11, 0.92);
+    color: #eedacf;
+    border-bottom: 1px solid rgba(231, 123, 50, 0.22);
+    backdrop-filter: blur(10px);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .oreka-private-shell a {
+    color: #eedacf;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .oreka-private-shell a:hover {
+    color: #ffffff;
+  }
+
+  .oreka-private-shell .divider {
+    width: 1px;
+    height: 14px;
+    background: rgba(238, 218, 207, 0.24);
+  }
+
+  .oreka-private-shell .title {
+    margin-left: auto;
+    color: rgba(238, 218, 207, 0.82);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="oreka-private-shell">
+  <a href="/privado/">Privado</a>
+  <span class="divider"></span>
+  <a href="/privado/entregables/">Entregables</a>
+  <span class="title">Parigo · informe mayo 2026</span>
+</div>
+
+
+    <div class="container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <a href="#" class="logo-area">
+                <div class="logo-icon">P</div>
+                <div class="logo-text">
+                    <h1>Parigó</h1>
+                    <p>Ecosistema Horeca</p>
+                </div>
+            </a>
+            
+            <nav class="nav-menu">
+                <div class="nav-item active" onclick="switchTab('tab-overview', this)">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right:8px"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                    Resumen Ejecutivo
+                </div>
+                <div class="nav-item" onclick="switchTab('tab-split', this)">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right:8px"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z"></path></svg>
+                    Le Plat vs Al Paso
+                </div>
+                <div class="nav-item" onclick="switchTab('tab-matrix', this)">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right:8px"><path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                    Ingeniería de Menú
+                </div>
+                <div class="nav-item" onclick="switchTab('tab-products', this)">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right:8px"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                    Mix de Ventas
+                </div>
+                <div class="nav-item" onclick="switchTab('tab-strategy', this)">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right:8px"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    Plan de Acción
+                </div>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div>Marca: Noverica - Oreka</div>
+                <div>Emisión: 2026-06-01</div>
+                <div>Firma: [Antigravity]</div>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            
+            <header class="top-header">
+                <div class="header-title">
+                    <h2 id="top-title">Informe de Ventas Mayo 2026 - Parigó</h2>
+                    <p>Fudo Mayo 2026 vs Exceles de Costeo Mandantes</p>
+                </div>
+                
+                <div class="system-status">
+                    <div class="status-pill">
+                        <div class="status-dot"></div>
+                        Cierre Procesado
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Tab: Overview -->
+            <section id="tab-overview" class="tab-panel active">
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="metric-label">Ventas Consolidadas Fudo</span>
+                        <span class="metric-value">$87.109.080</span>
+                        <span class="metric-subtext">CLP Bruto Cerradas</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">Ventas Le Plat (Salón)</span>
+                        <span class="metric-value" style="color:var(--primary)">$54.387.250</span>
+                        <span class="metric-subtext">62.4% de la Facturación</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">Ventas Parigó al Paso</span>
+                        <span class="metric-value" style="color:var(--accent-teal)">$32.721.830</span>
+                        <span class="metric-subtext">37.6% de la Facturación</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">Pedidos Cerrados</span>
+                        <span class="metric-value">5.224</span>
+                        <span class="metric-subtext">Promedio: 168.5 / día</span>
+                    </div>
+                </div>
+                
+                <div class="dashboard-layout">
+                    
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3>Tesis Ejecutiva y Síntesis del Mes</h3>
+                        </div>
+                        <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                            Mayo de 2026 consagra la estabilización operacional de **Parigó** en su inmueble de El Golf (esquina Reyes Lavalle 3310 / La Pastora 115). Tras la viralización y el boom inicial de la apertura en abril ($102.8M), las ventas se normalizan de forma saludable en **$87.1M CLP** con **5.224 pedidos** procesados en Fudo.
+                        </p>
+                        <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                            Esta cirugía de datos, separando de manera estricta **Parigó Le Plat (salón)** de **Parigó al paso (cafetería/panadería)**, aísla con total éxito el comportamiento y rentabilidad de ambos formatos:
+                        </p>
+                        <ul style="margin-left: 1.5rem; margin-bottom: 1rem; color: var(--text-secondary); font-size: 0.9rem; display:flex; flex-direction:column; gap:0.5rem;">
+                            <li><strong>Le Plat (Salón - $54.3M):</strong> Aporta el 62.4% de las ventas con un robusto AOV de **$54.550** por mesa (**$23.203** por persona, con un flujo de 2.344 comensales en el mes y una media de 2,35 personas por mesa). Muestra una cobertura de costeo del **70.4%** y una materia prima teórica agregada de **32.01%**.</li>
+                            <li><strong>Parigó al Paso (Cafetería - $32.7M):</strong> Explica el 37.6% restante con un alto volumen transaccional (4.227 pedidos) y un AOV ágil de **$7.741**. Muestra una cobertura de costeo del **46.0%** y una materia prima teórica del **26.76%**.</li>
+                        </ul>
+                        <div class="split-explanation">
+                            <strong>Nota de Gestión:</strong> Ambos formatos gozan de excelentes márgenes gastronómicos, pero revelan brechas de precios en las proteínas estrella de Le Plat (Lomo y Salmón a $22.000 están operando por debajo del 70% de margen) y brechas de cobertura en Al Paso (falta costear cafetería y combos).
+                        </div>
+                    </div>
+                    
+                    <div class="content-card" style="display:flex; flex-direction:column; justify-content:space-between;">
+                        <div>
+                            <div class="card-header">
+                                <h3>Materia Prima Real e Intercompany (Bocus)</h3>
+                            </div>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                                Costeo Real cruzado con los traspasos de <strong>Bocus</strong> y remuneraciones de Mayo 2026:
+                            </p>
+                            <ul style="list-style:none; font-size:0.8rem; color:var(--text-secondary); display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1rem;">
+                                <li>• <strong>Le Plat:</strong> MP Real <strong>23,48%</strong> ($10.730.886 CLP neto)</li>
+                                <li>• <strong>Al Paso:</strong> MP Real <strong>25,35%</strong> ($6.971.893 CLP neto)</li>
+                                <li>• <strong>Consolidado MP:</strong> MP Real <strong>24,18%</strong> ($17.702.779 CLP neto)</li>
+                                <li style="border-top: 1px solid var(--border-color); padding-top: 0.5rem; margin-top: 0.5rem;">• <strong>Sueldos Salón (Le Plat):</strong> $8.429.107 CLP</li>
+                                <li>• <strong>Sueldos Al Paso:</strong> $834.668 CLP</li>
+                                <li>• <strong>Sueldos Consolidados Parigó:</strong> $9.263.775 CLP</li>
+                            </ul>
+                        </div>
+                        <div class="split-explanation" style="border-left-color: var(--accent-teal); background-color: rgba(10, 216, 180, 0.02); margin-top:0; font-size:0.75rem;">
+                            <strong>Métrica de Control:</strong> La materia prima real consolidada se ubica en 24,18% (frente a 29,80% teórica), lo cual es saludable y valida el precio de transferencia intercompany.
+                        </div>
+                    </div>
+                    
+                </div>
+            </section>
+            
+            <!-- Tab: Le Plat vs Al Paso Breakdown -->
+            <section id="tab-split" class="tab-panel">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Mapeo Estricto de Canales Financieros</h3>
+                    </div>
+                    
+                    <div class="brand-split-grid">
+                        
+                        <!-- Le Plat -->
+                        <div class="brand-box">
+                            <div class="brand-header-row">
+                                <span class="brand-title">Le Plat (Restaurante)</span>
+                                <span class="brand-pill le-plat">Salón</span>
+                            </div>
+                            <p style="font-size: 0.8rem; color: var(--text-secondary);">
+                                Formato de salón comedor con servicio a la mesa de plato único express en Reyes Lavalle 3310.
+                            </p>
+                            
+                            <div class="brand-metric-row">
+                                <span>Venta Bruta Total Fudo</span>
+                                <span class="brand-metric-value" style="color:var(--primary)">$54.387.250</span>
+                            </div>
+                            <div class="brand-metric-row">
+                                <span>Venta Neta (sin IVA)</span>
+                                <span class="brand-metric-value">$45.703.571</span>
+                            </div>
+                            <div class="brand-metric-row">
+                                <span>Mesas Cerradas</span>
+                                <span class="brand-metric-value">997 mesas</span>
+                            </div>
+                            <div class="brand-metric-row">
+                                <span>Comensales Totales</span>
+                                <span class="brand-metric-value">2.344 personas</span>
+                            </div>
+                            <div class="brand-metric-row">
+                                <span>Comensales por Mesa</span>
+                                <span class="brand-metric-value">2,35 pax/mesa</span>
+                            </div>
+                            <div class="brand-metric-row">
+                                <span>Ticket Promedio Mesa</span>
+                                <span class="brand-metric-value" style="color:var(--primary)">$54.550</span>
+                            </div>
+                            <div class="brand-metric-row">
+                                <span>Ticket Promedio Persona</span>
+                                <span class="brand-metric-value" style="color:var(--primary)">$23.203</span>
+                            </div>
+                            <div class="brand-metric-row">
+                                <span>Cobertura Costeo</span>
+                                <span class="brand-metric-value">70.40%</span>
+                            </div>
+                            <div class="brand-metric-row">
+                                <span>MP Teórica (Costeados)</span>
+                                <span class="brand-metric-value" style="color:var(--accent-teal)">32.01%</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Parigo al Paso -->
+                        <div class="brand-box">
+                            <div class="brand-header-row">
+                                <span class="brand-title">Parigó al Paso (Cafetería)</span>
+                                <span class="brand-pill al-paso">Grab & Go</span>
+                            </div>
+                            <p style="font-size: 0.8rem; color: var(--text-secondary);">
+                                Formato al paso, barra frontal y vitrina de venta rápida para llevar (cafetería y panadería).
+                            </p>
+                            
+                            <div class="brand-metric-row">
+                                <span>Venta Bruta Total Fudo</span>
+                                <span class="brand-metric-value" style="color:var(--accent-teal)">$32.721.830</span>
+                            </div>
+                            <div class="brand-metric-row">
+                                <span>Venta Neta (sin IVA)</span>
+                                <span class="brand-metric-value">$27.497.336</span>
+                            </div>
+                            <div class="brand-metric-row">
+                                <span>Transacciones (Tickets)</span>
+                                <span class="brand-metric-value">4.227 pedidos</span>
+                            </div>
+                            <div class="brand-metric-row">
+                                <span>Ticket Promedio (AOV)</span>
+                                <span class="brand-metric-value" style="color:var(--accent-teal)">$7.741</span>
+                            </div>
+                            <div class="brand-metric-row">
+                                <span>Cobertura Costeo</span>
+                                <span class="brand-metric-value">46.01%</span>
+                            </div>
+                            <div class="brand-metric-row">
+                                <span>MP Teórica (Costeados)</span>
+                                <span class="brand-metric-value" style="color:var(--accent-teal)">26.76%</span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Tab: Menu Engineering (Generating) Split matrices -->
+            <section id="tab-matrix" class="tab-panel">
+                
+                <div class="filter-bar" style="margin-bottom: 2rem;">
+                    <div style="font-family: var(--font-display); font-size:1.15rem; font-weight:600;">
+                        Matriz de Ingeniería de Menú (Menu Engineering)
+                    </div>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" id="btn-matrix-le-plat" onclick="selectMatrix('le_plat')">1. Le Plat (Salón)</button>
+                        <button class="filter-btn" id="btn-matrix-al-paso" onclick="selectMatrix('al_paso')">2. Parigó al Paso</button>
+                    </div>
+                </div>
+
+                <!-- 2D SVG Graph Scatter Plot container -->
+                <div class="vector-graph-box">
+                    <div class="graph-wrapper" id="scatter-wrapper">
+                        <!-- Quadrants layout -->
+                        <div class="quadrant-bg quad-top-left">
+                            <span>ENIGMAS (Puzzles)</span>
+                            <span style="font-size:0.65rem; font-weight:normal; color:var(--text-secondary)">Alto Margen, Bajo Volumen</span>
+                        </div>
+                        <div class="quadrant-bg quad-top-right">
+                            <span>ESTRELLAS (Stars)</span>
+                            <span style="font-size:0.65rem; font-weight:normal; color:var(--text-secondary)">Alto Margen, Alto Volumen</span>
+                        </div>
+                        <div class="quadrant-bg quad-bottom-left">
+                            <span>PERROS (Dogs)</span>
+                            <span style="font-size:0.65rem; font-weight:normal; color:var(--text-secondary)">Bajo Margen, Bajo Volumen</span>
+                        </div>
+                        <div class="quadrant-bg quad-bottom-right">
+                            <span>CABALLOS DE BATALLA (Plowhorses)</span>
+                            <span style="font-size:0.65rem; font-weight:normal; color:var(--text-secondary)">Bajo Margen, Alto Volumen</span>
+                        </div>
+
+                        <!-- Bubbles/Dots Container -->
+                        <div class="scatter-container" id="scatter-dots-container">
+                            <!-- JS will dynamically populate or show/hide these -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3 id="matrix-list-title">Productos en Cuadrantes (Le Plat)</h3>
+                    </div>
+                    
+                    <div class="brand-split-grid" id="matrix-lists-grid" style="grid-template-columns: repeat(4, 1fr)">
+                        <!-- Quadrant lists will be dynamically filtered/updated via JS -->
+                        
+                        <!-- Stars -->
+                        <div class="matrix-quadrant" style="border-left: 3px solid var(--accent-teal);">
+                            <div class="quadrant-title" style="color:var(--accent-teal);" id="quad-1-title">Estrellas</div>
+                            <div class="quadrant-desc">Alto volumen y margen >= 70%. Potenciar ventas.</div>
+                            <ul class="quadrant-products" id="quad-1-list">
+                            </ul>
+                        </div>
+
+                        <!-- Puzzles -->
+                        <div class="matrix-quadrant" style="border-left: 3px solid var(--accent-violet);">
+                            <div class="quadrant-title" style="color:var(--accent-violet);" id="quad-2-title">Enigmas</div>
+                            <div class="quadrant-desc">Bajo volumen y margen >= 70%. Incrementar promoción.</div>
+                            <ul class="quadrant-products" id="quad-2-list">
+                            </ul>
+                        </div>
+
+                        <!-- Horses -->
+                        <div class="matrix-quadrant" style="border-left: 3px solid var(--primary);">
+                            <div class="quadrant-title" style="color:var(--primary);" id="quad-3-title">Caballos</div>
+                            <div class="quadrant-desc">Alto volumen y margen < 70%. Alzar precio o reducir costo.</div>
+                            <ul class="quadrant-products" id="quad-3-list">
+                            </ul>
+                        </div>
+
+                        <!-- Dogs -->
+                        <div class="matrix-quadrant" style="border-left: 3px solid var(--accent-rose);">
+                            <div class="quadrant-title" style="color:var(--accent-rose);" id="quad-4-title">Perros</div>
+                            <div class="quadrant-desc">Bajo volumen y margen < 70%. Evaluar descontinuar.</div>
+                            <ul class="quadrant-products" id="quad-4-list">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Tab: Products and Costs Table -->
+            <section id="tab-products" class="tab-panel">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"></path></svg>
+                            Filtro de Ventas y Costeo por Marca
+                        </h3>
+                    </div>
+                    
+                    <!-- Search & Filters -->
+                    <div class="filter-bar">
+                        <input type="text" id="table-search" class="search-input" placeholder="Buscar por nombre o categoría..." oninput="filterTable()">
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" id="btn-filter-all" onclick="setTableFilter('all')">Todos</button>
+                            <button class="filter-btn" id="btn-filter-plat" onclick="setTableFilter('plat')">Le Plat</button>
+                            <button class="filter-btn" id="btn-filter-paso" onclick="setTableFilter('paso')">Parigó al Paso</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Table responsive wrapper -->
+                    <div class="table-responsive">
+                        <table class="premium-table" id="products-table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre del Producto</th>
+                                    <th>Categoría</th>
+                                    <th>Segmento</th>
+                                    <th class="num-col">Cantidad</th>
+                                    <th class="num-col">Venta Bruta Fudo ($)</th>
+                                    <th class="num-col">Costo Ración ($)</th>
+                                    <th class="num-col">Margen Neto %</th>
+                                    <th>Estado / Comentario</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Le Plat Costed -->
+                                <tr data-type="plat">
+                                    <td class="table-prod-name">Ensalada Lomo</td>
+                                    <td>PRG Platos</td>
+                                    <td><span class="table-badge b2b">Le Plat</span></td>
+                                    <td class="num-col">1.151,0</td>
+                                    <td class="num-col">$25.322.000</td>
+                                    <td class="num-col">$6.300</td>
+                                    <td class="num-col table-delta-negative">65.9%</td>
+                                    <td>Fórmula principal (Lomo con papas) - Caballo</td>
+                                </tr>
+                                <tr data-type="plat">
+                                    <td class="table-prod-name">Ensalada Salmon</td>
+                                    <td>PRG Platos</td>
+                                    <td><span class="table-badge b2b">Le Plat</span></td>
+                                    <td class="num-col">279,0</td>
+                                    <td class="num-col">$6.138.000</td>
+                                    <td class="num-col">$5.856</td>
+                                    <td class="num-col table-delta-negative">68.3%</td>
+                                    <td>Fórmula principal (Salmón con papas) - Caballo</td>
+                                </tr>
+                                <tr data-type="plat">
+                                    <td class="table-prod-name">Tartaro Salom PRG</td>
+                                    <td>PRG Platos</td>
+                                    <td><span class="table-badge b2b">Le Plat</span></td>
+                                    <td class="num-col">108,0</td>
+                                    <td class="num-col">$1.728.000</td>
+                                    <td class="num-col">$3.457</td>
+                                    <td class="num-col table-delta-positive">74.3%</td>
+                                    <td>Tártaro salmón y quinoa - Enigma</td>
+                                </tr>
+                                <tr data-type="plat">
+                                    <td class="table-prod-name">Ensalada Coliflor</td>
+                                    <td>PRG Platos</td>
+                                    <td><span class="table-badge b2b">Le Plat</span></td>
+                                    <td class="num-col">81,0</td>
+                                    <td class="num-col">$1.579.500</td>
+                                    <td class="num-col">$3.649</td>
+                                    <td class="num-col table-delta-positive">77.7%</td>
+                                    <td>Opción vegetariana coliflor - Enigma</td>
+                                </tr>
+                                <tr data-type="plat">
+                                    <td class="table-prod-name">Cesar PRG</td>
+                                    <td>PRG Platos</td>
+                                    <td><span class="table-badge b2b">Le Plat</span></td>
+                                    <td class="num-col">110,0</td>
+                                    <td class="num-col">$1.475.000</td>
+                                    <td class="num-col">$2.935</td>
+                                    <td class="num-col table-delta-positive">73.9%</td>
+                                    <td>Ensalada César salón - Estrella</td>
+                                </tr>
+                                <tr data-type="plat">
+                                    <td class="table-prod-name">Steak Tartar PRG</td>
+                                    <td>PRG Platos</td>
+                                    <td><span class="table-badge b2b">Le Plat</span></td>
+                                    <td class="num-col">92,0</td>
+                                    <td class="num-col">$1.190.000</td>
+                                    <td class="num-col">$3.256</td>
+                                    <td class="num-col table-delta-positive">70.0%</td>
+                                    <td>Steak tartar de salón - Enigma</td>
+                                </tr>
+                                <tr data-type="plat">
+                                    <td class="table-prod-name">Tabla Mediterranea PRG</td>
+                                    <td>PRG Platos</td>
+                                    <td><span class="table-badge b2b">Le Plat</span></td>
+                                    <td class="num-col">71,0</td>
+                                    <td class="num-col">$1.136.000</td>
+                                    <td class="num-col">$3.816</td>
+                                    <td class="num-col table-delta-positive">71.6%</td>
+                                    <td>Tabla para compartir - Enigma</td>
+                                </tr>
+                                <tr data-type="plat">
+                                    <td class="table-prod-name">Creme Brulle PRG</td>
+                                    <td>PRG Postres</td>
+                                    <td><span class="table-badge b2b">Le Plat</span></td>
+                                    <td class="num-col">201,0</td>
+                                    <td class="num-col">$1.005.000</td>
+                                    <td class="num-col">$1.058</td>
+                                    <td class="num-col table-delta-positive">74.8%</td>
+                                    <td>Crème brûlée salón - Estrella</td>
+                                </tr>
+                                <tr data-type="plat">
+                                    <td class="table-prod-name">Tostada Frances PRG</td>
+                                    <td>PRG Postres</td>
+                                    <td><span class="table-badge b2b">Le Plat</span></td>
+                                    <td class="num-col">141,0</td>
+                                    <td class="num-col">$846.000</td>
+                                    <td class="num-col">$1.077</td>
+                                    <td class="num-col table-delta-positive">78.6%</td>
+                                    <td>Tostada francesa salón - Estrella</td>
+                                </tr>
+                                <tr data-type="plat">
+                                    <td class="table-prod-name">Tiramisu PRG</td>
+                                    <td>PRG Postres</td>
+                                    <td><span class="table-badge b2b">Le Plat</span></td>
+                                    <td class="num-col">125,0</td>
+                                    <td class="num-col">$817.000</td>
+                                    <td class="num-col">$2.118</td>
+                                    <td class="num-col table-delta-negative">61.5%</td>
+                                    <td>Tiramisú de salón - Caballo</td>
+                                </tr>
+                                <tr data-type="plat">
+                                    <td class="table-prod-name">Burrata PRG</td>
+                                    <td>PRG Platos</td>
+                                    <td><span class="table-badge b2b">Le Plat</span></td>
+                                    <td class="num-col">54,0</td>
+                                    <td class="num-col">$918.000</td>
+                                    <td class="num-col">$4.399</td>
+                                    <td class="num-col table-delta-negative">69.2%</td>
+                                    <td>Burrata asada - Perro</td>
+                                </tr>
+                                <tr data-type="plat">
+                                    <td class="table-prod-name">Jugo Naranjas PRG</td>
+                                    <td>PRG Refrescos</td>
+                                    <td><span class="table-badge b2b">Le Plat</span></td>
+                                    <td class="num-col">44,0</td>
+                                    <td class="num-col">$176.000</td>
+                                    <td class="num-col">$1.586</td>
+                                    <td class="num-col table-delta-negative">52.8%</td>
+                                    <td>Jugo naranja de salón - Perro</td>
+                                </tr>
+
+                                <!-- Al Paso Costed -->
+                                <tr data-type="paso">
+                                    <td class="table-prod-name">Media Luna</td>
+                                    <td>AP Bollería</td>
+                                    <td><span class="table-badge b2c">Al Paso</span></td>
+                                    <td class="num-col">929,0</td>
+                                    <td class="num-col">$1.653.900</td>
+                                    <td class="num-col">$243</td>
+                                    <td class="num-col table-delta-positive">83.7%</td>
+                                    <td>Medialuna dulce AP - Estrella</td>
+                                </tr>
+                                <tr data-type="paso">
+                                    <td class="table-prod-name">Baguette 300gr</td>
+                                    <td>AP Panadería</td>
+                                    <td><span class="table-badge b2c">Al Paso</span></td>
+                                    <td class="num-col">734,0</td>
+                                    <td class="num-col">$1.612.000</td>
+                                    <td class="num-col">$153</td>
+                                    <td class="num-col table-delta-positive">91.7%</td>
+                                    <td>Baguette masa madre cruda - Estrella</td>
+                                </tr>
+                                <tr data-type="paso">
+                                    <td class="table-prod-name">Sandwich Lyon</td>
+                                    <td>AP Sandwich/Ensaladas</td>
+                                    <td><span class="table-badge b2c">Al Paso</span></td>
+                                    <td class="num-col">270,0</td>
+                                    <td class="num-col">$1.484.500</td>
+                                    <td class="num-col">$1.393</td>
+                                    <td class="num-col table-delta-negative">69.8%</td>
+                                    <td>Sándwich croissant Lyon - Caballo</td>
+                                </tr>
+                                <tr data-type="paso">
+                                    <td class="table-prod-name">Sandwich Capri</td>
+                                    <td>AP Sandwich/Ensaladas</td>
+                                    <td><span class="table-badge b2c">Al Paso</span></td>
+                                    <td class="num-col">196,0</td>
+                                    <td class="num-col">$1.175.500</td>
+                                    <td class="num-col">$1.247</td>
+                                    <td class="num-col table-delta-positive">75.2%</td>
+                                    <td>Sándwich focaccia Capri - Estrella</td>
+                                </tr>
+                                <tr data-type="paso">
+                                    <td class="table-prod-name">Desayuno Parigo</td>
+                                    <td>AP Desayunos</td>
+                                    <td><span class="table-badge b2c">Al Paso</span></td>
+                                    <td class="num-col">137,0</td>
+                                    <td class="num-col">$1.027.500</td>
+                                    <td class="num-col">$1.382</td>
+                                    <td class="num-col table-delta-positive">78.1%</td>
+                                    <td>Desayuno clásico al paso - Enigma</td>
+                                </tr>
+                                <tr data-type="paso">
+                                    <td class="table-prod-name">Ensalada Cesar</td>
+                                    <td>AP Sandwich/Ensaladas</td>
+                                    <td><span class="table-badge b2c">Al Paso</span></td>
+                                    <td class="num-col">122,0</td>
+                                    <td class="num-col">$976.000</td>
+                                    <td class="num-col">$2.798</td>
+                                    <td class="num-col table-delta-negative">58.4%</td>
+                                    <td>Ensalada César para llevar - Perro</td>
+                                </tr>
+                                <tr data-type="paso">
+                                    <td class="table-prod-name">Sandwich Toscano</td>
+                                    <td>AP Sandwich/Ensaladas</td>
+                                    <td><span class="table-badge b2c">Al Paso</span></td>
+                                    <td class="num-col">143,0</td>
+                                    <td class="num-col">$858.000</td>
+                                    <td class="num-col">$1.357</td>
+                                    <td class="num-col table-delta-positive">73.1%</td>
+                                    <td>Sándwich Baguette toscana - Enigma</td>
+                                </tr>
+                                <tr data-type="paso">
+                                    <td class="table-prod-name">Sandwich Parisino</td>
+                                    <td>AP Sandwich/Ensaladas</td>
+                                    <td><span class="table-badge b2c">Al Paso</span></td>
+                                    <td class="num-col">147,0</td>
+                                    <td class="num-col">$808.500</td>
+                                    <td class="num-col">$954</td>
+                                    <td class="num-col table-delta-positive">79.4%</td>
+                                    <td>Sándwich Baguette París - Enigma</td>
+                                </tr>
+                                <tr data-type="paso">
+                                    <td class="table-prod-name">Croissant</td>
+                                    <td>AP Bollería</td>
+                                    <td><span class="table-badge b2c">Al Paso</span></td>
+                                    <td class="num-col">322,0</td>
+                                    <td class="num-col">$706.400</td>
+                                    <td class="num-col">$547</td>
+                                    <td class="num-col table-delta-positive">70.4%</td>
+                                    <td>Croissant francés AP - Estrella</td>
+                                </tr>
+                                <tr data-type="paso">
+                                    <td class="table-prod-name">Tarta del dia</td>
+                                    <td>AP Pasteleria</td>
+                                    <td><span class="table-badge b2c">Al Paso</span></td>
+                                    <td class="num-col">183,0</td>
+                                    <td class="num-col">$695.400</td>
+                                    <td class="num-col">$1.077</td>
+                                    <td class="num-col table-delta-negative">66.2%</td>
+                                    <td>Tarta dulce porción - Caballo</td>
+                                </tr>
+                                <tr data-type="paso">
+                                    <td class="table-prod-name">Jugo Naranjas AP</td>
+                                    <td>AP Refrescos</td>
+                                    <td><span class="table-badge b2c">Al Paso</span></td>
+                                    <td class="num-col">192,0</td>
+                                    <td class="num-col">$672.000</td>
+                                    <td class="num-col">$1.586</td>
+                                    <td class="num-col table-delta-negative">46.1%</td>
+                                    <td>Jugo naranja para llevar - Caballo</td>
+                                </tr>
+                                <tr data-type="paso">
+                                    <td class="table-prod-name">Ensalada Mediterranea</td>
+                                    <td>AP Sandwich/Ensaladas</td>
+                                    <td><span class="table-badge b2c">Al Paso</span></td>
+                                    <td class="num-col">77,0</td>
+                                    <td class="num-col">$616.000</td>
+                                    <td class="num-col">$3.179</td>
+                                    <td class="num-col table-delta-negative">52.7%</td>
+                                    <td>Ensalada mediterránea - Perro</td>
+                                </tr>
+                                <tr data-type="paso">
+                                    <td class="table-prod-name">Pan Chocolate</td>
+                                    <td>AP Bollería</td>
+                                    <td><span class="table-badge b2c">Al Paso</span></td>
+                                    <td class="num-col">251,0</td>
+                                    <td class="num-col">$601.400</td>
+                                    <td class="num-col">$683</td>
+                                    <td class="num-col table-delta-negative">66.1%</td>
+                                    <td>Pain au chocolat AP - Caballo</td>
+                                </tr>
+                                <tr data-type="paso">
+                                    <td class="table-prod-name">Palmera</td>
+                                    <td>AP Bollería</td>
+                                    <td><span class="table-badge b2c">Al Paso</span></td>
+                                    <td class="num-col">260,0</td>
+                                    <td class="num-col">$572.000</td>
+                                    <td class="num-col">$557</td>
+                                    <td class="num-col table-delta-negative">69.9%</td>
+                                    <td>Palmera dulce AP - Caballo</td>
+                                </tr>
+                                <tr data-type="paso">
+                                    <td class="table-prod-name">Pan de pasas</td>
+                                    <td>AP Bollería</td>
+                                    <td><span class="table-badge b2c">Al Paso</span></td>
+                                    <td class="num-col">218,0</td>
+                                    <td class="num-col">$522.200</td>
+                                    <td class="num-col">$673</td>
+                                    <td class="num-col table-delta-negative">66.6%</td>
+                                    <td>Pan de pasas dulce - Caballo</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Tab: Strategy and Action Plan -->
+            <section id="tab-strategy" class="tab-panel">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                            Áreas de Mejora y Plan de Acción Prioritario
+                        </h3>
+                    </div>
+                    
+                    <div class="action-list">
+                        
+                        <!-- Block 1 -->
+                        <div class="action-item-card">
+                            <div class="action-number">01</div>
+                            <div class="action-details">
+                                <h4>Ajuste Estratégico de Precios en Lomo y Salmón en Salón</h4>
+                                <div class="action-columns">
+                                    <div class="action-col-block causa">
+                                        <div class="block-title">Causa</div>
+                                        <div class="block-text">En Fudo, las fórmulas de Filete de Lomo y Salmón se venden a $22.000 gross. Sus costes de ración son de $6.300 y $5.856, respectivamente.</div>
+                                    </div>
+                                    <div class="action-col-block impacto">
+                                        <div class="block-title">Impacto</div>
+                                        <div class="block-text">Márgenes netos del 65.9% y 68.3%, por debajo de la meta transversal del 70%. Al ser el 51% del volumen de platos, erosionan el margen consolidado de Le Plat (32.0% MP).</div>
+                                    </div>
+                                    <div class="action-col-block accion">
+                                        <div class="block-title">Acción Recomendada</div>
+                                        <div class="block-text">Restaurar inmediatamente el precio de lanzamiento validado a $25.000 CLP gross (como figura en la ficha de precios de Le Plat). Esto alza el margen neto a un excelente 70.0% y 72.1% en salón.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Block 2 -->
+                        <div class="action-item-card">
+                            <div class="action-number">02</div>
+                            <div class="action-details">
+                                <h4>Estandarización de Stocktakes Quincenales</h4>
+                                <div class="action-columns">
+                                    <div class="action-col-block causa">
+                                        <div class="block-title">Causa</div>
+                                        <div class="block-text">Ausencia de conteos físicos valorizados periódicos para la casona y cámaras de Reyes Lavalle 3310 / La Pastora.</div>
+                                    </div>
+                                    <div class="action-col-block impacto">
+                                        <div class="block-title">Impacto</div>
+                                        <div class="block-text">No es posible auditar el costo real de materia prima vs. ideal, quedando ciega la detección de mermas, robos, diferencias de porcionamiento o rendimientos menores.</div>
+                                    </div>
+                                    <div class="action-col-block accion">
+                                        <div class="block-title">Acción Recomendada</div>
+                                        <div class="block-text">Jared (planta de masas) y Marcos (cocina Parigó) lideran stocktake quincenal (los días 15 y 30) cargado directamente en Buk o Gastrokaizen, valorizando existencias físicas.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Block 3 -->
+                        <div class="action-item-card">
+                            <div class="action-number">03</div>
+                            <div class="action-details">
+                                <h4>Ampliar Cobertura del Costeo en Parigó al Paso</h4>
+                                <div class="action-columns">
+                                    <div class="action-col-block causa">
+                                        <div class="block-title">Causa</div>
+                                        <div class="block-text">La cafetería de especialidad, bebidas, combos y pastelería fina elaborada por el equipo de AP no cuentan con fichas de costeo en las planillas mandantes.</div>
+                                    </div>
+                                    <div class="action-col-block impacto">
+                                        <div class="block-title">Impacto</div>
+                                        <div class="block-text">La cobertura de costeo de Al Paso es de apenas 46.01%, dejando a oscuras el 54% de la facturación de la cafetería de especialidad.</div>
+                                    </div>
+                                    <div class="action-col-block accion">
+                                        <div class="block-title">Acción Recomendada</div>
+                                        <div class="block-text">Daniela y Louis lideran el levantamiento y estandarización del costeo de café (grano, leche, endulzantes), combos de desayuno y bebidas para llevar antes del 15 de junio.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Block 4 -->
+                        <div class="action-item-card">
+                            <div class="action-number">04</div>
+                            <div class="action-details">
+                                <h4>Mitigar Pérdidas por Jugo de Naranja Natural</h4>
+                                <div class="action-columns">
+                                    <div class="action-col-block causa">
+                                        <div class="block-title">Causa</div>
+                                        <div class="block-text">El jugo de naranja natural de 350 cc tiene un coste real altísimo de $1.586 CLP debido a la merma y precios de compra de cítricos.</div>
+                                    </div>
+                                    <div class="action-col-block impacto">
+                                        <div class="block-title">Impacto</div>
+                                        <div class="block-text">Margen neto de apenas 46.0% (materia prima del 54.0%), catalogado como Perro en salón y Caballo en al paso debido al altísimo volumen de venta ($672k gross).</div>
+                                    </div>
+                                    <div class="action-col-block accion">
+                                        <div class="block-title">Acción Recomendada</div>
+                                        <div class="block-text">Alzar el precio en vitrina/carta de $3.500 gross a $4.000 gross (+14%), o evaluar pre-prensado de escala o mix de marcas de calidad estable (Sofruco / similar).</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </section>
+            
+        </main>
+        
+    </div>
+
+    <!-- Data and Interactive Navigation Scripts -->
+    <script>
+        // Data for two separate Menu Engineering Matrices (Le Plat and Al Paso)
+        const matrixData = {
+            le_plat: {
+                title: "Productos en Cuadrantes (Le Plat - Salón)",
+                dots: [
+                    { name: "Cesar PRG", x: 17.6, y: 73.9, class: "dot-star", qty: 110, margin: "73.9%", vbruta: "$1.475.000" },
+                    { name: "Creme Brulle PRG", x: 24.0, y: 74.8, class: "dot-star", qty: 201, margin: "74.8%", vbruta: "$1.005.000" },
+                    { name: "Tostada Frances PRG", x: 19.8, y: 78.6, class: "dot-star", qty: 141, margin: "78.6%", vbruta: "$846.000" },
+                    { name: "Ensalada Coliflor", x: 15.6, y: 77.7, class: "dot-puzzle", qty: 81, margin: "77.7%", vbruta: "$1.579.500" },
+                    { name: "Steak Tartar PRG", x: 16.4, y: 70.0, class: "dot-puzzle", qty: 92, margin: "70.0%", vbruta: "$1.190.000" },
+                    { name: "Tabla Mediterranea PRG", x: 14.9, y: 71.6, class: "dot-puzzle", qty: 71, margin: "71.6%", vbruta: "$1.136.000" },
+                    { name: "Tartaro Salom PRG", x: 17.5, y: 74.3, class: "dot-puzzle", qty: 108, margin: "74.3%", vbruta: "$1.728.000" },
+                    { name: "Ensalada Lomo", x: 90.0, y: 65.9, class: "dot-horse", qty: 1151, margin: "65.9%", vbruta: "$25.322.000" },
+                    { name: "Ensalada Salmon", x: 29.4, y: 68.3, class: "dot-horse", qty: 279, margin: "68.3%", vbruta: "$6.138.000" },
+                    { name: "Tiramisu PRG", x: 18.7, y: 61.5, class: "dot-horse", qty: 125, margin: "61.5%", vbruta: "$817.000" },
+                    { name: "Burrata PRG", x: 13.8, y: 69.2, class: "dot-dog", qty: 54, margin: "69.2%", vbruta: "$918.000" },
+                    { name: "Jugo Naranjas PRG", x: 13.1, y: 52.8, class: "dot-dog", qty: 44, margin: "52.8%", vbruta: "$176.000" }
+                ],
+                lists: {
+                    stars: [
+                        { name: "Cesar PRG", qty: 110, margin: "73.9%", vbruta: "$1.475.000" },
+                        { name: "Creme Brulle PRG", qty: 201, margin: "74.8%", vbruta: "$1.005.000" },
+                        { name: "Tostada Frances PRG", qty: 141, margin: "78.6%", vbruta: "$846.000" }
+                    ],
+                    puzzles: [
+                        { name: "Ensalada Coliflor", qty: 81, margin: "77.7%", vbruta: "$1.579.500" },
+                        { name: "Steak Tartar PRG", qty: 92, margin: "70.0%", vbruta: "$1.190.000" },
+                        { name: "Tabla Mediterranea PRG", qty: 71, margin: "71.6%", vbruta: "$1.136.000" },
+                        { name: "Tartaro Salom PRG", qty: 108, margin: "74.3%", vbruta: "$1.728.000" }
+                    ],
+                    horses: [
+                        { name: "Ensalada Lomo", qty: 1151, margin: "65.9%", vbruta: "$25.322.000" },
+                        { name: "Ensalada Salmon", qty: 279, margin: "68.3%", vbruta: "$6.138.000" },
+                        { name: "Tiramisu PRG", qty: 125, margin: "61.5%", vbruta: "$817.000" }
+                    ],
+                    dogs: [
+                        { name: "Burrata PRG", qty: 54, margin: "69.2%", vbruta: "$918.000" },
+                        { name: "Jugo Naranjas PRG", qty: 44, margin: "52.8%", vbruta: "$176.000" }
+                    ]
+                }
+            },
+            al_paso: {
+                title: "Productos en Cuadrantes (Parigó al Paso)",
+                dots: [
+                    { name: "Baguette 300gr", x: 73.3, y: 91.7, class: "dot-star", qty: 734, margin: "91.7%", vbruta: "$1.612.000" },
+                    { name: "Ciabatta Blanca 200g", x: 28.4, y: 94.6, class: "dot-star", qty: 214, margin: "94.6%", vbruta: "$256.800" },
+                    { name: "Croissant", x: 37.7, y: 70.4, class: "dot-star", qty: 322, margin: "70.4%", vbruta: "$706.400" },
+                    { name: "Marraqueta", x: 29.1, y: 84.7, class: "dot-star", qty: 222, margin: "84.7%", vbruta: "$266.400" },
+                    { name: "Media Luna", x: 90.0, y: 83.7, class: "dot-star", qty: 929, margin: "83.7%", vbruta: "$1.653.900" },
+                    { name: "Sandwich Capri", x: 26.9, y: 75.2, class: "dot-star", qty: 196, margin: "75.2%", vbruta: "$1.175.500" },
+                    { name: "Desayuno Parigo", x: 21.8, y: 78.1, class: "dot-puzzle", qty: 137, margin: "78.1%", vbruta: "$1.027.500" },
+                    { name: "Galleta Almendras", x: 16.2, y: 72.2, class: "dot-puzzle", qty: 72, margin: "72.2%", vbruta: "$237.600" },
+                    { name: "Galleta Brownie", x: 17.0, y: 72.2, class: "dot-puzzle", qty: 81, margin: "72.2%", vbruta: "$267.300" },
+                    { name: "Galleta Sable", x: 18.0, y: 72.1, class: "dot-puzzle", qty: 93, margin: "72.1%", vbruta: "$306.300" },
+                    { name: "Media Luna Manjar", x: 17.6, y: 82.8, class: "dot-puzzle", qty: 88, margin: "82.8%", vbruta: "$193.600" },
+                    { name: "Mini Canele", x: 18.5, y: 72.2, class: "dot-puzzle", qty: 98, margin: "72.2%", vbruta: "$323.400" },
+                    { name: "Mini Madeleine", x: 14.1, y: 77.0, class: "dot-puzzle", qty: 48, margin: "77.0%", vbruta: "$158.100" },
+                    { name: "Quiche Pollo Espinaca", x: 14.0, y: 76.8, class: "dot-puzzle", qty: 46, margin: "76.8%", vbruta: "$276.000" },
+                    { name: "Sandwich Parisino", x: 22.7, y: 79.4, class: "dot-puzzle", qty: 147, margin: "79.4%", vbruta: "$808.500" },
+                    { name: "Sandwich Toscano", x: 22.3, y: 73.1, class: "dot-puzzle", qty: 143, margin: "73.1%", vbruta: "$858.000" },
+                    { name: "Ciabatta Aceituna", x: 28.3, y: 68.7, class: "dot-horse", qty: 213, margin: "68.7%", vbruta: "$255.600" },
+                    { name: "Jugo Naranjas AP", x: 26.5, y: 46.1, class: "dot-horse", qty: 192, margin: "46.1%", vbruta: "$672.000" },
+                    { name: "Palmera", x: 32.4, y: 69.9, class: "dot-horse", qty: 260, margin: "69.9%", vbruta: "$572.000" },
+                    { name: "Pan Chocolate", x: 31.6, y: 66.1, class: "dot-horse", qty: 251, margin: "66.1%", vbruta: "$601.400" },
+                    { name: "Pan de pasas", x: 28.8, y: 66.6, class: "dot-horse", qty: 218, margin: "66.6%", vbruta: "$522.200" },
+                    { name: "Sandwich Lyon", x: 33.3, y: 69.8, class: "dot-horse", qty: 270, margin: "69.8%", vbruta: "$1.484.500" },
+                    { name: "Tarta del dia", x: 25.8, y: 66.2, class: "dot-horse", qty: 183, margin: "66.2%", vbruta: "$695.400" },
+                    { name: "Ensalada Cesar", x: 20.5, y: 58.4, class: "dot-dog", qty: 122, margin: "58.4%", vbruta: "$976.000" },
+                    { name: "Ensalada Mediterranea", x: 16.6, y: 52.7, class: "dot-dog", qty: 77, margin: "52.7%", vbruta: "$616.000" },
+                    { name: "Quiche Queso Cabra Capresse", x: 13.1, y: 65.6, class: "dot-dog", qty: 36, margin: "65.6%", vbruta: "$216.000" }
+                ],
+                lists: {
+                    stars: [
+                        { name: "Baguette 300gr", qty: 734, margin: "91.7%", vbruta: "$1.612.000" },
+                        { name: "Ciabatta Blanca 200gr", qty: 214, margin: "94.6%", vbruta: "$256.800" },
+                        { name: "Croissant", qty: 322, margin: "70.4%", vbruta: "$706.400" },
+                        { name: "Marraqueta", qty: 222, margin: "84.7%", vbruta: "$266.400" },
+                        { name: "Media Luna", qty: 929, margin: "83.7%", vbruta: "$1.653.900" },
+                        { name: "Sandwich Capri", qty: 196, margin: "75.2%", vbruta: "$1.175.500" }
+                    ],
+                    puzzles: [
+                        { name: "Desayuno Parigo", qty: 137, margin: "78.1%", vbruta: "$1.027.500" },
+                        { name: "Galleta Almendras", qty: 72, margin: "72.2%", vbruta: "$237.600" },
+                        { name: "Galleta Brownie", qty: 81, margin: "72.2%", vbruta: "$267.300" },
+                        { name: "Galleta Sable", qty: 93, margin: "72.1%", vbruta: "$306.300" },
+                        { name: "Media Luna Manjar", qty: 88, margin: "82.8%", vbruta: "$193.600" },
+                        { name: "Mini Canele", qty: 98, margin: "72.2%", vbruta: "$323.400" },
+                        { name: "Mini Madeleine", qty: 48, margin: "77.0%", vbruta: "$158.100" },
+                        { name: "Quiche Pollo Espinaca", qty: 46, margin: "76.8%", vbruta: "$276.000" },
+                        { name: "Sandwich Parisino", qty: 147, margin: "79.4%", vbruta: "$808.500" },
+                        { name: "Sandwich Toscano", qty: 143, margin: "73.1%", vbruta: "$858.000" }
+                    ],
+                    horses: [
+                        { name: "Ciabatta Aceituna", qty: 213, margin: "68.7%", vbruta: "$255.600" },
+                        { name: "Jugo Naranjas AP", qty: 192, margin: "46.1%", vbruta: "$672.000" },
+                        { name: "Palmera", qty: 260, margin: "69.9%", vbruta: "$572.000" },
+                        { name: "Pan Chocolate", qty: 251, margin: "66.1%", vbruta: "$601.400" },
+                        { name: "Pan de pasas", qty: 218, margin: "66.6%", vbruta: "$522.200" },
+                        { name: "Sandwich Lyon", qty: 270, margin: "69.8%", vbruta: "$1.484.500" },
+                        { name: "Tarta del dia", qty: 183, margin: "66.2%", vbruta: "$695.400" }
+                    ],
+                    dogs: [
+                        { name: "Ensalada Cesar", qty: 122, margin: "58.4%", vbruta: "$976.000" },
+                        { name: "Ensalada Mediterranea", qty: 77, margin: "52.7%", vbruta: "$616.000" },
+                        { name: "Quiche Queso Cabra Capresse", qty: 36, margin: "65.6%", vbruta: "$216.000" }
+                    ]
+                }
+            }
+        };
+
+        // Render function for 2D Scatter plot and quadrant listings
+        function renderMatrix(segmentKey) {
+            const data = matrixData[segmentKey];
+            
+            // Set header title
+            document.getElementById('matrix-list-title').textContent = data.title;
+            
+            // Clear and render dots
+            const dotsContainer = document.getElementById('scatter-dots-container');
+            dotsContainer.innerHTML = '';
+            
+            data.dots.forEach(dot => {
+                const dotEl = document.createElement('div');
+                dotEl.className = `scatter-dot ${dot.class}`;
+                
+                // Map percentages to coordinates
+                const leftPos = Math.max(8, Math.min(92, dot.x));
+                const topPos = Math.max(8, Math.min(92, 100 - dot.y));
+                
+                dotEl.style.left = `${leftPos}%`;
+                dotEl.style.top = `${topPos}%`;
+                dotEl.setAttribute('data-name', `${dot.name} (Cant: ${dot.qty} | Margen: ${dot.margin} | Ventas: ${dot.vbruta})`);
+                dotEl.style.color = 'currentColor';
+                
+                dotsContainer.appendChild(dotEl);
+            });
+            
+            // Render listings
+            const starsList = document.getElementById('quad-1-list');
+            const puzzlesList = document.getElementById('quad-2-list');
+            const horsesList = document.getElementById('quad-3-list');
+            const dogsList = document.getElementById('quad-4-list');
+            
+            starsList.innerHTML = '';
+            puzzlesList.innerHTML = '';
+            horsesList.innerHTML = '';
+            dogsList.innerHTML = '';
+            
+            data.lists.stars.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'quadrant-product-item';
+                li.innerHTML = `<span>${item.name}</span><strong>${item.qty} un (${item.margin})</strong>`;
+                starsList.appendChild(li);
+            });
+            
+            data.lists.puzzles.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'quadrant-product-item';
+                li.innerHTML = `<span>${item.name}</span><strong>${item.qty} un (${item.margin})</strong>`;
+                puzzlesList.appendChild(li);
+            });
+            
+            data.lists.horses.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'quadrant-product-item';
+                li.innerHTML = `<span>${item.name}</span><strong>${item.qty} un (${item.margin})</strong>`;
+                horsesList.appendChild(li);
+            });
+            
+            data.lists.dogs.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'quadrant-product-item';
+                li.innerHTML = `<span>${item.name}</span><strong>${item.qty} un (${item.margin})</strong>`;
+                dogsList.appendChild(li);
+            });
+        }
+
+        // Active matrix segment selection
+        function selectMatrix(segmentKey) {
+            // Remove active classes
+            document.getElementById('btn-matrix-le-plat').classList.remove('active');
+            document.getElementById('btn-matrix-al-paso').classList.remove('active');
+            
+            // Add active class
+            if (segmentKey === 'le_plat') {
+                document.getElementById('btn-matrix-le-plat').classList.add('active');
+            } else {
+                document.getElementById('btn-matrix-al-paso').classList.add('active');
+            }
+            
+            renderMatrix(segmentKey);
+        }
+
+        // Navigation tab switching
+        function switchTab(tabId, el) {
+            // Hide all tab panels
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            // Deactivate all nav items
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            
+            // Activate selected tab and nav item
+            document.getElementById(tabId).classList.add('active');
+            el.classList.add('active');
+            
+            // Change top header title depending on tab
+            const topTitleEl = document.getElementById('top-title');
+            if (tabId === 'tab-overview') {
+                topTitleEl.textContent = "Informe de Ventas Mayo 2026 - Parigó";
+            } else if (tabId === 'tab-split') {
+                topTitleEl.textContent = "Mapeo y Comparativa de Formatos: Le Plat vs. Al Paso";
+            } else if (tabId === 'tab-matrix') {
+                topTitleEl.textContent = "Matriz de Posicionamiento e Ingeniería de Menú";
+                // Trigger render on first selection
+                setTimeout(() => renderMatrix(document.getElementById('btn-matrix-le-plat').classList.contains('active') ? 'le_plat' : 'al_paso'), 50);
+            } else if (tabId === 'tab-products') {
+                topTitleEl.textContent = "Desglose Completo de Productos, Precios y Rentabilidad";
+            } else if (tabId === 'tab-strategy') {
+                topTitleEl.textContent = "Planificación Estratégica y Puntos Críticos de Gestión";
+            }
+        }
+
+        // Table filters
+        let tableFilter = 'all';
+        function setTableFilter(filterVal) {
+            tableFilter = filterVal;
+            // Toggle active buttons
+            document.getElementById('btn-filter-all').classList.remove('active');
+            document.getElementById('btn-filter-plat').classList.remove('active');
+            document.getElementById('btn-filter-paso').classList.remove('active');
+            
+            if (filterVal === 'all') document.getElementById('btn-filter-all').classList.add('active');
+            else if (filterVal === 'plat') document.getElementById('btn-filter-plat').classList.add('active');
+            else if (filterVal === 'paso') document.getElementById('btn-filter-paso').classList.add('active');
+            
+            filterTable();
+        }
+
+        function filterTable() {
+            const query = document.getElementById('table-search').value.toLowerCase().strip();
+            const rows = document.querySelectorAll('#products-table tbody tr');
+            
+            rows.forEach(row => {
+                const name = row.querySelector('.table-prod-name').textContent.toLowerCase();
+                const cat = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                const type = row.getAttribute('data-type');
+                
+                const matchesSearch = name.includes(query) || cat.includes(query);
+                const matchesFilter = (tableFilter === 'all') || (tableFilter === type);
+                
+                if (matchesSearch && matchesFilter) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // Initialize first render
+        renderMatrix('le_plat');
+    </script>
+</body>
+</html>

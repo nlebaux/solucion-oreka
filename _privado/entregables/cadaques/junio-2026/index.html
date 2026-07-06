@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informe de Ventas Junio 2026 - Cadaqués</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Jost: alternativa libre más cercana a Futura Std (tipografía oficial de marca según Manual de Marca Cadaqués 2023) -->
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    /* Paleta y tipografía tomadas del Manual de Marca Cadaqués (Panadería Cadaqués, 2023):
+       negro #000000, verde bosque #002A1C, salvia #2C4D3E, taupe #BFB8A8, crema #EFF0E9.
+       Tipografía Futura Std (Book/DemiBold) — se usa Jost como alternativa libre geométrica equivalente.
+       Look & feel: boulangerie europea tradicional, materiales naturales (kraft, madera, metal negro). */
+    :root {
+        --bg-page: #EFF0E9;
+        --bg-card: #FFFFFF;
+        --bg-card-alt: #F7F6F0;
+
+        --ink: #000000;
+        --forest: #002A1C;
+        --sage: #2C4D3E;
+        --taupe: #BFB8A8;
+        --cream: #EFF0E9;
+        --wood: #8C6A45;        /* tono cognac/roble del moodboard, para alertas */
+        --wood-light: #E4D9C4;
+
+        --text-primary: #17211B;
+        --text-secondary: #4B564E;
+        --text-muted: #8A9189;
+
+        --border: rgba(0, 42, 28, 0.14);
+        --border-strong: rgba(0, 0, 0, 0.85);
+
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 14px rgba(0, 42, 28, 0.08);
+
+        --font-display: 'Jost', sans-serif;
+        --font-body: 'Jost', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+        background-color: var(--bg-page);
+        color: var(--text-primary);
+        font-family: var(--font-body);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+    }
+
+    .container { display: flex; min-height: 100vh; }
+
+    /* ---- Sidebar: lockup de marca real (C circular + PANADERÍA letter-spaced) ---- */
+    aside.sidebar {
+        width: 270px;
+        background-color: var(--bg-card);
+        border-right: 1px solid var(--border-strong);
+        padding: 2.5rem 1.75rem;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        height: 100vh;
+        z-index: 10;
+    }
+
+    .logo-area { display: block; margin-bottom: 3rem; text-decoration: none; }
+    .logo-word {
+        font-family: var(--font-display); font-weight: 500; font-size: 2.1rem;
+        color: var(--ink); letter-spacing: 0.5px; line-height: 1;
+    }
+    .logo-word .cap-c {
+        display: inline-block; border: 2.5px solid var(--ink); border-radius: 50%;
+        width: 1.05em; height: 1.05em; text-align: center; line-height: 0.98em;
+        font-size: 0.62em; position: relative; top: 0.02em; margin-right: 0.02em;
+    }
+    .logo-sub {
+        font-size: 0.68rem; color: var(--sage); text-transform: uppercase;
+        letter-spacing: 5px; margin-top: 0.4rem; font-weight: 500;
+    }
+
+    nav.nav-menu { display: flex; flex-direction: column; gap: 0.15rem; flex-grow: 1; }
+
+    .nav-item {
+        display: flex; align-items: center; gap: 0.7rem;
+        padding: 0.7rem 0.6rem; color: var(--text-secondary); text-decoration: none;
+        font-weight: 500; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.8px;
+        border-left: 2px solid transparent; transition: all 0.15s ease; cursor: pointer;
+    }
+    .nav-item svg { flex-shrink: 0; opacity: 0.7; }
+    .nav-item:hover { color: var(--forest); background-color: var(--bg-card-alt); }
+    .nav-item.active { color: var(--forest); background-color: var(--bg-card-alt); border-left-color: var(--forest); font-weight: 600; }
+    .nav-item.active svg { opacity: 1; }
+
+    .sidebar-footer {
+        margin-top: auto; padding-top: 1.5rem; border-top: 1px solid var(--border);
+        font-size: 0.68rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.3rem;
+        text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    main.main-content { margin-left: 270px; flex-grow: 1; padding: 2.5rem 3rem 4rem; max-width: 1240px; }
+
+    /* Header estilo página de manual: regla gruesa arriba, línea fina de contexto */
+    header.top-header {
+        margin-bottom: 2.5rem; border-top: 2px solid var(--ink); padding-top: 0.9rem;
+    }
+    .top-header-row {
+        display: flex; justify-content: space-between; align-items: baseline;
+        border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 0.9rem;
+        text-transform: uppercase; letter-spacing: 1px; font-size: 0.72rem; color: var(--text-muted);
+    }
+    .header-title h2 { font-family: var(--font-display); font-size: 1.7rem; font-weight: 500; color: var(--forest); letter-spacing: 0.3px; }
+    .header-title p { font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.3rem; }
+
+    .status-pill {
+        display: flex; align-items: center; gap: 0.5rem;
+        background-color: var(--bg-card-alt); border: 1px solid var(--border);
+        color: var(--sage); padding: 0.4rem 0.8rem; border-radius: 2px; font-size: 0.7rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 1px;
+    }
+    .status-dot { width: 7px; height: 7px; background-color: var(--sage); border-radius: 50%; }
+
+    .tab-panel { display: none; animation: fadeIn 0.25s ease-out; }
+    .tab-panel.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem; }
+
+    .metric-card {
+        background-color: var(--bg-card); border: 1px solid var(--border-strong);
+        padding: 1.4rem 1.5rem; display: flex; flex-direction: column; gap: 0.4rem;
+        position: relative;
+    }
+    .metric-label { font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.2px; font-weight: 600; }
+    .metric-value { font-family: var(--font-display); font-size: 1.85rem; font-weight: 500; color: var(--forest); }
+    .metric-subtext { font-size: 0.75rem; color: var(--text-muted); margin-top: auto; }
+
+    .dashboard-layout { display: grid; grid-template-columns: 1.7fr 1.3fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+    @media (max-width: 968px) { .dashboard-layout { grid-template-columns: 1fr; } }
+
+    .content-card {
+        background-color: var(--bg-card); border: 1px solid var(--border);
+        padding: 1.75rem; box-shadow: var(--shadow-sm); margin-bottom: 1.5rem;
+    }
+    .card-header {
+        margin-bottom: 1.25rem; border-bottom: 1px solid var(--ink); padding-bottom: 0.7rem;
+        display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;
+    }
+    .card-header h3 {
+        font-family: var(--font-display); font-size: 1.05rem; font-weight: 500; color: var(--forest);
+        text-transform: uppercase; letter-spacing: 1px;
+    }
+    .card-header span.note { font-size: 0.7rem; color: var(--text-muted); }
+
+    .brand-split-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.1rem; margin-bottom: 1rem; }
+    @media (max-width: 968px) { .brand-split-grid { grid-template-columns: 1fr; } }
+
+    .brand-box {
+        background-color: var(--bg-card-alt); border: 1px solid var(--border);
+        padding: 1.4rem; display: flex; flex-direction: column; gap: 0.4rem;
+    }
+    .brand-title { font-family: var(--font-display); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; }
+    .brand-big { font-size: 1.4rem; font-weight: 500; color: var(--forest); margin: 0.3rem 0; font-family: var(--font-display); }
+    .brand-detail { font-size: 0.78rem; color: var(--text-secondary); line-height: 1.5; }
+
+    .table-responsive { width: 100%; overflow-x: auto; }
+    table.premium-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left; }
+    table.premium-table th, table.premium-table td { padding: 0.75rem 0.9rem; border-bottom: 1px solid var(--border); }
+    table.premium-table th {
+        color: var(--text-muted); text-transform: uppercase; font-size: 0.68rem; font-weight: 700;
+        letter-spacing: 0.8px; border-bottom: 1px solid var(--ink);
+    }
+    table.premium-table tr:hover td { background-color: var(--bg-card-alt); }
+    .num-col { text-align: right; font-variant-numeric: tabular-nums; }
+    .table-badge { padding: 0.15rem 0.5rem; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 2px; }
+    .table-badge.ok { background-color: rgba(44, 77, 62, 0.12); color: var(--sage); }
+    .table-badge.warn { background-color: rgba(191, 184, 168, 0.35); color: var(--forest); }
+    .table-badge.alert { background-color: rgba(140, 106, 69, 0.16); color: var(--wood); }
+
+    .bar-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; font-size: 0.76rem; }
+    .bar-label { width: 72px; color: var(--text-secondary); flex-shrink: 0; }
+    .bar-track { flex-grow: 1; background: var(--bg-card-alt); border: 1px solid var(--border); height: 16px; position: relative; overflow: hidden; }
+    .bar-fill { height: 100%; background: var(--sage); }
+    .bar-fill.weekend { background: var(--wood); }
+    .bar-value { width: 100px; text-align: right; color: var(--text-primary); font-variant-numeric: tabular-nums; flex-shrink: 0; }
+
+    .callout {
+        background-color: var(--bg-card-alt); border-left: 3px solid var(--sage);
+        padding: 0.9rem 1.1rem; font-size: 0.82rem; color: var(--text-secondary); margin-top: 1rem;
+    }
+    .callout.warn { background-color: var(--wood-light); border-left-color: var(--wood); color: var(--text-primary); }
+    .callout code { background: rgba(0,0,0,0.06); padding: 0.1rem 0.35rem; border-radius: 2px; font-size: 0.85em; }
+
+    ul.plain { list-style: none; display: flex; flex-direction: column; gap: 1rem; font-size: 0.85rem; color: var(--text-secondary); }
+    ul.plain li { border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; }
+    ul.plain li:last-child { border-bottom: none; padding-bottom: 0; }
+    ul.plain strong.title { color: var(--forest); display: block; font-size: 0.9rem; margin-bottom: 0.15rem; }
+
+    .people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 1rem; }
+    .person-card {
+        background-color: var(--bg-card-alt); border: 1px solid var(--border);
+        padding: 1.1rem; display: flex; flex-direction: column; gap: 0.3rem;
+    }
+    .person-card .name { font-family: var(--font-display); font-weight: 600; color: var(--forest); font-size: 0.92rem; }
+    .person-card .area { font-size: 0.7rem; color: var(--sage); text-transform: uppercase; letter-spacing: 0.5px; }
+    .person-card .sup { font-size: 0.72rem; color: var(--text-muted); }
+    .person-card .cost { font-size: 0.78rem; color: var(--forest); font-weight: 600; margin-top: 0.4rem; padding-top: 0.4rem; border-top: 1px solid var(--border); }
+    .person-card.peter { border-color: var(--wood); border-width: 1.5px; }
+
+    strong { color: var(--forest); }
+    em { color: var(--sage); font-style: italic; }
+</style>
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <script src="../../../auth.js"></script>
+<style id="oreka-private-shell-style">
+  .oreka-private-shell {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    background: rgba(14, 13, 11, 0.92);
+    color: #eedacf;
+    border-bottom: 1px solid rgba(231, 123, 50, 0.22);
+    backdrop-filter: blur(10px);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .oreka-private-shell a {
+    color: #eedacf;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .oreka-private-shell a:hover {
+    color: #ffffff;
+  }
+
+  .oreka-private-shell .divider {
+    width: 1px;
+    height: 14px;
+    background: rgba(238, 218, 207, 0.24);
+  }
+
+  .oreka-private-shell .title {
+    margin-left: auto;
+    color: rgba(238, 218, 207, 0.82);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="oreka-private-shell">
+  <a href="/privado/">Privado</a>
+  <span class="divider"></span>
+  <a href="/privado/entregables/">Entregables</a>
+  <span class="title">Cadaques · informe junio 2026</span>
+</div>
+
+
+<div class="container">
+
+    <aside class="sidebar">
+        <a href="#" class="logo-area">
+            <div class="logo-word"><span class="cap-c">C</span>adaqués</div>
+            <div class="logo-sub">Panadería</div>
+        </a>
+
+        <nav class="nav-menu">
+            <div class="nav-item active" onclick="switchTab('tab-overview', this)">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                Resumen
+            </div>
+            <div class="nav-item" onclick="switchTab('tab-canales', this)">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z"></path></svg>
+                Canales
+            </div>
+            <div class="nav-item" onclick="switchTab('tab-mix', this)">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                Mix
+            </div>
+            <div class="nav-item" onclick="switchTab('tab-costos', this)">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                Costos
+            </div>
+            <div class="nav-item" onclick="switchTab('tab-dotacion', this)">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4 4 4 0 004 4zm6 0a4 4 0 10-4-4"></path></svg>
+                Dotación
+            </div>
+            <div class="nav-item" onclick="switchTab('tab-rentabilidad', this)">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                Rentabilidad
+            </div>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div>Solución Horeca SpA</div>
+            <div>Emisión 2026-07-03</div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="top-header">
+            <div class="top-header-row">
+                <span>Panadería Cadaqués</span>
+                <span>Informe de gestión comercial</span>
+                <span>2026 · Junio</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:1rem;">
+                <div class="header-title">
+                    <h2>Junio 2026 — Gestión Comercial y Costeo Real</h2>
+                    <p>Inversiones Cadaqués SpA (RUT 77.427.765-K) — San Sebastián 2806, Las Condes</p>
+                </div>
+                <div class="status-pill">
+                    <div class="status-dot"></div>
+                    <span>Operación Activa</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- TAB: RESUMEN EJECUTIVO -->
+        <div id="tab-overview" class="tab-panel active">
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <span class="metric-label">Venta Bruta Fudo</span>
+                    <span class="metric-value">$50.029.932</span>
+                    <span class="metric-subtext">6.574 ventas cerradas · con IVA</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-label">Ticket Promedio</span>
+                    <span class="metric-value">$7.610</span>
+                    <span class="metric-subtext">85,1% mostrador</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-label">Materia Prima Real (Intercompany)</span>
+                    <span class="metric-value" style="color: var(--wood)">47,6%</span>
+                    <span class="metric-subtext">Margen bruto real: 52,4%</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-label">Traspaso Bocus → Cadaqués</span>
+                    <span class="metric-value">$23.825.954</span>
+                    <span class="metric-subtext">Materia prima, excluye Sueldos CDQ</span>
+                </div>
+            </div>
+
+            <div class="dashboard-layout">
+                <div class="left-column">
+                    <div class="content-card">
+                        <div class="card-header"><h3>Lectura del mes</h3></div>
+                        <p style="font-size: 0.95rem; margin-bottom: 1rem;">
+                            Cadaqués vendió <strong>$50.029.932 CLP</strong> brutos en junio, en 6.574 tickets cerrados, con un ticket promedio de <strong>$7.610 CLP</strong>. El mostrador sigue siendo el canal dominante con el 85,1% de la venta; delivery (Uber Eats + Rappi) aporta 8,3% y el salón 6,6% con un ticket muy superior ($78.630) por consumo grupal.
+                        </p>
+                        <p style="font-size: 0.95rem; margin-bottom: 1rem;">
+                            Al cruzar la venta real de Cadaqués contra los traspasos de materia prima que Bocus le factura como cliente interno (<em>Inversiones Cadaques Spa</em>), el costeo real de junio queda en <strong>47,6% de materia prima</strong> ($23.825.954 CLP sobre $50.029.932 CLP de venta), es decir un <strong>margen bruto real de 52,4%</strong>. Esta cifra se validó cruzándola contra el informe ejecutivo de Bocus junio 2026, que ya reportaba el mismo segmento de traspasos a Cadaqués en ~$23,8M — coinciden.
+                        </p>
+                        <p style="font-size: 0.95rem;">
+                            La venta cae de forma marcada los fines de semana (sábado y domingo son sistemáticamente los días más bajos del mes, ver pestaña Canales), algo atípico para una panadería y consistente con una ubicación de flujo de oficinas en Las Condes más que de barrio residencial.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="right-column">
+                    <div class="content-card" style="height: 100%;">
+                        <div class="card-header"><h3>Hitos y hallazgos</h3></div>
+                        <ul class="plain">
+                            <li>
+                                <strong class="title">Costeo real cruzado</strong>
+                                32 traspasos cerrados desde Bocus por $33.825.954 CLP brutos; de ellos, $10.000.000 corresponden a "Sueldos CDQ 202606" (servicio RRHH que Horeca cobra a Cadaqués), no a materia prima. Neto de eso, la materia prima real es $23.825.954 CLP.
+                            </li>
+                            <li>
+                                <strong class="title">Mix de venta</strong>
+                                Panadería (27,4%), Promociones (16,6%) y Sandwich (14,1%) concentran más de la mitad de la venta por categoría.
+                            </li>
+                            <li>
+                                <strong class="title">Venta B2B mayorista</strong>
+                                Otros restoranes (VYTA, La Biferia, Barra Fundición, Vch, Gastronomía Italiana, Devin) compraron pan al por mayor por $3.208.347 CLP (6,4% de la venta), un canal aparte del mostrador.
+                            </li>
+                            <li>
+                                <strong class="title">Dato sin trazar</strong>
+                                "Producto Genérico" (categoría Inactivos) explica $4.883.310 CLP / 845 unidades, un 9,1% de la venta por categoría — no es un producto real, es una fuga de trazabilidad en el catálogo Fudo, no de plata.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-header">
+                    <h3>Descuentos aplicados</h3>
+                    <span class="note">Hoja Descuentos, ventas.xls</span>
+                </div>
+                <p style="font-size: 0.9rem;">Se aplicaron <strong>$3.865.429 CLP</strong> en descuentos durante junio, equivalentes al 7,7% de la venta bruta antes de descuento.</p>
+            </div>
+
+        </div>
+
+        <!-- TAB: CANALES Y VENTA -->
+        <div id="tab-canales" class="tab-panel">
+
+            <div class="brand-split-grid">
+                <div class="brand-box" style="border-left: 4px solid var(--forest);">
+                    <span class="brand-title" style="color: var(--forest);">Mostrador</span>
+                    <div class="brand-big">$42.553.190</div>
+                    <p class="brand-detail">6.303 ventas · Ticket promedio $6.751 · 85,1% de la venta</p>
+                </div>
+                <div class="brand-box" style="border-left: 4px solid var(--sage);">
+                    <span class="brand-title" style="color: var(--sage);">Delivery</span>
+                    <div class="brand-big">$4.174.295</div>
+                    <p class="brand-detail">229 pedidos · Ticket promedio $18.228 · 8,3% de la venta<br>Uber Eats $3.960.235 (208) vs. Rappi $214.060 (21) — Rappi sigue sin tracción.</p>
+                </div>
+                <div class="brand-box" style="border-left: 4px solid var(--wood);">
+                    <span class="brand-title" style="color: var(--wood);">Salón / Local</span>
+                    <div class="brand-big">$3.302.447</div>
+                    <p class="brand-detail">42 ventas · Ticket promedio $78.630 · 6,6% de la venta (consumo grupal)</p>
+                </div>
+            </div>
+
+            <div class="dashboard-layout">
+                <div class="content-card" style="grid-column: 1 / -1;">
+                    <div class="card-header">
+                        <h3>Evolución diaria de venta</h3>
+                        <span class="note">Barras en tono madera = sábado/domingo</span>
+                    </div>
+                    <div id="daily-chart"></div>
+                    <div class="callout warn">
+                        Los 6 días de menor venta del mes son todos sábado o domingo (mín. $759.990 el domingo 28). El viernes 19 fue el pico del mes ($3.053.596). Vale la pena evaluar si el horario/dotación de fin de semana está sobredimensionado para la demanda real.
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-header"><h3>Medios de pago</h3></div>
+                <div class="table-responsive">
+                    <table class="premium-table">
+                        <thead><tr><th>Medio</th><th class="num-col">Monto</th><th class="num-col">%</th></tr></thead>
+                        <tbody>
+                            <tr><td>FudoPagos - Débito</td><td class="num-col">$15.796.820</td><td class="num-col">31,6%</td></tr>
+                            <tr><td>FudoPagos (QR / app)</td><td class="num-col">$12.690.600</td><td class="num-col">25,4%</td></tr>
+                            <tr><td>FudoPagos - Crédito</td><td class="num-col">$12.113.270</td><td class="num-col">24,2%</td></tr>
+                            <tr><td>Online Uber Eats</td><td class="num-col">$3.960.235</td><td class="num-col">7,9%</td></tr>
+                            <tr><td>Por pagar (cta. cte.)</td><td class="num-col">$3.246.547</td><td class="num-col">6,5%</td></tr>
+                            <tr><td>Efectivo</td><td class="num-col">$1.736.800</td><td class="num-col">3,5%</td></tr>
+                            <tr><td>Online Rappi</td><td class="num-col">$214.060</td><td class="num-col">0,4%</td></tr>
+                            <tr><td>Cta. Cte. / Transferencia</td><td class="num-col">$277.600</td><td class="num-col">0,6%</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- TAB: CATEGORÍAS Y MIX -->
+        <div id="tab-mix" class="tab-panel">
+
+            <div class="content-card">
+                <div class="card-header">
+                    <h3>Venta por categoría</h3>
+                    <span class="note">Suma de líneas de producto — ver nota de descuadre abajo</span>
+                </div>
+                <div class="table-responsive">
+                    <table class="premium-table">
+                        <thead><tr><th>Categoría</th><th class="num-col">Cantidad</th><th class="num-col">Venta</th><th class="num-col">%</th></tr></thead>
+                        <tbody>
+                            <tr><td>Panadería</td><td class="num-col">14.283</td><td class="num-col">$14.707.195</td><td class="num-col">27,4%</td></tr>
+                            <tr><td>Promociones</td><td class="num-col">1.483</td><td class="num-col">$8.924.400</td><td class="num-col">16,6%</td></tr>
+                            <tr><td>Sandwich</td><td class="num-col">1.339</td><td class="num-col">$7.565.000</td><td class="num-col">14,1%</td></tr>
+                            <tr><td>Bollería</td><td class="num-col">3.245</td><td class="num-col">$7.268.152</td><td class="num-col">13,5%</td></tr>
+                            <tr><td>Inactivos (Producto Genérico) <span class="table-badge alert">revisar</span></td><td class="num-col">860</td><td class="num-col">$4.883.310</td><td class="num-col">9,1%</td></tr>
+                            <tr><td>Cafetería</td><td class="num-col">1.422</td><td class="num-col">$3.702.500</td><td class="num-col">6,9%</td></tr>
+                            <tr><td>Quesos y Charcutería</td><td class="num-col">260</td><td class="num-col">$3.086.500</td><td class="num-col">5,7%</td></tr>
+                            <tr><td>Pastelería</td><td class="num-col">628</td><td class="num-col">$2.767.400</td><td class="num-col">5,2%</td></tr>
+                            <tr><td>Refrescos</td><td class="num-col">106</td><td class="num-col">$374.500</td><td class="num-col">0,7%</td></tr>
+                            <tr><td>Conservas</td><td class="num-col">38</td><td class="num-col">$240.500</td><td class="num-col">0,4%</td></tr>
+                            <tr><td>Ensaladas</td><td class="num-col">20</td><td class="num-col">$160.000</td><td class="num-col">0,3%</td></tr>
+                            <tr><td>Despachos</td><td class="num-col">2</td><td class="num-col">$8.000</td><td class="num-col">0,0%</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="callout warn">
+                    La suma de estas líneas ($53.687.457) no cuadra exactamente con la venta real del mes ($50.029.932) — diferencia de ~$3,66M, mismo patrón de descuadre ya visto en el informe de Bocus (atribuible a cómo Fudo desglosa combos/promociones en productos individuales). Usar el % de mix como referencia direccional, no como cifra reconciliada al peso.
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-header"><h3>Top 15 productos por venta</h3></div>
+                <div class="table-responsive">
+                    <table class="premium-table">
+                        <thead><tr><th>#</th><th>Producto</th><th>Categoría</th><th class="num-col">Cantidad</th><th class="num-col">Venta</th></tr></thead>
+                        <tbody>
+                            <tr><td>1</td><td>Producto Genérico <span class="table-badge alert">sin SKU real</span></td><td>Inactivos</td><td class="num-col">845</td><td class="num-col">$4.883.310</td></tr>
+                            <tr><td>2</td><td>Campo Integral 600gr</td><td>Panadería</td><td class="num-col">560</td><td class="num-col">$2.100.250</td></tr>
+                            <tr><td>3</td><td>Media Luna x 3</td><td>Promociones</td><td class="num-col">411</td><td class="num-col">$2.013.900</td></tr>
+                            <tr><td>4</td><td>Sandwich Lyon</td><td>Sandwich</td><td class="num-col">355</td><td class="num-col">$1.952.500</td></tr>
+                            <tr><td>5</td><td>Marraqueta</td><td>Panadería</td><td class="num-col">1.602</td><td class="num-col">$1.922.400</td></tr>
+                            <tr><td>6</td><td>Mini Ciabatta 45gr</td><td>Panadería</td><td class="num-col">8.402</td><td class="num-col">$1.745.600</td></tr>
+                            <tr><td>7</td><td>Sandwich Capri</td><td>Sandwich</td><td class="num-col">283</td><td class="num-col">$1.698.000</td></tr>
+                            <tr><td>8</td><td>Capuccino Vainilla 220ml</td><td>Cafetería</td><td class="num-col">568</td><td class="num-col">$1.590.400</td></tr>
+                            <tr><td>9</td><td>Campo Blanco 600gr</td><td>Panadería</td><td class="num-col">415</td><td class="num-col">$1.527.221</td></tr>
+                            <tr><td>10</td><td>Baguette x 2</td><td>Promociones</td><td class="num-col">323</td><td class="num-col">$1.259.700</td></tr>
+                            <tr><td>11</td><td>Media Luna</td><td>Bollería</td><td class="num-col">689</td><td class="num-col">$1.241.300</td></tr>
+                            <tr><td>12</td><td>Pan Chocolate</td><td>Bollería</td><td class="num-col">513</td><td class="num-col">$1.231.200</td></tr>
+                            <tr><td>13</td><td>Baguette 300gr</td><td>Panadería</td><td class="num-col">514</td><td class="num-col">$1.033.934</td></tr>
+                            <tr><td>14</td><td>Sandwich Parisino</td><td>Sandwich</td><td class="num-col">178</td><td class="num-col">$979.000</td></tr>
+                            <tr><td>15</td><td>Croissant x 2</td><td>Promociones</td><td class="num-col">248</td><td class="num-col">$967.200</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="callout">
+                    No se hizo Ingeniería de Menú completa (estrellas/caballos de batalla/perros) este mes porque requiere costo teórico por receta (fichas Fudo), no disponible en esta sesión. Si se necesita, extraer catálogo con <code>scripts/fudo_api.py --account cadaques catalog-export</code> y cruzar contra este top de ventas.
+                </div>
+            </div>
+
+        </div>
+
+        <!-- TAB: COSTOS INTERCOMPANY -->
+        <div id="tab-costos" class="tab-panel">
+
+            <div class="content-card">
+                <div class="card-header"><h3>Cómo se calculó el costeo real</h3></div>
+                <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">
+                    Cadaqués no registra sus compras de materia prima en su propio Fudo — el abastecimiento llega transferido desde el Fudo de <strong>Bocus</strong>, facturado internamente como "venta" al cliente <em>Inversiones Cadaques Spa</em> (id 8). Se extrajo en vivo el detalle de junio completo (01 al 30) vía API de Bocus.
+                </p>
+                <ul class="plain">
+                    <li><strong class="title">32 traspasos cerrados</strong> por un total bruto de $33.825.954 CLP.</li>
+                    <li><strong class="title">1 línea corresponde a "Sueldos CDQ 202606"</strong> por $10.000.000 CLP — es el cobro del servicio de RRHH que Horeca centraliza y factura a Cadaqués como empresa aparte, no es materia prima y se excluye del costeo de producto.</li>
+                    <li><strong class="title">Materia prima real: $23.825.954 CLP</strong> ($33.825.954 − $10.000.000). Esta cifra cruza casi exacto con el segmento "Cadaqués ~$23,8M" ya reportado en el informe ejecutivo de Bocus junio 2026.</li>
+                    <li><strong class="title">No hubo línea de "Despacho"</strong> este mes (sí apareció en meses anteriores).</li>
+                </ul>
+            </div>
+
+            <div class="content-card">
+                <div class="card-header"><h3>Margen bruto real consolidado</h3></div>
+                <div class="brand-split-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+                    <div class="brand-box" style="border-left: 4px solid var(--forest);">
+                        <span class="brand-title" style="color: var(--forest);">Venta bruta</span>
+                        <div class="brand-big">$50.029.932</div>
+                        <p class="brand-detail">6.574 ventas, con IVA</p>
+                    </div>
+                    <div class="brand-box" style="border-left: 4px solid var(--wood);">
+                        <span class="brand-title" style="color: var(--wood);">Materia prima real</span>
+                        <div class="brand-big">$23.825.954</div>
+                        <p class="brand-detail">47,6% de la venta</p>
+                    </div>
+                    <div class="brand-box" style="border-left: 4px solid var(--sage);">
+                        <span class="brand-title" style="color: var(--sage);">Margen bruto real</span>
+                        <div class="brand-big">52,4%</div>
+                        <p class="brand-detail">$26.203.978 CLP de contribución</p>
+                    </div>
+                </div>
+                <div class="callout">
+                    Metodología: se usa <code>sale.total</code> de cada traspaso como valor autoritativo (no la suma de líneas por producto, que está a precio de catálogo ~28% más alto que el precio de transferencia real). Mismo criterio ya validado en el informe de Bocus.
+                </div>
+            </div>
+
+        </div>
+
+        <!-- TAB: DOTACIÓN -->
+        <div id="tab-dotacion" class="tab-panel">
+
+            <div class="content-card">
+                <div class="card-header">
+                    <h3>Dotación Cadaqués (Buk, junio 2026)</h3>
+                    <span class="note">7 registrados en Buk bajo Cadaqués + 1 líder de producción registrado en Parigó</span>
+                </div>
+                <div class="people-grid">
+                    <div class="person-card">
+                        <span class="name">Patricia Agudelo Zapata</span><span class="area">Ventas</span><span class="sup">Sup: Roxana Contreras</span>
+                        <span class="cost">Costo empresa est.: $638.179</span>
+                    </div>
+                    <div class="person-card">
+                        <span class="name">Roxana Contreras Rivera</span><span class="area">Ventas · Jefa de Ventas</span><span class="sup">Sup: Nicolás Le Baux</span>
+                        <span class="cost">Costo empresa est.: $638.179</span>
+                    </div>
+                    <div class="person-card">
+                        <span class="name">José Matías Zuleta Retamal</span><span class="area">Ventas</span><span class="sup">Sup: Roxana Contreras</span>
+                        <span class="cost">Costo empresa est.: $638.179</span>
+                    </div>
+                    <div class="person-card">
+                        <span class="name">Daniela Abarca Moreno</span><span class="area">Ventas</span><span class="sup">Sup: Roxana Contreras</span>
+                        <span class="cost">Costo empresa est.: $638.179</span>
+                    </div>
+                    <div class="person-card">
+                        <span class="name">Matías Vallejos Cisterna</span><span class="area">Panadería</span><span class="sup">Sup: Peter Rojas</span>
+                        <span class="cost">Costo empresa est.: $638.179</span>
+                    </div>
+                    <div class="person-card">
+                        <span class="name">Juan Diego Peña Guerrero</span><span class="area">Panadería</span><span class="sup">Sup: Peter Rojas</span>
+                        <span class="cost">Costo empresa est.: $638.179</span>
+                    </div>
+                    <div class="person-card">
+                        <span class="name">Manuel Santolalla Flores</span><span class="area">Panadería</span><span class="sup">Sup: Peter Rojas</span>
+                        <span class="cost">Costo empresa est.: $638.179</span>
+                    </div>
+                    <div class="person-card peter">
+                        <span class="name">Peter Danilo Rojas Duran <span class="table-badge alert">Buk: Parigó</span></span>
+                        <span class="area">Jefe de Producción / Co-líder Panadería Cadaqués</span>
+                        <span class="sup">Lidera el taller de panadería de Cadaqués, aunque Buk lo registra en la división Parigó</span>
+                        <span class="cost">Costo empresa est.: $941.600</span>
+                    </div>
+                </div>
+
+                <div class="table-responsive" style="margin-top: 1.5rem;">
+                    <table class="premium-table">
+                        <thead><tr><th>Concepto</th><th class="num-col">Monto</th></tr></thead>
+                        <tbody>
+                            <tr><td>Sueldo bruto agregado — 7 colab. Buk/Cadaqués</td><td class="num-col">$4.175.000</td></tr>
+                            <tr><td>Costo empresa estimado — 7 colab. Buk/Cadaqués</td><td class="num-col">$4.467.250</td></tr>
+                            <tr><td>Costo empresa estimado — Peter Rojas (Parigó, funcional Cadaqués)</td><td class="num-col">$941.600</td></tr>
+                            <tr style="font-weight: bold; border-top: 2px solid var(--ink);"><td>Costo empresa total equipo funcional Cadaqués (8 personas)</td><td class="num-col">$5.408.850</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="callout warn">
+                    <strong>Cómo se calculó "costo empresa":</strong> no había planilla individual de sueldos de junio cargada en esta sesión (el Reporte Maestro Buk solo trae dotación/área, no montos). Se repartió el agregado validado de mayo ($4.175.000 bruto / 7 personas = $596.429 c/u) en partes iguales y se aplicó un factor estimado de 1,07 (SIS + AFC + mutual empleador) para aproximar el costo empresa — <strong>es una estimación, no el sueldo real de cada persona</strong>. El sueldo de Peter Rojas ($880.000 bruto) viene de un borrador interno sin validar formalmente. Para reemplazar esto por cifras exactas, se necesita el Previred o el detalle individual de Buk de junio con montos.
+                </div>
+                <div class="callout">
+                    <strong>Peter Rojas — nota de gobernanza:</strong> lidera técnicamente el taller de panadería de Cadaqués pero Buk lo tiene registrado bajo la división Parigó (mismo desalineamiento ya señalado en el informe de mayo). Su contrato de plazo fijo vencía el 30-06-2026 según ese informe; su estado de renovación al cierre de junio no se confirmó en esta sesión.
+                </div>
+            </div>
+
+        </div>
+
+        <!-- TAB: RENTABILIDAD OPERACIONAL -->
+        <div id="tab-rentabilidad" class="tab-panel">
+
+            <div class="content-card">
+                <div class="card-header">
+                    <h3>Margen de contribución — Junio 2026</h3>
+                    <span class="note">Venta − Materia Prima − Nómina. No es un P&amp;L completo.</span>
+                </div>
+                <div class="brand-split-grid" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
+                    <div class="brand-box" style="border-left: 4px solid var(--forest);">
+                        <span class="brand-title" style="color: var(--forest);">Venta bruta</span>
+                        <div class="brand-big">$50.029.932</div>
+                        <p class="brand-detail">100,0%</p>
+                    </div>
+                    <div class="brand-box" style="border-left: 4px solid var(--wood);">
+                        <span class="brand-title" style="color: var(--wood);">− Materia prima real</span>
+                        <div class="brand-big">$23.825.954</div>
+                        <p class="brand-detail">47,6% de la venta</p>
+                    </div>
+                    <div class="brand-box" style="border-left: 4px solid var(--wood);">
+                        <span class="brand-title" style="color: var(--wood);">− Nómina facturada (Sueldos CDQ)</span>
+                        <div class="brand-big">$10.000.000</div>
+                        <p class="brand-detail">20,0% de la venta</p>
+                    </div>
+                    <div class="brand-box" style="border-left: 4px solid var(--sage);">
+                        <span class="brand-title" style="color: var(--sage);">= Margen de contribución</span>
+                        <div class="brand-big">$16.203.978</div>
+                        <p class="brand-detail">32,4% de la venta</p>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>Por qué se usa $10.000.000 y no $5.408.850 en nómina:</strong> el traspaso real que Bocus le factura a Cadaqués por "Sueldos CDQ 202606" es de $10.000.000 CLP — es la cifra que efectivamente se cobra y paga entre las dos sociedades, así que es la base correcta para el margen de contribución real de caja. Pero al reconstruir el costo empresa desde la dotación visible en Buk (8 personas, ver pestaña Dotación) solo llega a ~$5.408.850 estimado — una brecha de <strong>~$4,59M sin explicar</strong>. Puede deberse a atrasos de meses anteriores regularizados en junio, provisión de leyes sociales/gratificación acumulada, u otros costos de RRHH que Horeca centraliza y refactura (reclutamiento, contabilidad de remuneraciones, etc.). Vale la pena pedirle el detalle a Horeca antes de aceptar el cobro sin más.
+                </div>
+
+                <div class="callout warn">
+                    <strong>Esto no es un P&amp;L completo.</strong> Falta restar arriendo del local San Sebastián 2806, servicios básicos, comisiones de delivery (Uber Eats/Rappi cobran comisión sobre el bruto vendido, no solo lo que aparece como "Online Uber Eats" en medios de pago), depreciación, y otros gastos operativos de junio — ninguno de esos datos estaba disponible en esta sesión. El margen de contribución de 32,4% es el punto de partida, no el resultado operacional final.
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+</div>
+
+<script>
+    function switchTab(tabId, el) {
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        el.classList.add('active');
+    }
+
+    const dailyData = [
+        {d:'01', dow:'Lun', total:1586175}, {d:'02', dow:'Mar', total:2348420}, {d:'03', dow:'Mié', total:1620355},
+        {d:'04', dow:'Jue', total:1910955}, {d:'05', dow:'Vie', total:2329960}, {d:'06', dow:'Sáb', total:1624455, weekend:true},
+        {d:'07', dow:'Dom', total:845780, weekend:true}, {d:'08', dow:'Lun', total:1386565}, {d:'09', dow:'Mar', total:1592590},
+        {d:'10', dow:'Mié', total:1551825}, {d:'11', dow:'Jue', total:1935610}, {d:'12', dow:'Vie', total:2022275},
+        {d:'13', dow:'Sáb', total:1014590, weekend:true}, {d:'14', dow:'Dom', total:893425, weekend:true}, {d:'15', dow:'Lun', total:1606105},
+        {d:'16', dow:'Mar', total:1737565}, {d:'17', dow:'Mié', total:2428435}, {d:'18', dow:'Jue', total:2065461},
+        {d:'19', dow:'Vie', total:3053596}, {d:'20', dow:'Sáb', total:1045480, weekend:true}, {d:'21', dow:'Dom', total:999040, weekend:true},
+        {d:'22', dow:'Lun', total:2119050}, {d:'23', dow:'Mar', total:1658890}, {d:'24', dow:'Mié', total:1882210},
+        {d:'25', dow:'Jue', total:1859210}, {d:'26', dow:'Vie', total:2332280}, {d:'27', dow:'Sáb', total:981040, weekend:true},
+        {d:'28', dow:'Dom', total:759990, weekend:true}, {d:'29', dow:'Lun', total:1231530}, {d:'30', dow:'Mar', total:1607070}
+    ];
+
+    const maxVal = Math.max(...dailyData.map(d => d.total));
+    const chart = document.getElementById('daily-chart');
+    dailyData.forEach(d => {
+        const pct = (d.total / maxVal * 100).toFixed(1);
+        const row = document.createElement('div');
+        row.className = 'bar-row';
+        row.innerHTML = `
+            <div class="bar-label">${d.d} ${d.dow}</div>
+            <div class="bar-track"><div class="bar-fill${d.weekend ? ' weekend' : ''}" style="width:${pct}%"></div></div>
+            <div class="bar-value">$${d.total.toLocaleString('es-CL')}</div>
+        `;
+        chart.appendChild(row);
+    });
+</script>
+
+</body>
+</html>

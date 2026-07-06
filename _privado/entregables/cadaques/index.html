@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cadaques | Oreka privado</title>
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta
+      name="description"
+      content="Informe mensual de Cadaques en una URL fija, con meses historicos accesibles desde el mismo entregable."
+    />
+    <script src="../../auth.js"></script>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f5efe8;
+        --panel: rgba(255, 251, 247, 0.94);
+        --ink: #201815;
+        --muted: #6f6158;
+        --line: rgba(32, 24, 21, 0.10);
+        --brand: #c96a28;
+        --brand-dark: #8c4310;
+        --shadow: 0 20px 60px rgba(61, 35, 17, 0.14);
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(236, 194, 157, 0.35), transparent 32%),
+          linear-gradient(180deg, #fcf7f1 0%, var(--bg) 100%);
+      }
+
+      .shell {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 20px;
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .topbar a {
+        color: var(--ink);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .hero, .panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+      }
+
+      .hero {
+        padding: 28px;
+        margin-bottom: 18px;
+      }
+
+      .eyebrow {
+        margin: 0 0 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 12px;
+        color: var(--brand-dark);
+        font-weight: 700;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(32px, 6vw, 52px);
+        line-height: 0.98;
+      }
+
+      .intro {
+        max-width: 860px;
+        margin: 14px 0 0;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .chip {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 8px 12px;
+        background: rgba(255,255,255,0.7);
+        font-size: 13px;
+      }
+
+      .panel {
+        padding: 22px;
+      }
+
+      .controls {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-bottom: 18px;
+      }
+
+      .month-buttons {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .month-button {
+        appearance: none;
+        border: 1px solid rgba(140, 67, 16, 0.18);
+        background: #fff;
+        color: var(--ink);
+        padding: 11px 16px;
+        border-radius: 999px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .month-button.active {
+        background: linear-gradient(135deg, var(--brand), #e99254);
+        color: #fff;
+        border-color: transparent;
+      }
+
+      .month-select {
+        min-width: 220px;
+        padding: 11px 14px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: #fff;
+        font: inherit;
+      }
+
+      .viewer-meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .viewer-link {
+        color: var(--brand-dark);
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      iframe {
+        width: 100%;
+        min-height: 78vh;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: #fff;
+      }
+
+      @media (max-width: 720px) {
+        .shell { padding: 16px; }
+        .hero, .panel { padding: 18px; border-radius: 20px; }
+        iframe { min-height: 68vh; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <div class="topbar">
+        <div>Oreka privado · Reportes por empresa</div>
+        <a href="/privado/entregables/">Volver a entregables</a>
+      </div>
+
+      <section class="hero">
+        <p class="eyebrow">URL estable</p>
+        <h1>Cadaques</h1>
+        <p class="intro">Informe mensual de Cadaques en una URL fija, con meses historicos accesibles desde el mismo entregable.</p>
+        <div class="chips">
+          <span class="chip">Empresa: Cadaques</span>
+          <span class="chip">Meses disponibles: 2</span>
+          <span class="chip">Actualizado: 2026-06-12</span>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="controls">
+          <div class="month-buttons">
+          <button class="month-button" data-month="mayo-2026">Mayo 2026</button>
+          <button class="month-button active" data-month="junio-2026">Junio 2026</button>
+          </div>
+          <label>
+            <select class="month-select" id="month-select">
+            <option value="mayo-2026">Mayo 2026</option>
+            <option value="junio-2026" selected>Junio 2026</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="viewer-meta">
+          <div>Mes activo: <strong id="active-label"></strong></div>
+          <a class="viewer-link" id="open-link" href="./junio-2026/" target="_blank" rel="noreferrer">Abrir este mes en pestaña aparte</a>
+        </div>
+
+        <iframe id="report-frame" title="Cadaques reportes mensuales" src="./junio-2026/"></iframe>
+      </section>
+    </main>
+
+    <script>
+      const labels = {"mayo-2026": "Mayo 2026", "junio-2026": "Junio 2026"};
+      const frame = document.getElementById("report-frame");
+      const buttons = Array.from(document.querySelectorAll(".month-button"));
+      const select = document.getElementById("month-select");
+      const activeLabel = document.getElementById("active-label");
+      const openLink = document.getElementById("open-link");
+
+      function applyMonth(monthKey) {
+        if (!labels[monthKey]) return;
+        frame.src = `./${monthKey}/`;
+        activeLabel.textContent = labels[monthKey];
+        openLink.href = `./${monthKey}/`;
+        buttons.forEach((button) => {
+          button.classList.toggle("active", button.dataset.month === monthKey);
+        });
+        select.value = monthKey;
+        const hash = `#${monthKey}`;
+        if (window.location.hash !== hash) {
+          history.replaceState(null, "", hash);
+        }
+      }
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => applyMonth(button.dataset.month));
+      });
+
+      select.addEventListener("change", (event) => {
+        applyMonth(event.target.value);
+      });
+
+      const initialMonth = window.location.hash.replace("#", "");
+      applyMonth(labels[initialMonth] ? initialMonth : "junio-2026");
+    </script>
+  </body>
+</html>

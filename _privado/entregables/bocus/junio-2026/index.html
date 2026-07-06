@@ -1,0 +1,2177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bocus · Informe Ejecutivo Junio 2026</title>
+    <!-- Google Fonts: Jost (Display) & Montserrat (Body) - tipografia oficial Bocus -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Jost:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        /* Modern CSS Custom Properties / Design System */
+        :root {
+            /* Paleta oficial Bocus (manual-de-marca.md + manual-visual-2026) */
+            --bg-base: #342d2a;       /* Marron oscuro profundo */
+            --bg-surface: #3f3833;    /* Marron oscuro (oficial) */
+            --bg-surface-elevated: #4c4239;
+            --border-color: #5c5044;
+
+            --primary: #ef6a2b;       /* Naranja Bocus (oficial) */
+            --primary-glow: rgba(239, 106, 43, 0.18);
+            --accent-teal: #93a86a;   /* Verde oliva (oficial, aclarado para contraste) */
+            --accent-rose: #d9604a;   /* Terracota (variante calida del rojo de marca) */
+            --accent-violet: #c4a693; /* Arena calido (oficial) */
+
+            --text-primary: #f4e2d6;  /* Beige claro / creme (oficial) */
+            --text-secondary: #c9b8ab;
+            --text-muted: #9c8f83;
+
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.18);
+            --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.24);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.35), 0 4px 6px -2px rgba(0, 0, 0, 0.24);
+
+            --font-display: 'Jost', sans-serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Layout Structure */
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 280px;
+            background-color: var(--bg-surface);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.5rem;
+            position: fixed;
+            height: 100vh;
+            z-index: 100;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .brand-logo {
+            width: 178px;
+            height: auto;
+            filter: drop-shadow(0 0 12px var(--primary-glow));
+        }
+
+        .logo-caption {
+            text-align: center;
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            margin-bottom: 2.5rem;
+        }
+
+        .logo-text span {
+            font-size: 0.75rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex-grow: 1;
+        }
+
+        .nav-item button {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 0.85rem 1rem;
+            color: var(--text-secondary);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: left;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item button:hover {
+            color: var(--text-primary);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-item.active button {
+            color: var(--bg-base);
+            background: linear-gradient(135deg, var(--primary), #f2a679);
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(239, 106, 43, 0.2);
+        }
+
+        .sidebar-footer {
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+            margin-top: auto;
+        }
+
+        .footer-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .profile-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--bg-surface-elevated);
+            border: 1.5px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--primary);
+        }
+
+        .profile-info h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .profile-info p {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+
+        /* Main Content Container */
+        .main-content {
+            margin-left: 280px;
+            flex-grow: 1;
+            padding: 2.5rem 3rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            max-width: 1400px;
+        }
+
+        /* Header section */
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .header-title h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.25rem;
+        }
+
+        .header-title p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .status-badge {
+            background-color: rgba(239, 106, 43, 0.1);
+            border: 1px solid rgba(239, 106, 43, 0.3);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-badge::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--primary);
+        }
+
+        /* Tab Content Control */
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards Grid - Key Metrics */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .kpi-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .kpi-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(30%, -30%);
+            z-index: 1;
+        }
+
+        .kpi-card .kpi-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .kpi-card .kpi-value {
+            font-family: var(--font-display);
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .kpi-card .kpi-delta {
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .kpi-delta.positive {
+            color: var(--accent-teal);
+        }
+
+        .kpi-delta.negative {
+            color: var(--accent-rose);
+        }
+
+        /* Main Section Cards */
+        .content-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.75rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .card-header h3 {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Split Screen Comparison B2C vs B2B */
+        .split-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .split-column {
+            background-color: rgba(255, 255, 255, 0.015);
+            border: 1px dashed var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .split-column.b2c {
+            border-left: 3px solid var(--accent-teal);
+        }
+
+        .split-column.b2b {
+            border-left: 3px solid var(--primary);
+        }
+
+        .split-column.internal {
+            border-left: 3px solid var(--accent-violet);
+        }
+
+        .column-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1.25rem;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.2rem 0.6rem;
+            border-radius: 99px;
+        }
+
+        .b2c .column-badge {
+            background-color: rgba(147, 168, 106, 0.1);
+            color: var(--accent-teal);
+        }
+
+        .b2b .column-badge {
+            background-color: rgba(239, 106, 43, 0.1);
+            color: var(--primary);
+        }
+
+        .internal .column-badge {
+            background-color: rgba(196, 166, 147, 0.1);
+            color: var(--accent-violet);
+        }
+
+        .split-header-text {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+        }
+
+        .split-metrics-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .split-metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            padding-bottom: 0.4rem;
+        }
+
+        .split-metric-row:last-child {
+            border-bottom: none;
+        }
+
+        .split-metric-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .split-metric-value {
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .split-explanation {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 1.25rem;
+            background-color: rgba(255, 255, 255, 0.02);
+            padding: 0.65rem 0.85rem;
+            border-radius: 8px;
+            border-left: 2px solid var(--primary);
+        }
+
+        /* 2D Vector Scatter Plot Matrix Graph */
+        .vector-graph-box {
+            background-color: var(--bg-surface-elevated);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .graph-wrapper {
+            position: relative;
+            width: 100%;
+            height: 380px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--bg-base);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+        }
+
+        .quadrant-bg {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 1rem;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .quad-top-left {
+            background-color: rgba(196, 166, 147, 0.02);
+            border-right: 1px dashed rgba(255, 255, 255, 0.1);
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            color: var(--accent-violet);
+            border-top-left-radius: 6px;
+        }
+
+        .quad-top-right {
+            background-color: rgba(147, 168, 106, 0.02);
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            color: var(--accent-teal);
+            align-items: flex-end;
+            border-top-right-radius: 6px;
+        }
+
+        .quad-bottom-left {
+            background-color: rgba(217, 96, 74, 0.02);
+            border-right: 1px dashed rgba(255, 255, 255, 0.1);
+            color: var(--accent-rose);
+            border-bottom-left-radius: 6px;
+        }
+
+        .quad-bottom-right {
+            background-color: rgba(239, 106, 43, 0.02);
+            color: var(--primary);
+            align-items: flex-end;
+            border-bottom-right-radius: 6px;
+        }
+
+        /* Bubbles/Dots on Scatter Plot */
+        .scatter-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .scatter-dot {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            pointer-events: auto;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scatter-dot::after {
+            content: attr(data-name);
+            position: absolute;
+            bottom: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(21, 27, 44, 0.95);
+            color: var(--text-primary);
+            border: 1.5px solid var(--primary);
+            padding: 0.5rem 0.85rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-family: var(--font-body);
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 99999;
+        }
+
+        .scatter-dot:hover {
+            transform: translate(-50%, -50%) scale(1.6);
+            z-index: 99999;
+            box-shadow: 0 0 25px currentColor;
+        }
+
+        .scatter-dot:hover::after {
+            opacity: 1;
+            bottom: 26px;
+        }
+
+        /* Bubble color classes */
+        .dot-star {
+            background-color: var(--accent-teal);
+            color: var(--accent-teal);
+        }
+
+        .dot-horse {
+            background-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .dot-puzzle {
+            background-color: var(--accent-violet);
+            color: var(--accent-violet);
+        }
+
+        .dot-dog {
+            background-color: var(--accent-rose);
+            color: var(--accent-rose);
+        }
+
+        /* Matrix Grid Lists */
+        .matrix-quadrant {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .matrix-quadrant:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-lg);
+            z-index: 5;
+            border-color: var(--primary);
+        }
+
+        .quadrant-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .quadrant-desc {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .quadrant-products {
+            list-style: none;
+            font-size: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            flex-grow: 1;
+            justify-content: flex-start;
+        }
+
+        .quadrant-products li {
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .quadrant-products li:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            transform: translateX(3px);
+        }
+
+        .prod-qty {
+            font-family: var(--font-display);
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+        }
+
+        .prod-margin {
+            font-family: var(--font-display);
+            font-weight: 700;
+        }
+
+        .quadrant-stars .prod-margin { color: var(--accent-teal); }
+        .quadrant-horses .prod-margin { color: var(--primary); }
+        .quadrant-puzzles .prod-margin { color: var(--accent-violet); }
+        .quadrant-dogs .prod-margin { color: var(--accent-rose); }
+
+        /* General Premium Tables */
+        .table-responsive {
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-surface);
+        }
+
+        .premium-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.85rem;
+        }
+
+        .premium-table th {
+            font-family: var(--font-display);
+            font-weight: 600;
+            background-color: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 1.25rem;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        .premium-table td {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .premium-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .premium-table tr:hover td {
+            background-color: rgba(255, 255, 255, 0.01);
+            color: var(--text-primary);
+        }
+
+        .table-prod-name {
+            font-weight: 600 !important;
+            color: var(--text-primary) !important;
+        }
+
+        .table-badge {
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 99px;
+            text-transform: uppercase;
+        }
+
+        .table-badge.b2c {
+            background-color: rgba(147, 168, 106, 0.08);
+            color: var(--accent-teal);
+        }
+
+        .table-badge.b2b {
+            background-color: rgba(239, 106, 43, 0.08);
+            color: var(--primary);
+        }
+
+        .table-badge.internal {
+            background-color: rgba(196, 166, 147, 0.08);
+            color: var(--accent-violet);
+        }
+
+        .num-col {
+            font-family: var(--font-display);
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .table-delta-positive { color: var(--accent-teal); }
+        .table-delta-negative { color: var(--accent-rose); }
+
+        /* Filter Controls */
+        .filter-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+        }
+
+        .search-input {
+            background-color: var(--bg-base);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.6rem 1.25rem;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            flex-grow: 1;
+            max-width: 350px;
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .filter-btn {
+            background-color: var(--bg-surface-elevated);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover {
+            color: var(--text-primary);
+            border-color: var(--text-secondary);
+        }
+
+        .filter-btn.active {
+            background-color: rgba(239, 106, 43, 0.1);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* Action Cards - Improvement Areas */
+        .action-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .action-item-card {
+            background-color: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 1.5rem;
+            align-items: start;
+            transition: all 0.3s ease;
+        }
+
+        .action-item-card:hover {
+            background-color: rgba(255, 255, 255, 0.02);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .action-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: rgba(239, 106, 43, 0.1);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.25rem;
+            border: 1px solid rgba(239, 106, 43, 0.2);
+        }
+
+        .action-details h4 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .action-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .action-col-block {
+            background-color: rgba(0, 0, 0, 0.1);
+            padding: 0.85rem 1rem;
+            border-radius: 8px;
+            border-left: 2.5px solid var(--border-color);
+        }
+
+        .action-col-block.causa { border-left-color: var(--accent-rose); }
+        .action-col-block.impacto { border-left-color: var(--accent-violet); }
+        .action-col-block.accion { border-left-color: var(--accent-teal); }
+
+        .block-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.35rem;
+        }
+
+        .causa .block-title { color: var(--accent-rose); }
+        .impacto .block-title { color: var(--accent-violet); }
+        .accion .block-title { color: var(--accent-teal); }
+
+        .block-text {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Shopify Specific Layouts */
+        .shopify-stats-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .shopify-stats-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mini-metric-box {
+            background-color: rgba(255, 255, 255, 0.015);
+            border: 1px solid var(--border-color);
+            padding: 1.25rem;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mini-metric-box h5 {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .mini-metric-box div {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 700;
+        }
+
+        /* Chart Canvas Styles */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            margin-top: 1rem;
+        }
+
+        /* SVG Trend Chart Styles */
+        .sales-trend-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .sales-trend-svg polyline {
+            fill: none;
+            stroke-width: 3.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .sales-trend-svg .trend-line-b2c {
+            stroke: var(--accent-teal);
+            filter: drop-shadow(0px 4px 8px rgba(147, 168, 106, 0.3));
+        }
+
+        .sales-trend-svg .trend-line-b2b {
+            stroke: var(--primary);
+            filter: drop-shadow(0px 4px 8px rgba(239, 106, 43, 0.3));
+        }
+
+        .sales-trend-svg .trend-line-internal {
+            stroke: var(--accent-violet);
+            filter: drop-shadow(0px 4px 8px rgba(196, 166, 147, 0.3));
+        }
+
+        .svg-grid-line {
+            stroke: rgba(255, 255, 255, 0.04);
+            stroke-width: 1;
+            stroke-dasharray: 4 4;
+        }
+
+        .svg-axis-line {
+            stroke: var(--border-color);
+            stroke-width: 1.5;
+        }
+
+        .svg-label {
+            fill: var(--text-secondary);
+            font-size: 9px;
+            font-family: var(--font-body);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .split-grid {
+                grid-template-columns: 1fr;
+            }
+            .shopify-stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .matrix-container {
+                aspect-ratio: auto;
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(4, auto);
+                gap: 1.5rem;
+            }
+            .action-columns {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 1.5rem 1.5rem;
+            }
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+            .top-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+    
+
+        /* Extensiones Junio 2026 (mismo design system) */
+        .context-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .context-item {
+            display: grid;
+            grid-template-columns: 110px 1fr;
+            gap: 1rem;
+            padding: 0.75rem 1rem;
+            background-color: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-left: 2.5px solid var(--primary);
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+        .context-item .ctx-date {
+            font-family: var(--font-display);
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+        .context-item .ctx-text { color: var(--text-secondary); }
+        .context-item .ctx-text strong { color: var(--text-primary); }
+
+        .eerr-list { display: flex; flex-direction: column; }
+        .eerr-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 1rem;
+            padding: 0.85rem 1.1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        .eerr-row .eerr-val { font-family: var(--font-display); font-weight: 600; white-space: nowrap; }
+        .eerr-row.subtotal {
+            background-color: rgba(239, 106, 43, 0.05);
+            border-left: 2.5px solid var(--primary);
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .eerr-row.result {
+            background-color: rgba(147, 168, 106, 0.06);
+            border-left: 2.5px solid var(--accent-teal);
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        .eerr-row.result .eerr-val { color: var(--accent-teal); font-size: 1.15rem; }
+        .eerr-note {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            padding: 0.25rem 1.1rem 0.6rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .alert-box {
+            background-color: rgba(217, 96, 74, 0.05);
+            border: 1px solid rgba(217, 96, 74, 0.2);
+            border-left: 3px solid var(--accent-rose);
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            font-size: 0.83rem;
+            color: var(--text-secondary);
+            margin: 1.25rem 0;
+        }
+        .alert-box strong { color: var(--accent-rose); }
+        .insight-box {
+            background-color: rgba(147, 168, 106, 0.04);
+            border: 1px solid rgba(147, 168, 106, 0.15);
+            border-left: 3px solid var(--accent-teal);
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            font-size: 0.83rem;
+            color: var(--text-secondary);
+            margin: 1.25rem 0;
+        }
+        .insight-box strong { color: var(--accent-teal); }
+
+        .matrix-grid-2x2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+        @media (max-width: 1200px) { .matrix-grid-2x2 { grid-template-columns: 1fr; } }
+
+        .chart-tall { height: 420px; }
+        .charts-duo {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        @media (max-width: 1200px) { .charts-duo { grid-template-columns: 1fr; } }
+
+        .semaforo {
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 0.18rem 0.6rem;
+            border-radius: 99px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        .semaforo.verde { background-color: rgba(147, 168, 106, 0.1); color: var(--accent-teal); }
+        .semaforo.amarillo { background-color: rgba(240, 180, 60, 0.12); color: #F0B43C; }
+        .semaforo.rojo { background-color: rgba(217, 96, 74, 0.1); color: var(--accent-rose); }
+        .semaforo.gris { background-color: rgba(156, 163, 175, 0.12); color: var(--text-secondary); }
+
+        .report-footer {
+            margin-top: 2rem;
+            padding: 1.5rem 0 0.5rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+    </style>
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <script src="../../../auth.js"></script>
+<style id="oreka-private-shell-style">
+  .oreka-private-shell {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    background: rgba(14, 13, 11, 0.92);
+    color: #eedacf;
+    border-bottom: 1px solid rgba(231, 123, 50, 0.22);
+    backdrop-filter: blur(10px);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .oreka-private-shell a {
+    color: #eedacf;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .oreka-private-shell a:hover {
+    color: #ffffff;
+  }
+
+  .oreka-private-shell .divider {
+    width: 1px;
+    height: 14px;
+    background: rgba(238, 218, 207, 0.24);
+  }
+
+  .oreka-private-shell .title {
+    margin-left: auto;
+    color: rgba(238, 218, 207, 0.82);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="oreka-private-shell">
+  <a href="/privado/">Privado</a>
+  <span class="divider"></span>
+  <a href="/privado/entregables/">Entregables</a>
+  <span class="title">Bocus · informe junio 2026</span>
+</div>
+
+
+    <div class="app-container">
+
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo-section">
+                <img src="data:image/png;base64,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" alt="Bocus" class="brand-logo">
+            </div>
+            <div class="logo-caption">Informe Ejecutivo &middot; Soluci&oacute;n Oreka</div>
+
+            <ul class="nav-menu">
+                <li class="nav-item active" data-tab="tab-summary">
+                    <button>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z"></path></svg>
+                        Resumen Ejecutivo
+                    </button>
+                </li>
+                <li class="nav-item" data-tab="tab-split">
+                    <button>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z"></path></svg>
+                        Ingreso y Canales
+                    </button>
+                </li>
+                <li class="nav-item" data-tab="tab-matrix">
+                    <button>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                        Menu Engineering
+                    </button>
+                </li>
+                <li class="nav-item" data-tab="tab-products">
+                    <button>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        Costos, RRHH y Compras
+                    </button>
+                </li>
+                <li class="nav-item" data-tab="tab-strategy">
+                    <button>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                        Plan de Acción y Cierre
+                    </button>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <div class="footer-profile">
+                    <div class="profile-avatar">NLB</div>
+                    <div class="profile-info">
+                        <h4>Nicolás Le Baux</h4>
+                        <p>Director General</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-title">
+                    <h2 id="dynamic-title">Resumen Ejecutivo</h2>
+                    <p id="dynamic-subtitle">Bocus · Junio 2026 · Solución Horeca SpA · Emisión 2026-07-02</p>
+                </div>
+                <div class="header-actions">
+                    <span class="status-badge">Cierre Junio 2026</span>
+                </div>
+            </header>
+
+            <!-- ==================== TAB 1: RESUMEN EJECUTIVO ==================== -->
+            <section id="tab-summary" class="tab-panel active">
+
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-label">Venta Real Junio (FUDO)</div>
+                        <div class="kpi-value">$169.571.846</div>
+                        <div class="kpi-delta positive">
+                            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 15l7-7 7 7"></path></svg>
+                            +12,2% vs mayo · 1.947 ventas
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Venta Externa Real</div>
+                        <div class="kpi-value">$90,8M</div>
+                        <div class="kpi-delta positive">53,5% del total · plata de terceros</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Margen Bruto</div>
+                        <div class="kpi-value">33,0%</div>
+                        <div class="kpi-delta positive">$56,0M · ajustado 31,8%</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Resultado Operacional Visible</div>
+                        <div class="kpi-value">≈ $36,2M</div>
+                        <div class="kpi-delta positive">21,3% de la venta</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Ticket Promedio</div>
+                        <div class="kpi-value">$87.094</div>
+                        <div class="kpi-delta positive">rango $370 a $10M por venta</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Costo Laboral Bocus</div>
+                        <div class="kpi-value">$19,8M</div>
+                        <div class="kpi-delta positive">21 personas (Previred x Buk) · 11,7% de la venta</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Crédito B2B Vivo</div>
+                        <div class="kpi-value">$55,0M</div>
+                        <div class="kpi-delta negative">
+                            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+                            facturado y aún no cobrado
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Venta Perdida (Quiebres)</div>
+                        <div class="kpi-value">$2,8M</div>
+                        <div class="kpi-delta negative">95 líneas "producto no disponible"</div>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Tesis del Mes</h3>
+                    </div>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                        Junio de 2026 confirma que <strong style="color: var(--text-primary);">Bocus es una operación rentable a nivel visible</strong>: genera un resultado operacional aproximado de <strong style="color: var(--accent-teal);">$36,2M (21,3% sobre la venta)</strong>, antes de arriendo y gastos no registrados en los sistemas. La facturación FUDO alcanza $169.571.846 brutos con IVA en 1.947 ventas, excluyendo el traspaso financiero "Sueldos CDQ 202606" por $10M que no es venta.
+                    </p>
+                    <div class="insight-box">
+                        <strong>Corrección 2026-07-03:</strong> el costo laboral de Bocus se recalculó cruzando el Previred definitivo de junio (RUT por persona) contra el Reporte Maestro de Buk (división operativa). El resultado operacional sube de $23,0M a $36,2M porque el costo laboral real de Bocus es $19,8M, no $33,0M como se había estimado antes. Detalle completo en la pestaña Costos, RRHH y Compras.
+                    </div>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 0.75rem;">
+                        La clave de lectura del mes: <strong style="color: var(--text-primary);">de cada $100 que marca FUDO, $53,5 son venta de verdad a terceros</strong> (minorista, B2B externo y Cadaqués facturado). El resto es el rol de Bocus como hub de abastecimiento del grupo: traspaso a Parigó ($42,6M) y autoconsumo de áreas propias ($36,2M). Es correcto que exista, pero al evaluar el crecimiento comercial hay que mirar solo la venta externa.
+                    </p>
+                    <div class="insight-box">
+                        <strong>Estado general:</strong> mes sano en lo visible. Tres frentes mandan julio: costear las 33 recetas faltantes en FUDO ($6,1M/mes de venta a ciegas), vigilar la cobranza del crédito B2B ($55,0M vivo) y cerrar el P&L completo incorporando arriendo, servicios y comisiones de medios de pago.
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Contexto del Mes · Qué pasó en junio</h3>
+                    </div>
+                    <div class="context-timeline">
+                        <div class="context-item">
+                            <span class="ctx-date">2026-06-13/14</span>
+                            <span class="ctx-text"><strong>Meta Ads:</strong> se publica el anuncio de Día del Padre (Pack Celebra a Papá) en la campaña Tracción y se genera el primer reporte semanal de Meta Ads con historial desde marzo.</span>
+                        </div>
+                        <div class="context-item">
+                            <span class="ctx-date">2026-06-16</span>
+                            <span class="ctx-text"><strong>Importaciones al día:</strong> se liquida la deuda completa con From'Europe (EUR 22.313,78, $23,25M) por las importaciones 23 a 26, y se pagan los tributos aduaneros de la Importación 26 ($1,58M).</span>
+                        </div>
+                        <div class="context-item">
+                            <span class="ctx-date">2026-06-19</span>
+                            <span class="ctx-text"><strong>Uber Eats:</strong> Nicolás aprueba el acuerdo comercial: comisión 23% + IVA sin exclusividad, $1,2M en incentivos de marketing financiados por Uber y cláusula de arrastre para Parigó. Se envía la documentación y se firma el contrato.</span>
+                        </div>
+                        <div class="context-item">
+                            <span class="ctx-date">2026-06-19</span>
+                            <span class="ctx-text"><strong>Audiencias:</strong> se exportan las bases Klaviyo (14.002 registros, más listas Ancla y Bodeguita) para alimentar audiencias segmentadas de Meta Ads.</span>
+                        </div>
+                        <div class="context-item">
+                            <span class="ctx-date">2026-06-21</span>
+                            <span class="ctx-text"><strong>CRM Shopify:</strong> se integra la Shopify Admin API (app NLB2Codex) y se construye el CRM: 24.447 clientes, 7.846 pedidos históricos. El segmento VIP recurrente queda en 205 clientes con $123,1M de gasto acumulado.</span>
+                        </div>
+                        <div class="context-item">
+                            <span class="ctx-date">2026-06-23</span>
+                            <span class="ctx-text"><strong>Importación 26 cerrada:</strong> liquidación aduanera final de Pollmann por $2,63M; el costo neto real de la importación queda en $8,3M.</span>
+                        </div>
+                        <div class="context-item">
+                            <span class="ctx-date">2026-06-23/24</span>
+                            <span class="ctx-text"><strong>Estrategia digital:</strong> dos reuniones (Víctor y Cristian) definen el funnel educativo de quesos: landings por queso partiendo por Brillat-Savarin, video clase, remarketing 14 días y piso de pauta de $4.000 diarios. ROAS semanal baja de 19,5 a 14,4 tras el Día del Padre. Se detecta cobro indebido de IVA en plataforma publicitaria por ≈$1M.</span>
+                        </div>
+                        <div class="context-item">
+                            <span class="ctx-date">2026-06-24</span>
+                            <span class="ctx-text"><strong>Medios de pago:</strong> se confirma la comisión de Mercado Pago Checkout: 3,19% + IVA con liquidación al instante.</span>
+                        </div>
+                        <div class="context-item">
+                            <span class="ctx-date">2026-06-25</span>
+                            <span class="ctx-text"><strong>Importación 27:</strong> se envía el pedido a From'Europe (aérea, 162 colis, 345 kg netos, salida de origen 2026-07-03).</span>
+                        </div>
+                        <div class="context-item">
+                            <span class="ctx-date">2026-06-26</span>
+                            <span class="ctx-text"><strong>Uber Eats activo:</strong> la tienda Bocus queda operativa en la plataforma. Explica que la venta Uber Eats de junio sea aún marginal ($160K).</span>
+                        </div>
+                        <div class="context-item" style="border-left-color: var(--accent-rose);">
+                            <span class="ctx-date" style="color: var(--accent-rose);">2026-06-14</span>
+                            <span class="ctx-text"><strong>Alerta RRHH:</strong> la conciliación Buk detecta 8 colaboradores de Bocus con contrato plazo fijo vencido al 2026-06-30 que requieren regularización.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Metas Fijadas en Reuniones vs Resultado Real</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="premium-table">
+                            <thead>
+                                <tr><th>Meta / Acuerdo</th><th>Origen</th><th>Resultado junio</th><th style="text-align:right;">Estado</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="table-prod-name">Piso de pauta Meta Ads $4.000/día</td>
+                                    <td>Reunión 2026-06-23</td>
+                                    <td>Mantenido; campaña evergreen activa (282 seguidores nuevos/semana, costo por seguidor $63)</td>
+                                    <td class="num-col"><span class="semaforo verde">Cumplida</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="table-prod-name">ROAS semanal de campañas</td>
+                                    <td>Reunión 2026-06-24</td>
+                                    <td>Baja de 19,5 a 14,4 tras Día del Padre; atribuible a estacionalidad e inicio de vacaciones</td>
+                                    <td class="num-col"><span class="semaforo amarillo">Vigilar</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="table-prod-name">Activar Bocus en Uber Eats</td>
+                                    <td>Acuerdo 2026-06-19</td>
+                                    <td>Tienda activa desde 2026-06-26; venta junio $160K (recién partiendo)</td>
+                                    <td class="num-col"><span class="semaforo verde">Hito logrado</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="table-prod-name">Ticket objetivo Shopify $60.000</td>
+                                    <td>Meta vigente (informe mayo)</td>
+                                    <td>No medible en el export FUDO de junio: el canal Shopify no viene segmentado en esta extracción. Brecha declarada</td>
+                                    <td class="num-col"><span class="semaforo gris">Sin medición</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="table-prod-name">Video clase de quesos (entrega 2026-06-29)</td>
+                                    <td>Reunión 2026-06-24</td>
+                                    <td>Sin confirmación de entrega en bitácora al cierre de este informe</td>
+                                    <td class="num-col"><span class="semaforo gris">Pendiente</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Comparativo Histórico vs Mayo 2026</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="premium-table">
+                            <thead>
+                                <tr><th>Métrica</th><th class="num-col">Mayo 2026</th><th class="num-col">Junio 2026</th><th class="num-col">Variación</th><th style="text-align:right;">Semáforo</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="table-prod-name">Venta consolidada FUDO</td>
+                                    <td class="num-col">$151.091.413</td>
+                                    <td class="num-col">$169.571.846</td>
+                                    <td class="num-col table-delta-positive">+12,2%</td>
+                                    <td class="num-col"><span class="semaforo verde">Verde</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="table-prod-name">Transacciones totales</td>
+                                    <td class="num-col">1.798</td>
+                                    <td class="num-col">1.947</td>
+                                    <td class="num-col table-delta-positive">+8,3%</td>
+                                    <td class="num-col"><span class="semaforo verde">Verde</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="table-prod-name">Venta minorista / B2C retail</td>
+                                    <td class="num-col">$38.346.297</td>
+                                    <td class="num-col">$34.633.408</td>
+                                    <td class="num-col table-delta-negative">-9,7%</td>
+                                    <td class="num-col"><span class="semaforo amarillo">Amarillo</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="table-prod-name">Traspaso a Parigó</td>
+                                    <td class="num-col">$21.060.346</td>
+                                    <td class="num-col">$42.593.560</td>
+                                    <td class="num-col table-delta-positive">+102%</td>
+                                    <td class="num-col"><span class="semaforo gris">Perímetro cambió</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="table-prod-name">Delivery apps (Rappi + Uber)</td>
+                                    <td class="num-col">$2.937.680</td>
+                                    <td class="num-col">$3.573.850</td>
+                                    <td class="num-col table-delta-positive">+21,7%</td>
+                                    <td class="num-col"><span class="semaforo verde">Verde</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="split-explanation" style="margin-top: 1rem;">
+                        <strong>Notas de comparabilidad (lectura honesta):</strong> (1) Mayo incluía la refacturación de nómina Cadaqués ($7,7M) dentro del B2B; junio excluye el traspaso equivalente ($10M). Sobre base comparable, el crecimiento real de junio ronda +18%. (2) La caída aparente del minorista mezcla definiciones distintas: mayo sumaba Shopify + Rappi + venta directa + venta rápida; junio agrupa mostrador + delivery del export FUDO. (3) El salto del traspaso a Parigó se explica por perímetro: desde junio incluye el salón y la nueva área Teatro (cliente 101 en FUDO). (4) El food cost de mayo (25,25%) se calculó como compras/venta; el margen de junio (33,0%) usa COGS de recetas FUDO. No son la misma métrica y no se comparan.
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ==================== TAB 2: INGRESO Y CANALES ==================== -->
+            <section id="tab-split" class="tab-panel">
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>¿De dónde viene la plata? La verdad del ingreso</h3>
+                    </div>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">
+                        FUDO Bocus registra $169,6M, pero no todo es venta. Bocus es el hub de abastecimiento del grupo: una parte es plata fresca de terceros, otra es traspaso al grupo y otra es Bocus vendiéndose a sí mismo. Separarlo es la única forma de leer la rentabilidad real.
+                    </p>
+                    <div class="split-grid">
+                        <div class="split-column b2c">
+                            <span class="column-badge">Externa</span>
+                            <div class="split-header-text">Plata externa real</div>
+                            <div class="split-metrics-list">
+                                <div class="split-metric-row"><span class="split-metric-label">Total</span><span class="split-metric-value" style="color: var(--accent-teal);">$90.772.643 · 53,5%</span></div>
+                                <div class="split-metric-row"><span class="split-metric-label">Minorista (mostrador + delivery)</span><span class="split-metric-value">$34.633.408</span></div>
+                                <div class="split-metric-row"><span class="split-metric-label">B2B externo (Baco, Trebons, BdCh)</span><span class="split-metric-value">$32.313.281</span></div>
+                                <div class="split-metric-row"><span class="split-metric-label">Cadaqués facturado</span><span class="split-metric-value">$23.825.954</span></div>
+                            </div>
+                            <div class="split-explanation">Caja que entra desde fuera del grupo. Esta es la columna que mide el crecimiento comercial.</div>
+                        </div>
+                        <div class="split-column b2b">
+                            <span class="column-badge">Grupo</span>
+                            <div class="split-header-text">Traspaso al grupo (Parigó)</div>
+                            <div class="split-metrics-list">
+                                <div class="split-metric-row"><span class="split-metric-label">Total</span><span class="split-metric-value" style="color: var(--primary);">$42.593.560 · 25,1%</span></div>
+                                <div class="split-metric-row"><span class="split-metric-label">Transacciones</span><span class="split-metric-value">409</span></div>
+                                <div class="split-metric-row"><span class="split-metric-label">Ticket</span><span class="split-metric-value">$104.140</span></div>
+                                <div class="split-metric-row"><span class="split-metric-label">Margen</span><span class="split-metric-value">19,9%</span></div>
+                            </div>
+                            <div class="split-explanation">Abastecimiento a Parigó (cocina, AP, salón, Teatro) a precio de transferencia. Ingreso de Bocus pero costo de Parigó: a nivel grupo se netea.</div>
+                        </div>
+                        <div class="split-column internal">
+                            <span class="column-badge">Interno</span>
+                            <div class="split-header-text">Autoconsumo Bocus</div>
+                            <div class="split-metrics-list">
+                                <div class="split-metric-row"><span class="split-metric-label">Total</span><span class="split-metric-value" style="color: var(--accent-violet);">$36.205.643 · 21,4%</span></div>
+                                <div class="split-metric-row"><span class="split-metric-label">Transacciones</span><span class="split-metric-value">639</span></div>
+                                <div class="split-metric-row"><span class="split-metric-label">Ticket</span><span class="split-metric-value">$56.660</span></div>
+                                <div class="split-metric-row"><span class="split-metric-label">Margen</span><span class="split-metric-value">17,0%</span></div>
+                            </div>
+                            <div class="split-explanation">Áreas propias: Cocina Bocus, Transformación, Logística, Masas, Copería, Bollería y Personal. Materia prima moviéndose dentro de la casa, no venta.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Los 5 Segmentos: Venta, Margen y Ticket</h3>
+                    </div>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.25rem;">
+                        Teatro se consolida dentro de Parigó (es subcategoría de Parigó al Paso). El traspaso financiero "Sueldos CDQ 202606" por $10M (venta 19147) fue excluido: es refacturación de nómina, no venta.
+                    </p>
+                    <div class="table-responsive">
+                        <table class="premium-table">
+                            <thead>
+                                <tr><th>Segmento</th><th class="num-col">Venta bruta</th><th class="num-col">%</th><th class="num-col">Ventas</th><th class="num-col">Ticket</th><th class="num-col">COGS</th><th class="num-col">Margen</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="table-prod-name"><span class="table-badge b2b">Grupo</span> Parigó (Cocina + AP + Salón + Teatro)</td><td class="num-col">$42.593.560</td><td class="num-col">25,1%</td><td class="num-col">409</td><td class="num-col">$104,1K</td><td class="num-col">$34,1M</td><td class="num-col">19,9%</td></tr>
+                                <tr><td class="table-prod-name"><span class="table-badge internal">Interno</span> Bocus interno (autoconsumo áreas)</td><td class="num-col">$36.205.643</td><td class="num-col">21,4%</td><td class="num-col">639</td><td class="num-col">$56,7K</td><td class="num-col">$30,0M</td><td class="num-col">17,0%</td></tr>
+                                <tr><td class="table-prod-name"><span class="table-badge b2c">Externa</span> Minorista (mostrador + delivery)</td><td class="num-col">$34.633.408</td><td class="num-col">20,4%</td><td class="num-col">789</td><td class="num-col">$43,9K</td><td class="num-col">$9,0M*</td><td class="num-col">~68%*</td></tr>
+                                <tr><td class="table-prod-name"><span class="table-badge b2c">Externa</span> B2B externo (Baco, Trebons, Banco de Chile)</td><td class="num-col">$32.313.281</td><td class="num-col">19,1%</td><td class="num-col">80</td><td class="num-col">$403,9K</td><td class="num-col">$19,8M</td><td class="num-col">38,7%</td></tr>
+                                <tr><td class="table-prod-name"><span class="table-badge b2c">Externa</span> Cadaqués facturado</td><td class="num-col">$23.825.954</td><td class="num-col">14,1%</td><td class="num-col">30</td><td class="num-col">$794,2K</td><td class="num-col">$20,7M</td><td class="num-col">13,3%</td></tr>
+                                <tr style="border-top: 2px solid var(--border-color);"><td class="table-prod-name">TOTAL</td><td class="num-col" style="color: var(--primary); font-weight: 700;">$169.571.846</td><td class="num-col">100%</td><td class="num-col">1.947</td><td class="num-col">$87,1K</td><td class="num-col">$113,6M</td><td class="num-col" style="color: var(--primary); font-weight: 700;">33,0%</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="alert-box">
+                        <strong>*Margen minorista sobreestimado:</strong> 33 productos del canal ($6,1M en venta, 18% del canal) no tienen costo cargado en FUDO y aparecen con margen 100%. Aplicando el costo promedio GastroKaizen (32,6% de materia prima), el margen minorista real ronda 60 a 65% y el margen bruto total de Bocus baja de 33,0% a ≈31,8%. Detalle en Menu Engineering.
+                    </div>
+                    <div class="insight-box">
+                        <strong>Margen por rol:</strong> B2B externo (38,7%) y minorista (60%+) son los motores de rentabilidad. Cadaqués (13,3%) y Parigó (19,9%) operan cerca de precio de transferencia, coherente con la política costo+5% más productos terminados con margen. Bocus gana afuera y abastece adentro.
+                    </div>
+                    <div class="table-responsive" style="margin-top: 1.25rem;">
+                        <table class="premium-table">
+                            <thead><tr><th>Materia prima: costo real vs. teórico</th><th class="num-col">Venta base</th><th class="num-col">Costo MP</th><th class="num-col">% Costo/Venta</th></tr></thead>
+                            <tbody>
+                                <tr><td class="table-prod-name">Total Bocus (todos los segmentos, real FUDO)</td><td class="num-col">$169.571.846</td><td class="num-col">$113.583.399</td><td class="num-col">66,98%</td></tr>
+                                <tr><td class="table-prod-name">Total ajustado (33 productos sin costo a MP GastroKaizen)</td><td class="num-col">$169.571.846</td><td class="num-col">$115.571.999</td><td class="num-col">68,16%</td></tr>
+                                <tr><td class="table-prod-name">Solo minorista, productos con costo cargado</td><td class="num-col">$28.533.408</td><td class="num-col">≈$9.000.000</td><td class="num-col" style="color: var(--accent-teal); font-weight: 700;">31,54%</td></tr>
+                                <tr><td class="table-prod-name">Teórico GastroKaizen (13 recetas costeadas, promedio)</td><td class="num-col">-</td><td class="num-col">-</td><td class="num-col" style="color: var(--primary); font-weight: 700;">32,60%</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="insight-box" style="margin-top: 1rem;">
+                        <strong>Lectura:</strong> el 66,98% total no es comparable directo al 32,6% teórico de GastroKaizen: el total mezcla traspasos a Parigó y autoconsumo interno que operan casi a precio de costo, diluyendo el porcentaje. La comparación correcta es minorista-con-costo-cargado (31,54%) vs. teórico GastroKaizen (32,60%): quedan a solo 1,06 puntos de distancia, lo que valida que donde FUDO sí tiene receta cargada, el costo es consistente con el teórico independiente. Todo el riesgo de margen está concentrado en los 33 productos sin receta cargada ($6,1M de venta al 100% ficticio), no en un problema de costeo general.
+                    </div>
+                    <div class="charts-duo" style="margin-top: 1.5rem;">
+                        <div class="vector-graph-box">
+                            <h4 style="font-family: var(--font-display); font-size: 0.95rem; margin-bottom: 1rem;">Mix de venta por segmento</h4>
+                            <div class="chart-container" style="height: 280px;"><canvas id="chSegmentos"></canvas></div>
+                        </div>
+                        <div class="vector-graph-box">
+                            <h4 style="font-family: var(--font-display); font-size: 0.95rem; margin-bottom: 1rem;">Margen bruto por segmento (%)</h4>
+                            <div class="chart-container" style="height: 280px;"><canvas id="chMargen"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>El Ritmo del Mes: Cuándo y Cómo Entra la Plata</h3>
+                    </div>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.25rem;">
+                        Venta diaria por fecha de pago (el pago del 01-jul corresponde a venta del 30-jun). Dos peaks dominan el mes y ambos son facturación mayorista, no mostrador.
+                    </p>
+                    <div class="vector-graph-box">
+                        <h4 style="font-family: var(--font-display); font-size: 0.95rem; margin-bottom: 1rem;">Venta diaria junio 2026 (CLP)</h4>
+                        <div class="chart-container" style="height: 300px;"><canvas id="chDiaria"></canvas></div>
+                    </div>
+                    <div class="charts-duo">
+                        <div class="vector-graph-box">
+                            <h4 style="font-family: var(--font-display); font-size: 0.95rem; margin-bottom: 1rem;">Venta por día de semana</h4>
+                            <div class="chart-container" style="height: 260px;"><canvas id="chSemana"></canvas></div>
+                        </div>
+                        <div class="vector-graph-box">
+                            <h4 style="font-family: var(--font-display); font-size: 0.95rem; margin-bottom: 1rem;">Medios de pago</h4>
+                            <div class="chart-container" style="height: 260px;"><canvas id="chPagos"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="table-responsive" style="margin-top: 1.5rem;">
+                        <table class="premium-table">
+                            <thead><tr><th>Hallazgo</th><th>Detalle</th></tr></thead>
+                            <tbody>
+                                <tr><td class="table-prod-name">Jueves = día de facturación</td><td>$49,5M en jueves (29% del mes). El 25-jun solo: $32,8M (Trebons $5,5M, Banco de Chile $6,7M, Cadaqués $6,5M+). El 17-jun ($13,3M) fue casi todo Cadaqués.</td></tr>
+                                <tr><td class="table-prod-name">Mercado Pago es el POS real</td><td>$21,5M en 445 transacciones: la caja minorista del día a día. "Interno" ($77,9M) son las áreas; "Por pagar/B2B" ($33,4M) y "Cta. Cte." ($21,6M) son crédito a clientes empresa.</td></tr>
+                                <tr><td class="table-prod-name">Delivery es marginal</td><td>$3,6M (2,1% de la venta) en 165 pedidos. Rappi concentra 95,5%; Uber Eats casi inexistente ($160K, activo recién desde el 26-jun). Sin cargos de envío cobrados en junio.</td></tr>
+                                <tr><td class="table-prod-name">Domingo es el día débil</td><td>$10,6M total (140 ventas). El mostrador de fin de semana no compensa la ausencia de facturación B2B.</td></tr>
+                                <tr><td class="table-prod-name">Crédito B2B vivo</td><td>$55,0M del mes ($33,4M "por pagar" + $21,6M cta. cte.) es venta facturada aún no cobrada al momento del registro. Vigilar cobranza.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ==================== TAB 3: MENU ENGINEERING ==================== -->
+            <section id="tab-matrix" class="tab-panel">
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Menu Engineering · Canal Minorista (129 productos reales)</h3>
+                    </div>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.25rem;">
+                        Mapa clásico de 4 cuadrantes sobre transacciones reales de junio: eje X = popularidad (unidades vendidas, escala logarítmica), eje Y = margen %, tamaño de burbuja = venta del mes. Umbrales calculados de la data: popularidad 17,6 unidades (70% de la media) y margen 62,6% (margen ponderado del canal). Los productos con costo sin cargar aparecen punteados en rojo, flotando en el 100% ficticio.
+                    </p>
+                    <div class="vector-graph-box">
+                        <div class="chart-container chart-tall"><canvas id="chMenu"></canvas></div>
+                    </div>
+
+                    <div class="matrix-grid-2x2" style="margin-top: 1.5rem;">
+                        <div class="matrix-quadrant quadrant-stars">
+                            <div>
+                                <div class="quadrant-title">⭐ Estrellas <span style="font-size: 0.75rem; color: var(--text-secondary);">18 prod · $11,3M</span></div>
+                                <div class="quadrant-desc">Alto volumen y margen sobre el umbral: proteger y exhibir.</div>
+                                <ul class="quadrant-products">
+                                    <li><span>Boeuf Bourguignon</span><span class="prod-qty">120 un · $1.680.000</span><span class="prod-margin">64,3%</span></li>
+                                    <li><span>Steak Tartar</span><span class="prod-qty">100 un · $1.264.000</span><span class="prod-margin">63,6%</span></li>
+                                    <li><span>Roast Beef</span><span class="prod-qty">105 un · $1.236.000</span><span class="prod-margin">63,5%</span></li>
+                                    <li><span>Quiches (Espinaca + Cebolla)</span><span class="prod-qty">173 un · $1.036.000</span><span class="prod-margin">65,7%</span></li>
+                                    <li><span>Merluza Vasca</span><span class="prod-qty">48 un · $718.500</span><span class="prod-margin">73,9%</span></li>
+                                    <li><span>Crème Brûlée</span><span class="prod-qty">129 un · $645.000</span><span class="prod-margin">78,8%</span></li>
+                                    <li><span>Milhojas</span><span class="prod-qty">101 un · $608.760</span><span class="prod-margin">86,5%</span></li>
+                                    <li><span>Pollo al Curry</span><span class="prod-qty">51 un · $665.990</span><span class="prod-margin">69,4%</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="matrix-quadrant quadrant-horses">
+                            <div>
+                                <div class="quadrant-title">🐎 Caballos de Batalla <span style="font-size: 0.75rem; color: var(--text-secondary);">13 prod · $8,5M</span></div>
+                                <div class="quadrant-desc">Populares con margen bajo el umbral: subir margen vía costo o precio.</div>
+                                <ul class="quadrant-products">
+                                    <li><span>Strogonoff (el #1 del canal)</span><span class="prod-qty">154 un · $2.313.450</span><span class="prod-margin">60,1%</span></li>
+                                    <li><span>Salmón Sellado</span><span class="prod-qty">72 un · $1.080.000</span><span class="prod-margin">53,3%</span></li>
+                                    <li><span>Tártaro de Salmón</span><span class="prod-qty">74 un · $1.021.000</span><span class="prod-margin">58,0%</span></li>
+                                    <li><span>Brillat Savarin 200gr</span><span class="prod-qty">44 un · $792.000</span><span class="prod-margin">41,6%</span></li>
+                                    <li><span>Quiche Lorraine</span><span class="prod-qty">120 un · $706.380</span><span class="prod-margin">51,6%</span></li>
+                                    <li><span>Plato Queso y Charcutería</span><span class="prod-qty">66 un · $627.000</span><span class="prod-margin">61,1%</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="matrix-quadrant quadrant-puzzles">
+                            <div>
+                                <div class="quadrant-title">🧩 Enigmas <span style="font-size: 0.75rem; color: var(--text-secondary);">margen alto, poco volumen</span></div>
+                                <div class="quadrant-desc">Merecen empuje comercial: visibilidad, upselling y packs.</div>
+                                <ul class="quadrant-products">
+                                    <li><span>Bocus para 4</span><span class="prod-qty">5 un · $420.000</span><span class="prod-margin">79,8%</span></li>
+                                    <li><span>Aligot ACP</span><span class="prod-qty">17 un · $85.000</span><span class="prod-margin">84,0%</span></li>
+                                    <li><span>Tabla Queso</span><span class="prod-qty">11 un · $133.100</span><span class="prod-margin">73,9%</span></li>
+                                    <li><span>Plato de Charcutería</span><span class="prod-qty">12 un · $114.000</span><span class="prod-margin">73,7%</span></li>
+                                    <li><span>Bocus Para 2</span><span class="prod-qty">3 un · $156.000</span><span class="prod-margin">73,1%</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="matrix-quadrant quadrant-dogs">
+                            <div>
+                                <div class="quadrant-title">🐕 Perros <span style="font-size: 0.75rem; color: var(--text-secondary);">46 prod · solo $2,9M</span></div>
+                                <div class="quadrant-desc">Poco volumen y bajo margen: candidatos a poda del menú.</div>
+                                <ul class="quadrant-products">
+                                    <li><span>Pack Picoteo Verano (perro caro)</span><span class="prod-qty">11 un · $594.000</span><span class="prod-margin">42,3%</span></li>
+                                    <li><span>Cremeux Bourgogne</span><span class="prod-qty">12 un · $225.600</span><span class="prod-margin">46,2%</span></li>
+                                    <li><span>Reblochon</span><span class="prod-qty">14 un · $210.000</span><span class="prod-margin">39,7%</span></li>
+                                    <li><span>Roquefort</span><span class="prod-qty">17 un · $127.500</span><span class="prod-margin">42,2%</span></li>
+                                    <li><span>Jamón Cocido Kg (revisar precio)</span><span class="prod-qty">7,2 un · $108.461</span><span class="prod-margin">5,0%</span></li>
+                                    <li><span>Aceite Petralia 3Lt (revisar precio)</span><span class="prod-qty">3 un · $94.581</span><span class="prod-margin">5,0%</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert-box" style="margin-top: 1.5rem;">
+                        <strong>Los "margen 100%": 33 productos sin costo cargado ($6,1M en venta).</strong> Los principales: Canelón Asado de Tira (50 un, $748.500, probable estrella real), Ensalada Burrata (40 un, $680.000), Guiso de Lentejas (39 un, $570.000), Ensalada de Quinoa (48 un, $517.000) y Baguette (219 un, $470.790, el más vendido en unidades del canal). Sandwich Toscano, Capri, César, Tiramisú y 24 más suman $3.118.350 adicionales. Además hay dos casos con costo probablemente incompleto: Confit de Pato (92,9%) y Mechada con Aligot (94,0%), márgenes irreales para platos con proteína. GastroKaizen ya tiene costeadas 13 recetas (costo MP promedio 32,6%): falta migrarlas a FUDO y costear las 33 faltantes.
+                    </div>
+                    <div class="insight-box">
+                        <strong>Jugadas de menú para julio:</strong> (1) Strogonoff vende $2,3M: 5 puntos de margen recuperados vía costo o precio valen ≈$115K/mes. (2) Los 46 perros suman solo $2,9M: podar la cola larga simplifica cocina y compras. (3) El Pack Picoteo Verano ($594K, margen 42,3%) es un perro caro: re-costear o re-preciar. (4) Los enigmas de margen alto (Bocus para 4: 79,8%) merecen empuje comercial.
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ==================== TAB 4: COSTOS, RRHH Y COMPRAS ==================== -->
+            <section id="tab-products" class="tab-panel">
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Costo Laboral Bocus · Previred Junio (lo más real a la fecha)</h3>
+                    </div>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.25rem;">
+                        Base: archivo Previred junio 2026 definitivo de Solución Horeca SpA (43 personas, RUT por persona), cruzado por nombre contra el Reporte Maestro de Empleados de Buk (división operativa) para atribuir cada sueldo a su marca real. Las cotizaciones están declaradas y aún no pagadas: se confirmarán al pago.
+                    </p>
+                    <div class="insight-box">
+                        <strong>Corrección definitiva de dotación y costo laboral (2026-07-03):</strong> el cruce Previred x Buk por RUT/nombre reemplaza la clasificación anterior. Real: <strong>Bocus 21 personas pagadas, $17.387.196</strong> (más Nicolás Le Baux en División Bocus, sin sueldo Previred) · Parigó 15 personas, $14.202.258 · Cadaqués 7 personas, $5.670.722. Total Solución Horeca SpA: $37.260.176. La cifra anterior ($29.879.601 para "33 personas" de Bocus) mezclaba personas de Parigó y quedó reemplazada por esta atribución verificada. El aporte patronal se reprorrateó con la nueva participación real de Bocus (46,7% del total pagado, antes se usó 81,6% por error).
+                    </div>
+                    <div class="kpi-grid" style="grid-template-columns: repeat(4, 1fr);">
+                        <div class="kpi-card">
+                            <div class="kpi-label">Sueldos Brutos Bocus</div>
+                            <div class="kpi-value">$17.387.196</div>
+                            <div class="kpi-delta positive">21 personas · promedio $828K</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-label">Aporte Patronal Estimado</div>
+                            <div class="kpi-value">≈ $972K</div>
+                            <div class="kpi-delta positive">SIS + cesantía + mutual · prorrateo 46,7%</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-label">Honorarios Bocus</div>
+                            <div class="kpi-value">$1.460.000</div>
+                            <div class="kpi-delta positive">los $1,47M de Al Paso van a Parigó</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-label">Costo Laboral Total</div>
+                            <div class="kpi-value">≈ $19,8M</div>
+                            <div class="kpi-delta positive">11,7% de la venta</div>
+                        </div>
+                    </div>
+
+                    <h4 style="font-family: var(--font-display); font-size: 1rem; margin: 1rem 0 0.75rem;">Leyes sociales junio (empresa completa, por pagar)</h4>
+                    <div class="table-responsive">
+                        <table class="premium-table">
+                            <thead><tr><th>Concepto</th><th class="num-col">Monto</th><th style="text-align:right;">Estado</th></tr></thead>
+                            <tbody>
+                                <tr><td class="table-prod-name">Previsión AFP (Modelo, Uno, Planvital, Capital, Provida, Habitat, Seg. Social)</td><td class="num-col">$4.396.987</td><td class="num-col"><span class="semaforo amarillo">Por pagar</span></td></tr>
+                                <tr><td class="table-prod-name">Salud (Fonasa $2,44M + Cruz Blanca + Colmena)</td><td class="num-col">$2.668.512</td><td class="num-col"><span class="semaforo amarillo">Por pagar</span></td></tr>
+                                <tr><td class="table-prod-name">Seguro de Cesantía</td><td class="num-col">$1.126.971</td><td class="num-col"><span class="semaforo amarillo">Por pagar</span></td></tr>
+                                <tr><td class="table-prod-name">Seguro Invalidez y Sobrevivencia (SIS)</td><td class="num-col">$608.796</td><td class="num-col"><span class="semaforo amarillo">Por pagar</span></td></tr>
+                                <tr><td class="table-prod-name">Mutual de Seguridad (CChC)</td><td class="num-col">$346.620</td><td class="num-col"><span class="semaforo amarillo">Por pagar</span></td></tr>
+                                <tr><td class="table-prod-name">Ajuste CCAF</td><td class="num-col">-$27.740</td><td class="num-col"><span class="semaforo gris">Ajuste</span></td></tr>
+                                <tr style="border-top: 2px solid var(--border-color);"><td class="table-prod-name">TOTAL COTIZACIONES SOLUCIÓN HORECA</td><td class="num-col" style="color: var(--primary); font-weight: 700;">$9.120.146</td><td class="num-col"><span class="semaforo rojo">Confirmar al pagar</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="split-explanation" style="margin-top: 1rem;">
+                        La mayor parte de estas cotizaciones ya está descontada dentro de los sueldos brutos (aporte del trabajador). El costo adicional para la empresa es solo la porción patronal (≈$2,1M total empresa, ≈$972K Bocus con la participación real de 46,7%). No sumar los $9,1M encima de los brutos: sería doble conteo.
+                    </div>
+
+                    <h4 style="font-family: var(--font-display); font-size: 1rem; margin: 1.5rem 0 0.75rem;">Almuerzos del personal · 1.020 al mes, $370 c/u</h4>
+                    <div class="shopify-stats-grid">
+                        <div class="vector-graph-box" style="margin-bottom: 0;">
+                            <div class="chart-container" style="height: 300px;"><canvas id="chAlmuerzos"></canvas></div>
+                        </div>
+                        <div class="shopify-stats-sidebar">
+                            <div class="mini-metric-box"><h5>Almuerzos/mes (proyección ×2)</h5><div>1.020</div></div>
+                            <div class="mini-metric-box"><h5>Costo FUDO Área Personal</h5><div>$377.718</div></div>
+                            <div class="split-explanation">Conteo real de 2 semanas de planillas (510 almuerzos: semanas del 08-jun y 29-jun; los otros 2 PDF eran duplicados), proyectado ×2 como mes representativo. El 56% lo consumen equipos Parigó y Mantención: si el beneficio lo paga Bocus, es un subsidio cruzado de ≈$210K/mes hacia las otras unidades. Decisión de política interna, no error.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Compras de Junio · $87,5M en 289 Documentos</h3>
+                    </div>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.25rem;">
+                        Compras deduplicadas por documento desde FUDO (el registro por línea inflaba a $312M; corregido). No es comparable 1:1 con el COGS ($113,6M): las compras son caja del mes, el COGS valoriza recetas e incluye consumo de inventario previo.
+                    </p>
+                    <div class="table-responsive">
+                        <table class="premium-table">
+                            <thead><tr><th>Proveedor</th><th class="num-col">Monto</th><th class="num-col">% compras</th><th style="text-align:right;">Categoría</th></tr></thead>
+                            <tbody>
+                                <tr><td class="table-prod-name">GestaPack</td><td class="num-col">$13.600.000</td><td class="num-col">15,5%</td><td class="num-col"><span class="table-badge internal">Packaging</span></td></tr>
+                                <tr><td class="table-prod-name">Los Boldos</td><td class="num-col">$7.300.000</td><td class="num-col">8,3%</td><td class="num-col"><span class="table-badge b2c">Materia prima</span></td></tr>
+                                <tr><td class="table-prod-name">San Cristóbal</td><td class="num-col">$6.300.000</td><td class="num-col">7,2%</td><td class="num-col"><span class="table-badge b2c">Materia prima</span></td></tr>
+                                <tr><td class="table-prod-name">Resto (≈286 documentos, decenas de proveedores)</td><td class="num-col">$60.340.000</td><td class="num-col">69,0%</td><td class="num-col"><span class="table-badge b2b">Mixto</span></td></tr>
+                                <tr style="border-top: 2px solid var(--border-color);"><td class="table-prod-name">TOTAL COMPRAS JUNIO</td><td class="num-col" style="color: var(--primary); font-weight: 700;">$87.540.000</td><td class="num-col">100%</td><td></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="insight-box">
+                        <strong>El dato que duele:</strong> el mayor proveedor de Bocus no es comida, es packaging (15,5%). Junto con la masa Baguette de Baco ($10,7M vendida en 1.427 cajas, el producto #1 en facturación B2B), define dónde negociar: dos conversaciones cubren ≈$24M/mes.
+                    </div>
+
+                    <h4 style="font-family: var(--font-display); font-size: 1rem; margin: 1.5rem 0 0.75rem;">Volumen de producción (toda la operación)</h4>
+                    <div class="table-responsive">
+                        <table class="premium-table">
+                            <thead><tr><th>Producto</th><th class="num-col">Unidades junio</th><th class="num-col">Facturación</th></tr></thead>
+                            <tbody>
+                                <tr><td class="table-prod-name">Caja Masa Baguette Baco 6,3Kg</td><td class="num-col">1.427</td><td class="num-col">$10.702.500</td></tr>
+                                <tr><td class="table-prod-name">Huevos (un.)</td><td class="num-col">5.200</td><td class="num-col">$1.540.050</td></tr>
+                                <tr><td class="table-prod-name">Media Luna 60gr</td><td class="num-col">4.188</td><td class="num-col">$1.344.478</td></tr>
+                                <tr><td class="table-prod-name">Croissant 100gr</td><td class="num-col">2.023</td><td class="num-col">$1.248.956</td></tr>
+                                <tr><td class="table-prod-name">Mini Canelé / Galletas (brownie, almendra, sablé)</td><td class="num-col">≈3.440</td><td class="num-col">≈$697.000</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="split-explanation" style="margin-top: 1rem;">
+                        La panadería/bollería mueve ≈12.000 unidades al mes. Es la fábrica silenciosa de Bocus: bajo ticket, altísimo volumen, y la columna vertebral del abastecimiento a Baco y Parigó.
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Fugas y Ruido Operacional</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="premium-table">
+                            <thead><tr><th>Concepto</th><th class="num-col">Magnitud</th><th>Lectura</th></tr></thead>
+                            <tbody>
+                                <tr><td class="table-prod-name">Líneas canceladas</td><td class="num-col">$20,5M · 571 líneas</td><td>No es plata perdida (muchas son correcciones re-digitadas), pero es ruido que ensucia la data. "Error de registro": $5,1M en 51 líneas.</td></tr>
+                                <tr><td class="table-prod-name">Producto no disponible</td><td class="num-col">$2,8M · 95 líneas</td><td>Esto sí es venta perdida real: el cliente pidió y no había. ≈1,6% de la venta del mes se escapó por quiebres de stock.</td></tr>
+                                <tr><td class="table-prod-name">Descuentos</td><td class="num-col">$5,9M · 173 aplicaciones</td><td>3,4% de la venta. Sin nombre ni responsable registrado en su mayoría: imposible auditar quién descuenta y por qué.</td></tr>
+                                <tr><td class="table-prod-name">Ventas sin cliente asignado</td><td class="num-col">789 ventas minoristas</td><td>Mostrador anónimo: normal en retail, pero limita fidelización y análisis de recurrencia.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>¿Es Rentable Bocus? Estado de Resultados Operacional Visible</h3>
+                    </div>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.25rem;">
+                        Construido solo con lo que los sistemas registran. Cifras brutas (con IVA), junio 2026.
+                    </p>
+                    <div class="eerr-list">
+                        <div class="eerr-row"><span>Ventas registradas (sin traspaso CDQ)</span><span class="eerr-val">$169.571.846</span></div>
+                        <div class="eerr-note">de las cuales: externa real $90,8M · traspaso Parigó $42,6M · autoconsumo $36,2M</div>
+                        <div class="eerr-row"><span>(-) Costo de materia prima (COGS FUDO)</span><span class="eerr-val" style="color: var(--accent-rose);">-$113.583.399</span></div>
+                        <div class="eerr-row subtotal"><span>= Margen bruto contable (33,0%)</span><span class="eerr-val">$55.988.447</span></div>
+                        <div class="eerr-note">ajustado por 33 productos sin costo (est. GastroKaizen 32,6% MP): ≈$54,0M (31,8%)</div>
+                        <div class="eerr-row"><span>(-) Sueldos brutos Bocus (Previred x Buk, 21 personas verificadas)</span><span class="eerr-val" style="color: var(--accent-rose);">-$17.387.196</span></div>
+                        <div class="eerr-row"><span>(-) Aporte patronal estimado (SIS + cesantía + mutual, prorrateo 46,7%)</span><span class="eerr-val" style="color: var(--accent-rose);">-$972.000</span></div>
+                        <div class="eerr-row"><span>(-) Honorarios Bocus</span><span class="eerr-val" style="color: var(--accent-rose);">-$1.460.000</span></div>
+                        <div class="eerr-row result"><span>= RESULTADO OPERACIONAL VISIBLE (21,3% s/ventas)</span><span class="eerr-val">≈ $36.169.251</span></div>
+                        <div class="eerr-note">con margen ajustado por productos sin costo: ≈$34,2M (20,2%)</div>
+                    </div>
+                    <div class="insight-box">
+                        <strong>La conclusión honesta:</strong> Bocus genera ≈$34 a 36M/mes antes de arriendo y gastos no registrados, una vez corregido el costo laboral real (21 personas, $17,4M, no las 33 personas $29,9M estimadas antes). Si arriendo + servicios + comisiones suman menos de ≈$28M/mes, Bocus es rentable operando. Con los EERR contables de julio se cierra esa brecha de una vez.
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ==================== TAB 5: PLAN DE ACCIÓN Y CIERRE ==================== -->
+            <section id="tab-strategy" class="tab-panel">
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Plan de Acción · Julio 2026</h3>
+                    </div>
+                    <div class="action-list">
+                        <div class="action-item-card">
+                            <div class="action-number">1</div>
+                            <div class="action-details">
+                                <h4>Costear las 33 recetas faltantes en FUDO</h4>
+                                <div class="action-columns">
+                                    <div class="action-col-block causa"><div class="block-title">Causa</div><div class="block-text">33 productos minoristas sin receta cargada aparecen con margen 100% ficticio. Confit de Pato y Mechada con Aligot con costo incompleto.</div></div>
+                                    <div class="action-col-block impacto"><div class="block-title">Impacto</div><div class="block-text">$6,1M/mes de venta vuela a ciegas. GastroKaizen ya tiene 13 recetas hechas.</div></div>
+                                    <div class="action-col-block accion"><div class="block-title">Acción</div><div class="block-text">Partir por Canelón, Burrata, Lentejas, Quinoa y Baguette. Migrar recetas GastroKaizen a FUDO. Responsable: Operaciones + Nicolás.</div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="action-item-card">
+                            <div class="action-number">2</div>
+                            <div class="action-details">
+                                <h4>Atacar quiebres de stock</h4>
+                                <div class="action-columns">
+                                    <div class="action-col-block causa"><div class="block-title">Causa</div><div class="block-text">95 líneas "producto no disponible" en junio: el cliente pidió y no había.</div></div>
+                                    <div class="action-col-block impacto"><div class="block-title">Impacto</div><div class="block-text">≈$2,8M/mes de venta perdida directa (1,6% de la venta).</div></div>
+                                    <div class="action-col-block accion"><div class="block-title">Acción</div><div class="block-text">Revisar los productos con más quiebres y ajustar producción/stock mínimo. Responsable: Operaciones.</div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="action-item-card">
+                            <div class="action-number">3</div>
+                            <div class="action-details">
+                                <h4>Protocolo de descuentos</h4>
+                                <div class="action-columns">
+                                    <div class="action-col-block causa"><div class="block-title">Causa</div><div class="block-text">$5,9M en 173 descuentos sin nombre ni responsable registrado.</div></div>
+                                    <div class="action-col-block impacto"><div class="block-title">Impacto</div><div class="block-text">3,4% de la venta sin trazabilidad de quién descuenta y por qué.</div></div>
+                                    <div class="action-col-block accion"><div class="block-title">Acción</div><div class="block-text">Exigir nombre y motivo en FUDO para cada descuento. Responsable: Administración.</div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="action-item-card">
+                            <div class="action-number">4</div>
+                            <div class="action-details">
+                                <h4>Podar el menú minorista</h4>
+                                <div class="action-columns">
+                                    <div class="action-col-block causa"><div class="block-title">Causa</div><div class="block-text">46 productos "perro" venden solo $2,9M entre todos.</div></div>
+                                    <div class="action-col-block impacto"><div class="block-title">Impacto</div><div class="block-text">Cola larga que complica cocina, compras y merma sin aportar venta.</div></div>
+                                    <div class="action-col-block accion"><div class="block-title">Acción</div><div class="block-text">Concentrar cocina en estrellas y caballos; re-costear el Pack Picoteo Verano. Responsable: Nicolás + Cocina.</div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="action-item-card">
+                            <div class="action-number">5</div>
+                            <div class="action-details">
+                                <h4>Negociar los 2 grandes proveedores</h4>
+                                <div class="action-columns">
+                                    <div class="action-col-block causa"><div class="block-title">Causa</div><div class="block-text">GestaPack ($13,6M, packaging) es el mayor proveedor; la relación masa/Baco mueve ≈$24M/mes en compra-venta cruzada.</div></div>
+                                    <div class="action-col-block impacto"><div class="block-title">Impacto</div><div class="block-text">1 punto de descuento ≈ $240K/mes.</div></div>
+                                    <div class="action-col-block accion"><div class="block-title">Acción</div><div class="block-text">Dos conversaciones comerciales en julio. Responsable: Nicolás.</div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="action-item-card">
+                            <div class="action-number">6</div>
+                            <div class="action-details">
+                                <h4>Cerrar el P&L completo en julio</h4>
+                                <div class="action-columns">
+                                    <div class="action-col-block causa"><div class="block-title">Causa</div><div class="block-text">Arriendo, servicios básicos y comisiones de medios de pago no están en FUDO ni en los archivos del mes.</div></div>
+                                    <div class="action-col-block impacto"><div class="block-title">Impacto</div><div class="block-text">Pasar de "rentable visible" a "rentable comprobado".</div></div>
+                                    <div class="action-col-block accion"><div class="block-title">Acción</div><div class="block-text">Cargar arriendo + servicios + comisiones al informe de julio, cruzando con EERR contables. Responsable: Nicolás + contabilidad.</div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="action-item-card">
+                            <div class="action-number">7</div>
+                            <div class="action-details">
+                                <h4>Replicar este informe para Cadaqués y Parigó</h4>
+                                <div class="action-columns">
+                                    <div class="action-col-block causa"><div class="block-title">Causa</div><div class="block-text">La data ya vive en FUDO Bocus y las nóminas ya están separadas (5 y 4 personas).</div></div>
+                                    <div class="action-col-block impacto"><div class="block-title">Impacto</div><div class="block-text">Visión de grupo completa con el mismo estándar.</div></div>
+                                    <div class="action-col-block accion"><div class="block-title">Acción</div><div class="block-text">Generar informes espejos con la misma skill. Responsable: IA ejecutora + Nicolás valida.</div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Pendientes para Cobrar y Cerrar el Mes</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="premium-table">
+                            <thead><tr><th>Pendiente</th><th class="num-col">Monto</th><th>Responsable</th><th>Fuente / plazo</th></tr></thead>
+                            <tbody>
+                                <tr><td class="table-prod-name">Crédito B2B facturado no cobrado ("por pagar" $33,4M + cta. cte. $21,6M)</td><td class="num-col">$55,0M</td><td>Nicolás / Administración</td><td>FUDO junio · vigilar cobranza julio</td></tr>
+                                <tr><td class="table-prod-name">Leyes sociales junio declaradas, no pagadas</td><td class="num-col">$9.120.146</td><td>Nicolás</td><td>Previred / Buk · confirmar al pago</td></tr>
+                                <tr><td class="table-prod-name">Cartolas junio sin cargar: Horeca Banco de Chile 2007, BICE 8666, Mercado Pago 6688</td><td class="num-col">n/d</td><td>Nicolás</td><td>contable/CARGAR-CARTOLAS.md</td></tr>
+                                <tr><td class="table-prod-name">Devolución IVA cobrado indebidamente en plataforma publicitaria</td><td class="num-col">≈$1,0M</td><td>Nicolás</td><td>Gestión iniciada 2026-06-25 (reunión 06-24)</td></tr>
+                                <tr><td class="table-prod-name">8 contratos plazo fijo Bocus vencidos al 30-jun por regularizar</td><td class="num-col">n/d</td><td>Nicolás / RRHH</td><td>Conciliación Buk 2026-06-14</td></tr>
+                                <tr><td class="table-prod-name">Bloqueos del cierre contable junio: societarios (Eduardo), rendiciones Luis, criterio $17M compras extranjeras</td><td class="num-col">$17,0M</td><td>Nicolás / Luis / Yube</td><td>temas-activos 2026-06-27</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Lo que Este Informe NO Puede Ver (brechas declaradas)</h3>
+                    </div>
+                    <ul class="quadrant-products" style="font-size: 0.85rem;">
+                        <li><span><strong>Arriendo del local:</strong> no está en FUDO ni en los archivos entregados. Puede ser el mayor gasto faltante.</span></li>
+                        <li><span><strong>Servicios básicos y gastos generales:</strong> luz, agua, gas y administración sin registro disponible.</span></li>
+                        <li><span><strong>Comisiones de medios de pago:</strong> Mercado Pago 3,19% + IVA, Rappi ≈25 a 30% del canal. No descontadas; solo Rappi podría comerse ≈$1M del delivery.</span></li>
+                        <li><span><strong>IVA:</strong> todas las cifras son brutas. El margen % es consistente porque venta y costo se comparan en la misma base.</span></li>
+                        <li><span><strong>Depreciación, seguros y gastos financieros:</strong> fuera de alcance.</span></li>
+                        <li><span><strong>Compras vs COGS:</strong> la brecha ($87,5M comprado vs $113,6M consumido a valor receta) sugiere consumo de inventario o márgenes de transferencia dentro del costo. Se necesita inventario inicial/final para cerrarla.</span></li>
+                        <li><span><strong>Nómina:</strong> cotizaciones declaradas, no pagadas. Gratificaciones, finiquitos u horas extra de julio no incluidos.</span></li>
+                        <li><span><strong>Canal Shopify no segmentado:</strong> el export FUDO de junio no separa Shopify de mostrador, por lo que las metas de ticket web ($60.000) quedan sin medición este mes.</span></li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Conclusión Ejecutiva y Seguimiento</h3>
+                    </div>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                        Junio fue un mes <strong style="color: var(--accent-teal);">sano y en crecimiento</strong>: +12,2% de venta sobre mayo (+18% en base comparable), margen bruto de 33,0% y un resultado operacional visible de ≈$36,2M (21,3%) tras corregir el costo laboral real. La métrica que manda julio es el <strong style="color: var(--text-primary);">cierre del P&L completo</strong> (arriendo, servicios, comisiones): es lo único que separa "rentable visible" de "rentable comprobado". Las tres prioridades: costear las 33 recetas faltantes, cobrar el crédito B2B de $55M y ejecutar las dos negociaciones de proveedores.
+                    </p>
+                    <div class="report-footer">
+                        Solución Oreka · Informe Mensual Bocus Junio 2026 · Estructura Noverica con identidad visual oficial Bocus (manual de marca) · Generado 2026-07-02 por Claude (Fable 5), corregido 2026-07-03, validación pendiente de Nicolás Le Baux.<br>
+                        <strong>Fuentes:</strong> FUDO Bocus (export ventas 01 al 30 de junio, 1.947 ventas pagadas, 7.919 líneas) · Previred junio 2026 definitivo (43 trabajadores, RUT por persona) · Reporte Maestro de Empleados Buk (generado 2026-07-03, división operativa) · Libro Leyes Sociales Buk · planillas de almuerzo (semanas 08-jun y 29-jun) · GastroKaizen (13 recetas costeadas) · bitácora Bocus junio 2026 · minutas de reuniones 06-15, 06-17, 06-23 y 06-24 · informe mayo 2026 Noverica (comparativo).<br>
+                        <strong>Corrección de dotación (2026-07-03):</strong> cruce definitivo Previred x Buk por RUT/nombre. Bocus 21 pagados ($17.387.196) · Parigó 15 pagados ($14.202.258) · Cadaqués 7 pagados ($5.670.722). Reemplaza la clasificación anterior (33/4/5 personas), que mezclaba personas de Parigó dentro de Bocus.<br>
+                        <strong>Exclusiones declaradas:</strong> venta 19147 "Sueldos CDQ 202606" ($10M, traspaso financiero) · líneas canceladas · Despacho y Producto Genérico en menu engineering.
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // ----- Design tokens (paleta oficial Bocus) -----
+            const GOLD = '#ef6a2b', GOLD_SOFT = '#c4a693', TEAL = '#93a86a', ROSE = '#d9604a',
+                  VIOLET = '#95887d', BLUE = '#7a6a5c', TEXT = '#c9b8ab', GRID = 'rgba(244,226,214,0.08)';
+            Chart.defaults.color = TEXT;
+            Chart.defaults.font.family = "'Inter', sans-serif";
+            Chart.defaults.borderColor = GRID;
+            const fmtM = v => '$' + (v / 1e6).toFixed(1) + 'M';
+            const fmtCL = v => '$' + v.toLocaleString('es-CL');
+
+            // ----- Data (validada, junio 2026) -----
+            const segLabels = ['Parigó', 'Bocus interno', 'Minorista', 'B2B externo', 'Cadaqués'];
+            const segData = [42593560, 36205643, 34633408, 32313281, 23825954];
+            const segColors = [GOLD, VIOLET, TEAL, GOLD_SOFT, BLUE];
+
+            const dias = ['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30'];
+            const vDiaria = [3014898,2546183,3162438,5426008,3970358,3367410,2438762,3179951,3269992,3217010,3723148,4020959,4475938,2776731,4142959,4261088,13278083,7638552,5985009,5034771,1199988,5615810,5911277,6473368,32751619,4367887,6117651,4181658,7109978,6912362];
+
+            const semanaData = [23063596,21632431,27399371,49539327,18344213,18995770,10597138];
+
+            const pagoLabels = ['Interno (áreas)','Por pagar / B2B','Cta. Cte.','Mercado Pago','Transferencia','Fintoc','Rappi','Efectivo','Otros'];
+            const pagoData = [77880135,33424810,21603602,21462562,4528898,4495626,3413850,1928762,833601];
+            const pagoColors = [VIOLET,GOLD,GOLD_SOFT,TEAL,BLUE,'#d65a1f',ROSE,'#9c8f83','#5c5248'];
+
+            const ME = [{"p":"Strogonoff","u":154,"v":2313450,"m":60.1,"c":"Caballo de Batalla"},{"p":"Boeuf Bourgignon","u":120,"v":1680000,"m":64.3,"c":"Estrella"},{"p":"Steak Tartar","u":100,"v":1264000,"m":63.6,"c":"Estrella"},{"p":"Roast Beef","u":105,"v":1236000,"m":63.5,"c":"Estrella"},{"p":"Salmon Sellado","u":72,"v":1080000,"m":53.3,"c":"Caballo de Batalla"},{"p":"Tartaro de Salmon","u":74,"v":1021000,"m":58,"c":"Caballo de Batalla"},{"p":"Confit de Pato","u":37,"v":814000,"m":92.9,"c":"Estrella"},{"p":"Mechada con Aligot","u":58,"v":810600,"m":94,"c":"Estrella"},{"p":"Brillat Savarin 200gr","u":44,"v":792000,"m":41.6,"c":"Caballo de Batalla"},{"p":"Canelon Asado de Tira","u":50,"v":748500,"m":100,"c":"Sin costo"},{"p":"Merluza Vasca","u":48,"v":718500,"m":73.9,"c":"Estrella"},{"p":"Quiche Lorraine","u":120,"v":706380,"m":51.6,"c":"Caballo de Batalla"},{"p":"Ensalada Burrata","u":40,"v":680000,"m":100,"c":"Sin costo"},{"p":"Pollo al Curry","u":51,"v":665990,"m":69.4,"c":"Estrella"},{"p":"Creme Brulee","u":129,"v":645000,"m":78.8,"c":"Estrella"},{"p":"Plato Queso y Charcuteria","u":66,"v":627000,"m":61.1,"c":"Caballo de Batalla"},{"p":"Milhojas","u":101,"v":608760,"m":86.5,"c":"Estrella"},{"p":"Pack Picoteo Verano","u":11,"v":594000,"m":42.3,"c":"Perro"},{"p":"Guiso de Lentejas","u":39,"v":570000,"m":100,"c":"Sin costo"},{"p":"Quiche Espinaca","u":89,"v":532000,"m":66.5,"c":"Estrella"},{"p":"Ensalada de Quinoa","u":48,"v":517000,"m":100,"c":"Sin costo"},{"p":"Quiche Cebolla","u":84,"v":504000,"m":65,"c":"Estrella"},{"p":"Salmon Eneldo","u":45,"v":495000,"m":70.9,"c":"Estrella"},{"p":"Baguette","u":219,"v":470790,"m":100,"c":"Sin costo"},{"p":"Plato de Quesos","u":47,"v":446500,"m":54.7,"c":"Caballo de Batalla"},{"p":"Bocus para 4","u":5,"v":420000,"m":79.8,"c":"Puzzle"},{"p":"Ensalada de Salmon","u":38,"v":418000,"m":50.9,"c":"Caballo de Batalla"},{"p":"Sandwich Toscano","u":74,"v":407000,"m":100,"c":"Sin costo"},{"p":"Comte","u":26,"v":390000,"m":45,"c":"Caballo de Batalla"},{"p":"Creme Caramel","u":76,"v":379500,"m":75.2,"c":"Estrella"},{"p":"Saucisson","u":31,"v":365800,"m":57.9,"c":"Caballo de Batalla"},{"p":"Ens. Roquefort y Pera","u":34,"v":340000,"m":100,"c":"Sin costo"},{"p":"Brie","u":29,"v":304500,"m":65.1,"c":"Estrella"},{"p":"Ensalada Cesar","u":27,"v":297000,"m":100,"c":"Sin costo"},{"p":"Terrine de Cerdo","u":26,"v":247000,"m":100,"c":"Sin costo"},{"p":"Canelon Pollo","u":19,"v":247000,"m":100,"c":"Sin costo"},{"p":"Ens. Mediterranea","u":22,"v":242000,"m":100,"c":"Sin costo"},{"p":"Cremeux Bourgogne","u":12,"v":225600,"m":46.2,"c":"Perro"},{"p":"Mousse de Chocolate","u":45,"v":221150,"m":66.2,"c":"Estrella"},{"p":"Fuet","u":26,"v":220400,"m":63.2,"c":"Estrella"},{"p":"Tiramisú","u":44,"v":220000,"m":100,"c":"Sin costo"},{"p":"Reblochon","u":14,"v":210000,"m":39.7,"c":"Perro"},{"p":"Ementhal","u":18,"v":183600,"m":61.9,"c":"Caballo de Batalla"},{"p":"Sandwich Capri","u":33,"v":170500,"m":100,"c":"Sin costo"},{"p":"Corvina a la Vasca","u":11,"v":165000,"m":100,"c":"Sin costo"},{"p":"Petit Basque 1/4","u":17,"v":161500,"m":51.3,"c":"Perro"},{"p":"Bocus Para 2","u":3,"v":156000,"m":73.1,"c":"Puzzle"},{"p":"Pack Pololeo","u":4,"v":152000,"m":46.7,"c":"Perro"},{"p":"Tabla Queso","u":11,"v":133100,"m":73.9,"c":"Puzzle"},{"p":"Papas Champi ACP","u":26,"v":130000,"m":60,"c":"Caballo de Batalla"},{"p":"Roquefort","u":17,"v":127500,"m":42.2,"c":"Perro"},{"p":"Gratin Zapallo ACP","u":25,"v":125000,"m":76,"c":"Estrella"},{"p":"Petit Camembert","u":10,"v":125000,"m":41.4,"c":"Perro"},{"p":"Pack Quesos","u":2,"v":124000,"m":42.2,"c":"Perro"},{"p":"Plato de Charcuteria","u":12,"v":114000,"m":73.7,"c":"Puzzle"},{"p":"Jamon Cocido Kg","u":7.2,"v":108461,"m":5,"c":"Perro"},{"p":"ET Coyam","u":4,"v":104000,"m":100,"c":"Sin costo"},{"p":"Prosciutto","u":7,"v":101500,"m":58.2,"c":"Perro"},{"p":"Aceite Petralia 3Lt","u":3,"v":94581,"m":5,"c":"Perro"},{"p":"Campo Integral","u":24,"v":91200,"m":100,"c":"Sin costo"},{"p":"Campo Aceituna","u":24,"v":90820,"m":100,"c":"Sin costo"},{"p":"Sobrasada","u":12,"v":88800,"m":67.1,"c":"Puzzle"},{"p":"ME Calyptra 20","u":3,"v":87000,"m":53.9,"c":"Perro"},{"p":"Arroz Basmati ACP","u":17,"v":85000,"m":62,"c":"Perro"},{"p":"Aligot ACP","u":17,"v":85000,"m":84,"c":"Puzzle"}];
+            const UMB_POP = 17.6, UMB_MG = 62.6;
+
+            const almuerzoLabels = ['Parigó Servicio','Cocina Parigó','Logística','Copería','Mantención','Cocina Bocus','Ventas Parigó AP','Cocina Producción','Panadería','Barra','Pastelería','Práctica'];
+            const almuerzoData = [154,140,116,114,110,108,86,68,66,42,12,4];
+
+            // ----- Lazy chart init por tab -----
+            const chartBuilders = {
+                'tab-split': () => {
+                    new Chart(document.getElementById('chSegmentos'), {
+                        type: 'doughnut',
+                        data: { labels: segLabels, datasets: [{ data: segData, backgroundColor: segColors, borderColor: '#0B0F19', borderWidth: 3 }] },
+                        options: { maintainAspectRatio: false, plugins: { legend: { position: 'right' },
+                            tooltip: { callbacks: { label: c => ` ${c.label}: ${fmtCL(c.raw)} (${(c.raw / 169571846 * 100).toFixed(1)}%)` } } } }
+                    });
+                    new Chart(document.getElementById('chMargen'), {
+                        type: 'bar',
+                        data: { labels: ['Minorista*','B2B externo','Parigó','Bocus interno','Cadaqués'],
+                            datasets: [{ data: [68, 38.7, 19.9, 17.0, 13.3], backgroundColor: [TEAL, GOLD_SOFT, GOLD, VIOLET, BLUE], borderRadius: 6 }] },
+                        options: { maintainAspectRatio: false, plugins: { legend: { display: false },
+                            tooltip: { callbacks: { label: c => ` Margen: ${c.raw}%` } } },
+                            scales: { y: { beginAtZero: true, max: 80, ticks: { callback: v => v + '%' }, grid: { color: GRID } }, x: { grid: { display: false } } } }
+                    });
+                    new Chart(document.getElementById('chDiaria'), {
+                        type: 'line',
+                        data: { labels: dias, datasets: [{ label: 'Venta diaria', data: vDiaria, borderColor: GOLD,
+                            backgroundColor: 'rgba(239, 106, 43,0.08)', fill: true, tension: 0.3, pointRadius: 3, pointBackgroundColor: TEAL, borderWidth: 2.5 }] },
+                        options: { maintainAspectRatio: false, plugins: { legend: { display: false },
+                            tooltip: { callbacks: { label: c => ' ' + fmtCL(c.raw) } } },
+                            scales: { y: { ticks: { callback: fmtM }, grid: { color: GRID } }, x: { grid: { display: false } } } }
+                    });
+                    new Chart(document.getElementById('chSemana'), {
+                        type: 'bar',
+                        data: { labels: ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'],
+                            datasets: [{ data: semanaData, backgroundColor: semanaData.map((v, i) => i === 3 ? GOLD : (i === 6 ? 'rgba(217, 96, 74,0.55)' : 'rgba(149,136,125,0.35)')), borderRadius: 6 }] },
+                        options: { maintainAspectRatio: false, plugins: { legend: { display: false },
+                            tooltip: { callbacks: { label: c => ' ' + fmtCL(c.raw) } } },
+                            scales: { y: { ticks: { callback: fmtM }, grid: { color: GRID } }, x: { grid: { display: false } } } }
+                    });
+                    new Chart(document.getElementById('chPagos'), {
+                        type: 'doughnut',
+                        data: { labels: pagoLabels, datasets: [{ data: pagoData, backgroundColor: pagoColors, borderColor: '#0B0F19', borderWidth: 2 }] },
+                        options: { maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 12, font: { size: 10 } } },
+                            tooltip: { callbacks: { label: c => ` ${c.label}: ${fmtCL(c.raw)}` } } } }
+                    });
+                },
+                'tab-matrix': () => {
+                    const colors = {
+                        'Estrella': { bg: 'rgba(147, 168, 106,0.75)', bd: TEAL },
+                        'Caballo de Batalla': { bg: 'rgba(239, 106, 43,0.75)', bd: GOLD },
+                        'Puzzle': { bg: 'rgba(196, 166, 147,0.75)', bd: VIOLET },
+                        'Perro': { bg: 'rgba(217, 96, 74,0.6)', bd: ROSE },
+                        'Sin costo': { bg: 'rgba(243,244,246,0.25)', bd: ROSE }
+                    };
+                    const rScale = v => 4 + 16 * Math.sqrt(v / 2313450);
+                    const dsets = Object.keys(colors).map(q => ({
+                        label: q,
+                        data: ME.filter(d => d.c === q).map(d => ({ x: d.u, y: d.m, r: rScale(d.v), p: d.p, v: d.v })),
+                        backgroundColor: colors[q].bg, borderColor: colors[q].bd,
+                        borderWidth: q === 'Sin costo' ? 2 : 1.5, borderDash: q === 'Sin costo' ? [4, 3] : []
+                    }));
+                    const quad = { id: 'quad', beforeDatasetsDraw(ch) {
+                        const { ctx, scales: { x, y } } = ch;
+                        const xT = x.getPixelForValue(UMB_POP), yT = y.getPixelForValue(UMB_MG);
+                        ctx.save();
+                        ctx.strokeStyle = 'rgba(239, 106, 43,0.35)'; ctx.setLineDash([7, 5]); ctx.lineWidth = 1.4;
+                        ctx.beginPath(); ctx.moveTo(xT, y.top); ctx.lineTo(xT, y.bottom); ctx.stroke();
+                        ctx.beginPath(); ctx.moveTo(x.left, yT); ctx.lineTo(x.right, yT); ctx.stroke();
+                        ctx.setLineDash([]);
+                        ctx.font = "700 11px 'Outfit', sans-serif";
+                        ctx.fillStyle = 'rgba(147, 168, 106,0.7)'; ctx.fillText('⭐ ESTRELLAS', x.right - 105, y.top + 16);
+                        ctx.fillStyle = 'rgba(196, 166, 147,0.7)'; ctx.fillText('🧩 ENIGMAS', x.left + 8, y.top + 16);
+                        ctx.fillStyle = 'rgba(239, 106, 43,0.7)'; ctx.fillText('🐎 CABALLOS', x.right - 105, y.bottom - 8);
+                        ctx.fillStyle = 'rgba(217, 96, 74,0.7)'; ctx.fillText('🐕 PERROS', x.left + 8, y.bottom - 8);
+                        ctx.restore();
+                    } };
+                    new Chart(document.getElementById('chMenu'), {
+                        type: 'bubble', data: { datasets: dsets }, plugins: [quad],
+                        options: { maintainAspectRatio: false,
+                            plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } },
+                                tooltip: { callbacks: { label: c => { const d = c.raw; return ` ${d.p}: ${d.x} un · margen ${d.y}% · ${fmtCL(d.v)}`; } } } },
+                            scales: {
+                                x: { type: 'logarithmic', title: { display: true, text: 'Popularidad (unidades vendidas, escala log)' },
+                                    ticks: { callback: v => [2, 5, 10, 20, 50, 100, 200].includes(v) ? v : null }, grid: { color: GRID } },
+                                y: { min: 0, max: 105, title: { display: true, text: 'Margen bruto %' },
+                                    ticks: { callback: v => v + '%' }, grid: { color: GRID } }
+                            } }
+                    });
+                },
+                'tab-products': () => {
+                    new Chart(document.getElementById('chAlmuerzos'), {
+                        type: 'bar',
+                        data: { labels: almuerzoLabels, datasets: [{ label: 'Almuerzos/mes', data: almuerzoData,
+                            backgroundColor: almuerzoLabels.map(l => l.includes('Parigó') || l === 'Panadería' || l === 'Barra' || l === 'Mantención' ? 'rgba(239, 106, 43,0.6)' : 'rgba(147, 168, 106,0.55)'), borderRadius: 5 }] },
+                        options: { indexAxis: 'y', maintainAspectRatio: false, plugins: { legend: { display: false } },
+                            scales: { x: { grid: { color: GRID } }, y: { grid: { display: false }, ticks: { font: { size: 10 } } } } }
+                    });
+                }
+            };
+            const chartsDone = {};
+            function initChartsFor(tabId) {
+                if (chartBuilders[tabId] && !chartsDone[tabId]) {
+                    chartsDone[tabId] = true;
+                    chartBuilders[tabId]();
+                }
+            }
+
+            // ----- Sidebar Tabs control -----
+            const navItems = document.querySelectorAll('.nav-item');
+            const tabPanels = document.querySelectorAll('.tab-panel');
+            const dynamicTitle = document.getElementById('dynamic-title');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    item.classList.add('active');
+                    tabPanels.forEach(panel => panel.classList.remove('active'));
+
+                    const tabId = item.getAttribute('data-tab');
+                    const targetPanel = document.getElementById(tabId);
+                    if (targetPanel) {
+                        targetPanel.classList.add('active');
+                    }
+                    initChartsFor(tabId);
+
+                    const btnText = item.querySelector('button').textContent.trim();
+                    dynamicTitle.textContent = btnText;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
