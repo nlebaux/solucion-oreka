@@ -1,2 +1,4 @@
 .DS_Store
 **/.DS_Store
+# artefactos de Google Drive que corrompen refs de git
+Icon?

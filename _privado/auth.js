@@ -1,6 +1,20 @@
 (function () {
-  var STORAGE_KEY = "oreka_private_access_v2";
-  var PASSWORD = "oreka";
+  var STORAGE_KEY = "oreka_private_access_v3";
+  // La clave ya no viaja en texto plano: se compara su SHA-256. Para cambiarla,
+  // reemplazar este hash por el de la clave nueva y volver a publicar:
+  //   python3 -c "import hashlib;print(hashlib.sha256('CLAVE'.encode()).hexdigest())"
+  // Sigue siendo proteccion contra el curioso casual, no seguridad de servidor:
+  // no subir aqui material legal, patrimonial ni de RRHH sensible.
+  var PASSWORD_HASH = "cadc7c0585a09ba2454cf637cd26e63c4ec2123e056495db347976e4ec9a2ba0";
+
+  function sha256Hex(text) {
+    var bytes = new TextEncoder().encode(text);
+    return crypto.subtle.digest("SHA-256", bytes).then(function (buf) {
+      return Array.prototype.map
+        .call(new Uint8Array(buf), function (b) { return b.toString(16).padStart(2, "0"); })
+        .join("");
+    });
+  }
 
   function renderDenied() {
     document.documentElement.innerHTML = `
@@ -84,14 +98,37 @@
     return;
   }
 
+  // Fail-closed: se oculta el contenido mientras se valida y solo se revela
+  // si la clave calza. Si el navegador no soporta crypto.subtle, no se muestra.
+  var ocultar = document.createElement("style");
+  ocultar.id = "oreka-gate-hide";
+  ocultar.textContent = "body{visibility:hidden}";
+  (document.head || document.documentElement).appendChild(ocultar);
+
+  function revelar() {
+    var s = document.getElementById("oreka-gate-hide");
+    if (s && s.parentNode) s.parentNode.removeChild(s);
+  }
+
   var entered = window.prompt("Clave de acceso Oreka");
 
-  if ((entered || "").trim() === PASSWORD) {
-    try {
-      localStorage.setItem(STORAGE_KEY, "granted");
-    } catch (error) {}
+  if (!window.crypto || !crypto.subtle) {
+    renderDenied();
     return;
   }
 
-  renderDenied();
+  sha256Hex((entered || "").trim()).then(function (hex) {
+    if (hex === PASSWORD_HASH) {
+      try {
+        localStorage.setItem(STORAGE_KEY, "granted");
+      } catch (error) {}
+      revelar();
+      return;
+    }
+    revelar();
+    renderDenied();
+  }).catch(function () {
+    revelar();
+    renderDenied();
+  });
 })();
