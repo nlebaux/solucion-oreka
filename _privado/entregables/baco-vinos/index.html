@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guía de Vinos · Baco</title>
+<style>
+:root{
+  --bg:#faf7f4; --card:#ffffff; --ink:#2b2226; --muted:#8a7a80; --line:#e8dfe2;
+  --wine:#8b1f3f; --wine-soft:#f3e2e8; --gold:#b58a3c; --ok:#2e7d4f; --bad:#b3372e;
+  --chip:#f0e8eb; --shadow:0 1px 3px rgba(60,20,35,.08);
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#171114; --card:#221a1e; --ink:#efe6ea; --muted:#a08e96; --line:#3a2d33;
+    --wine:#d46a8a; --wine-soft:#3a2129; --gold:#d4a95e; --ok:#5cba8a; --bad:#e0776e;
+    --chip:#31262b; --shadow:0 1px 3px rgba(0,0,0,.4); }
+}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+a{color:var(--wine);text-decoration:none}
+header{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 14px 8px}
+.brand{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.brand h1{font-size:19px;margin:0;color:var(--wine);letter-spacing:.3px}
+.brand small{color:var(--muted)}
+nav{display:flex;gap:4px;margin-top:8px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+nav a{padding:6px 12px;border-radius:16px;white-space:nowrap;font-size:13.5px;color:var(--ink);background:transparent}
+nav a.on{background:var(--wine);color:#fff}
+main{max-width:980px;margin:0 auto;padding:14px}
+.searchbar{display:flex;gap:8px;margin:2px 0 10px}
+.searchbar input{flex:1;padding:11px 14px;font-size:16px;border:1.5px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);outline:none}
+.searchbar input:focus{border-color:var(--wine)}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.filters select{padding:6px 8px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--ink);font-size:13px}
+.chip{padding:5px 11px;border-radius:14px;background:var(--chip);font-size:12.5px;cursor:pointer;border:1px solid transparent;user-select:none}
+.chip.on{background:var(--wine);color:#fff}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px;box-shadow:var(--shadow)}
+.card.click{cursor:pointer}
+.card.click:hover{border-color:var(--wine)}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.wname{font-weight:650;font-size:15.5px}
+.wsub{color:var(--muted);font-size:13px;margin-top:1px}
+.nota{font-weight:700;font-size:17px;min-width:34px;text-align:center;border-radius:9px;padding:3px 7px}
+.n7,.n6{background:var(--wine);color:#fff}
+.n5{background:var(--wine-soft);color:var(--wine)}
+.n4,.n3{background:var(--chip);color:var(--muted)}
+.n2,.n1,.n0{background:transparent;color:var(--bad);border:1px solid var(--bad)}
+.nx{background:transparent;color:var(--muted);border:1px dashed var(--line)}
+.meta{display:flex;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:12.5px;margin-top:6px}
+.meta b{color:var(--ink);font-weight:600}
+.count{color:var(--muted);font-size:13px;margin:6px 2px 10px}
+h2{font-size:17px;margin:18px 2px 10px;color:var(--wine)}
+h3{font-size:14.5px;margin:14px 2px 8px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;color:var(--muted);font-weight:600;font-size:12px;padding:6px 8px;border-bottom:1px solid var(--line)}
+td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+.tclip{overflow-x:auto}
+.back{display:inline-block;margin-bottom:10px;font-size:13.5px}
+.big{font-size:22px;font-weight:700}
+.statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin:10px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.stat .v{font-size:19px;font-weight:700;color:var(--wine)}
+.stat .l{font-size:11.5px;color:var(--muted);margin-top:2px}
+.spark{margin:4px 0}
+.tag{display:inline-block;background:var(--chip);border-radius:8px;padding:2px 8px;font-size:11.5px;margin:1px 3px 1px 0;color:var(--muted)}
+.tag.warn{background:var(--wine-soft);color:var(--wine)}
+.tag.conf-alta{background:rgba(46,125,79,.14);color:var(--ok)}
+.tag.conf-media{background:var(--chip);color:var(--muted)}
+.tag.conf-baja{background:transparent;color:var(--muted);border:1px dashed var(--line)}
+.tag.conf-disp{background:rgba(179,55,46,.12);color:var(--bad)}
+.barra{display:flex;height:9px;border-radius:5px;overflow:hidden;background:var(--chip);margin:3px 0}
+.barra i{display:block;height:100%}
+.kv{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.kv:last-child{border-bottom:none}
+.nota-cata{border-left:3px solid var(--gold);padding:8px 12px;background:var(--card);border-radius:0 10px 10px 0;margin:8px 0;font-size:13.5px}
+.nota-cata .rol{color:var(--gold);font-weight:650;font-size:12px;text-transform:uppercase;letter-spacing:.4px}
+.delta-up{color:var(--ok);font-weight:650}
+.delta-dn{color:var(--bad);font-weight:650}
+.foot{color:var(--muted);font-size:12px;text-align:center;padding:26px 0 34px}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:640px){.cols2{grid-template-columns:1fr}}
+.empty{color:var(--muted);text-align:center;padding:36px 0}
+.comm{color:var(--muted);font-size:12.5px;font-style:italic}
+.provchange{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:13px}
+.arrow{color:var(--muted)}
+.star{border:none;background:transparent;font-size:19px;color:var(--line);cursor:pointer;line-height:1;padding:2px 5px;flex-shrink:0}
+.star.on{color:var(--gold)}
+.btn{padding:7px 13px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:13px;cursor:pointer}
+.btn:hover{border-color:var(--wine)}
+.btn.ghost{background:transparent}
+.hdrow{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+@media print{
+  header,.back,.star,.no-print{display:none !important}
+  body{background:#fff;color:#000}
+  main{max-width:100%}
+  .card{box-shadow:none;border:1px solid #ccc;break-inside:avoid}
+  a{color:#000}
+}
+.foto{display:block;max-width:100%;max-height:420px;width:auto;margin:10px auto;border-radius:14px;box-shadow:var(--shadow);cursor:zoom-in}
+</style>
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <style id="oreka-gate-hide">body{visibility:hidden}</style>
+  <script src="/privado/auth.js"></script>
+<style id="oreka-private-shell-style">
+  .oreka-private-shell { position: sticky; top: 0; z-index: 999; display: flex; align-items: center;
+    gap: 12px; padding: 10px 16px; background: rgba(14,13,11,0.92); color: #eedacf;
+    border-bottom: 1px solid rgba(231,123,50,0.22); backdrop-filter: blur(10px);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+  .oreka-private-shell a { color: #eedacf; text-decoration: none; font-size: 13px; font-weight: 600; }
+  .oreka-private-shell a:hover { color: #fff; }
+  .oreka-private-shell .divider { width: 1px; height: 14px; background: rgba(238,218,207,0.24); }
+  .oreka-private-shell .title { margin-left: auto; color: rgba(238,218,207,0.82); font-size: 12px;
+    letter-spacing: 0.06em; text-transform: uppercase; }
+</style>
+</head>
+<body>
+<div class="oreka-private-shell">
+  <a href="/privado/">Privado</a>
+  <span class="divider"></span>
+  <a href="/privado/entregables/">Entregables</a>
+  <span class="title">Guia de vinos Baco</span>
+</div>
+
+<header>
+  <div class="brand"><h1>🍷 Guía de Vinos Baco</h1><small id="brandinfo"></small></div>
+  <nav id="nav">
+    <a href="#buscar" data-v="buscar">Buscar</a>
+    <a href="#guia" data-v="guia">Guía</a>
+    <a href="#anadas" data-v="anadas">Añadas</a>
+    <a href="#catas" data-v="catas">Catas</a>
+    <a href="#explorar" data-v="explorar">Explorar</a>
+    <a href="#calibracion" data-v="calibracion">Calibración</a>
+    <a href="#favoritos" data-v="favoritos">Mi lista<span id="favcount"></span></a>
+  </nav>
+</header>
+<main id="main"></main>
+<script src="data.js?v=20260713"></script>
+<script src="normalizacion.js?v=20260725"></script>
+<script src="comentarios-degustacion.js?v=20260730"></script>
+<script src="fotos.js?v=20260714"></script>
+<script>
+/* ============================== modelo ============================== */
+const RAW = window.VINOS_DATA || {registros:[]};
+const NORM = (window.NORMALIZACION || {campos:{}}).campos;
+const NOTAS = window.COMENTARIOS_CATA || {};
+const FOTOS = window.FOTOS_VINOS || {};
+
+// Mínimo de vinos comparables para publicar un índice de añada. Con menos que esto
+// el promedio lo mueve un puñado de botellas: se muestra "—" en vez de un número
+// que no se sostiene (con 8, añadas viejas de 9 vinos encabezaban el ranking).
+const IDX_MIN = 25;
+
+const fold = s => (s||"").normalize("NFKD").replace(/[̀-ͯ]/g,"").toLowerCase();
+const slug = s => fold(s).replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
+const canon = (campo, v) => {
+  if(!v) return "";
+  const m = NORM[campo]||{};
+  return (v in m) ? m[v] : v.trim();
+};
+const fmt$ = v => v==null ? "—" : "$"+Math.round(v).toLocaleString("es-CL");
+const fmtN = v => v==null ? "s/n" : (v%1? v.toFixed(1): String(v));
+const esc = s => (s||"").replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+// Una cata no puede estar fechada en el futuro: si pasa, es typo en la planilla.
+const HOY = new Date().toISOString().slice(0,10);
+const esFutura = f => !!f && f > HOY;
+const tagFutura = f => esFutura(f)? ` <span class="tag warn" title="Fecha posterior a hoy: casi seguro es un error de tipeo en el Excel">fecha futura</span>`:"";
+
+/* ============================== favoritos ============================== */
+const FAV_KEY = "baco-favoritos-v1";
+function getFavs(){ try{ return new Set(JSON.parse(localStorage.getItem(FAV_KEY)||"[]")); }catch(e){ return new Set(); } }
+function setFavs(s){ localStorage.setItem(FAV_KEY, JSON.stringify([...s])); updateFavCount(); }
+let FAVS = getFavs();
+function updateFavCount(){ const el=document.getElementById("favcount"); if(el) el.textContent = FAVS.size? " ("+FAVS.size+")":""; }
+function toggleFav(ckey, ev){
+  if(ev){ ev.stopPropagation(); ev.preventDefault(); }
+  if(FAVS.has(ckey)) FAVS.delete(ckey); else FAVS.add(ckey);
+  setFavs(FAVS);
+  rerenderCurrent();
+}
+
+const REGS = RAW.registros.map(r=>{
+  const vinaC = canon("vina", r.vina);
+  const provC = canon("proveedor", r.proveedor);
+  const valleC = canon("valle", r.valle);
+  const ckey = slug(vinaC)+"~"+slug(r.vino);
+  return {...r, vinaC, provC, valleC, ckey,
+    idx: fold([r.vina,vinaC,r.vino,r.proveedor,provC,r.valle,valleC,r.comentario,r.catNombre,r.ano].join(" "))};
+});
+
+// vinos agrupados
+const WINES = new Map();
+for(const r of REGS){
+  if(!r.ckey || r.ckey==="~") continue;
+  let w = WINES.get(r.ckey);
+  if(!w){ w={ckey:r.ckey, vina:r.vinaC, vino:r.vino, regs:[], cats:new Set()}; WINES.set(r.ckey,w); }
+  w.regs.push(r); w.cats.add(r.catNombre.trim());
+  if(r.vino && r.vino.length > (w.vino||"").length) {} // keep first
+}
+for(const w of WINES.values()){
+  w.regs.sort((a,b)=>(a.fecha||"") < (b.fecha||"") ? -1:1);
+  const notas = w.regs.filter(r=>r.nota!=null);
+  w.n = w.regs.length;
+  w.last = w.regs[w.regs.length-1];
+  w.lastFecha = [...w.regs].reverse().find(r=>r.fecha)?.fecha || null;
+  w.bestNota = notas.length? Math.max(...notas.map(r=>r.nota)) : null;
+  w.lastNota = notas.length? notas[notas.length-1].nota : null;
+  w.lastPvp = [...w.regs].reverse().find(r=>r.pvp!=null)?.pvp ?? null;
+  w.anos = [...new Set(w.regs.map(r=>r.ano).filter(Boolean))].sort();
+}
+const WLIST = [...WINES.values()];
+
+// viñas
+const VINAS = new Map();
+for(const r of REGS){
+  if(!r.vinaC) continue;
+  let v = VINAS.get(r.vinaC);
+  if(!v){ v={nombre:r.vinaC, regs:[], wines:new Set(), provs:new Set(), valles:new Set()}; VINAS.set(r.vinaC,v); }
+  v.regs.push(r); v.wines.add(r.ckey);
+  if(r.provC) v.provs.add(r.provC);
+  if(r.valleC) v.valles.add(r.valleC);
+}
+for(const v of VINAS.values()){
+  const notas = v.regs.filter(r=>r.nota!=null);
+  v.n=v.regs.length; v.avg = notas.length? notas.reduce((s,r)=>s+r.nota,0)/notas.length : null;
+  v.nNotas = notas.length;
+  v.lastFecha = v.regs.map(r=>r.fecha).filter(Boolean).sort().pop()||null;
+  // proveedor dominante por año + cambios
+  const byYear = {};
+  for(const r of v.regs){ if(!r.fecha||!r.provC) continue;
+    const y=r.fecha.slice(0,4); (byYear[y]=byYear[y]||{})[r.provC]=(byYear[y][r.provC]||0)+1; }
+  v.provTimeline = Object.keys(byYear).sort().map(y=>{
+    const e=Object.entries(byYear[y]).sort((a,b)=>b[1]-a[1]); return {y, prov:e[0][0]}; });
+  v.provChanges = [];
+  for(let i=1;i<v.provTimeline.length;i++){
+    const a=v.provTimeline[i-1], b=v.provTimeline[i];
+    if(a.prov!==b.prov) v.provChanges.push({de:a.prov, a:b.prov, y:b.y});
+  }
+  // nota promedio por año (para evolución)
+  const ny={};
+  for(const r of notas){ if(!r.fecha) continue; const y=+r.fecha.slice(0,4);
+    (ny[y]=ny[y]||[]).push(r.nota); }
+  v.notaPorAno = Object.keys(ny).sort().map(y=>({y:+y, avg: ny[y].reduce((s,x)=>s+x,0)/ny[y].length, n:ny[y].length}));
+}
+
+// proveedores
+const PROVS = new Map();
+for(const r of REGS){
+  if(!r.provC) continue;
+  let p = PROVS.get(r.provC);
+  if(!p){ p={nombre:r.provC, regs:[], vinas:new Set(), wines:new Set()}; PROVS.set(r.provC,p); }
+  p.regs.push(r); if(r.vinaC) p.vinas.add(r.vinaC); p.wines.add(r.ckey);
+}
+for(const p of PROVS.values()){
+  const notas=p.regs.filter(r=>r.nota!=null);
+  p.n=p.regs.length; p.avg=notas.length? notas.reduce((s,r)=>s+r.nota,0)/notas.length:null;
+  p.lastFecha = p.regs.map(r=>r.fecha).filter(Boolean).sort().pop()||null;
+}
+
+// comentarios de cata indexados por ckey aproximado
+const NOTAS_BY_KEY = {};
+for(const [fecha, blk] of Object.entries(NOTAS)){
+  for(const it of (blk.items||[])){
+    (NOTAS_BY_KEY[it.key] = NOTAS_BY_KEY[it.key]||[]).push({...it, fecha, fuente:blk.fuente});
+  }
+}
+function notasDe(w){
+  // las keys de notas vienen del key viejo (slug viña+vino crudos)
+  const out=[];
+  const keys = new Set(w.regs.map(r=>r.key));
+  keys.add(w.ckey.replace("~","-"));
+  for(const k of keys) if(NOTAS_BY_KEY[k]) out.push(...NOTAS_BY_KEY[k]);
+  return out;
+}
+
+const CATS = [...new Set(REGS.map(r=>r.catNombre.trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'es'));
+
+// cepas (categorías) agregadas por vino
+const CEPAS = new Map();
+for(const w of WLIST){
+  for(const c of w.cats){
+    if(!c) continue;
+    let e = CEPAS.get(c);
+    if(!e){ e={nombre:c, wines:new Set()}; CEPAS.set(c,e); }
+    e.wines.add(w.ckey);
+  }
+}
+for(const e of CEPAS.values()){
+  const ws = [...e.wines].map(k=>WINES.get(k)).filter(Boolean);
+  const notas = ws.map(w=>w.bestNota).filter(n=>n!=null);
+  const pvps = ws.map(w=>w.lastPvp).filter(p=>p!=null);
+  e.n = ws.length;
+  e.avgNota = notas.length? notas.reduce((s,x)=>s+x,0)/notas.length : null;
+  e.avgPvp = pvps.length? pvps.reduce((s,x)=>s+x,0)/pvps.length : null;
+}
+
+/* ---------- añadas (vintages) ----------
+   Dos métricas distintas y no intercambiables:
+   - avg: promedio simple de las notas de esa añada. Está contaminado por QUÉ vinos
+     se cataron ese año (si un año se probaron más vinos baratos, baja sin que la
+     añada sea peor).
+   - idx: promedio de (nota de la añada − promedio del MISMO vino en sus otras
+     añadas). Solo usa vinos con 2+ añadas calificadas, así que compara cada vino
+     contra sí mismo y elimina casi todo el sesgo de selección. Es el número serio. */
+const cellA = new Map();
+for(const r of REGS){
+  if(r.ano==null || r.nota==null || !r.ckey || r.ckey==="~") continue;
+  const k = r.ckey+"|"+r.ano;
+  if(!cellA.has(k)) cellA.set(k, []);
+  cellA.get(k).push(r.nota);
+}
+const wineVintages = new Map();
+for(const [k, arr] of cellA){
+  const i = k.lastIndexOf("|");
+  const ckey = k.slice(0,i), ano = +k.slice(i+1);
+  if(!wineVintages.has(ckey)) wineVintages.set(ckey, new Map());
+  wineVintages.get(ckey).set(ano, arr.reduce((s,x)=>s+x,0)/arr.length);
+}
+const ANADAS = new Map();
+const anadaOf = a => { if(!ANADAS.has(a)) ANADAS.set(a,{ano:a, regs:[], notas:[], deltas:[], wines:new Set(), vinas:new Set()}); return ANADAS.get(a); };
+for(const r of REGS){
+  if(r.ano==null) continue;
+  const e = anadaOf(r.ano);
+  e.regs.push(r);
+  if(r.ckey && r.ckey!=="~") e.wines.add(r.ckey);
+  if(r.vinaC) e.vinas.add(r.vinaC);
+  if(r.nota!=null) e.notas.push(r.nota);
+}
+for(const [ckey, mp] of wineVintages){
+  if(mp.size<2) continue;
+  const base = [...mp.values()].reduce((s,x)=>s+x,0)/mp.size;
+  for(const [a,v] of mp) anadaOf(a).deltas.push({d:v-base, ckey});
+}
+for(const e of ANADAS.values()){
+  e.n = e.regs.length;
+  e.nNotas = e.notas.length;
+  e.avg = e.notas.length? e.notas.reduce((s,x)=>s+x,0)/e.notas.length : null;
+  e.nIdx = e.deltas.length;
+  e.idx = e.deltas.length>=IDX_MIN? e.deltas.reduce((s,x)=>s+x.d,0)/e.deltas.length : null;
+}
+const ANADAS_LIST = [...ANADAS.values()].filter(e=>e.ano>=1990 && e.ano<=2030).sort((a,b)=>b.ano-a.ano);
+
+/* ---------- sesiones de cata ---------- */
+const CATAS = new Map();
+for(const r of REGS){
+  if(!r.fecha) continue;
+  if(!CATAS.has(r.fecha)) CATAS.set(r.fecha, {fecha:r.fecha, regs:[], cats:new Set(), provs:new Set()});
+  const s = CATAS.get(r.fecha);
+  s.regs.push(r);
+  const c=(r.catNombre||"").trim(); if(c) s.cats.add(c);
+  if(r.provC) s.provs.add(r.provC);
+}
+for(const s of CATAS.values()){
+  const notas = s.regs.filter(r=>r.nota!=null);
+  s.n = s.regs.length;
+  s.nNotas = notas.length;
+  s.avg = notas.length? notas.reduce((a,r)=>a+r.nota,0)/notas.length : null;
+  s.best = notas.length? notas.reduce((b,r)=> r.nota>(b?b.nota:-1)? r:b, null) : null;
+}
+const CATAS_LIST = [...CATAS.values()].sort((a,b)=> a.fecha<b.fecha? 1:-1);
+
+/* ---------- valles ---------- */
+const VALLES = new Map();
+for(const r of REGS){
+  if(!r.valleC) continue;
+  if(!VALLES.has(r.valleC)) VALLES.set(r.valleC, {nombre:r.valleC, regs:[], wines:new Set(), vinas:new Set(), cats:new Map()});
+  const e = VALLES.get(r.valleC);
+  e.regs.push(r);
+  if(r.ckey && r.ckey!=="~") e.wines.add(r.ckey);
+  if(r.vinaC) e.vinas.add(r.vinaC);
+  const c=(r.catNombre||"").trim(); if(c) e.cats.set(c,(e.cats.get(c)||0)+1);
+}
+for(const e of VALLES.values()){
+  const notas = e.regs.filter(r=>r.nota!=null);
+  e.n = e.regs.length;
+  e.avg = notas.length? notas.reduce((s,r)=>s+r.nota,0)/notas.length : null;
+  e.lastFecha = e.regs.map(r=>r.fecha).filter(Boolean).sort().pop()||null;
+}
+const VALLES_LIST = [...VALLES.values()].sort((a,b)=>b.n-a.n);
+
+/* ---------- calibracion: que tan confiable es una nota ----------
+   Se mide sobre la base misma: cuando el mismo vino y la misma añada se cataron
+   en fechas distintas, cuanto difirieron las notas. Ese es el error de medicion
+   de una nota suelta. Se calcula UNA vez aca y lo usan tanto la ficha del vino
+   como la vista Calibracion, para que no exista mas de un numero para lo mismo. */
+const PARES_RETEST = (()=>{
+  const celda = new Map();
+  for(const r of REGS){
+    if(r.nota==null || !r.fecha || r.ano==null || !r.ckey || r.ckey==="~") continue;
+    const k = r.ckey+"|"+r.ano;
+    if(!celda.has(k)) celda.set(k, []);
+    celda.get(k).push(r);
+  }
+  const difs = [];
+  for(const obs of celda.values()){
+    if(obs.length<2) continue;
+    const o = [...obs].sort((a,b)=> a.fecha<b.fecha? -1:1);
+    for(let i=0;i<o.length-1;i++) if(o[i].fecha!==o[i+1].fecha) difs.push(Math.abs(o[i].nota-o[i+1].nota));
+  }
+  return difs;
+})();
+const RUIDO_NOTA = PARES_RETEST.length? PARES_RETEST.reduce((a,b)=>a+b,0)/PARES_RETEST.length : null;
+
+// Dureza de cada sesion: cuanto se desvio ese dia respecto de como se califico
+// normalmente a ESOS MISMOS vinos en el resto de su historia. Negativo = sesion dura.
+const notaMediaVino = new Map();
+for(const w of WLIST){
+  const ns = w.regs.filter(r=>r.nota!=null).map(r=>r.nota);
+  if(ns.length>=2) notaMediaVino.set(w.ckey, ns.reduce((s,x)=>s+x,0)/ns.length);
+}
+const DUREZA_MIN = 8; // sesiones con menos vinos comparables no se corrigen
+for(const s of CATAS.values()){
+  const ds = [];
+  for(const r of s.regs){
+    if(r.nota==null) continue;
+    const m = notaMediaVino.get(r.ckey);
+    if(m!=null) ds.push(r.nota-m);
+  }
+  s.nComparables = ds.length;
+  s.dureza = ds.length>=DUREZA_MIN? ds.reduce((a,b)=>a+b,0)/ds.length : null;
+}
+// nota corregida por la dureza del dia en que se cató
+function notaAjustada(r){
+  const s = r.fecha? CATAS.get(r.fecha) : null;
+  if(!s || s.dureza==null || r.nota==null) return null;
+  const v = r.nota - s.dureza;
+  return Math.max(0, Math.min(7, v));
+}
+// Confianza de un vino: cuantas catas lo respaldan y cuanto discrepan entre si
+function confianza(w){
+  const ns = w.regs.filter(r=>r.nota!=null).map(r=>r.nota);
+  if(!ns.length) return {nivel:"ninguna", n:0, rango:null, txt:"sin nota"};
+  if(ns.length===1) return {nivel:"baja", n:1, rango:null,
+    txt:"una sola cata: el margen de error de una nota suelta es de ±1 punto"};
+  const min=Math.min(...ns), max=Math.max(...ns), rango=max-min;
+  const nivel = (ns.length>=3 && rango<=1)? "alta" : (rango>=3? "dispersa" : "media");
+  const txt = nivel==="alta"? `${ns.length} catas coincidentes (${min}–${max})`
+    : nivel==="dispersa"? `${ns.length} catas muy dispares (${min}–${max}): el vino o el criterio cambió`
+    : `${ns.length} catas (${min}–${max})`;
+  return {nivel, n:ns.length, rango, txt};
+}
+function chipConfianza(w){
+  const c = confianza(w);
+  if(c.n===0) return "";
+  const cls = c.nivel==="alta"? "conf-alta" : c.nivel==="baja"? "conf-baja" : c.nivel==="dispersa"? "conf-disp":"conf-media";
+  const lbl = c.nivel==="alta"? "sólida" : c.nivel==="baja"? "1 cata" : c.nivel==="dispersa"? "dispar":"media";
+  return `<span class="tag ${cls}" title="${esc(c.txt)}">${lbl}</span>`;
+}
+
+/* ============================== helpers UI ============================== */
+function notaChip(n){
+  if(n==null) return `<span class="nota nx">–</span>`;
+  const c = "n"+Math.max(0,Math.min(7,Math.floor(n)));
+  return `<span class="nota ${c}">${fmtN(n)}</span>`;
+}
+function spark(points, w=180, h=36, min=null, max=null){
+  const vals=points.map(p=>p.v);
+  if(vals.length<2) return "";
+  min = min==null? Math.min(...vals): min; max = max==null? Math.max(...vals): max;
+  if(max-min<0.001){max=min+1}
+  const xs = points.map((p,i)=> 4+(w-8)*i/(points.length-1));
+  const ys = vals.map(v=> h-5-(h-10)*(v-min)/(max-min));
+  const pts = xs.map((x,i)=>`${x.toFixed(1)},${ys[i].toFixed(1)}`).join(" ");
+  const dots = xs.map((x,i)=>`<circle cx="${x.toFixed(1)}" cy="${ys[i].toFixed(1)}" r="2.4" fill="var(--wine)"/>`).join("");
+  return `<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
+    <polyline points="${pts}" fill="none" stroke="var(--wine)" stroke-width="1.8" opacity=".75"/>${dots}</svg>`;
+}
+function lineChart(points, w=640, h=170, labelFn=p=>p.y){
+  if(points.length<2) return `<div class="comm">Pocos datos para graficar.</div>`;
+  const vals=points.map(p=>p.v);
+  let min=Math.min(...vals), max=Math.max(...vals);
+  if(max-min<0.5){min=Math.max(0,min-0.5);max=max+0.5}
+  const X=i=> 34+(w-44)*i/(points.length-1);
+  const Y=v=> h-24-(h-42)*(v-min)/(max-min);
+  const pts=points.map((p,i)=>`${X(i).toFixed(1)},${Y(p.v).toFixed(1)}`).join(" ");
+  const dots=points.map((p,i)=>`<circle cx="${X(i)}" cy="${Y(p.v)}" r="3" fill="var(--wine)"><title>${labelFn(p)}: ${p.v.toFixed(2)}</title></circle>`).join("");
+  const labs=points.map((p,i)=> (points.length<=12 || i%Math.ceil(points.length/12)===0)?
+    `<text x="${X(i)}" y="${h-8}" font-size="10" fill="var(--muted)" text-anchor="middle">${labelFn(p)}</text>`:"").join("");
+  const gy=[min,(min+max)/2,max].map(v=>`<text x="4" y="${Y(v)+3}" font-size="10" fill="var(--muted)">${v.toFixed(1)}</text>
+     <line x1="30" x2="${w-6}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)" stroke-width="1"/>`).join("");
+  return `<div class="tclip"><svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" style="max-width:100%">
+    ${gy}<polyline points="${pts}" fill="none" stroke="var(--wine)" stroke-width="2"/>${dots}${labs}</svg></div>`;
+}
+function scatterChart(points, w=680, h=280){
+  if(points.length<2) return `<div class="comm">Pocos datos para graficar.</div>`;
+  const xs=points.map(p=>p.x);
+  const minX=Math.min(...xs), maxX=Math.max(...xs);
+  const minY=0, maxY=7;
+  const X=x=> 40+(w-52)*(x-minX)/(maxX-minX||1);
+  const Y=y=> h-26-(h-38)*(y-minY)/(maxY-minY);
+  const dots = points.map(p=>`<circle cx="${X(p.x).toFixed(1)}" cy="${Y(p.y).toFixed(1)}" r="3.5" fill="var(--wine)" opacity=".65" style="cursor:pointer" onclick="location.hash='#vino/${p.ckey}'"><title>${esc(p.label)}: ${fmt$(p.x)} · nota ${p.y}</title></circle>`).join("");
+  const gy=[4,5,6,7].map(v=>`<text x="4" y="${Y(v)+3}" font-size="10" fill="var(--muted)">${v}</text>
+     <line x1="34" x2="${w-8}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)" stroke-width="1"/>`).join("");
+  const gx=[minX,(minX+maxX)/2,maxX].map(v=>`<text x="${X(v).toFixed(1)}" y="${h-8}" font-size="10" fill="var(--muted)" text-anchor="middle">${fmt$(v)}</text>`).join("");
+  return `<div class="tclip"><svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" style="max-width:100%">
+    ${gy}${dots}${gx}</svg></div>`;
+}
+function similares(w){
+  const cats = w.cats, price = w.lastPvp;
+  let cands = WLIST.filter(o=> o.ckey!==w.ckey && [...o.cats].some(c=>cats.has(c)));
+  if(price!=null){
+    const lo=price*0.6, hi=price*1.6;
+    const inRange = cands.filter(o=> o.lastPvp!=null && o.lastPvp>=lo && o.lastPvp<=hi);
+    if(inRange.length>=3) cands = inRange;
+  }
+  return cands.sort((a,b)=>(b.bestNota??-1)-(a.bestNota??-1) || b.n-a.n).slice(0,6);
+}
+function wineCard(w){
+  const notaTag = notasDe(w).length? `<span class="tag warn">📝 nota de cata</span>`:"";
+  const foto = FOTOS[w.ckey]? `<span class="tag">📷 foto</span>`:"";
+  const isFav = FAVS.has(w.ckey);
+  // El número grande es la ÚLTIMA nota (cómo está el vino hoy), no la mejor
+  // histórica: un vino que sacó 6 en 2015 y 3 el año pasado no es un 6.
+  const caida = maxHist(w);
+  return `<div class="card click" tabindex="0" role="link" onclick="location.hash='#vino/${w.ckey}'" onkeydown="if(event.key==='Enter')location.hash='#vino/${w.ckey}'">
+    <div class="row"><div>
+      <div class="wname">${w.vina? esc(w.vina)+" · ":""}${esc(w.vino)||"(sin nombre)"}</div>
+      <div class="wsub">${[...w.cats].map(c=>`<a href="#cepa/${encodeURIComponent(c)}" onclick="event.stopPropagation()">${esc(c)}</a>`).join(", ")}${w.anos.length? " · añadas "+w.anos.join(", "):""}</div>
+    </div><div style="display:flex;align-items:center;gap:2px">
+      <button class="star ${isFav?'on':''}" onclick="toggleFav('${w.ckey}',event)" aria-label="Guardar en mi lista" title="Guardar en mi lista">${isFav?"★":"☆"}</button>
+      ${notaChip(w.lastNota)}
+    </div></div>
+    <div class="meta">
+      <span><b>${w.n}</b> cata${w.n>1?"s":""}</span>
+      ${chipConfianza(w)}
+      ${w.lastFecha? `<span>última <b>${w.lastFecha}</b></span>`:""}
+      ${caida? `<span class="tag warn" title="La mejor nota histórica es mayor que la última">máx ${fmtN(w.bestNota)}</span>`:""}
+      ${w.lastPvp!=null? `<span>PVP <b>${fmt$(w.lastPvp)}</b></span>`:""}
+      ${w.last.provC? `<span>prov. <b>${esc(w.last.provC)}</b></span>`:""}
+      ${notaTag}${foto}
+    </div></div>`;
+}
+// true cuando el vino tuvo mejores días: hay más de una nota y la mejor supera a la última
+function maxHist(w){
+  const notas = w.regs.filter(r=>r.nota!=null);
+  return notas.length>1 && w.bestNota!=null && w.lastNota!=null && w.bestNota>w.lastNota;
+}
+
+/* ============================== vistas ============================== */
+const $m = document.getElementById("main");
+const state = {q:"", cat:"", notaMin:"", orden:"recientes", precio:"", valle:""};
+let SHOWN = 120;
+let LAST_RESULTS = [];
+function stateToHash(){
+  const p = new URLSearchParams();
+  if(state.q) p.set("q", state.q);
+  if(state.cat) p.set("cat", state.cat);
+  if(state.notaMin) p.set("nota", state.notaMin);
+  if(state.orden!=="recientes") p.set("orden", state.orden);
+  if(state.precio) p.set("precio", state.precio);
+  if(state.valle) p.set("valle", state.valle);
+  const s = p.toString();
+  return "#buscar"+(s? "?"+s : "");
+}
+// CSV con ; y BOM para que Excel en español lo abra en columnas y respete los acentos
+function exportCSV(list){
+  const head = ["Viña","Vino","Cepas","Añadas","Catas","Última nota","Mejor histórica","Última cata","Último PVP","Proveedor","Valle"];
+  const rows = list.map(w=>[w.vina, w.vino, [...w.cats].join(" / "), w.anos.join(" "), w.n,
+    w.lastNota??"", w.bestNota??"", w.lastFecha??"", w.lastPvp??"", w.last.provC??"", w.last.valleC??""]);
+  const csv = [head,...rows].map(r=>r.map(c=>{
+    const s = String(c??"");
+    return /[",;\n]/.test(s)? '"'+s.replace(/"/g,'""')+'"' : s;
+  }).join(";")).join("\r\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob(["﻿"+csv], {type:"text/csv;charset=utf-8"}));
+  a.download = `vinos-baco-${RAW.generado||"export"}.csv`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+// distancia de edición acotada, solo para sugerir nombres cuando no hay resultados
+function editDist(a,b){
+  if(Math.abs(a.length-b.length)>4) return 99;
+  const m=a.length,n=b.length; let prev=[...Array(n+1).keys()], cur=new Array(n+1);
+  for(let i=1;i<=m;i++){ cur[0]=i;
+    for(let j=1;j<=n;j++) cur[j]=Math.min(prev[j]+1, cur[j-1]+1, prev[j-1]+(a[i-1]===b[j-1]?0:1));
+    [prev,cur]=[cur,prev];
+  }
+  return prev[n];
+}
+function sugerencias(q){
+  const t = fold(q).trim();
+  if(t.length<3) return [];
+  const cand = [];
+  for(const v of VINAS.keys()){
+    const f = fold(v);
+    if(f.includes(t) || t.includes(f)) { cand.push({n:v, d:0}); continue; }
+    const d = editDist(t, f);
+    if(d<=Math.max(2, Math.floor(t.length/3))) cand.push({n:v, d});
+  }
+  return cand.sort((a,b)=>a.d-b.d).slice(0,6);
+}
+function syncHash(){
+  const h = stateToHash();
+  if("#"+location.hash.slice(1) !== h) history.replaceState(null,"",h);
+}
+
+function vBuscar(){
+  SHOWN = 120;
+  const opts = CATS.map(c=>`<option ${state.cat===c?"selected":""}>${esc(c)}</option>`).join("");
+  // solo valles con volumen real: el resto son variantes sueltas que ensucian el selector
+  const valleOpts = VALLES_LIST.filter(v=>v.n>=10).sort((a,b)=>a.nombre.localeCompare(b.nombre,'es'))
+    .map(v=>`<option ${state.valle===v.nombre?"selected":""}>${esc(v.nombre)}</option>`).join("");
+  $m.innerHTML = `
+  <div class="searchbar"><input id="q" placeholder="Buscar vino, viña, proveedor, valle…" value="${esc(state.q)}" autocomplete="off"></div>
+  <div class="filters">
+    <select id="fcat"><option value="">Todas las cepas</option>${opts}</select>
+    <select id="fnota"><option value="">Cualquier nota</option>
+      <option value="6" ${state.notaMin==="6"?"selected":""}>Nota ≥ 6</option>
+      <option value="5" ${state.notaMin==="5"?"selected":""}>Nota ≥ 5</option>
+      <option value="4" ${state.notaMin==="4"?"selected":""}>Nota ≥ 4</option></select>
+    <select id="fprecio"><option value="">Cualquier precio</option>
+      <option value="10000" ${state.precio==="10000"?"selected":""}>Hasta $10.000</option>
+      <option value="15000" ${state.precio==="15000"?"selected":""}>Hasta $15.000</option>
+      <option value="25000" ${state.precio==="25000"?"selected":""}>Hasta $25.000</option>
+      <option value="25001" ${state.precio==="25001"?"selected":""}>Sobre $25.000</option></select>
+    <select id="fvalle"><option value="">Todos los valles</option>${valleOpts}</select>
+    <select id="forden">
+      <option value="recientes" ${state.orden==="recientes"?"selected":""}>Recientes</option>
+      <option value="nota" ${state.orden==="nota"?"selected":""}>Mejor nota actual</option>
+      <option value="notamax" ${state.orden==="notamax"?"selected":""}>Mejor nota histórica</option>
+      <option value="catas" ${state.orden==="catas"?"selected":""}>Más probados</option>
+      <option value="precio" ${state.orden==="precio"?"selected":""}>Menor precio</option>
+      <option value="az" ${state.orden==="az"?"selected":""}>A–Z</option></select>
+    <button class="btn" id="btnCsv" title="Descargar los resultados actuales en CSV">⤓ CSV</button>
+  </div>
+  <div class="count" id="rescount"></div><div id="results"></div>`;
+  const q=document.getElementById("q");
+  q.addEventListener("input", ()=>{state.q=q.value; SHOWN=120; renderResults();});
+  for(const [id,key] of [["fcat","cat"],["fnota","notaMin"],["forden","orden"],["fprecio","precio"],["fvalle","valle"]]){
+    const el=document.getElementById(id);
+    el.addEventListener("change", ()=>{state[key]=el.value; SHOWN=120; renderResults();});
+  }
+  document.getElementById("btnCsv").addEventListener("click", ()=>exportCSV(LAST_RESULTS));
+  renderResults();
+  if(!("ontouchstart" in window)) q.focus();
+}
+function renderResults(){
+  const terms = fold(state.q).split(/\s+/).filter(Boolean);
+  let list = WLIST.filter(w=>{
+    if(state.cat && ![...w.cats].includes(state.cat)) return false;
+    // el filtro usa la última nota, que es la que muestra la tarjeta
+    if(state.notaMin && !(w.lastNota>=+state.notaMin)) return false;
+    if(state.valle && !w.regs.some(r=>r.valleC===state.valle)) return false;
+    if(state.precio==="25001"){ if(!(w.lastPvp>25000)) return false; }
+    else if(state.precio){ if(!(w.lastPvp!=null && w.lastPvp<=+state.precio)) return false; }
+    if(terms.length){
+      const hay = w.regs.some(r=> terms.every(t=> r.idx.includes(t)));
+      if(!hay) return false;
+    }
+    return true;
+  });
+  const ord = state.orden;
+  list.sort((a,b)=>{
+    if(ord==="nota") return (b.lastNota??-1)-(a.lastNota??-1) || b.n-a.n;
+    if(ord==="notamax") return (b.bestNota??-1)-(a.bestNota??-1) || b.n-a.n;
+    if(ord==="catas") return b.n-a.n;
+    if(ord==="precio") return (a.lastPvp??1e12)-(b.lastPvp??1e12);
+    if(ord==="az") return a.vina.localeCompare(b.vina,'es')||a.vino.localeCompare(b.vino,'es');
+    return (b.lastFecha||"") < (a.lastFecha||"") ? -1:1;
+  });
+  LAST_RESULTS = list;
+  const filtros = [state.cat, state.notaMin, state.precio, state.valle].filter(Boolean).length;
+  document.getElementById("rescount").innerHTML =
+    `${list.length.toLocaleString("es-CL")} vinos · ${REGS.length.toLocaleString("es-CL")} degustaciones registradas`
+    + (filtros? ` · <a href="#buscar${state.q? "?q="+encodeURIComponent(state.q):""}">limpiar filtros</a>`:"");
+  const frag = list.slice(0,SHOWN).map(wineCard).join("");
+  let html = frag;
+  if(!frag){
+    const sug = sugerencias(state.q);
+    html = `<div class="empty">Sin resultados${filtros? " con estos filtros":""}.
+      ${filtros? `<div style="margin-top:8px"><a href="#buscar${state.q? "?q="+encodeURIComponent(state.q):""}">Buscar sin filtros</a></div>`:""}
+      ${sug.length? `<div style="margin-top:12px">¿Buscabas alguna de estas viñas?<div style="margin-top:6px">
+        ${sug.map(s=>`<a class="tag" href="#vina/${encodeURIComponent(s.n)}">${esc(s.n)}</a>`).join(" ")}</div></div>`:""}
+    </div>`;
+  }
+  if(list.length>SHOWN){
+    html += `<div style="text-align:center;margin:14px 0"><button class="btn" id="btnMas">Mostrar más (${(list.length-SHOWN).toLocaleString("es-CL")} restantes)</button></div>`;
+  }
+  document.getElementById("results").innerHTML = html;
+  const bm = document.getElementById("btnMas");
+  if(bm) bm.addEventListener("click", ()=>{ SHOWN+=120; renderResults(); });
+  syncHash();
+}
+
+function vVino(ckey){
+  const w = WINES.get(ckey);
+  if(!w){ $m.innerHTML=`<a class="back" href="#buscar">← volver a la búsqueda</a><div class="empty">Vino no encontrado.</div>`; return; }
+  const notas = w.regs.filter(r=>r.nota!=null && r.fecha);
+  const serieNota = notas.map(r=>({v:r.nota, y:r.fecha.slice(0,4)}));
+  const precios = w.regs.filter(r=>r.pvp!=null && r.fecha).map(r=>({v:r.pvp, y:r.fecha.slice(0,4)}));
+  const notas = notasDe(w);
+  const rows = [...w.regs].reverse().map(r=>`<tr>
+    <td>${r.fecha? `<a href="#cata/${r.fecha}">${r.fecha}</a>`+tagFutura(r.fecha):"—"}</td>
+    <td>${r.ano? `<a href="#anada/${r.ano}">${r.ano}</a>`:"—"}</td>
+    <td>${notaChip(r.nota)}${r.notaRaw?` <span class="tag warn">dato raro: ${esc(r.notaRaw)}</span>`:""}</td>
+    <td>${(()=>{const a=notaAjustada(r); if(a==null) return '<span class="comm">—</span>';
+      const dif=a-r.nota;
+      return `${a.toFixed(1)}${Math.abs(dif)>=0.15? ` <span class="comm">(${dif>0?"+":""}${dif.toFixed(1)})</span>`:""}`;})()}</td>
+    <td>${fmt$(r.pvp)}</td>
+    <td>${r.provC? `<a href="#proveedor/${encodeURIComponent(r.provC)}">${esc(r.provC)}</a>`:"—"}</td>
+    <td>${r.valleC? `<a href="#valle/${encodeURIComponent(r.valleC)}">${esc(r.valleC)}</a>`:"—"}</td>
+    <td class="comm">${esc(r.comentario)}</td></tr>`).join("");
+  const anosT = w.anos.length>1 ? (()=> {
+    const byAno={};
+    for(const r of w.regs){ if(!r.ano) continue; const a=byAno[r.ano]=byAno[r.ano]||{notas:[],pvp:null};
+      if(r.nota!=null)a.notas.push(r.nota); if(r.pvp!=null)a.pvp=r.pvp; }
+    const conNota = Object.values(byAno).filter(a=>a.notas.length);
+    const base = conNota.length>1
+      ? conNota.reduce((s,a)=> s + a.notas.reduce((x,y)=>x+y,0)/a.notas.length, 0)/conNota.length
+      : null;
+    return `<h3>Comparación de añadas de este vino</h3>
+    ${base!=null? `<div class="comm" style="margin-bottom:6px">"Vs. su promedio" compara cada añada contra el promedio de este mismo vino (${base.toFixed(2)}).</div>`:""}
+    <div class="card tclip"><table>
+      <tr><th>Añada</th><th>Promedio</th><th>Mejor</th><th>Catas</th><th>Último PVP</th>${base!=null?"<th>Vs. su promedio</th>":""}</tr>
+      ${Object.keys(byAno).sort().map(a=>{
+        const e=byAno[a];
+        const prom = e.notas.length? e.notas.reduce((x,y)=>x+y,0)/e.notas.length : null;
+        const d = (base!=null && prom!=null)? prom-base : null;
+        return `<tr><td><a href="#anada/${a}"><b>${a}</b></a></td>
+        <td>${prom!=null? prom.toFixed(2):"—"}</td>
+        <td>${notaChip(e.notas.length?Math.max(...e.notas):null)}</td>
+        <td>${e.notas.length||"—"}</td><td>${fmt$(e.pvp)}</td>
+        ${base!=null? `<td>${d==null?"—":`<span class="${d>0.05?"delta-up":d<-0.05?"delta-dn":""}">${d>0?"+":""}${d.toFixed(2)}</span>`}</td>`:""}</tr>`;}).join("")}
+    </table></div>`;})() : "";
+  const isFav = FAVS.has(w.ckey);
+  const sim = similares(w);
+  const wValles = [...new Set(w.regs.map(r=>r.valleC).filter(Boolean))];
+  const conf = confianza(w);
+  $m.innerHTML = `
+  <a class="back" href="${stateToHash()}">← volver a la búsqueda</a>
+  <div class="row"><div>
+    <div class="big">${esc(w.vino)}</div>
+    <div class="wsub">${w.vina? `<a href="#vina/${encodeURIComponent(w.vina)}">${esc(w.vina)}</a> · `:""}${[...w.cats].map(c=>`<a href="#cepa/${encodeURIComponent(c)}">${esc(c)}</a>`).join(", ")}${
+      wValles.length? " · "+wValles.map(v=>`<a href="#valle/${encodeURIComponent(v)}">${esc(v)}</a>`).join(", "):""}</div>
+  </div><div style="display:flex;align-items:center;gap:2px">
+    <button class="btn no-print" onclick="window.print()" title="Imprimir ficha">🖨️</button>
+    <button class="star ${isFav?'on':''}" onclick="toggleFav('${w.ckey}',event)" aria-label="Guardar en mi lista" title="Guardar en mi lista">${isFav?"★":"☆"}</button>
+    ${notaChip(w.lastNota)}
+  </div></div>
+  <div class="comm" style="margin:-2px 0 6px">El número grande es la última nota${w.lastFecha? " ("+w.lastFecha+")":""}${maxHist(w)? `, no la mejor histórica (${fmtN(w.bestNota)}).`:"."}</div>
+  <div class="card" style="border-left:3px solid ${conf.nivel==="alta"?"var(--ok)":conf.nivel==="dispersa"?"var(--bad)":"var(--line)"}">
+    <b>Cuánto confiar en este número.</b> ${esc(conf.txt)}.
+    ${conf.n===1 && RUIDO_NOTA!=null && w.lastNota!=null? ` En esta base, dos catas del mismo vino y añada difieren en promedio ${RUIDO_NOTA.toFixed(2)} puntos, así que este ${fmtN(w.lastNota)} bien podría ser un ${Math.max(0,Math.round(w.lastNota-1))} o un ${Math.min(7,Math.round(w.lastNota+1))}.`:""}
+    ${conf.nivel==="dispersa"? " Conviene mirar el historial completo antes de decidir, no quedarse con la última.":""}
+    <a href="#calibracion" style="margin-left:4px">cómo se mide</a>
+  </div>
+  ${FOTOS[w.ckey]? `<a href="${FOTOS[w.ckey]}" target="_blank" rel="noopener"><img class="foto" src="${FOTOS[w.ckey]}" alt="Foto de ${esc(w.vino)}" loading="lazy"></a>`:""}
+  <div class="statgrid">
+    <div class="stat"><div class="v">${w.n}</div><div class="l">catas (${w.regs[0].fecha?.slice(0,4)||"?"}–${w.lastFecha?.slice(0,4)||"?"})</div></div>
+    <div class="stat"><div class="v">${fmtN(w.bestNota)}</div><div class="l">mejor histórica</div></div>
+    <div class="stat"><div class="v">${fmt$(w.lastPvp)}</div><div class="l">último PVP</div></div>
+    <div class="stat"><div class="v">${w.anos.length||"—"}</div><div class="l">añadas probadas</div></div>
+  </div>
+  ${notas.map(p=>`<div class="nota-cata"><span class="rol">${esc(p.rol||"nota de cata")}</span>
+     ${p.ano?`<span class="tag">añada ${p.ano}</span>`:""}<br>${esc(p.comentario)}
+     <div class="comm" style="margin-top:4px">${esc(p.fuente||p.fecha)}</div></div>`).join("")}
+  ${serieNota.length>1? `<h3>Evolución de nota</h3><div class="card">${lineChart(serieNota,640,150,p=>p.y)}</div>`:""}
+  ${precios.length>1? `<h3>Evolución de PVP</h3><div class="card">${lineChart(precios,640,150,p=>p.y)}</div>`:""}
+  ${anosT}
+  ${sim.length? `<h3>Vinos similares</h3><div class="comm" style="margin-bottom:6px">Misma cepa, precio parecido — útil si este no está disponible.</div>${sim.map(wineCard).join("")}`:""}
+  <h3>Historial completo</h3>
+  <div class="comm" style="margin-bottom:6px">"Ajustada" corrige la nota por lo dura o generosa que estuvo esa sesión completa (ver <a href="#calibracion">Calibración</a>). Solo se calcula en sesiones con suficientes vinos comparables.</div>
+  <div class="card tclip"><table>
+    <tr><th>Degustación</th><th>Añada</th><th>Nota</th><th>Ajustada</th><th>PVP</th><th>Proveedor</th><th>Valle</th><th>Comentario</th></tr>
+    ${rows}</table></div>`;
+}
+
+function vVinas(filtro){
+  const list=[...VINAS.values()].filter(v=>v.nNotas>=1).sort((a,b)=>b.n-a.n);
+  $m.innerHTML = `
+  <div class="searchbar"><input id="qv" placeholder="Filtrar viñas…" value="${esc(filtro||"")}"></div>
+  <div class="count">${list.length} viñas con degustaciones</div><div id="vlist"></div>`;
+  const render=()=>{
+    const t=fold(document.getElementById("qv").value);
+    const ls=list.filter(v=> !t || fold(v.nombre).includes(t));
+    document.getElementById("vlist").innerHTML = ls.slice(0,100).map(v=>`
+    <div class="card click" onclick="location.hash='#vina/${encodeURIComponent(v.nombre)}'">
+      <div class="row"><div><div class="wname">${esc(v.nombre)}</div>
+        <div class="wsub">${v.wines.size} vinos · ${v.n} catas${v.lastFecha? " · última "+v.lastFecha:""}</div></div>
+        ${notaChip(v.avg!=null? Math.round(v.avg*10)/10 : null)}</div>
+      ${v.provChanges.length? `<div class="meta"><span class="tag warn">⇄ ${v.provChanges.length} cambio${v.provChanges.length>1?"s":""} de proveedor</span></div>`:""}
+    </div>`).join("") || `<div class="empty">Sin viñas.</div>`;
+  };
+  document.getElementById("qv").addEventListener("input", render);
+  render();
+}
+
+function vVina(nombre){
+  const v = VINAS.get(nombre);
+  if(!v){ $m.innerHTML=`<a class="back" href="#vinas">← viñas</a><div class="empty">Viña no encontrada.</div>`; return; }
+  const wines = [...v.wines].map(k=>WINES.get(k)).filter(Boolean)
+    .sort((a,b)=>(b.bestNota??-1)-(a.bestNota??-1) || b.n-a.n);
+  const serie = v.notaPorAno.filter(p=>p.n>=1).map(p=>({v:p.avg, y:p.y, n:p.n}));
+  const provs = v.provTimeline;
+  const provHist = provs.length? `<h3>Proveedor por año</h3><div class="card provchange">
+    ${provs.map((p,i)=>`${i>0?'<span class="arrow">→</span>':""}<span class="tag${i>0&&provs[i-1].prov!==p.prov?" warn":""}">${p.y}: ${esc(p.prov)}</span>`).join("")}
+  </div>`:"";
+  $m.innerHTML = `
+  <a class="back" href="#vinas">← viñas</a>
+  <div class="row"><div class="big">${esc(v.nombre)}</div>${notaChip(v.avg!=null? Math.round(v.avg*10)/10:null)}</div>
+  <div class="statgrid">
+    <div class="stat"><div class="v">${v.wines.size}</div><div class="l">vinos probados</div></div>
+    <div class="stat"><div class="v">${v.n}</div><div class="l">degustaciones</div></div>
+    <div class="stat"><div class="v">${v.avg!=null? v.avg.toFixed(2):"—"}</div><div class="l">nota promedio</div></div>
+    <div class="stat"><div class="v">${[...v.valles].slice(0,2).join(", ")||"—"}</div><div class="l">valles principales</div></div>
+  </div>
+  ${serie.length>1? `<h3>Evolución de calidad (nota promedio por año)</h3>
+    <div class="card">${lineChart(serie,640,170,p=>p.y)}
+    <div class="comm">Promedio de notas de degustación de cada año. Años con pocas catas son menos representativos.</div></div>`:""}
+  ${v.provChanges.length? `<h3>Cambios de distribuidor detectados</h3>
+    ${v.provChanges.map(c=>`<div class="card provchange"><span class="tag">${c.y}</span>
+      <b>${esc(c.de)}</b><span class="arrow">→</span><b>${esc(c.a)}</b></div>`).join("")}`:""}
+  ${provHist}
+  <h3>Vinos de esta viña</h3>
+  ${wines.map(wineCard).join("")}`;
+}
+
+function vProveedores(){
+  const list=[...PROVS.values()].sort((a,b)=>b.n-a.n);
+  $m.innerHTML = `
+  <div class="searchbar"><input id="qp" placeholder="Filtrar proveedores…"></div>
+  <div class="count">${list.length} proveedores/distribuidores</div><div id="plist"></div>`;
+  const render=()=>{
+    const t=fold(document.getElementById("qp").value);
+    const ls=list.filter(p=> !t || fold(p.nombre).includes(t));
+    document.getElementById("plist").innerHTML = ls.slice(0,100).map(p=>`
+    <div class="card click" onclick="location.hash='#proveedor/${encodeURIComponent(p.nombre)}'">
+      <div class="row"><div><div class="wname">${esc(p.nombre)}</div>
+        <div class="wsub">${p.vinas.size} viñas · ${p.wines.size} vinos · ${p.n} catas${p.lastFecha? " · última "+p.lastFecha:""}</div></div>
+        ${notaChip(p.avg!=null? Math.round(p.avg*10)/10:null)}</div></div>`).join("");
+  };
+  document.getElementById("qp").addEventListener("input", render);
+  render();
+}
+
+function vProveedor(nombre){
+  const p = PROVS.get(nombre);
+  if(!p){ $m.innerHTML=`<a class="back" href="#proveedores">← proveedores</a><div class="empty">Proveedor no encontrado.</div>`; return; }
+  const vinas=[...p.vinas].map(n=>VINAS.get(n)).filter(Boolean).sort((a,b)=>b.n-a.n);
+  // actividad por año
+  const byYear={};
+  for(const r of p.regs){ if(!r.fecha)continue; const y=+r.fecha.slice(0,4); byYear[y]=(byYear[y]||0)+1; }
+  const serie=Object.keys(byYear).sort().map(y=>({v:byYear[y], y}));
+  // viñas que dejaron a este proveedor / llegaron
+  const ganadas=[], perdidas=[];
+  for(const v of VINAS.values()){
+    for(const c of v.provChanges){
+      if(c.a===nombre) ganadas.push({vina:v.nombre, y:c.y, otro:c.de});
+      if(c.de===nombre) perdidas.push({vina:v.nombre, y:c.y, otro:c.a});
+    }
+  }
+  const wines=[...p.wines].map(k=>WINES.get(k)).filter(Boolean)
+    .sort((a,b)=>(b.bestNota??-1)-(a.bestNota??-1)).slice(0,20);
+  $m.innerHTML = `
+  <a class="back" href="#proveedores">← proveedores</a>
+  <div class="row"><div class="big">${esc(p.nombre)}</div>${notaChip(p.avg!=null? Math.round(p.avg*10)/10:null)}</div>
+  <div class="statgrid">
+    <div class="stat"><div class="v">${p.vinas.size}</div><div class="l">viñas</div></div>
+    <div class="stat"><div class="v">${p.wines.size}</div><div class="l">vinos</div></div>
+    <div class="stat"><div class="v">${p.n}</div><div class="l">degustaciones</div></div>
+    <div class="stat"><div class="v">${p.avg!=null? p.avg.toFixed(2):"—"}</div><div class="l">nota promedio</div></div>
+  </div>
+  ${serie.length>1? `<h3>Actividad (catas por año)</h3><div class="card">${lineChart(serie,640,150,pt=>pt.y)}</div>`:""}
+  ${(ganadas.length||perdidas.length)? `<div class="cols2">
+    <div><h3>Viñas que llegaron</h3>${ganadas.map(g=>`<div class="card provchange"><span class="tag">${g.y}</span>
+      <a href="#vina/${encodeURIComponent(g.vina)}"><b>${esc(g.vina)}</b></a> <span class="comm">antes: ${esc(g.otro)}</span></div>`).join("")||'<div class="comm" style="margin:4px">—</div>'}</div>
+    <div><h3>Viñas que se fueron</h3>${perdidas.map(g=>`<div class="card provchange"><span class="tag">${g.y}</span>
+      <a href="#vina/${encodeURIComponent(g.vina)}"><b>${esc(g.vina)}</b></a> <span class="comm">ahora: ${esc(g.otro)}</span></div>`).join("")||'<div class="comm" style="margin:4px">—</div>'}</div>
+  </div>`:""}
+  <h3>Cartera (viñas por volumen de catas)</h3>
+  <div class="card">${vinas.slice(0,30).map(v=>`<a class="tag" href="#vina/${encodeURIComponent(v.nombre)}">${esc(v.nombre)} (${v.n})</a>`).join(" ")}</div>
+  <h3>Mejores vinos de este proveedor</h3>
+  ${wines.map(wineCard).join("")}`;
+}
+
+function vGuia(){
+  // calidad global por año
+  const byYear={};
+  for(const r of REGS){ if(r.nota==null||!r.fecha)continue; const y=+r.fecha.slice(0,4);
+    if(y<2014||y>2026) continue; (byYear[y]=byYear[y]||[]).push(r.nota); }
+  const serie=Object.keys(byYear).sort().map(y=>({v:byYear[y].reduce((s,x)=>s+x,0)/byYear[y].length, y, n:byYear[y].length}));
+  // viñas en alza / baja: comparar promedio 2024+ vs anterior
+  const CORTE=2024, alzas=[];
+  for(const v of VINAS.values()){
+    const rec=[], ant=[];
+    for(const r of v.regs){ if(r.nota==null||!r.fecha)continue;
+      (+r.fecha.slice(0,4)>=CORTE? rec:ant).push(r.nota); }
+    if(rec.length>=4 && ant.length>=4){
+      const a=rec.reduce((s,x)=>s+x,0)/rec.length, b=ant.reduce((s,x)=>s+x,0)/ant.length;
+      alzas.push({v, delta:a-b, rec:a, ant:b, nRec:rec.length});
+    }
+  }
+  alzas.sort((a,b)=>b.delta-a.delta);
+  const up=alzas.filter(x=>x.delta>0.25).slice(0,10), dn=[...alzas].reverse().filter(x=>x.delta<-0.25).slice(0,10);
+  // top por categoría (nota>=6 recientes)
+  const joyas = WLIST.filter(w=>w.bestNota>=6 && w.lastFecha>="2024").sort((a,b)=>(b.lastFecha||"").localeCompare(a.lastFecha||"")).slice(0,15);
+  // cambios de distribuidor recientes
+  const cambios=[];
+  for(const v of VINAS.values()) for(const c of v.provChanges) if(c.y>="2023") cambios.push({vina:v.nombre,...c});
+  cambios.sort((a,b)=>b.y.localeCompare(a.y));
+  // valor: nota >=5 y pvp <=12000
+  const valor = WLIST.filter(w=>w.bestNota>=5 && w.lastPvp!=null && w.lastPvp<=12000 && w.lastFecha>="2023")
+    .sort((a,b)=>(a.lastPvp)-(b.lastPvp)).slice(0,12);
+  // subidas de precio recientes (primer vs último PVP registrado, con cambio reciente)
+  // saltos >100% casi siempre son error de tipeo en el Excel, no alza real: van aparte
+  const subidas=[], sospechosas=[];
+  for(const w of WLIST){
+    const pv = w.regs.filter(r=>r.pvp!=null && r.fecha).sort((a,b)=> a.fecha<b.fecha?-1:1);
+    if(pv.length<2) continue;
+    const first=pv[0], last=pv[pv.length-1];
+    if(last.fecha<"2025" || first.pvp<=0 || last.fecha===first.fecha) continue;
+    const delta=(last.pvp-first.pvp)/first.pvp;
+    if(delta<0.15 || (last.pvp-first.pvp)<1000) continue;
+    (delta>1 ? sospechosas : subidas).push({w, from:first.pvp, to:last.pvp, delta, fecha:last.fecha});
+  }
+  subidas.sort((a,b)=>b.delta-a.delta);
+  sospechosas.sort((a,b)=>b.delta-a.delta);
+  // mapa precio/calidad: recientes, excluye premium >$60.000 para que el gráfico sea legible
+  const scatterAll = WLIST.filter(w=>w.bestNota!=null && w.lastPvp!=null && w.lastPvp>0 && w.lastFecha>="2025");
+  const scatterPts = scatterAll.filter(w=>w.lastPvp<=60000)
+    .map(w=>({x:w.lastPvp, y:w.bestNota, label:(w.vina?w.vina+" · ":"")+w.vino, ckey:w.ckey}));
+  $m.innerHTML = `
+  <h2>Evolución de la calidad degustada</h2>
+  <div class="card">${lineChart(serie,680,180,p=>p.y)}
+  <div class="comm">Nota promedio de todas las degustaciones por <b>año de cata</b> (${REGS.length.toLocaleString("es-CL")} catas desde ${serie[0]?.y||"?"}).
+  Esto mide qué tan bien salieron las catas de cada año, no qué tan buena fue cada cosecha:
+  para eso está la <a href="#anadas">guía de añadas</a>.</div></div>
+  <h2>Mapa precio / calidad</h2>
+  <div class="card">${scatterChart(scatterPts,680,280)}
+  <div class="comm">${scatterPts.length.toLocaleString("es-CL")} vinos catados desde 2025, PVP hasta $60.000 (excluye ${scatterAll.length-scatterPts.length} sobre ese precio para que se lea bien). Toca un punto para ver la ficha.</div></div>
+  <div class="cols2">
+    <div><h2>Viñas en alza</h2>
+    ${up.map(x=>`<div class="card click" onclick="location.hash='#vina/${encodeURIComponent(x.v.nombre)}'">
+      <div class="row"><div class="wname">${esc(x.v.nombre)}</div><span class="delta-up">▲ +${x.delta.toFixed(2)}</span></div>
+      <div class="wsub">${x.ant.toFixed(2)} → ${x.rec.toFixed(2)} (desde ${CORTE}, ${x.nRec} catas recientes)</div></div>`).join("")||'<div class="comm">Sin datos suficientes.</div>'}</div>
+    <div><h2>Viñas en baja</h2>
+    ${dn.map(x=>`<div class="card click" onclick="location.hash='#vina/${encodeURIComponent(x.v.nombre)}'">
+      <div class="row"><div class="wname">${esc(x.v.nombre)}</div><span class="delta-dn">▼ ${x.delta.toFixed(2)}</span></div>
+      <div class="wsub">${x.ant.toFixed(2)} → ${x.rec.toFixed(2)} (desde ${CORTE}, ${x.nRec} catas recientes)</div></div>`).join("")||'<div class="comm">Sin datos suficientes.</div>'}</div>
+  </div>
+  <h2>Cambios de distribuidor (desde 2023)</h2>
+  ${cambios.slice(0,20).map(c=>`<div class="card provchange"><span class="tag">${c.y}</span>
+    <a href="#vina/${encodeURIComponent(c.vina)}"><b>${esc(c.vina)}</b></a>
+    <span>${esc(c.de)}</span><span class="arrow">→</span><span><b>${esc(c.a)}</b></span></div>`).join("")||'<div class="comm">Sin cambios detectados.</div>'}
+  <h2>Subidas de precio recientes</h2>
+  ${subidas.slice(0,12).map(s=>`<div class="card click" onclick="location.hash='#vino/${s.w.ckey}'">
+    <div class="row"><div class="wname">${s.w.vina? esc(s.w.vina)+" · ":""}${esc(s.w.vino)}</div><span class="delta-dn">▲ +${Math.round(s.delta*100)}%</span></div>
+    <div class="wsub">${fmt$(s.from)} → ${fmt$(s.to)} (a ${s.fecha})</div></div>`).join("")||'<div class="comm">Sin subidas relevantes detectadas.</div>'}
+  ${sospechosas.length? `<h3>Saltos de precio a revisar (&gt;100%, probable error de dato)</h3>
+  <div class="comm" style="margin-bottom:6px">Estos saltos son demasiado grandes para ser un alza real — casi siempre es un PVP mal tipeado en el Excel. No se cuentan como alza; conviene revisarlos en la planilla.</div>
+  ${sospechosas.slice(0,10).map(s=>`<div class="card click" onclick="location.hash='#vino/${s.w.ckey}'">
+    <div class="row"><div class="wname">${s.w.vina? esc(s.w.vina)+" · ":""}${esc(s.w.vino)}</div><span class="tag warn">+${Math.round(s.delta*100)}%</span></div>
+    <div class="wsub">${fmt$(s.from)} → ${fmt$(s.to)} (a ${s.fecha})</div></div>`).join("")}`:""}
+  <h2>Joyas recientes (nota 6–7 desde 2024)</h2>
+  ${joyas.map(wineCard).join("")}
+  <h2>Mejor relación precio/calidad (nota ≥5, PVP ≤ $12.000)</h2>
+  ${valor.map(wineCard).join("")}`;
+}
+
+function vFavoritos(){
+  const list=[...FAVS].map(k=>WINES.get(k)).filter(Boolean)
+    .sort((a,b)=>a.vina.localeCompare(b.vina,'es')||a.vino.localeCompare(b.vino,'es'));
+  const texto = list.map(w=>`• ${w.vina? esc(w.vina)+" - ":""}${w.vino}${w.lastPvp!=null? " ("+fmt$(w.lastPvp)+")":""}`).join("\n");
+  $m.innerHTML = `
+  <div class="hdrow"><div class="big">Mi lista</div>
+    ${list.length? `<div style="display:flex;gap:8px" class="no-print"><button class="btn" id="btnCopiar">📋 Copiar para WhatsApp</button>
+    <button class="btn" onclick="window.print()">🖨️ Imprimir</button>
+    <button class="btn ghost" id="btnVaciar">Vaciar</button></div>`:""}
+  </div>
+  <div class="count">${list.length} vino${list.length!==1?"s":""} guardado${list.length!==1?"s":""}</div>
+  ${list.map(wineCard).join("") || `<div class="empty">Aún no guardas vinos. Toca la ☆ en cualquier vino para agregarlo aquí.</div>`}`;
+  const bc=document.getElementById("btnCopiar");
+  if(bc) bc.addEventListener("click", ()=>{
+    navigator.clipboard.writeText(texto).then(()=>{ bc.textContent="✓ Copiado"; setTimeout(()=>bc.textContent="📋 Copiar para WhatsApp",1500); });
+  });
+  const bv=document.getElementById("btnVaciar");
+  if(bv) bv.addEventListener("click", ()=>{ if(confirm("¿Vaciar toda la lista?")){ FAVS=new Set(); setFavs(FAVS); vFavoritos(); } });
+}
+
+function vCepas(){
+  const list=[...CEPAS.values()].sort((a,b)=>b.n-a.n);
+  $m.innerHTML = `
+  <div class="searchbar"><input id="qc" placeholder="Filtrar cepas…"></div>
+  <div class="count">${list.length} cepas</div><div id="clist"></div>`;
+  const render=()=>{
+    const t=fold(document.getElementById("qc").value);
+    const ls=list.filter(c=> !t || fold(c.nombre).includes(t));
+    document.getElementById("clist").innerHTML = ls.map(c=>`
+    <div class="card click" onclick="location.hash='#cepa/${encodeURIComponent(c.nombre)}'">
+      <div class="row"><div><div class="wname">${esc(c.nombre)}</div>
+        <div class="wsub">${c.n} vinos${c.avgPvp!=null? " · PVP prom. "+fmt$(c.avgPvp):""}</div></div>
+        ${notaChip(c.avgNota!=null? Math.round(c.avgNota*10)/10:null)}</div></div>`).join("") || `<div class="empty">Sin cepas.</div>`;
+  };
+  document.getElementById("qc").addEventListener("input", render);
+  render();
+}
+
+function vCepa(nombre){
+  const c = CEPAS.get(nombre);
+  if(!c){ $m.innerHTML=`<a class="back" href="#cepas">← cepas</a><div class="empty">Cepa no encontrada.</div>`; return; }
+  const ws=[...c.wines].map(k=>WINES.get(k)).filter(Boolean).sort((a,b)=>(b.bestNota??-1)-(a.bestNota??-1) || b.n-a.n);
+  const regsCepa = REGS.filter(r=>(r.catNombre||"").trim()===nombre);
+  const byYear={};
+  for(const r of regsCepa){ if(r.nota==null||!r.fecha) continue; const y=+r.fecha.slice(0,4); (byYear[y]=byYear[y]||[]).push(r.nota); }
+  const serie=Object.keys(byYear).sort().map(y=>({v:byYear[y].reduce((s,x)=>s+x,0)/byYear[y].length, y, n:byYear[y].length}));
+  const valor = ws.filter(w=>w.bestNota>=5 && w.lastPvp!=null).sort((a,b)=>a.lastPvp-b.lastPvp).slice(0,8);
+  $m.innerHTML = `
+  <a class="back" href="#cepas">← cepas</a>
+  <div class="row"><div class="big">${esc(c.nombre)}</div>${notaChip(c.avgNota!=null? Math.round(c.avgNota*10)/10:null)}</div>
+  <div class="statgrid">
+    <div class="stat"><div class="v">${c.n}</div><div class="l">vinos</div></div>
+    <div class="stat"><div class="v">${regsCepa.length}</div><div class="l">degustaciones</div></div>
+    <div class="stat"><div class="v">${c.avgPvp!=null? fmt$(c.avgPvp):"—"}</div><div class="l">PVP promedio</div></div>
+  </div>
+  ${serie.length>1? `<h3>Evolución de calidad</h3><div class="card">${lineChart(serie,640,160,p=>p.y)}</div>`:""}
+  ${valor.length? `<h3>Mejor relación precio/calidad de esta cepa</h3>${valor.map(wineCard).join("")}`:""}
+  <h3>Mejores vinos de esta cepa</h3>
+  ${ws.slice(0,20).map(wineCard).join("")}`;
+}
+
+/* ============================== añadas ============================== */
+// Contexto externo verificado (prensa especializada), no sale de la planilla.
+const CONTEXTO_ANADA = {
+  2016: {t:"Añada muy golpeada por El Niño en Chile: cayeron unos 200 mm en tres días a mediados de abril con uva todavía en planta, y la producción de tintos bajó fuerte. Quienes alcanzaron a esquivar la lluvia reportaron tintos más elegantes y de menor alcohol.",
+         f:"Decanter", u:"https://www.decanter.com/wine-news/rain-means-chile-2016-vintage-like-bordeaux-305123/"},
+  2017: {t:"Año de heladas e incendios forestales en Chile y Argentina, con impacto en rendimiento y en algunos casos en el perfil de la uva.",
+         f:"Wine Spectator", u:"https://www.winespectator.com/webfeature/show/id/2017-Harvest-Report-Argentina-and-Chile"},
+};
+function barChart(points, w=680, h=200, hashPrefix="#anada/"){
+  if(!points.length) return `<div class="comm">Sin datos suficientes.</div>`;
+  const vals = points.map(p=>p.v);
+  const mx = Math.max(0.15, ...vals.map(v=>Math.abs(v)));
+  const min=-mx, max=mx, pad=36;
+  const bw = (w-pad-10)/points.length;
+  const Y = v => h-24-(h-44)*(v-min)/(max-min);
+  const zero = Y(0);
+  const bars = points.map((p,i)=>{
+    const x = pad+i*bw+bw*0.15, bwid = Math.max(2, bw*0.7);
+    const y = p.v>=0? Y(p.v) : zero;
+    const hh = Math.max(1.5, Math.abs(Y(p.v)-zero));
+    const accion = hashPrefix? ` style="cursor:pointer" onclick="location.hash='${hashPrefix}${p.label}'"` : "";
+    return `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bwid.toFixed(1)}" height="${hh.toFixed(1)}"
+      fill="${p.v>=0? "var(--ok)":"var(--bad)"}" opacity=".85"${accion}><title>${p.label}: ${p.v>0?"+":""}${p.v.toFixed(2)}${p.n?` (${p.n} vinos)`:""}</title></rect>`;
+  }).join("");
+  const labs = points.map((p,i)=> (points.length<=22 || i%2===0)?
+    `<text x="${(pad+i*bw+bw/2).toFixed(1)}" y="${h-8}" font-size="9.5" fill="var(--muted)" text-anchor="middle">${String(p.label).slice(2)}</text>`:"").join("");
+  const gy = [max, 0, min].map(v=>`<text x="2" y="${Y(v)+3}" font-size="9.5" fill="var(--muted)">${v>0?"+":""}${v.toFixed(2)}</text>
+    <line x1="${pad-4}" x2="${w-6}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)" stroke-width="${v===0?1.4:1}"/>`).join("");
+  return `<div class="tclip"><svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" style="max-width:100%">${gy}${bars}${labs}</svg></div>`;
+}
+
+function vAnadas(){
+  const conIdx = ANADAS_LIST.filter(e=>e.idx!=null).sort((a,b)=>a.ano-b.ano);
+  const pts = conIdx.map(e=>({label:e.ano, v:e.idx, n:e.nIdx}));
+  const rank = [...conIdx].sort((a,b)=>b.idx-a.idx);
+  const tabla = ANADAS_LIST.filter(e=>e.nNotas>=10).sort((a,b)=>b.ano-a.ano);
+  $m.innerHTML = `
+  <div class="big">Guía de añadas</div>
+  <div class="comm" style="margin:4px 0 12px">Qué tan buena fue cada cosecha según lo que Baco realmente probó.</div>
+  <div class="card" style="border-left:3px solid var(--gold)">
+    <b>Cómo leer esto.</b> El <b>índice</b> compara cada añada contra el promedio del <b>mismo vino</b> en sus otras añadas,
+    usando solo los ${WLIST.filter(w=>(wineVintages.get(w.ckey)||new Map()).size>1).length.toLocaleString("es-CL")} vinos que se probaron en 2 o más añadas.
+    Así se elimina el sesgo de qué vinos tocó catar cada año: +0,20 significa que ese año los vinos rindieron 0,2 puntos
+    por sobre su propio estándar. El <b>promedio simple</b> va al lado solo como referencia, y es menos confiable
+    porque mezcla vinos distintos.
+  </div>
+  <h2>Índice de añada</h2>
+  <div class="card">${barChart(pts, 680, 210)}
+    <div class="comm">Sobre 0 = la cosecha rindió mejor que el estándar de esos mismos vinos. Toca una barra para ver la añada.
+    Solo se publican añadas con al menos ${IDX_MIN} vinos comparables.</div></div>
+  <div class="cols2">
+    <div><h2>Mejores añadas</h2>
+      ${rank.slice(0,5).map(e=>`<div class="card click" tabindex="0" role="link" onclick="location.hash='#anada/${e.ano}'" onkeydown="if(event.key==='Enter')location.hash='#anada/${e.ano}'">
+        <div class="row"><div class="wname">${e.ano}</div><span class="delta-up">▲ +${e.idx.toFixed(2)}</span></div>
+        <div class="wsub">${e.nIdx} vinos comparados · ${e.nNotas} catas</div></div>`).join("")}</div>
+    <div><h2>Añadas más flojas</h2>
+      ${rank.slice(-5).reverse().map(e=>`<div class="card click" tabindex="0" role="link" onclick="location.hash='#anada/${e.ano}'" onkeydown="if(event.key==='Enter')location.hash='#anada/${e.ano}'">
+        <div class="row"><div class="wname">${e.ano}</div><span class="delta-dn">▼ ${e.idx.toFixed(2)}</span></div>
+        <div class="wsub">${e.nIdx} vinos comparados · ${e.nNotas} catas</div></div>`).join("")}</div>
+  </div>
+  <h2>Todas las añadas</h2>
+  <div class="card tclip"><table>
+    <tr><th>Añada</th><th>Índice</th><th>Vinos comparados</th><th>Promedio simple</th><th>Catas</th><th>Vinos</th></tr>
+    ${tabla.map(e=>`<tr>
+      <td><a href="#anada/${e.ano}"><b>${e.ano}</b></a>${CONTEXTO_ANADA[e.ano]?' <span class="tag">nota</span>':""}</td>
+      <td>${e.idx==null? '<span class="comm">—</span>' : `<span class="${e.idx>0.05?"delta-up":e.idx<-0.05?"delta-dn":""}">${e.idx>0?"+":""}${e.idx.toFixed(2)}</span>`}</td>
+      <td>${e.nIdx||"—"}</td><td>${e.avg!=null? e.avg.toFixed(2):"—"}</td>
+      <td>${e.nNotas}</td><td>${e.wines.size}</td></tr>`).join("")}
+  </table></div>`;
+}
+
+function vAnada(anoStr){
+  const ano = +anoStr;
+  const e = ANADAS.get(ano);
+  if(!e){ $m.innerHTML=`<a class="back" href="#anadas">← añadas</a><div class="empty">Sin datos para la añada ${esc(anoStr)}.</div>`; return; }
+  const ws = [...e.wines].map(k=>WINES.get(k)).filter(Boolean);
+  // mejor nota que obtuvo cada vino EN esta añada (no en toda su historia)
+  const conNota = ws.map(w=>{
+    const notas = w.regs.filter(r=>r.ano===ano && r.nota!=null).map(r=>r.nota);
+    return notas.length? {w, nota:Math.max(...notas)} : null;
+  }).filter(Boolean).sort((a,b)=>b.nota-a.nota);
+  const ctx = CONTEXTO_ANADA[ano];
+  const cepas = new Map();
+  for(const r of e.regs){ const c=(r.catNombre||"").trim(); if(c) cepas.set(c,(cepas.get(c)||0)+1); }
+  $m.innerHTML = `
+  <a class="back" href="#anadas">← añadas</a>
+  <div class="row"><div class="big">Añada ${ano}</div>
+    ${e.idx!=null? `<span class="${e.idx>0?"delta-up":"delta-dn"}" style="font-size:18px">${e.idx>0?"▲ +":"▼ "}${e.idx.toFixed(2)}</span>`:""}</div>
+  <div class="statgrid">
+    <div class="stat"><div class="v">${e.wines.size}</div><div class="l">vinos de esta añada</div></div>
+    <div class="stat"><div class="v">${e.nNotas}</div><div class="l">catas con nota</div></div>
+    <div class="stat"><div class="v">${e.idx!=null? (e.idx>0?"+":"")+e.idx.toFixed(2):"—"}</div><div class="l">índice (${e.nIdx} comparables)</div></div>
+    <div class="stat"><div class="v">${e.avg!=null? e.avg.toFixed(2):"—"}</div><div class="l">promedio simple</div></div>
+  </div>
+  ${ctx? `<div class="nota-cata"><span class="rol">contexto externo</span><br>${esc(ctx.t)}
+    <div class="comm" style="margin-top:4px">Fuente: <a href="${ctx.u}" target="_blank" rel="noopener">${esc(ctx.f)}</a>. No sale de la planilla de Baco.</div></div>`:""}
+  ${e.idx!=null? `<div class="comm" style="margin:10px 2px">Índice calculado contra el propio promedio de cada vino, sobre ${e.nIdx} vinos con más de una añada probada.</div>`:
+    `<div class="comm" style="margin:10px 2px">Sin índice: menos de ${IDX_MIN} vinos de esta añada tienen otra añada con la que compararse.</div>`}
+  <h3>Cepas de esta añada</h3>
+  <div class="card">${[...cepas.entries()].sort((a,b)=>b[1]-a[1]).slice(0,18)
+    .map(([c,n])=>`<a class="tag" href="#cepa/${encodeURIComponent(c)}">${esc(c)} (${n})</a>`).join(" ")||'<span class="comm">—</span>'}</div>
+  <h3>Mejores vinos de la añada ${ano}</h3>
+  <div class="comm" style="margin-bottom:6px">Ordenados por la nota que sacaron en esta añada.</div>
+  ${conNota.slice(0,25).map(x=>wineCard(x.w)).join("") || `<div class="empty">Sin vinos con nota en esta añada.</div>`}`;
+}
+
+/* ============================== sesiones de cata ============================== */
+function vCatas(filtro){
+  $m.innerHTML = `
+  <div class="big">Sesiones de cata</div>
+  <div class="comm" style="margin:4px 0 10px">${CATAS_LIST.length} fechas de degustación registradas. Sirve para responder "¿qué probamos ese día?".</div>
+  <div class="searchbar"><input id="qs" placeholder="Filtrar por fecha, cepa o proveedor…" value="${esc(filtro||"")}"></div>
+  <div class="count" id="scount"></div><div id="slist"></div>`;
+  const inp = document.getElementById("qs");
+  const render = ()=>{
+    const t = fold(inp.value);
+    const ls = CATAS_LIST.filter(s=> !t || fold(s.fecha).includes(t)
+      || [...s.cats].some(c=>fold(c).includes(t)) || [...s.provs].some(p=>fold(p).includes(t)));
+    document.getElementById("scount").textContent = `${ls.length} sesiones`;
+    document.getElementById("slist").innerHTML = ls.slice(0,150).map(s=>`
+    <div class="card click" tabindex="0" role="link" onclick="location.hash='#cata/${s.fecha}'" onkeydown="if(event.key==='Enter')location.hash='#cata/${s.fecha}'">
+      <div class="row"><div>
+        <div class="wname">${s.fecha}${tagFutura(s.fecha)}</div>
+        <div class="wsub">${s.n} vino${s.n>1?"s":""}${s.cats.size? " · "+[...s.cats].slice(0,4).join(", ")+(s.cats.size>4?"…":""):""}</div>
+      </div>${notaChip(s.avg!=null? Math.round(s.avg*10)/10 : null)}</div>
+      ${s.best? `<div class="meta"><span>mejor: <b>${esc(s.best.vinaC||"")} ${esc(s.best.vino)}</b> (${fmtN(s.best.nota)})</span></div>`:""}
+    </div>`).join("") || `<div class="empty">Sin sesiones para ese filtro.</div>`;
+  };
+  inp.addEventListener("input", render);
+  render();
+}
+
+function vCata(fecha){
+  const s = CATAS.get(fecha);
+  if(!s){ $m.innerHTML=`<a class="back" href="#catas">← catas</a><div class="empty">No hay cata registrada el ${esc(fecha)}.</div>`; return; }
+  const orden = [...s.regs].sort((a,b)=> (b.nota??-1)-(a.nota??-1));
+  const notaBlk = NOTAS[fecha];
+  const idxV = CATAS_LIST.findIndex(x=>x.fecha===fecha);
+  const prev = CATAS_LIST[idxV+1], next = CATAS_LIST[idxV-1];
+  $m.innerHTML = `
+  <a class="back" href="#catas">← catas</a>
+  <div class="row"><div class="big">Cata del ${fecha}${tagFutura(fecha)}</div>${notaChip(s.avg!=null? Math.round(s.avg*10)/10:null)}</div>
+  <div class="statgrid">
+    <div class="stat"><div class="v">${s.n}</div><div class="l">vinos probados</div></div>
+    <div class="stat"><div class="v">${s.avg!=null? s.avg.toFixed(2):"—"}</div><div class="l">nota promedio</div></div>
+    <div class="stat"><div class="v">${s.best? fmtN(s.best.nota):"—"}</div><div class="l">mejor nota del día</div></div>
+    <div class="stat"><div class="v">${s.provs.size}</div><div class="l">proveedores</div></div>
+  </div>
+  ${notaBlk? `<div class="nota-cata"><span class="rol">minuta de esta cata</span><br>
+    ${(notaBlk.items||[]).length} comentario(s) registrados de esta sesión.
+    <div class="comm" style="margin-top:4px">${esc(notaBlk.fuente||"")}</div></div>`:""}
+  <div class="hdrow" style="margin-top:14px">
+    <h3 style="margin:0">Vinos de esta sesión</h3>
+    <div style="display:flex;gap:6px">
+      ${prev? `<a class="btn" href="#cata/${prev.fecha}">← ${prev.fecha}</a>`:""}
+      ${next? `<a class="btn" href="#cata/${next.fecha}">${next.fecha} →</a>`:""}
+    </div>
+  </div>
+  <div class="card tclip"><table>
+    <tr><th>Nota</th><th>Viña</th><th>Vino</th><th>Añada</th><th>PVP</th><th>Proveedor</th><th>Cepa</th></tr>
+    ${orden.map(r=>`<tr>
+      <td>${notaChip(r.nota)}</td>
+      <td>${r.vinaC? `<a href="#vina/${encodeURIComponent(r.vinaC)}">${esc(r.vinaC)}</a>`:"—"}</td>
+      <td><a href="#vino/${r.ckey}"><b>${esc(r.vino)||"(sin nombre)"}</b></a></td>
+      <td>${r.ano? `<a href="#anada/${r.ano}">${r.ano}</a>`:"—"}</td>
+      <td>${fmt$(r.pvp)}</td>
+      <td>${r.provC? `<a href="#proveedor/${encodeURIComponent(r.provC)}">${esc(r.provC)}</a>`:"—"}</td>
+      <td>${esc((r.catNombre||"").trim())||"—"}</td></tr>`).join("")}
+  </table></div>`;
+}
+
+/* ============================== valles ============================== */
+function vValles(){
+  $m.innerHTML = `
+  <div class="big">Valles</div>
+  <div class="comm" style="margin:4px 0 10px">${VALLES_LIST.length} valles / orígenes registrados.</div>
+  <div class="searchbar"><input id="qva" placeholder="Filtrar valles…"></div>
+  <div class="count" id="vacount"></div><div id="valist"></div>`;
+  const inp = document.getElementById("qva");
+  const render = ()=>{
+    const t = fold(inp.value);
+    const ls = VALLES_LIST.filter(v=> !t || fold(v.nombre).includes(t));
+    document.getElementById("vacount").textContent = `${ls.length} valles`;
+    document.getElementById("valist").innerHTML = ls.slice(0,120).map(v=>`
+    <div class="card click" tabindex="0" role="link" onclick="location.hash='#valle/${encodeURIComponent(v.nombre)}'" onkeydown="if(event.key==='Enter')location.hash='#valle/${encodeURIComponent(v.nombre)}'">
+      <div class="row"><div><div class="wname">${esc(v.nombre)}</div>
+        <div class="wsub">${v.wines.size} vinos · ${v.vinas.size} viñas · ${v.n} catas</div></div>
+      ${notaChip(v.avg!=null? Math.round(v.avg*10)/10:null)}</div></div>`).join("") || `<div class="empty">Sin valles.</div>`;
+  };
+  inp.addEventListener("input", render);
+  render();
+}
+
+function vValle(nombre){
+  const v = VALLES.get(nombre);
+  if(!v){ $m.innerHTML=`<a class="back" href="#valles">← valles</a><div class="empty">Valle no encontrado.</div>`; return; }
+  const ws = [...v.wines].map(k=>WINES.get(k)).filter(Boolean)
+    .sort((a,b)=>(b.lastNota??-1)-(a.lastNota??-1) || b.n-a.n);
+  const byYear={};
+  for(const r of v.regs){ if(r.nota==null||!r.fecha) continue; const y=+r.fecha.slice(0,4); (byYear[y]=byYear[y]||[]).push(r.nota); }
+  const serie = Object.keys(byYear).sort().map(y=>({v:byYear[y].reduce((s,x)=>s+x,0)/byYear[y].length, y}));
+  const vinasTop = [...v.vinas].map(n=>VINAS.get(n)).filter(Boolean).sort((a,b)=>b.n-a.n).slice(0,20);
+  $m.innerHTML = `
+  <a class="back" href="#valles">← valles</a>
+  <div class="row"><div class="big">${esc(v.nombre)}</div>${notaChip(v.avg!=null? Math.round(v.avg*10)/10:null)}</div>
+  <div class="statgrid">
+    <div class="stat"><div class="v">${v.wines.size}</div><div class="l">vinos</div></div>
+    <div class="stat"><div class="v">${v.vinas.size}</div><div class="l">viñas</div></div>
+    <div class="stat"><div class="v">${v.n}</div><div class="l">degustaciones</div></div>
+    <div class="stat"><div class="v">${v.avg!=null? v.avg.toFixed(2):"—"}</div><div class="l">nota promedio</div></div>
+  </div>
+  ${serie.length>1? `<h3>Evolución de calidad (por año de cata)</h3><div class="card">${lineChart(serie,640,160,p=>p.y)}</div>`:""}
+  <h3>Cepas típicas de este valle</h3>
+  <div class="card">${[...v.cats.entries()].sort((a,b)=>b[1]-a[1]).slice(0,16)
+    .map(([c,n])=>`<a class="tag" href="#cepa/${encodeURIComponent(c)}">${esc(c)} (${n})</a>`).join(" ")||'<span class="comm">—</span>'}</div>
+  <h3>Viñas de este valle</h3>
+  <div class="card">${vinasTop.map(x=>`<a class="tag" href="#vina/${encodeURIComponent(x.nombre)}">${esc(x.nombre)} (${x.n})</a>`).join(" ")||'<span class="comm">—</span>'}</div>
+  <h3>Mejores vinos del valle</h3>
+  ${ws.slice(0,20).map(wineCard).join("")}`;
+}
+
+/* ============================== calibracion ============================== */
+// Todo lo de esta vista se calcula en vivo sobre la base; ningun numero esta escrito a mano.
+function calcCalibracion(){
+  // 1. distribucion de notas
+  const dist = new Map();
+  for(const r of REGS) if(r.nota!=null) dist.set(r.nota,(dist.get(r.nota)||0)+1);
+  const totalNotas = [...dist.values()].reduce((a,b)=>a+b,0);
+
+  // 2. fiabilidad: mismo vino + misma añada, catado en fechas distintas
+  const celda = new Map();
+  for(const r of REGS){
+    if(r.nota==null || !r.fecha || r.ano==null || !r.ckey || r.ckey==="~") continue;
+    const k = r.ckey+"|"+r.ano;
+    if(!celda.has(k)) celda.set(k,[]);
+    celda.get(k).push(r);
+  }
+  const difs = PARES_RETEST;             // mismo calculo que usa la ficha del vino
+  const media = RUIDO_NOTA;
+  const pct = k => difs.length? 100*difs.filter(d=>d>=k).length/difs.length : 0;
+
+  // 3. deriva por año de cata, controlando vino Y añada
+  const porAno = new Map();
+  for(const obs of celda.values()){
+    const ys = new Map();
+    for(const r of obs){ const y=+r.fecha.slice(0,4); if(!ys.has(y)) ys.set(y,[]); ys.get(y).push(r.nota); }
+    if(ys.size<2) continue;
+    const medias=[...ys.values()].map(v=>v.reduce((a,b)=>a+b,0)/v.length);
+    const base=medias.reduce((a,b)=>a+b,0)/medias.length;
+    for(const [y,v] of ys){
+      const m=v.reduce((a,b)=>a+b,0)/v.length;
+      if(!porAno.has(y)) porAno.set(y,[]);
+      porAno.get(y).push(m-base);
+    }
+  }
+  const deriva=[...porAno.entries()].filter(([y,v])=>v.length>=12 && y>=2014 && y<=2026)
+    .map(([y,v])=>({y, v:v.reduce((a,b)=>a+b,0)/v.length, n:v.length})).sort((a,b)=>a.y-b.y);
+
+  // 4. precio vs calidad, por tramo, sobre el ultimo registro de cada vino
+  const tramos=[[0,8000,"menos de $8.000"],[8000,12000,"$8.000–12.000"],[12000,16000,"$12.000–16.000"],
+    [16000,25000,"$16.000–25.000"],[25000,40000,"$25.000–40.000"],[40000,70000,"$40.000–70.000"],[70000,1e12,"más de $70.000"]];
+  const univ = WLIST.filter(w=>w.lastPvp!=null && w.lastPvp>0 && w.lastNota!=null);
+  const precio = tramos.map(([a,b,lbl])=>{
+    const g=univ.filter(w=>w.lastPvp>=a && w.lastPvp<b);
+    return {lbl, n:g.length,
+      avg: g.length? g.reduce((s,w)=>s+w.lastNota,0)/g.length : null,
+      p5: g.length? 100*g.filter(w=>w.lastNota>=5).length/g.length : null};
+  }).filter(t=>t.n>=15);
+
+  // 5. sesiones mas duras y mas generosas (dureza ya controlada por vino)
+  const conD = CATAS_LIST.filter(s=>s.dureza!=null && s.n>=20).sort((a,b)=>a.dureza-b.dureza);
+  return {dist, totalNotas, difs, media, pct, deriva, precio,
+    duras:conD.slice(0,5), generosas:conD.slice(-5).reverse(), nSesiones:conD.length,
+    nPares:difs.length, nCeldas:[...celda.values()].filter(o=>o.length>1).length};
+}
+
+function vCalibracion(){
+  const K = calcCalibracion();
+  const maxD = Math.max(...[...K.dist.values()]);
+  const filasDist = [...K.dist.entries()].sort((a,b)=>a[0]-b[0]).map(([n,c])=>`
+    <div style="display:flex;align-items:center;gap:8px;margin:2px 0">
+      <span style="width:28px;text-align:right;font-weight:600">${fmtN(n)}</span>
+      <span class="barra" style="flex:1"><i style="width:${(100*c/maxD).toFixed(1)}%;background:var(--wine)"></i></span>
+      <span class="comm" style="width:96px">${c.toLocaleString("es-CL")} (${(100*c/K.totalNotas).toFixed(1)}%)</span>
+    </div>`).join("");
+  const enteros = [...K.dist.entries()].filter(([n])=>Number.isInteger(n)).reduce((s,[,c])=>s+c,0);
+
+  $m.innerHTML = `
+  <div class="big">Calibración</div>
+  <div class="comm" style="margin:4px 0 12px">Cómo se comportan las notas de Baco. Todo esto sale de la base misma, no de teoría.</div>
+
+  <div class="card" style="border-left:3px solid var(--bad)">
+    <b>Lo más importante que hay que saber.</b> Cuando el mismo vino y la misma añada se cataron en
+    dos fechas distintas, las notas difirieron en promedio <b>${K.media.toFixed(2)} puntos</b>
+    (${K.nPares.toLocaleString("es-CL")} pares comparables). En una escala de 0 a 7 eso es mucho:
+    quiere decir que <b>una nota suelta trae un margen de error cercano a ±1 punto</b>.
+    La diferencia entre un 5 y un 6 de una sola cata no es información, es ruido.
+    Un vino con tres catas coincidentes vale mucho más que uno con un 6 aislado.
+  </div>
+
+  <h2>Qué tan repetible es una nota</h2>
+  <div class="card">
+    <div class="kv"><span>Dos catas dieron nota distinta</span><b>${K.pct(1).toFixed(0)}%</b></div>
+    <div class="kv"><span>Difirieron en 2 puntos o más</span><b>${K.pct(2).toFixed(0)}%</b></div>
+    <div class="kv"><span>Difirieron en 3 puntos o más</span><b>${K.pct(3).toFixed(0)}%</b></div>
+    <div class="kv"><span>Diferencia promedio</span><b>${K.media.toFixed(2)} puntos</b></div>
+    <div class="comm" style="margin-top:8px">Por eso cada vino ahora muestra un sello de confianza:
+    <span class="tag conf-alta">sólida</span> (3+ catas que coinciden),
+    <span class="tag conf-media">media</span>,
+    <span class="tag conf-baja">1 cata</span> y
+    <span class="tag conf-disp">dispar</span> (las catas se contradicen).</div>
+  </div>
+
+  <h2>La exigencia del catador cambió con los años</h2>
+  <div class="card">${barChart(K.deriva.map(d=>({label:d.y, v:d.v, n:d.n})), 680, 200, null)}
+    <div class="comm">Mismo vino, misma añada, catado en años distintos. Bajo cero = ese año se calificó
+    más duro de lo normal a esos mismos vinos. ${(()=>{
+      const min=K.deriva.reduce((a,b)=>b.v<a.v?b:a), max=K.deriva.reduce((a,b)=>b.v>a.v?b:a);
+      return `El año más exigente fue ${min.y} (${min.v.toFixed(2)}) y el más generoso ${max.y} (+${max.v.toFixed(2)}),
+      una brecha de ${(max.v-min.v).toFixed(2)} puntos que no tiene que ver con el vino sino con quien puso la nota.`;})()}
+    Es la razón de que el gráfico de <a href="#guia">la Guía</a> muestre una caída hacia 2019-2020: no es que el
+    vino chileno haya empeorado, es que la vara subió.</div>
+  </div>
+
+  <h2>Sesiones duras y sesiones generosas</h2>
+  <div class="cols2">
+    <div><h3>Más exigentes</h3>${K.duras.map(s=>`
+      <div class="card click" tabindex="0" role="link" onclick="location.hash='#cata/${s.fecha}'" onkeydown="if(event.key==='Enter')location.hash='#cata/${s.fecha}'">
+        <div class="row"><div class="wname">${s.fecha}</div><span class="delta-dn">${s.dureza.toFixed(2)}</span></div>
+        <div class="wsub">${s.n} vinos · promedio ${s.avg.toFixed(2)}</div></div>`).join("")}</div>
+    <div><h3>Más generosas</h3>${K.generosas.map(s=>`
+      <div class="card click" tabindex="0" role="link" onclick="location.hash='#cata/${s.fecha}'" onkeydown="if(event.key==='Enter')location.hash='#cata/${s.fecha}'">
+        <div class="row"><div class="wname">${s.fecha}</div><span class="delta-up">+${s.dureza.toFixed(2)}</span></div>
+        <div class="wsub">${s.n} vinos · promedio ${s.avg.toFixed(2)}</div></div>`).join("")}</div>
+  </div>
+  <div class="comm" style="margin:8px 2px">Un vino catado en una sesión dura arrastra esa nota para siempre.
+  Por eso la ficha de cada vino muestra una columna "ajustada" que descuenta el humor del día.</div>
+
+  <h2>Cuánto compra el precio</h2>
+  <div class="card tclip"><table>
+    <tr><th>Tramo de PVP</th><th>Vinos</th><th>Nota promedio</th><th>% que llega a 5+</th></tr>
+    ${K.precio.map(t=>`<tr><td>${t.lbl}</td><td>${t.n}</td>
+      <td><b>${t.avg.toFixed(2)}</b></td><td>${t.p5.toFixed(0)}%</td></tr>`).join("")}
+  </table>
+  <div class="comm" style="margin-top:8px">${(()=>{
+    const t16=K.precio.find(t=>t.lbl.includes("16.000")), t25=K.precio.find(t=>t.lbl.includes("25.000")), t40=K.precio.find(t=>t.lbl.includes("40.000"));
+    if(!t16||!t25||!t40) return "";
+    return `La curva se aplana: entre $16.000 y $70.000 la nota promedio casi no se mueve
+    (${t16.avg.toFixed(2)} / ${t25.avg.toFixed(2)} / ${t40.avg.toFixed(2)}). Subir de $16.000 a $40.000
+    no compra calidad percibida en la cata; compra etiqueta, guarda o escasez. El salto real de calidad
+    está en pasar de menos de $12.000 a la franja de $16.000–25.000.`;})()}</div></div>
+
+  <h2>Cómo se usa la escala</h2>
+  <div class="card">${filasDist}
+    <div class="comm" style="margin-top:8px">${(100*enteros/K.totalNotas).toFixed(1)}% de las notas son número entero:
+    en la práctica la escala funciona como ${K.dist.size<=9? K.dist.size:8} casilleros, no como una escala continua.
+    La nota más usada es el 3, y solo ${((K.dist.get(7)||0)*100/K.totalNotas).toFixed(1)}% de las catas llega a 7.
+    Vale la pena saberlo antes de comparar promedios con decimales: la diferencia entre 3,9 y 4,1 no significa nada.</div>
+  </div>`;
+}
+
+/* ============================== explorar (hub) ============================== */
+function vExplorar(){
+  const items = [
+    {h:"#vinas", t:"Viñas", d:`${VINAS.size.toLocaleString("es-CL")} productores`, s:"Evolución de calidad y cambios de distribuidor."},
+    {h:"#proveedores", t:"Proveedores", d:`${PROVS.size.toLocaleString("es-CL")} distribuidores`, s:"Cartera, actividad y viñas que llegaron o se fueron."},
+    {h:"#cepas", t:"Cepas", d:`${CEPAS.size} categorías`, s:"Cada hoja de la planilla es una cepa."},
+    {h:"#valles", t:"Valles", d:`${VALLES.size} orígenes`, s:"Terroir: qué rinde bien en cada valle."},
+  ];
+  $m.innerHTML = `
+  <div class="big">Explorar</div>
+  <div class="comm" style="margin:4px 0 12px">Los mismos vinos, ordenados por otra dimensión.</div>
+  <div class="cols2">${items.map(i=>`
+    <div class="card click" tabindex="0" role="link" onclick="location.hash='${i.h}'" onkeydown="if(event.key==='Enter')location.hash='${i.h}'">
+      <div class="row"><div class="wname">${i.t}</div><span class="tag">${i.d}</span></div>
+      <div class="wsub">${i.s}</div></div>`).join("")}</div>`;
+}
+
+/* ============================== router ============================== */
+let CURRENT = {view:"buscar", arg:""};
+function rerenderCurrent(){
+  const {view, arg} = CURRENT;
+  if(view==="vino") return vVino(arg);
+  if(view==="vinas") return vVinas();
+  if(view==="vina") return vVina(arg);
+  if(view==="proveedores") return vProveedores();
+  if(view==="proveedor") return vProveedor(arg);
+  if(view==="guia") return vGuia();
+  if(view==="favoritos") return vFavoritos();
+  if(view==="cepas") return vCepas();
+  if(view==="cepa") return vCepa(arg);
+  if(view==="anadas") return vAnadas();
+  if(view==="anada") return vAnada(arg);
+  if(view==="catas") return vCatas();
+  if(view==="cata") return vCata(arg);
+  if(view==="valles") return vValles();
+  if(view==="valle") return vValle(arg);
+  if(view==="explorar") return vExplorar();
+  if(view==="calibracion") return vCalibracion();
+  return vBuscar();
+}
+function route(){
+  const raw = decodeURIComponent(location.hash||"#buscar").slice(1);
+  const [pathPart, qs] = raw.split("?");
+  const [view, ...rest] = pathPart.split("/");
+  const arg = rest.join("/");
+  const v = view || "buscar";
+  CURRENT = {view:v, arg};
+  // qué pestaña se ilumina para cada vista (las de detalle heredan la de su sección)
+  const TAB = {vino:"buscar", vinas:"explorar", vina:"explorar", proveedores:"explorar",
+    proveedor:"explorar", cepas:"explorar", cepa:"explorar", valles:"explorar", valle:"explorar",
+    anada:"anadas", cata:"catas"};
+  const tab = TAB[v] || v;
+  document.querySelectorAll("nav a").forEach(a=> a.classList.toggle("on", a.dataset.v===tab));
+  window.scrollTo(0,0);
+  // La URL manda: al entrar a #buscar el estado se reconstruye entero desde los
+  // parámetros, así "#buscar" a secas limpia los filtros y un link con ?q=… los aplica.
+  if(v==="buscar"){
+    const p = new URLSearchParams(qs||"");
+    state.q = p.get("q")||"";
+    state.cat = p.get("cat")||"";
+    state.notaMin = p.get("nota")||"";
+    state.orden = p.get("orden")||"recientes";
+    state.precio = p.get("precio")||"";
+    state.valle = p.get("valle")||"";
+  }
+  rerenderCurrent();
+}
+document.getElementById("brandinfo").textContent =
+  `${WLIST.length.toLocaleString("es-CL")} vinos · ${REGS.length.toLocaleString("es-CL")} catas · datos al ${RAW.generado||"?"}`;
+updateFavCount();
+// El router ya posiciona cada vista arriba; sin esto el navegador restaura el
+// scroll anterior al recargar y la vista nueva aparece en blanco a media pagina.
+if("scrollRestoration" in history) history.scrollRestoration = "manual";
+// "/" salta al buscador desde cualquier vista; Escape limpia el campo
+document.addEventListener("keydown", e=>{
+  const enCampo = /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName||"");
+  if(e.key==="/" && !enCampo){
+    e.preventDefault();
+    if(CURRENT.view!=="buscar"){ location.hash = "#buscar"; setTimeout(()=>document.getElementById("q")?.focus(), 30); }
+    else document.getElementById("q")?.focus();
+  } else if(e.key==="Escape" && document.activeElement?.id==="q"){
+    state.q=""; document.getElementById("q").value=""; SHOWN=120; renderResults();
+  }
+});
+window.addEventListener("hashchange", route);
+route();
+</script>
+</body>
+</html>
