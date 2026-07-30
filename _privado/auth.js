@@ -5,7 +5,7 @@
   //   python3 -c "import hashlib;print(hashlib.sha256('CLAVE'.encode()).hexdigest())"
   // Sigue siendo proteccion contra el curioso casual, no seguridad de servidor:
   // no subir aqui material legal, patrimonial ni de RRHH sensible.
-  var PASSWORD_HASH = "cadc7c0585a09ba2454cf637cd26e63c4ec2123e056495db347976e4ec9a2ba0";
+  var PASSWORD_HASH = "993dba15fe54682ebcc67f0efcd56a56f024354b71140a4d230d58a147d6c30b";
 
   function sha256Hex(text) {
     var bytes = new TextEncoder().encode(text);
